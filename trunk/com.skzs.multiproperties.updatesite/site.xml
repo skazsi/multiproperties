@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="MultiProperties update site">
+      MultiProperties update site
+   </description>
+   <feature url="features/com.skzs.multiproperties.feature_0.9.0.jar" id="com.skzs.multiproperties.feature" version="0.9.0" nl="en">
+      <category name="com.skzs.multiproperties.base"/>
+   </feature>
+   <feature url="features/com.skzs.multiproperties.handler.java.feature_0.9.0.jar" id="com.skzs.multiproperties.handler.java.feature" version="0.9.0" nl="en">
+      <category name="com.skzs.multiproperties.handler"/>
+   </feature>
+   <category-def name="com.skzs.multiproperties.base" label="MultiProperties Base">
+      <description>
+         Contains the MultiProperties Editor. For supporting an output format, like Java Properties files, install some handler plugins as well.
+      </description>
+   </category-def>
+   <category-def name="com.skzs.multiproperties.handler" label="MultiProperties Handlers"/>
+</site>
