@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.ind.multiproperties.ui.editors.Editor"
+            contributorClass="com.ind.multiproperties.ui.editors.EditorContributor"
+            extensions="multiproperties"
+            icon="icons/title.gif"
+            id="com.ind.multiproperties.ui.editor"
+            name="MultiProperties Editor"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="com.ind.multiproperties.ui.preferences.PreferenceInitializer"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.ind.multiproperties.ui.preferences.PreferencesPage"
+            id="com.ind.multiproperties.ui.preferencespage"
+            name="MultiProperties"/>
+      <page
+            category="com.ind.multiproperties.ui.preferencespage"
+            class="com.ind.multiproperties.ui.preferences.ColorsPreferencesPage"
+            id="com.ind.multiproperties.ui.colorspreferencespage"
+            name="Colors"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.ind.multiproperties.ui.perspectives.Perspective"
+            icon="icons/title.gif"
+            id="com.ind.multiproperties.ui.perspective"
+            name="MultiProperties"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="com.ind.multiproperties.newwizard.category"
+            name="MultiProperties">
+      </category>
+      <wizard
+            category="com.ind.multiproperties.newwizard.category"
+            class="com.ind.multiproperties.ui.wizards.NewMultiPropertiesWizard"
+            icon="icons/title.gif"
+            id="com.ind.multiproperties.newwizard.NewMultiProperties"
+            name="MultiProperties">
+      </wizard>
+   </extension>
+   <extension
+		id="problemmarker" 
+		point="org.eclipse.core.resources.markers" 
+		name="problemName">
+			<super type="org.eclipse.core.resources.marker"/>
+			<persistent value="true"/>
+			<attribute name="severity"/>
+			<attribute name="message"/>
+			<attribute name="location"/>
+	</extension>
+
+</plugin>
