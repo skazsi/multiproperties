@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.ind.multiproperties.handler.java.feature"
+      label="IND MultiProperties Java Handler Feature"
+      version="2.0.0"
+      provider-name="IND">
+
+   <description>
+      Java Handler for MultiProperties Editor.
+   </description>
+
+   <copyright>
+      Copyright (C) 2009 IND Group. All rights reserved.
+   </copyright>
+
+   <license>
+      This program is distributed as freeware. It may contain bugs,
+so use of this tool is at your own risk. Author takes no responsibility
+for any damage that may unintentionally be caused through its
+use. You may not distribute MultiProperties in any form
+without express written permission of IND.
+   </license>
+
+   <url>
+      <update label="IND Eclipse update site" url="http://eclipse.indweb.hu"/>
+   </url>
+
+   <requires>
+      <import plugin="com.ind.multiproperties.base"/>
+      <import plugin="com.ind.multiproperties.ui"/>
+   </requires>
+
+   <plugin
+         id="com.ind.multiproperties.handler.java"
+         download-size="0"
+         install-size="0"
+         version="2.0.0"
+         unpack="false"/>
+
+</feature>
