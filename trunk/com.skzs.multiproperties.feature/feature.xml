@@ -2,12 +2,17 @@
 <feature
       id="com.skzs.multiproperties.feature"
       label="MultiProperties Feature"
-      version="2.0.0">
+      version="0.9.0"
+      nl="en">
 
    <description>
       The MultiProperties Editor help for editing several properties
 files having similar structure in one table.
    </description>
+
+   <url>
+      <update label="MultiProperties update site" url="https://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/com.skzs.multiproperties.updatesite"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.ui"/>
@@ -25,14 +30,14 @@ files having similar structure in one table.
          id="com.skzs.multiproperties.base"
          download-size="0"
          install-size="0"
-         version="2.0.0"
+         version="0.9.0"
          unpack="false"/>
 
    <plugin
          id="com.skzs.multiproperties.ui"
          download-size="0"
          install-size="0"
-         version="2.0.0"
+         version="0.9.0"
          unpack="false"/>
 
 </feature>
