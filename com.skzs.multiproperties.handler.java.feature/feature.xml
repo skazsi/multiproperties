@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.ind.multiproperties.handler.java.feature"
+      id="com.skzs.multiproperties.handler.java.feature"
       label="MultiProperties Java Handler Feature"
       version="2.0.0">
 
@@ -9,12 +9,12 @@
    </description>
 
    <requires>
-      <import plugin="com.ind.multiproperties.base"/>
-      <import plugin="com.ind.multiproperties.ui"/>
+      <import plugin="com.skzs.multiproperties.base"/>
+      <import plugin="com.skzs.multiproperties.ui"/>
    </requires>
 
    <plugin
-         id="com.ind.multiproperties.handler.java"
+         id="com.skzs.multiproperties.handler.java"
          download-size="0"
          install-size="0"
          version="2.0.0"
