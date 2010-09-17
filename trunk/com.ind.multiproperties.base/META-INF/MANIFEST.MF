@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: IND MultiProperties Base Plug-in
+Bundle-SymbolicName: com.ind.multiproperties.base;singleton:=true
+Bundle-Version: 2.0.0
+Bundle-Activator: com.ind.multiproperties.base.Activator
+Bundle-Vendor: IND
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: com.ind.multiproperties.base.api,
+ com.ind.multiproperties.base.model,
+ com.ind.multiproperties.base.model.listener
+Bundle-ClassPath: .,
+ lib/jaxb-api.jar,
+ lib/jaxb-impl.jar,
+ lib/jaxb-xjc.jar
