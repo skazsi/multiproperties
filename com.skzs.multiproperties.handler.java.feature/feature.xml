@@ -2,11 +2,16 @@
 <feature
       id="com.skzs.multiproperties.handler.java.feature"
       label="MultiProperties Java Handler Feature"
-      version="2.0.0">
+      version="0.9.0"
+      nl="en">
 
    <description>
       Java Handler for MultiProperties Editor.
    </description>
+
+   <url>
+      <update label="MultiProperties update site" url="https://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/com.skzs.multiproperties.updatesite"/>
+   </url>
 
    <requires>
       <import plugin="com.skzs.multiproperties.base"/>
@@ -17,7 +22,7 @@
          id="com.skzs.multiproperties.handler.java"
          download-size="0"
          install-size="0"
-         version="2.0.0"
+         version="0.9.0"
          unpack="false"/>
 
 </feature>
