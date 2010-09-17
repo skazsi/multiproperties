@@ -1,29 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.ind.multiproperties.feature"
-      label="IND MultiProperties Feature"
-      version="2.0.0"
-      provider-name="IND">
+      label="MultiProperties Feature"
+      version="2.0.0">
 
    <description>
-      The MultiProperties Editor help for editing several properties files having similar structure in one table.
+      The MultiProperties Editor help for editing several properties
+files having similar structure in one table.
    </description>
-
-   <copyright>
-      Copyright (C) 2009 IND Group. All rights reserved.
-   </copyright>
-
-   <license>
-      This program is distributed as freeware. It may contain bugs,
-so use of this tool is at your own risk. Author takes no responsibility
-for any damage that may unintentionally be caused through its
-use. You may not distribute MultiProperties in any form
-without express written permission of IND.
-   </license>
-
-   <url>
-      <update label="IND Eclipse update site" url="http://eclipse.indweb.hu"/>
-   </url>
 
    <requires>
       <import plugin="org.eclipse.ui"/>
