@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MultiProperties Java Handler Plug-in
-Bundle-SymbolicName: com.ind.multiproperties.handler.java;singleton:=true
+Bundle-SymbolicName: com.skzs.multiproperties.handler.java;singleton:=true
 Bundle-Version: 2.0.0
-Bundle-Activator: com.ind.multiproperties.handler.java.Activator
+Bundle-Activator: com.skzs.multiproperties.handler.java.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.ind.multiproperties.base,
+ com.skzs.multiproperties.base,
  org.eclipse.ui.ide,
  org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

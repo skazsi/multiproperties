@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.ind.multiproperties.feature"
+      id="com.skzs.multiproperties.feature"
       label="MultiProperties Feature"
       version="2.0.0">
 
@@ -13,7 +13,7 @@ files having similar structure in one table.
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.ind.multiproperties.base"/>
+      <import plugin="com.skzs.multiproperties.base"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.forms"/>
       <import plugin="org.eclipse.ui.workbench.texteditor"/>
@@ -22,14 +22,14 @@ files having similar structure in one table.
    </requires>
 
    <plugin
-         id="com.ind.multiproperties.base"
+         id="com.skzs.multiproperties.base"
          download-size="0"
          install-size="0"
          version="2.0.0"
          unpack="false"/>
 
    <plugin
-         id="com.ind.multiproperties.ui"
+         id="com.skzs.multiproperties.ui"
          download-size="0"
          install-size="0"
          version="2.0.0"
