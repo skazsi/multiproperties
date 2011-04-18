@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<project name="MultiProperties Core" default="xjc" basedir=".">
+
+	<target name="xjc">
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		  <classpath>
+		    <fileset dir="lib" includes="*.jar" />
+		  </classpath>
+		</taskdef>
+
+		<xjc schema="${basedir}/src/com/skzs/multiproperties/base/model/multiproperties.xsd" destdir="${basedir}/src" package="com.skzs.multiproperties.base.model.schema" removeOldOutput="true" extension="true" description="">
+			<produces dir="${basedir}/src/com/skzs/multiproperties/base/model/schema" includes="*impl/**" />
+			<arg value="-no-header"/>
+		</xjc>
+	</target>
+</project>
