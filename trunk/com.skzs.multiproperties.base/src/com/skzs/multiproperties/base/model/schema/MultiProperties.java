@@ -650,9 +650,9 @@ public class MultiProperties {
     public static class Records {
 
         @XmlElements({
-            @XmlElement(name = "Empty", type = MultiProperties.Records.Empty.class),
+            @XmlElement(name = "Comment", type = MultiProperties.Records.Comment.class),
             @XmlElement(name = "Property", type = MultiProperties.Records.Property.class),
-            @XmlElement(name = "Comment", type = MultiProperties.Records.Comment.class)
+            @XmlElement(name = "Empty", type = MultiProperties.Records.Empty.class)
         })
         protected List<Object> propertyOrCommentOrEmpty;
 
@@ -674,9 +674,9 @@ public class MultiProperties {
          * 
          * <p>
          * Objects of the following type(s) are allowed in the list
-         * {@link MultiProperties.Records.Empty }
-         * {@link MultiProperties.Records.Property }
          * {@link MultiProperties.Records.Comment }
+         * {@link MultiProperties.Records.Property }
+         * {@link MultiProperties.Records.Empty }
          * 
          * 
          */
@@ -936,7 +936,7 @@ public class MultiProperties {
 
                 @XmlValue
                 protected String value;
-                @XmlAttribute
+                @XmlAttribute(name = "disabled")
                 protected Boolean disabled;
 
                 /**
