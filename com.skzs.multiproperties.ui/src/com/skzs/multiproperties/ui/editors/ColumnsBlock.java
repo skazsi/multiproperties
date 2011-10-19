@@ -1,5 +1,7 @@
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.model.Column;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -29,7 +31,6 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
-import com.skzs.multiproperties.base.model.Column;
 import com.skzs.multiproperties.ui.Activator;
 
 public class ColumnsBlock extends MasterDetailsBlock

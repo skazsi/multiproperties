@@ -1,5 +1,7 @@
 package com.skzs.multiproperties.ui.wizards;
 
+import hu.skzs.multiproperties.base.model.CommentRecord;
+
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -8,7 +10,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.skzs.multiproperties.base.model.CommentRecord;
 
 public class CommentEditPage extends WizardPage
 {

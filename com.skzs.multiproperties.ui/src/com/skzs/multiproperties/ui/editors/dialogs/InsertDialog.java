@@ -3,6 +3,11 @@
  */
 package com.skzs.multiproperties.ui.editors.dialogs;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.CommentRecord;
+import hu.skzs.multiproperties.base.model.EmptyRecord;
+import hu.skzs.multiproperties.base.model.PropertyRecord;
+
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -20,10 +25,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
-import com.skzs.multiproperties.base.model.AbstractRecord;
-import com.skzs.multiproperties.base.model.CommentRecord;
-import com.skzs.multiproperties.base.model.EmptyRecord;
-import com.skzs.multiproperties.base.model.PropertyRecord;
 import com.skzs.multiproperties.ui.Activator;
 import com.skzs.multiproperties.ui.editors.Editor;
 import com.skzs.multiproperties.ui.editors.TablePage;

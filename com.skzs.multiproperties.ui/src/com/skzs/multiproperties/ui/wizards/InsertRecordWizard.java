@@ -1,10 +1,11 @@
 package com.skzs.multiproperties.ui.wizards;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.EmptyRecord;
+
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
-import com.skzs.multiproperties.base.model.AbstractRecord;
-import com.skzs.multiproperties.base.model.EmptyRecord;
 import com.skzs.multiproperties.ui.Activator;
 import com.skzs.multiproperties.ui.ContentAssistant;
 

@@ -1,5 +1,9 @@
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.CommentRecord;
+import hu.skzs.multiproperties.base.model.PropertyRecord;
+
 import java.util.StringTokenizer;
 
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -17,9 +21,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import com.skzs.multiproperties.base.model.AbstractRecord;
-import com.skzs.multiproperties.base.model.CommentRecord;
-import com.skzs.multiproperties.base.model.PropertyRecord;
 import com.skzs.multiproperties.ui.Activator;
 
 public class EditorLabelProvider extends LabelProvider implements ITableLabelProvider, IColorProvider

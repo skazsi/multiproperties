@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MultiProperties UI Plug-in
-Bundle-SymbolicName: com.skzs.multiproperties.ui;singleton:=true
+Bundle-SymbolicName: hu.skzs.multiproperties.ui;singleton:=true
 Bundle-Version: 0.9.0
 Bundle-Activator: com.skzs.multiproperties.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.skzs.multiproperties.base,
+ hu.skzs.multiproperties.base,
  org.eclipse.ui.ide,
  org.eclipse.ui.forms,
  org.eclipse.ui.workbench.texteditor,

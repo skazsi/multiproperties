@@ -1,5 +1,7 @@
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.model.Table;
+
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
@@ -23,7 +25,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.forms.widgets.TableWrapData;
 
-import com.skzs.multiproperties.base.model.Table;
 import com.skzs.multiproperties.ui.Activator;
 import com.skzs.multiproperties.ui.util.LayoutFactory;
 
