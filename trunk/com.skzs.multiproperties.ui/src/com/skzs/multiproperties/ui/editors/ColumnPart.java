@@ -1,5 +1,8 @@
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.api.IHandler;
+import hu.skzs.multiproperties.base.model.Column;
+
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
@@ -23,8 +26,6 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
-import com.skzs.multiproperties.base.api.IHandler;
-import com.skzs.multiproperties.base.model.Column;
 import com.skzs.multiproperties.ui.Activator;
 
 public class ColumnPart implements IDetailsPage

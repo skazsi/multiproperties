@@ -1,8 +1,9 @@
 package com.skzs.multiproperties.ui.wizards;
 
+import hu.skzs.multiproperties.base.model.CommentRecord;
+
 import org.eclipse.jface.wizard.Wizard;
 
-import com.skzs.multiproperties.base.model.CommentRecord;
 import com.skzs.multiproperties.ui.Activator;
 
 public class EditCommentWizard extends Wizard

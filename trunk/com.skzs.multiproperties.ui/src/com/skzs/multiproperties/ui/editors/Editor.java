@@ -1,5 +1,11 @@
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.PropertyRecord;
+import hu.skzs.multiproperties.base.model.Table;
+import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
+import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,11 +28,6 @@ import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
-import com.skzs.multiproperties.base.model.AbstractRecord;
-import com.skzs.multiproperties.base.model.PropertyRecord;
-import com.skzs.multiproperties.base.model.Table;
-import com.skzs.multiproperties.base.model.listener.IRecordChangeListener;
-import com.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 import com.skzs.multiproperties.ui.Activator;
 
 public class Editor extends FormEditor implements IResourceChangeListener, IRecordChangeListener, IStructuralChangeListener

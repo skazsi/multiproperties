@@ -1,9 +1,10 @@
 package com.skzs.multiproperties.ui.wizards;
 
+import hu.skzs.multiproperties.base.model.Column;
+import hu.skzs.multiproperties.base.model.PropertyRecord;
+
 import org.eclipse.jface.wizard.Wizard;
 
-import com.skzs.multiproperties.base.model.Column;
-import com.skzs.multiproperties.base.model.PropertyRecord;
 import com.skzs.multiproperties.ui.Activator;
 import com.skzs.multiproperties.ui.ContentAssistant;
 

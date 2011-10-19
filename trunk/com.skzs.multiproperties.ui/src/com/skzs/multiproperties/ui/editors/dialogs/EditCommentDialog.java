@@ -3,6 +3,8 @@
  */
 package com.skzs.multiproperties.ui.editors.dialogs;
 
+import hu.skzs.multiproperties.base.model.CommentRecord;
+
 import java.util.StringTokenizer;
 
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -22,7 +24,6 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.skzs.multiproperties.base.model.CommentRecord;
 import com.skzs.multiproperties.ui.Activator;
 import com.skzs.multiproperties.ui.editors.Editor;
 import com.skzs.multiproperties.ui.editors.TablePage;

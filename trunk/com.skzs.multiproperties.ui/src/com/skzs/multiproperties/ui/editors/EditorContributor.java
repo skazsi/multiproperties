@@ -1,5 +1,10 @@
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.CommentRecord;
+import hu.skzs.multiproperties.base.model.EmptyRecord;
+import hu.skzs.multiproperties.base.model.PropertyRecord;
+
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
@@ -21,10 +26,6 @@ import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 import org.eclipse.ui.texteditor.FindReplaceAction;
 
-import com.skzs.multiproperties.base.model.AbstractRecord;
-import com.skzs.multiproperties.base.model.CommentRecord;
-import com.skzs.multiproperties.base.model.EmptyRecord;
-import com.skzs.multiproperties.base.model.PropertyRecord;
 import com.skzs.multiproperties.ui.Activator;
 import com.skzs.multiproperties.ui.ContentAssistant;
 import com.skzs.multiproperties.ui.wizards.EditCommentWizard;

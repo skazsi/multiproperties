@@ -3,13 +3,14 @@
  */
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+
 import org.eclipse.jface.text.IFindReplaceTarget;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.graphics.Point;
 
-import com.skzs.multiproperties.base.model.AbstractRecord;
 
 public class FindReplaceTarget implements IFindReplaceTarget
 {

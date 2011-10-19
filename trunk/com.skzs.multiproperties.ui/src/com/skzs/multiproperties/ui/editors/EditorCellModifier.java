@@ -3,6 +3,10 @@
  */
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.CommentRecord;
+import hu.skzs.multiproperties.base.model.PropertyRecord;
+
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
@@ -10,9 +14,6 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Item;
 
-import com.skzs.multiproperties.base.model.AbstractRecord;
-import com.skzs.multiproperties.base.model.CommentRecord;
-import com.skzs.multiproperties.base.model.PropertyRecord;
 
 public class EditorCellModifier implements ICellModifier
 {

@@ -1,18 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MultiProperties Base Plug-in
-Bundle-SymbolicName: com.skzs.multiproperties.base;singleton:=true
+Bundle-SymbolicName: hu.skzs.multiproperties.base;singleton:=true
 Bundle-Version: 0.9.0
-Bundle-Activator: com.skzs.multiproperties.base.Activator
+Bundle-Activator: hu.skzs.multiproperties.base.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: com.skzs.multiproperties.base.api,
- com.skzs.multiproperties.base.model,
- com.skzs.multiproperties.base.model.listener
+Export-Package: hu.skzs.multiproperties.base.api,
+ hu.skzs.multiproperties.base.model,
+ hu.skzs.multiproperties.base.model.listener
 Bundle-ClassPath: .,
- lib/jaxb-api.jar,
- lib/jaxb-impl.jar,
- lib/jaxb-xjc.jar
+ lib/jaxb/jaxb-impl.jar,
+ lib/jaxb/jaxb-xjc.jar,
+ lib/jaxb/jaxb1-impl.jar

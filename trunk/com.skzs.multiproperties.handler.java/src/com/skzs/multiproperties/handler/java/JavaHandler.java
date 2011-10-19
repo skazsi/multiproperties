@@ -1,5 +1,12 @@
 package com.skzs.multiproperties.handler.java;
 
+import hu.skzs.multiproperties.base.api.IHandler;
+import hu.skzs.multiproperties.base.model.Column;
+import hu.skzs.multiproperties.base.model.CommentRecord;
+import hu.skzs.multiproperties.base.model.EmptyRecord;
+import hu.skzs.multiproperties.base.model.PropertyRecord;
+import hu.skzs.multiproperties.base.model.Table;
+
 import java.io.ByteArrayInputStream;
 
 import org.eclipse.core.resources.IContainer;
@@ -14,12 +21,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
-import com.skzs.multiproperties.base.api.IHandler;
-import com.skzs.multiproperties.base.model.Column;
-import com.skzs.multiproperties.base.model.CommentRecord;
-import com.skzs.multiproperties.base.model.EmptyRecord;
-import com.skzs.multiproperties.base.model.PropertyRecord;
-import com.skzs.multiproperties.base.model.Table;
 import com.skzs.multiproperties.handler.java.wizard.TargetPropertiesSelectionWizard;
 
 public class JavaHandler implements IHandler

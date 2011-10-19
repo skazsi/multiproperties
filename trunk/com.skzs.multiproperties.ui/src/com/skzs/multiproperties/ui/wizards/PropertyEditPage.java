@@ -1,5 +1,7 @@
 package com.skzs.multiproperties.ui.wizards;
 
+import hu.skzs.multiproperties.base.model.PropertyRecord;
+
 import org.eclipse.jface.dialogs.DialogPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -20,7 +22,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.skzs.multiproperties.base.model.PropertyRecord;
 import com.skzs.multiproperties.ui.Activator;
 import com.skzs.multiproperties.ui.ContentAssistant;
 

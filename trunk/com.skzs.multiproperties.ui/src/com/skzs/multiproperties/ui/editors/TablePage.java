@@ -3,6 +3,9 @@
  */
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.PropertyRecord;
+
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -37,8 +40,6 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
-import com.skzs.multiproperties.base.model.AbstractRecord;
-import com.skzs.multiproperties.base.model.PropertyRecord;
 import com.skzs.multiproperties.ui.Activator;
 
 public class TablePage extends FormPage

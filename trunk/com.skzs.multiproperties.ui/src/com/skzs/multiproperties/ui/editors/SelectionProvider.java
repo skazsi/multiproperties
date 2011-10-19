@@ -1,11 +1,12 @@
 package com.skzs.multiproperties.ui.editors;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.Table;
+
 import java.util.Iterator;
 
 import org.eclipse.jface.viewers.StructuredSelection;
 
-import com.skzs.multiproperties.base.model.AbstractRecord;
-import com.skzs.multiproperties.base.model.Table;
 
 public class SelectionProvider
 {
