@@ -12,7 +12,7 @@ public class Activator extends AbstractUIPlugin
 {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.skzs.multiproperties.base";
+	public static final String PLUGIN_ID = "hu.skzs.multiproperties.base";
 
 	// The shared instance
 	private static Activator plugin;

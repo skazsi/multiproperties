@@ -4,48 +4,48 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="com.skzs.multiproperties.ui.editors.Editor"
-            contributorClass="com.skzs.multiproperties.ui.editors.EditorContributor"
+            class="hu.skzs.multiproperties.ui.editors.Editor"
+            contributorClass="hu.skzs.multiproperties.ui.editors.EditorContributor"
             extensions="multiproperties"
             icon="icons/title.gif"
-            id="com.skzs.multiproperties.ui.editor"
+            id="hu.skzs.multiproperties.ui.editor"
             name="MultiProperties Editor"/>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
-      <initializer class="com.skzs.multiproperties.ui.preferences.PreferenceInitializer"/>
+      <initializer class="hu.skzs.multiproperties.ui.preferences.PreferenceInitializer"/>
    </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="com.skzs.multiproperties.ui.preferences.PreferencesPage"
-            id="com.skzs.multiproperties.ui.preferencespage"
+            class="hu.skzsskzs.multiproperties.ui.preferences.PreferencesPage"
+            id="hu.skzs.multiproperties.ui.preferencespage"
             name="MultiProperties"/>
       <page
-            category="com.skzs.multiproperties.ui.preferencespage"
-            class="com.skzs.multiproperties.ui.preferences.ColorsPreferencesPage"
-            id="com.skzs.multiproperties.ui.colorspreferencespage"
+            category="hu.skzs.multiproperties.ui.preferencespage"
+            class="hu.skzs.multiproperties.ui.preferences.ColorsPreferencesPage"
+            id="hu.skzs.multiproperties.ui.colorspreferencespage"
             name="Colors"/>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
-            class="com.skzs.multiproperties.ui.perspectives.Perspective"
+            class="hu.skzs.multiproperties.ui.perspectives.Perspective"
             icon="icons/title.gif"
-            id="com.skzs.multiproperties.ui.perspective"
+            id="hu.skzs.multiproperties.ui.perspective"
             name="MultiProperties"/>
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
       <category
-            id="com.skzs.multiproperties.newwizard.category"
+            id="hu.skzs.multiproperties.newwizard.category"
             name="MultiProperties">
       </category>
       <wizard
-            category="com.skzs.multiproperties.newwizard.category"
-            class="com.skzs.multiproperties.ui.wizards.NewMultiPropertiesWizard"
+            category="hu.skzs.multiproperties.newwizard.category"
+            class="hu.skzs.multiproperties.ui.wizards.NewMultiPropertiesWizard"
             icon="icons/title.gif"
-            id="com.skzs.multiproperties.newwizard.NewMultiProperties"
+            id="hu.skzs.multiproperties.newwizard.NewMultiProperties"
             name="MultiProperties">
       </wizard>
    </extension>

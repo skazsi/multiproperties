@@ -1,5 +1,5 @@
-<xsd:schema targetNamespace="com.skzs.multiproperties" elementFormDefault="qualified"
-	xmlns="com.skzs.multiproperties" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema targetNamespace="hu.skzs.multiproperties" elementFormDefault="qualified"
+	xmlns="hu.skzs.multiproperties" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 	<xsd:element name="MultiProperties">
 		<xsd:complexType>

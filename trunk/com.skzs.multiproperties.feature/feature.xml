@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.skzs.multiproperties.feature"
+      id="hu.skzs.multiproperties.feature"
       label="MultiProperties Feature"
       version="0.9.0"
       nl="en">
@@ -11,14 +11,14 @@ files having similar structure in one table.
    </description>
 
    <url>
-      <update label="MultiProperties update site" url="https://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/com.skzs.multiproperties.updatesite"/>
+      <update label="MultiProperties update site" url="https://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.updatesite"/>
    </url>
 
    <requires>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
-      <import plugin="com.skzs.multiproperties.base"/>
+      <import plugin="hu.skzs.multiproperties.base"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.forms"/>
       <import plugin="org.eclipse.ui.workbench.texteditor"/>
@@ -27,14 +27,14 @@ files having similar structure in one table.
    </requires>
 
    <plugin
-         id="com.skzs.multiproperties.base"
+         id="hu.skzs.multiproperties.base"
          download-size="0"
          install-size="0"
          version="0.9.0"
          unpack="false"/>
 
    <plugin
-         id="com.skzs.multiproperties.ui"
+         id="hu.skzs.multiproperties.ui"
          download-size="0"
          install-size="0"
          version="0.9.0"

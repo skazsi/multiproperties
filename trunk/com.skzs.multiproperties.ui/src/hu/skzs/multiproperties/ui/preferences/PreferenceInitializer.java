@@ -1,11 +1,12 @@
 /*
  * Created on Dec 2, 2005
  */
-package com.skzs.multiproperties.ui.preferences;
+package hu.skzs.multiproperties.ui.preferences;
+
+import hu.skzs.multiproperties.ui.Activator;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 
-import com.skzs.multiproperties.ui.Activator;
 
 public class PreferenceInitializer extends AbstractPreferenceInitializer
 {

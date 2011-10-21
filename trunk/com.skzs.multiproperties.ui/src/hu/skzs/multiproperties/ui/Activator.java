@@ -1,4 +1,4 @@
-package com.skzs.multiproperties.ui;
+package hu.skzs.multiproperties.ui;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -14,7 +14,7 @@ public class Activator extends AbstractUIPlugin
 {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.skzs.multiproperties.ui";
+	public static final String PLUGIN_ID = "hu.skzs.multiproperties.ui";
 
 	// The shared instance
 	private static Activator plugin;
@@ -73,7 +73,7 @@ public class Activator extends AbstractUIPlugin
 	 */
 	public static ImageDescriptor getImageDescriptor(final String path)
 	{
-		return AbstractUIPlugin.imageDescriptorFromPlugin("com.skzs.multiproperties.ui", path);
+		return AbstractUIPlugin.imageDescriptorFromPlugin("hu.skzs.multiproperties.ui", path);
 	}
 
 	@Override

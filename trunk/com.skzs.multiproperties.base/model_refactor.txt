@@ -1,8 +1,0 @@
-
-com.skzs.multiproperties.base.internal
- - AbstractRecord
-   - event firing
-   - clone abstract method
- - PropertyRecord
-   - duplicated
-     - uses the events in AbstractRecord

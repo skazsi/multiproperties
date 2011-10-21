@@ -1,4 +1,4 @@
-package com.skzs.multiproperties.ui.perspectives;
+package hu.skzs.multiproperties.ui.perspectives;
 
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
