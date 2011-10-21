@@ -2,9 +2,9 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="com.skzs.multiproperties.handler">
+         point="hu.skzs.multiproperties.handler">
          <handler
          	name="Java Properties Handler"
-         	class="com.skzs.multiproperties.handler.java.JavaHandler"/>
+         	class="hu.skzs.multiproperties.handler.java.JavaHandler"/>
    </extension>
 </plugin>

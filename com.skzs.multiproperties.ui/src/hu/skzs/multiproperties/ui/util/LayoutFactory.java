@@ -1,4 +1,4 @@
-package com.skzs.multiproperties.ui.util;
+package hu.skzs.multiproperties.ui.util;
 
 import org.eclipse.ui.forms.widgets.TableWrapLayout;
 

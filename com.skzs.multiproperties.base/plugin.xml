@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="com.skzs.multiproperties.handler" name="MultiProperties Handler" schema="schema/com.skzs.multiproperties.handler.exsd"/>
+   <extension-point id="hu.skzs.multiproperties.handler" name="MultiProperties Handler" schema="schema/hu.skzs.multiproperties.handler.exsd"/>
 
 </plugin>

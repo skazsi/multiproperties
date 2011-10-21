@@ -1,4 +1,4 @@
-package com.skzs.multiproperties.handler.java.wizard;
+package hu.skzs.multiproperties.handler.java.wizard;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;

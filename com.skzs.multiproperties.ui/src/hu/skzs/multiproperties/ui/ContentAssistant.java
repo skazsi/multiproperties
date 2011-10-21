@@ -1,10 +1,10 @@
-package com.skzs.multiproperties.ui;
+package hu.skzs.multiproperties.ui;
 
 import hu.skzs.multiproperties.base.model.Table;
+import hu.skzs.multiproperties.ui.editors.Editor;
 
 import org.eclipse.ui.PlatformUI;
 
-import com.skzs.multiproperties.ui.editors.Editor;
 
 public class ContentAssistant
 {

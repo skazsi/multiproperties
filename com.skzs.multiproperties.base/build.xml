@@ -3,35 +3,22 @@
 <project name="MultiProperties Core" default="generate-sources" basedir=".">
 
 	<target name="generate-sources">
-		<taskdef name="xjc" classname="org.jvnet.jaxb2_commons.xjc.XJC2Task">
+		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
 			<classpath>
 				<fileset dir="${basedir}/lib">
-					<include name="jaxb/*.jar"/>
-					<include name="jaxb-basics/*.jar"/>
+					<include name="jaxb/jaxb-api.jar"/>
+					<include name="jaxb/jaxb-impl.jar"/>
+					<include name="jaxb/jaxb-xjc.jar"/>
 				</fileset>
 			</classpath>
 		</taskdef>
 
-		<xjc destdir="${basedir}/src" extension="true">
-			<arg line="-Xinheritance"/>
+		<xjc destdir="${basedir}/src" package="hu.skzs.multiproperties.base.model.schema" extension="true">
 			<!--produces dir="${basedir}/src/hu/skzs/test/model" includes="*impl/**" />
 			<arg value="-no-header"/-->
 			<schema dir="${basedir}/src/hu/skzs/multiproperties/base">
 			 	<include name="**/*.xsd"/>
 			</schema>
-			<!-- Plugins -->
-			<classpath>
-				<fileset dir="${basedir}/lib/jaxb-basics">
-					<!-- JAXB2 Basics library -->
-					<include name="jaxb2-basics-*.jar"/>
-					<!-- JAXB2 Basics library dependencies -->
-					<include name="jaxb2-basics-runtime-*.jar"/>
-					<include name="jaxb2-basics-tools-*.jar"/>
-					<include name="commons-beanutils-*.jar"/>
-					<include name="commons-lang-*.jar"/>
-					<include name="commons-logging-*.jar"/>
-				</fileset>
-			</classpath>
 		</xjc>
 	</target>
 </project>

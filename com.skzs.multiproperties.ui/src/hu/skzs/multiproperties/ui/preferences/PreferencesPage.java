@@ -1,14 +1,15 @@
 /*
  * Created on Dec 8, 2005
  */
-package com.skzs.multiproperties.ui.preferences;
+package hu.skzs.multiproperties.ui.preferences;
+
+import hu.skzs.multiproperties.ui.Activator;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import com.skzs.multiproperties.ui.Activator;
 
 public class PreferencesPage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage
 {

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="com.skzs.multiproperties.base" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="hu.skzs.multiproperties.base" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="com.skzs.multiproperties.base" id="com.skzs.multiproperties.handler" name="MultiProperties Handler"/>
+         <meta.schema plugin="hu.skzs.multiproperties.base" id="hu.skzs.multiproperties.handler" name="MultiProperties Handler"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]

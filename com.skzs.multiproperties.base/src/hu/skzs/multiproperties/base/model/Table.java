@@ -24,7 +24,6 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.MessageDialog;
 
-
 /**
  * The <tt>Table</tt> object represents the entire multiproperties object. 
  * @author sallai
@@ -32,7 +31,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 public class Table implements IRecordChangeListener, IStructuralChangeListener
 {
 
-	private static final String SCHEMA_PACKAGE = "com.skzs.multiproperties.base.model.schema";
+	private static final String SCHEMA_PACKAGE = "hu.skzs.multiproperties.base.model.schema";
 
 	/**
 	 * The name of the multiproperties 
@@ -727,7 +726,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 			{
 				IConfigurationElement element = null;
 				final IExtensionRegistry reg = Platform.getExtensionRegistry();
-				final IConfigurationElement[] extensions = reg.getConfigurationElementsFor("com.skzs.multiproperties.handler");
+				final IConfigurationElement[] extensions = reg.getConfigurationElementsFor("hu.skzs.multiproperties.handler");
 				for (int i = 0; i < extensions.length; i++)
 				{
 					if (extensions[i].getAttribute("name").equals(handler))
