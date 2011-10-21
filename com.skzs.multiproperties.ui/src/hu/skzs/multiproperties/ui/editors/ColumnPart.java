@@ -27,7 +27,6 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 
-
 public class ColumnPart implements IDetailsPage
 {
 
@@ -102,7 +101,7 @@ public class ColumnPart implements IDetailsPage
 				{
 					IConfigurationElement element = null;
 					final IExtensionRegistry reg = Platform.getExtensionRegistry();
-					final IConfigurationElement[] extensions = reg.getConfigurationElementsFor("com.skzs.multiproperties.handler");
+					final IConfigurationElement[] extensions = reg.getConfigurationElementsFor("hu.skzs.multiproperties.handler");
 					for (int i = 0; i < extensions.length; i++)
 					{
 						if (extensions[i].getAttribute("name").equals(block.getEditor().getTable().getHandler()))
