@@ -176,7 +176,7 @@ public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 
 	private void throwCoreException(final String message) throws CoreException
 	{
-		final IStatus status = new Status(IStatus.ERROR, "com.skzs.multiproperties.ui", IStatus.OK, message, null);
+		final IStatus status = new Status(IStatus.ERROR, "hu.skzs.multiproperties.ui", IStatus.OK, message, null);
 		throw new CoreException(status);
 	}
 

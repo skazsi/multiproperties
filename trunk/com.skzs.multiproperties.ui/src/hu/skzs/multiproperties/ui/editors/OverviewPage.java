@@ -27,7 +27,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.forms.widgets.TableWrapData;
 
-
 public class OverviewPage extends FormPage
 {
 
@@ -147,7 +146,7 @@ public class OverviewPage extends FormPage
 		handler.setLayoutData(new TableWrapData(TableWrapData.FILL));
 
 		final IExtensionRegistry reg = Platform.getExtensionRegistry();
-		final IConfigurationElement[] extensions = reg.getConfigurationElementsFor("com.skzs.multiproperties.handler");
+		final IConfigurationElement[] extensions = reg.getConfigurationElementsFor("hu.skzs.multiproperties.handler");
 		handler.add("none");
 		handler.select(0);
 		boolean found_configured_handler = false;
