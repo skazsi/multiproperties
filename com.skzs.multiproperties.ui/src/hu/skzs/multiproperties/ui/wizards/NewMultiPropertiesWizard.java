@@ -167,7 +167,7 @@ public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 	 */
 	private InputStream openContentStream(final String name)
 	{
-		final StringBuffer strb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><MultiProperties xmlns=\"multiproperties.indgroup.eu\"><Version>2.0</Version>");
+		final StringBuffer strb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><MultiProperties xmlns=\"hu.skzs.multiproperties\"><Version>1.0</Version>");
 		strb.append("<Name>" + name + "</Name>");
 		strb.append("<Description></Description><Handler></Handler><Columns><Key><Width>100</Width></Key></Columns><Records></Records></MultiProperties>");
 
