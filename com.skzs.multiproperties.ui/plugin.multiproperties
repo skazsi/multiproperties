@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MultiProperties xmlns="multiproperties.indgroup.eu">
+    <Version>2.0</Version>
+    <Name>MultiProperties UI</Name>
+    <Description></Description>
+    <Handler>Java Properties Handler</Handler>
+    <Columns>
+        <Key>
+            <Width>265</Width>
+        </Key>
+        <Column>
+            <Name>EN</Name>
+            <Description></Description>
+            <Width>518</Width>
+            <HandlerConfiguration>/hu.skzs.multiproperties.ui/plugin.properties</HandlerConfiguration>
+        </Column>
+    </Columns>
+    <Records>
+        <Comment>
+            <Value>GENERAL</Value>
+        </Comment>
+        <Property>
+            <Name>general.overview</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Overview</Value>
+        </Property>
+        <Property>
+            <Name>general.columns</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Columns</Value>
+        </Property>
+        <Property>
+            <Name>general.table</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Table</Value>
+        </Property>
+        <Property>
+            <Name>general.confirm.title</Name>
+            <Description>	</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Confirm</Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>EDITOR / OVERVIEW PAGE</Value>
+        </Comment>
+        <Property>
+            <Name>overview.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Overview</Value>
+        </Property>
+        <Comment>
+            <Value>general section</Value>
+        </Comment>
+        <Property>
+            <Name>overview.general.section.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">General Information</Value>
+        </Property>
+        <Property>
+            <Name>overview.general.section.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">This section describes general information about this multiproperties.</Value>
+        </Property>
+        <Property>
+            <Name>overview.general.name</Name>
+            <Description>	</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Name: </Value>
+        </Property>
+        <Property>
+            <Name>overview.general.description</Name>
+            <Description>	</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Description: </Value>
+        </Property>
+        <Comment>
+            <Value>handler section</Value>
+        </Comment>
+        <Property>
+            <Name>overview.handler.section.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Handler</Value>
+        </Property>
+        <Property>
+            <Name>overview.handler.section.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The handlers are able to produce different kind of outputs from the multiproperties.</Value>
+        </Property>
+        <Property>
+            <Name>overview.handler.handler</Name>
+            <Description>	</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Handler: </Value>
+        </Property>
+        <Property>
+            <Name>overview.handler.handler.none</Name>
+            <Description>	</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">none</Value>
+        </Property>
+        <Property>
+            <Name>overview.handler.confirm.text</Name>
+            <Description>	</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Changing the handler implementation will cause the current handler configurations get lost. Are you sure to continue?</Value>
+        </Property>
+        <Comment>
+            <Value>navigation section</Value>
+        </Comment>
+        <Property>
+            <Name>overview.navigation.section.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Navigation</Value>
+        </Property>
+        <Property>
+            <Name>overview.navigation.section.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">This section describes the pages of the editor shortly.</Value>
+        </Property>
+        <Property>
+            <Name>overview.navigation.columns</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">list of all columns contained by this multiproperties.</Value>
+        </Property>
+        <Property>
+            <Name>overview.navigation.table</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">editable interface of columns in table format.</Value>
+        </Property>
+        <Comment>
+            <Value>statistics section</Value>
+        </Comment>
+        <Property>
+            <Name>overview.statistics.section.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Statistics</Value>
+        </Property>
+        <Property>
+            <Name>overview.statistics.section.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">This section gives statistical information about this multiproperties.</Value>
+        </Property>
+        <Property>
+            <Name>overview.statistics.countof.columns</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Count of columns: </Value>
+        </Property>
+        <Property>
+            <Name>overview.statistics.countof.property</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Count of property records: </Value>
+        </Property>
+        <Property>
+            <Name>overview.statistics.countof.disabled</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Count of disabled property records:  </Value>
+        </Property>
+        <Property>
+            <Name>overview.statistics.countof.comment</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Count of disabled comment records: </Value>
+        </Property>
+        <Property>
+            <Name>overview.statistics.countof.empty</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Count of disabled empty records: </Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>EDITOR / COLUMNS PAGE</Value>
+        </Comment>
+        <Property>
+            <Name>columns.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Columns</Value>
+        </Property>
+        <Property>
+            <Name>columns.button.add</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add...</Value>
+        </Property>
+        <Property>
+            <Name>columns.button.remove</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Remove</Value>
+        </Property>
+        <Property>
+            <Name>columns.button.remove.confirm.text</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Are you sure to remove the selected column?</Value>
+        </Property>
+        <Property>
+            <Name>columns.button.up</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Up</Value>
+        </Property>
+        <Property>
+            <Name>columns.button.down</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Down</Value>
+        </Property>
+        <Property>
+            <Name>columns.button.horizontal</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Horizontal layout</Value>
+        </Property>
+        <Property>
+            <Name>columns.button.vertical</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Vertical layout</Value>
+        </Property>
+        <Comment>
+            <Value>column section</Value>
+        </Comment>
+        <Property>
+            <Name>columns.column.section.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Selected column</Value>
+        </Property>
+        <Property>
+            <Name>columns.column.name</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Name</Value>
+        </Property>
+        <Property>
+            <Name>columns.column.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Description</Value>
+        </Property>
+        <Property>
+            <Name>columns.column.handler</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Handler configuration</Value>
+        </Property>
+        <Property>
+            <Name>columns.column.handler.button</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Configure...</Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>COMMAND</Value>
+        </Comment>
+        <Property>
+            <Name>command.add.property</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add Property Record...</Value>
+        </Property>
+        <Property>
+            <Name>command.add.property.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add Property Record</Value>
+        </Property>
+        <Property>
+            <Name>command.add.comment</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add Comment Record...</Value>
+        </Property>
+        <Property>
+            <Name>command.add.comment.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add Comment Record</Value>
+        </Property>
+        <Property>
+            <Name>command.add.empty</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add Empty Record...</Value>
+        </Property>
+        <Property>
+            <Name>command.add.empty.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add Empty Record</Value>
+        </Property>
+        <Property>
+            <Name>command.delete</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Delete</Value>
+        </Property>
+        <Property>
+            <Name>command.delete.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Delete Selected Records</Value>
+        </Property>
+        <Property>
+            <Name>command.delete.confirm</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Are you sure to delete selected records?</Value>
+        </Property>
+    </Records>
+</MultiProperties>

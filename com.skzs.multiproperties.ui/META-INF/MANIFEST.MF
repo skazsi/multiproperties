@@ -4,6 +4,7 @@ Bundle-Name: MultiProperties UI Plug-in
 Bundle-SymbolicName: hu.skzs.multiproperties.ui;singleton:=true
 Bundle-Version: 0.9.0
 Bundle-Activator: hu.skzs.multiproperties.ui.Activator
+Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  hu.skzs.multiproperties.base,
@@ -12,6 +13,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.workbench.texteditor,
  org.eclipse.ui.views,
  org.eclipse.jface.text,
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ org.eclipse.core.expressions;bundle-version="3.4.300"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Eclipse-LazyStart: true
