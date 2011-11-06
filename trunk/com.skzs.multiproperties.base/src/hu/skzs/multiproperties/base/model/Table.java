@@ -412,6 +412,23 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	}
 
 	/**
+	 * Removes the given records.
+	 * @param records the given records
+	 * @return the number of removed records
+	 */
+	public int remove(final AbstractRecord[] records)
+	{
+		int count = 0;
+		for (AbstractRecord record : records)
+		{
+			if (this.records.remove(record))
+				count++;
+		}
+		setDirty(true);
+		return count;
+	}
+
+	/**
 	 * Returns the current size of the multiproperties.
 	 * @see #sizeOfProperties()
 	 * @see #sizeOfDisabled()

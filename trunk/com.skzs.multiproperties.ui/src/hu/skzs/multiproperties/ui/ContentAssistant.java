@@ -1,7 +1,7 @@
 package hu.skzs.multiproperties.ui;
 
 import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.ui.editors.Editor;
+import hu.skzs.multiproperties.ui.editor.Editor;
 
 import org.eclipse.ui.PlatformUI;
 
