@@ -1,5 +1,6 @@
 package hu.skzs.multiproperties.ui.command;
 
+import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.ui.editor.Editor;
 import hu.skzs.multiproperties.ui.wizard.CommentAddWizard;
 
@@ -11,6 +12,10 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
+/**
+ * The <code>AddCommentHandler</code> adds a new {@link CommentRecord} instance.
+ * @author sallai
+ */
 public class AddCommentHandler extends AbstractHandler
 {
 

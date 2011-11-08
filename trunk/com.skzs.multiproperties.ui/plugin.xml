@@ -42,7 +42,7 @@
       </category>
       <wizard
             category="hu.skzs.multiproperties.newwizard.category"
-            class="hu.skzs.multiproperties.ui.wizards.NewMultiPropertiesWizard"
+            class="hu.skzs.multiproperties.ui.wizard.NewMultiPropertiesWizard"
             icon="icons/title.gif"
             id="hu.skzs.multiproperties.newwizard.NewMultiProperties"
             name="MultiProperties">

@@ -1,5 +1,6 @@
 package hu.skzs.multiproperties.ui.command;
 
+import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.ui.editor.Editor;
 import hu.skzs.multiproperties.ui.wizard.EmptyAddWizard;
 
@@ -11,6 +12,10 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
+/**
+ * The <code>AddEmptyHandler</code> adds a new {@link EmptyRecord} instance.
+ * @author sallai
+ */
 public class AddEmptyHandler extends AbstractHandler
 {
 
