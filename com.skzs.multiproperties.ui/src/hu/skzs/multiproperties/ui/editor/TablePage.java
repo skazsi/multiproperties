@@ -14,9 +14,6 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
@@ -91,12 +88,11 @@ public class TablePage extends MPEditorPage
 	{
 		parent.setLayout(new FillLayout());
 
-		// tableviewer
 		tableviewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		tableviewer.getTable().setLinesVisible(true);
 		tableviewer.getTable().setHeaderVisible(true);
 		final TableColumn tc = new TableColumn(tableviewer.getTable(), SWT.NONE, 0);
-		tc.setText("Key");
+		tc.setText(Messages.getString("tables.key")); //$NON-NLS-1$
 		tc.setWidth(editor.getTable().getKeyColumnWidth());
 		tc.addControlListener(new ControlListener() {
 
@@ -116,7 +112,7 @@ public class TablePage extends MPEditorPage
 		tableviewer.setInput(editor.getEditorInput());
 		tableviewer.setCellModifier(new EditorCellModifier(editor, tableviewer));
 		// Disable native tooltip
-		tableviewer.getTable().setToolTipText("");
+		tableviewer.getTable().setToolTipText(""); //$NON-NLS-1$
 
 		// Makes the selection available to the workbench
 		getSite().setSelectionProvider(tableviewer);
@@ -132,7 +128,7 @@ public class TablePage extends MPEditorPage
 				{
 				case SWT.MouseDown:
 					final Event e = new Event();
-					e.item = (TableItem) label.getData("_TABLEITEM");
+					e.item = (TableItem) label.getData("_TABLEITEM"); //$NON-NLS-1$
 					// Assuming table is single select, set the selection as if
 					// the mouse down event went through to the table
 					tableviewer.getTable().setSelection(new TableItem[] { (TableItem) e.item });
@@ -200,7 +196,7 @@ public class TablePage extends MPEditorPage
 							title.setForeground(tableviewer.getTable().getDisplay().getSystemColor(SWT.COLOR_INFO_FOREGROUND));
 							title.setBackground(tableviewer.getTable().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND));
 							title.setFont(EditorFontRegistry.get(EditorFontRegistry.TOOLTIP_TITLE));
-							title.setData("_TABLEITEM", item);
+							title.setData("_TABLEITEM", item); //$NON-NLS-1$
 							title.setText(propertyrecord.getValue());
 							title.addListener(SWT.MouseExit, labelListener);
 							title.addListener(SWT.MouseDown, labelListener);
@@ -209,7 +205,7 @@ public class TablePage extends MPEditorPage
 								description = new Label(tip, SWT.NONE);
 								description.setForeground(tableviewer.getTable().getDisplay().getSystemColor(SWT.COLOR_INFO_FOREGROUND));
 								description.setBackground(tableviewer.getTable().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND));
-								description.setData("_TABLEITEM", item);
+								description.setData("_TABLEITEM", item); //$NON-NLS-1$
 								description.setText(propertyrecord.getDescription());
 								description.addListener(SWT.MouseExit, labelListener);
 								description.addListener(SWT.MouseDown, labelListener);
@@ -229,18 +225,9 @@ public class TablePage extends MPEditorPage
 		tableviewer.getTable().addListener(SWT.KeyDown, tableListener);
 		tableviewer.getTable().addListener(SWT.MouseMove, tableListener);
 		tableviewer.getTable().addListener(SWT.MouseHover, tableListener);
-		final MenuManager menuManager = new MenuManager();
-		//		menuManager.add(editor.getContributor().getInsertAction());
-		//		menuManager.add(editor.getContributor().getEditAction());
-		//		menuManager.add(editor.getContributor().getDeleteAction());
-		//		menuManager.add(new Separator());
-		//		menuManager.add(editor.getContributor().getDuplicateAction());
-		//		menuManager.add(editor.getContributor().getDisableAction());
-		//		menuManager.add(new Separator());
-		//		menuManager.add(editor.getContributor().getMoveUpAction());
-		//		menuManager.add(editor.getContributor().getMoveDownAction());
-		tableviewer.getTable().setMenu(menuManager.createContextMenu(tableviewer.getTable()));
 
+		final MenuManager menuManager = new MenuManager();
+		tableviewer.getTable().setMenu(menuManager.createContextMenu(tableviewer.getTable()));
 		getSite().registerContextMenu(menuManager, tableviewer);
 
 		tableviewer.addDoubleClickListener(new IDoubleClickListener() {
@@ -261,21 +248,6 @@ public class TablePage extends MPEditorPage
 				{
 					e.printStackTrace();
 				}
-			}
-		});
-		tableviewer.addSelectionChangedListener(new ISelectionChangedListener() {
-
-			public void selectionChanged(final SelectionChangedEvent event)
-			{
-				final ISelection selection = tableviewer.getSelection();
-				//				AbstractRecord record;
-				//				if (selection.isEmpty())
-				//					record = null;
-				//				else
-				//					record = (AbstractRecord) ((IStructuredSelection) selection).getFirstElement();
-				//				editor.getContributor().refreshActions();
-				//				if (editor.getOutlinePage() != null)
-				//					editor.getOutlinePage().update(record);
 			}
 		});
 	}
@@ -306,7 +278,7 @@ public class TablePage extends MPEditorPage
 		}
 		// add the news
 		final String[] columnproperties = new String[editor.getTable().getColumns().size() + 1];
-		columnproperties[0] = "0";
+		columnproperties[0] = "0"; //$NON-NLS-1$
 		final TextCellEditor keyscelleditor = new TextCellEditor(tableviewer.getTable());
 		final TextCellEditor valuescelleditor = new TextCellEditor(tableviewer.getTable());
 		final CellEditor[] celleditors = new CellEditor[editor.getTable().getColumns().size() + 1];
@@ -330,7 +302,7 @@ public class TablePage extends MPEditorPage
 					editor.getTable().getColumns().get(index.intValue()).setWidth(tablecolumn.getWidth());
 				}
 			});
-			columnproperties[i + 1] = "" + (i + 1);
+			columnproperties[i + 1] = "" + (i + 1); //$NON-NLS-1$
 			celleditors[i + 1] = valuescelleditor;
 		}
 		tableviewer.setColumnProperties(columnproperties);

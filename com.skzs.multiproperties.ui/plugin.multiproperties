@@ -272,6 +272,16 @@
         </Property>
         <Empty/>
         <Comment>
+            <Value>EDITOR / TABLE PAGE</Value>
+        </Comment>
+        <Property>
+            <Name>tables.key</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Key</Value>
+        </Property>
+        <Empty/>
+        <Comment>
             <Value>COMMAND</Value>
         </Comment>
         <Property>

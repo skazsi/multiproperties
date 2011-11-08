@@ -1,5 +1,6 @@
 package hu.skzs.multiproperties.ui.command;
 
+import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.ui.editor.Editor;
 import hu.skzs.multiproperties.ui.wizard.PropertyAddWizard;
 
@@ -11,6 +12,10 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
+/**
+ * The <code>AddPropertyHandler</code> adds a new {@link PropertyRecord} instance.
+ * @author sallai
+ */
 public class AddPropertyHandler extends AbstractHandler
 {
 
