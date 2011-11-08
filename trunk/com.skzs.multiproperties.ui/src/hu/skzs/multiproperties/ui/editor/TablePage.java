@@ -4,7 +4,10 @@ import hu.skzs.multiproperties.base.model.AbstractRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
+import hu.skzs.multiproperties.ui.command.EditHandler;
+import hu.skzs.multiproperties.ui.command.TooltipHandler;
 
+import org.eclipse.core.commands.NotEnabledException;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -33,6 +36,10 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.commands.ICommandService;
+import org.eclipse.ui.handlers.IHandlerService;
+import org.eclipse.ui.handlers.RegistryToggleState;
 
 public class TablePage extends MPEditorPage
 {
@@ -112,7 +119,6 @@ public class TablePage extends MPEditorPage
 		tableviewer.getTable().setToolTipText("");
 
 		// Makes the selection available to the workbench
-		System.out.println("b: " + getSite().getClass().getName());
 		getSite().setSelectionProvider(tableviewer);
 
 		// Implement a "fake" tooltip
@@ -162,8 +168,14 @@ public class TablePage extends MPEditorPage
 				}
 				case SWT.MouseHover:
 				{
-					if (!Activator.getDefault().getPreferenceStore().getBoolean("tooltip"))
+					ICommandService commandService = (ICommandService) PlatformUI.getWorkbench().getService(ICommandService.class);
+					if (commandService == null)
 						return;
+
+					Boolean showTooltip = (Boolean) commandService.getCommand(TooltipHandler.COMMAND_ID).getState(RegistryToggleState.STATE_ID).getValue();
+					if (!showTooltip)
+						return;
+
 					if (tableviewer.getTable().getItem(new Point(event.x, event.y)) != null)
 					{
 						final AbstractRecord record = (AbstractRecord) tableviewer.getElementAt(tableviewer.getTable().indexOf(tableviewer.getTable().getItem(new Point(event.x, event.y))));
@@ -235,7 +247,20 @@ public class TablePage extends MPEditorPage
 
 			public void doubleClick(final DoubleClickEvent event)
 			{
-				editor.getContributor().getEditAction().run();
+				IHandlerService handlerService = (IHandlerService) getSite().getService(IHandlerService.class);
+				try
+				{
+					handlerService.executeCommand(EditHandler.COMMAND_ID, null);
+				}
+				catch (NotEnabledException e)
+				{
+					// do nothing
+					// TODO: it should be investigated how the enabled state could be checked
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
 			}
 		});
 		tableviewer.addSelectionChangedListener(new ISelectionChangedListener() {

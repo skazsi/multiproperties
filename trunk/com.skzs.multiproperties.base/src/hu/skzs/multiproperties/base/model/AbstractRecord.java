@@ -8,7 +8,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
 
-
 public abstract class AbstractRecord implements Cloneable
 {
 
