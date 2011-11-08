@@ -64,7 +64,7 @@
             class="hu.skzs.multiproperties.ui.propertytester.MPEPropertyTester"
             id="hu.skzs.multiproperties.ui.propertyTester"
             namespace="hu.skzs.multiproperties.ui"
-            properties="isContinuousSelection"
+            properties="isContinuousSelection,isBeginningSelection,isEndingSelection"
             type="java.lang.Object">
       </propertyTester>
    </extension>
@@ -82,6 +82,64 @@
             id="hu.skzs.multiproperties.ui.command.AddEmpty"
             name="%command.add.empty">
       </command>
+      <command
+            id="hu.skzs.multiproperties.ui.command.Edit"
+            name="%command.edit">
+      </command>
+      <command
+            id="hu.skzs.multiproperties.ui.command.Duplicate"
+            name="%command.duplicate">
+      </command>
+      <command
+            id="hu.skzs.multiproperties.ui.command.Disable"
+            name="%command.disable">
+      </command>
+      <command
+            id="hu.skzs.multiproperties.ui.command.MoveUp"
+            name="%command.moveup">
+      </command>
+      <command
+            id="hu.skzs.multiproperties.ui.command.MoveDown"
+            name="%command.movedown">
+      </command>
+      <command
+            id="hu.skzs.multiproperties.ui.command.ToggleTooltip"
+            name="%command.tooltip">
+		   <state
+		         class="org.eclipse.ui.handlers.RegistryToggleState:false"
+		         id="org.eclipse.ui.commands.toggleState">
+		   </state>
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commandImages">
+      <image
+            commandId="hu.skzs.multiproperties.ui.command.AddProperty"
+            icon="icons/property_add.gif"
+            disabledIcon="icons/property_add_d.gif"/>
+      <image
+            commandId="hu.skzs.multiproperties.ui.command.AddComment"
+            icon="icons/comment_add.gif"
+            disabledIcon="icons/comment_add_d.gif"/>
+      <image
+            commandId="hu.skzs.multiproperties.ui.command.AddEmpty"
+            icon="icons/empty_add.gif"
+            disabledIcon="icons/empty_add_d.gif"/>
+      <image
+            commandId="hu.skzs.multiproperties.ui.command.Duplicate"
+            icon="icons/duplicate.gif"
+            disabledIcon="icons/duplicate_d.gif"/>
+      <image
+            commandId="hu.skzs.multiproperties.ui.command.MoveUp"
+            icon="icons/move_up_e.gif"
+            disabledIcon="icons/move_up_d.gif"/>
+      <image
+            commandId="hu.skzs.multiproperties.ui.command.MoveDown"
+            icon="icons/move_down_e.gif"
+            disabledIcon="icons/move_down_d.gif"/>
+      <image
+            commandId="hu.skzs.multiproperties.ui.command.ToggleTooltip"
+            icon="icons/tooltip.gif"/>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -91,9 +149,7 @@
             <command
                   commandId="hu.skzs.multiproperties.ui.command.AddProperty"
                   label="%command.add.property"
-                  tooltip="%command.add.property.tooltip"
-                  icon="icons/property_add.gif"
-                  disabledIcon="icons/property_add_d.gif">
+                  tooltip="%command.add.property.tooltip">
 	            <visibleWhen>
 	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
 	            </visibleWhen>
@@ -101,9 +157,7 @@
             <command
                   commandId="hu.skzs.multiproperties.ui.command.AddComment"
                   label="%command.add.comment"
-                  tooltip="%command.add.comment.tooltip"
-                  icon="icons/comment_add.gif"
-                  disabledIcon="icons/comment_add_d.gif">
+                  tooltip="%command.add.comment.tooltip">
 	            <visibleWhen>
 	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
 	            </visibleWhen>
@@ -111,9 +165,27 @@
             <command
                   commandId="hu.skzs.multiproperties.ui.command.AddEmpty"
                   label="%command.add.empty"
-                  tooltip="%command.add.empty.tooltip"
-                  icon="icons/empty_add.gif"
-                  disabledIcon="icons/empty_add_d.gif">
+                  tooltip="%command.add.empty.tooltip">
+	            <visibleWhen>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+	            </visibleWhen>
+            </command>
+            <separator
+                  name="hu.skzs.multiproperties.ui.separator"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="hu.skzs.multiproperties.ui.command.Duplicate"
+                  label="%command.duplicate"
+                  tooltip="%command.duplicate.tooltip">
+	            <visibleWhen>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+	            </visibleWhen>
+            </command>
+            <command
+                  commandId="hu.skzs.multiproperties.ui.command.Disable"
+                  label="%command.disable"
+                  tooltip="%command.disable.tooltip">
 	            <visibleWhen>
 	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
 	            </visibleWhen>
@@ -121,13 +193,43 @@
       </menuContribution>
       <menuContribution
             allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+            <toolbar
+                  id="hu.skzs.multiproperties.ui.toolbar">
+	            <command
+	                  commandId="hu.skzs.multiproperties.ui.command.MoveUp"
+	                  label="%command.moveup"
+	                  tooltip="%command.moveup.tooltip">
+		            <visibleWhen>
+		               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+		            </visibleWhen>
+	            </command>
+	            <command
+	                  commandId="hu.skzs.multiproperties.ui.command.MoveDown"
+	                  label="%command.movedown"
+	                  tooltip="%command.movedown.tooltip">
+		            <visibleWhen>
+		               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+		            </visibleWhen>
+	            </command>
+	            <command
+	                  commandId="hu.skzs.multiproperties.ui.command.ToggleTooltip"
+	                  label="%command.tooltip"
+	                  tooltip="%command.tooltip.tooltip"
+	                  style="toggle">
+		            <visibleWhen>
+		               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+		            </visibleWhen>
+	            </command>
+            </toolbar>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
             locationURI="popup:hu.skzs.multiproperties.ui.editor">
             <command
                   commandId="hu.skzs.multiproperties.ui.command.AddProperty"
                   label="%command.add.property"
-                  tooltip="%command.add.property.tooltip"
-                  icon="icons/property_add.gif"
-                  disabledIcon="icons/property_add_d.gif">
+                  tooltip="%command.add.property.tooltip">
 	            <visibleWhen>
 	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
 	            </visibleWhen>
@@ -135,9 +237,7 @@
             <command
                   commandId="hu.skzs.multiproperties.ui.command.AddComment"
                   label="%command.add.comment"
-                  tooltip="%command.add.comment.tooltip"
-                  icon="icons/comment_add.gif"
-                  disabledIcon="icons/comment_add_d.gif">
+                  tooltip="%command.add.comment.tooltip">
 	            <visibleWhen>
 	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
 	            </visibleWhen>
@@ -145,9 +245,7 @@
             <command
                   commandId="hu.skzs.multiproperties.ui.command.AddEmpty"
                   label="%command.add.empty"
-                  tooltip="%command.add.empty.tooltip"
-                  icon="icons/empty_add.gif"
-                  disabledIcon="icons/empty_add_d.gif">
+                  tooltip="%command.add.empty.tooltip">
 	            <visibleWhen>
 	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
 	            </visibleWhen>
@@ -161,7 +259,50 @@
                   label="%command.delete"
                   tooltip="%command.delete.tooltip">
             </command>
-            
+            <separator
+                  name="hu.skzs.multiproperties.ui.separator2"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="hu.skzs.multiproperties.ui.command.Edit"
+                  label="%command.edit"
+                  tooltip="%command.edit.tooltip">
+	            <visibleWhen>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+	            </visibleWhen>
+            </command>
+            <command
+                  commandId="hu.skzs.multiproperties.ui.command.MoveUp"
+                  label="%command.moveup"
+                  tooltip="%command.moveup.tooltip">
+	            <visibleWhen>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+	            </visibleWhen>
+            </command>
+            <command
+                  commandId="hu.skzs.multiproperties.ui.command.MoveDown"
+                  label="%command.movedown"
+                  tooltip="%command.movedown.tooltip">
+	            <visibleWhen>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+	            </visibleWhen>
+            </command>
+            <command
+                  commandId="hu.skzs.multiproperties.ui.command.Duplicate"
+                  label="%command.duplicate"
+                  tooltip="%command.duplicate.tooltip">
+	            <visibleWhen>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+	            </visibleWhen>
+            </command>
+            <command
+                  commandId="hu.skzs.multiproperties.ui.command.Disable"
+                  label="%command.disable"
+                  tooltip="%command.disable.tooltip">
+	            <visibleWhen>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+	            </visibleWhen>
+            </command>
       </menuContribution>
    </extension>
    <extension
@@ -171,6 +312,22 @@
 		<and>
 			<with variable="activeEditor">
          		<instanceof value="hu.skzs.multiproperties.ui.editor.Editor"/>
+			</with>
+		</and>
+      </definition>
+      <definition
+            id="hu.skzs.multiproperties.ui.definition.hasSelection">
+		<and>
+			<with variable="activeEditor">
+         		<instanceof value="hu.skzs.multiproperties.ui.editor.Editor"/>
+			</with>
+			<with variable="selection">
+				<and>
+					<count value="+"/>
+					<iterate ifEmpty="false" operator="and">
+						<instanceof value="hu.skzs.multiproperties.base.model.AbstractRecord"/>
+					</iterate>
+				</and>
 			</with>
 		</and>
       </definition>
@@ -189,20 +346,7 @@
 		</and>
       </definition>
       <definition
-            id="hu.skzs.multiproperties.ui.definition.hasSelection">
-		<and>
-			<with variable="activeEditor">
-         		<instanceof value="hu.skzs.multiproperties.ui.editor.Editor"/>
-			</with>
-			<with variable="selection">
-				<iterate ifEmpty="false" operator="and">
-					<instanceof value="hu.skzs.multiproperties.base.model.AbstractRecord"/>
-				</iterate>
-			</with>
-		</and>
-      </definition>
-      <definition
-            id="hu.skzs.multiproperties.ui.definition.trial">
+            id="hu.skzs.multiproperties.ui.definition.editable">
 		<and>
 			<with variable="activeEditor">
          		<instanceof value="hu.skzs.multiproperties.ui.editor.Editor"/>
@@ -211,13 +355,28 @@
 				<and>
 					<count value="1"/>
 					<iterate ifEmpty="false" operator="and">
-						<and>
-							<or>
-								<instanceof value="hu.skzs.multiproperties.base.model.PropertyRecord"/>
-								<instanceof value="hu.skzs.multiproperties.base.model.CommentRecord"/>
-							</or>
-							<test property="hu.skzs.multiproperties.ui.firstRecord"/>
-						</and>
+						<or>
+							<instanceof value="hu.skzs.multiproperties.base.model.PropertyRecord"/>
+							<instanceof value="hu.skzs.multiproperties.base.model.CommentRecord"/>
+						</or>
+					</iterate>
+				</and>
+			</with>
+		</and>
+      </definition>
+      <definition
+            id="hu.skzs.multiproperties.ui.definition.onePropertySelected">
+		<and>
+			<with variable="activeEditor">
+         		<instanceof value="hu.skzs.multiproperties.ui.editor.Editor"/>
+			</with>
+			<with variable="selection">
+				<and>
+					<count value="1"/>
+					<iterate ifEmpty="false" operator="and">
+						<or>
+							<instanceof value="hu.skzs.multiproperties.base.model.PropertyRecord"/>
+						</or>
 					</iterate>
 				</and>
 			</with>
@@ -230,21 +389,37 @@
       		class="hu.skzs.multiproperties.ui.command.AddPropertyHandler"
             commandId="hu.skzs.multiproperties.ui.command.AddProperty">
             <enabledWhen>
-               <reference definitionId="hu.skzs.multiproperties.ui.definition.continuousSelection"/>
+            	<or>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.hasSelection"/>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.continuousSelection"/>
+            	</or>
             </enabledWhen>
       </handler>
       <handler
       		class="hu.skzs.multiproperties.ui.command.AddCommentHandler"
             commandId="hu.skzs.multiproperties.ui.command.AddComment">
             <enabledWhen>
-               <reference definitionId="hu.skzs.multiproperties.ui.definition.continuousSelection"/>
+            	<or>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.hasSelection"/>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.continuousSelection"/>
+            	</or>
             </enabledWhen>
       </handler>
       <handler
       		class="hu.skzs.multiproperties.ui.command.AddEmptyHandler"
             commandId="hu.skzs.multiproperties.ui.command.AddEmpty">
             <enabledWhen>
-               <reference definitionId="hu.skzs.multiproperties.ui.definition.continuousSelection"/>
+            	<or>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.hasSelection"/>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.continuousSelection"/>
+            	</or>
+            </enabledWhen>
+      </handler>
+      <handler
+      		class="hu.skzs.multiproperties.ui.command.EditHandler"
+            commandId="hu.skzs.multiproperties.ui.command.Edit">
+            <enabledWhen>
+               <reference definitionId="hu.skzs.multiproperties.ui.definition.editable"/>
             </enabledWhen>
       </handler>
       <handler
@@ -255,9 +430,101 @@
             </enabledWhen>
       </handler>
       <handler
+      		class="hu.skzs.multiproperties.ui.command.MoveUpHandler"
+            commandId="hu.skzs.multiproperties.ui.command.MoveUp">
+            <enabledWhen>
+				<and>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.hasSelection"/>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.continuousSelection"/>
+					<with variable="selection">
+						<not>
+							<test property="hu.skzs.multiproperties.ui.isBeginningSelection"/>
+						</not>
+					</with>
+				</and>
+            </enabledWhen>
+      </handler>
+      <handler
+      		class="hu.skzs.multiproperties.ui.command.MoveDownHandler"
+            commandId="hu.skzs.multiproperties.ui.command.MoveDown">
+            <enabledWhen>
+				<and>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.hasSelection"/>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.continuousSelection"/>
+					<with variable="selection">
+						<not>
+							<test property="hu.skzs.multiproperties.ui.isEndingSelection"/>
+						</not>
+					</with>
+				</and>
+            </enabledWhen>
+      </handler>
+      <handler
+      		class="hu.skzs.multiproperties.ui.command.DuplicateHandler"
+            commandId="hu.skzs.multiproperties.ui.command.Duplicate">
+            <enabledWhen>
+				<and>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.hasSelection"/>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.continuousSelection"/>
+				</and>
+            </enabledWhen>
+      </handler>
+      <handler
+      		class="hu.skzs.multiproperties.ui.command.DisableHandler"
+            commandId="hu.skzs.multiproperties.ui.command.Disable">
+            <enabledWhen>
+            	<and>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.hasSelection"/>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.onePropertySelected"/>
+            	</and>
+            </enabledWhen>
+      </handler>
+      <handler
       		class="hu.skzs.multiproperties.ui.command.FindReplaceHandler"
             commandId="org.eclipse.ui.edit.findReplace">
       </handler>
+      <handler
+      		class="hu.skzs.multiproperties.ui.command.TooltipHandler"
+            commandId="hu.skzs.multiproperties.ui.command.ToggleTooltip">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="hu.skzs.multiproperties.ui.command.AddProperty"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="INSERT">
+      </key>
+      <key
+            commandId="hu.skzs.multiproperties.ui.command.AddComment"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+INSERT">
+      </key>
+      <key
+            commandId="hu.skzs.multiproperties.ui.command.AddEmpty"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M3+INSERT">
+      </key>
+      <key
+            commandId="hu.skzs.multiproperties.ui.command.MoveUp"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M3+ARROW_UP">
+      </key>
+      <key
+            commandId="hu.skzs.multiproperties.ui.command.MoveDown"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M3+ARROW_DOWN">
+      </key>
+      <key
+            commandId="hu.skzs.multiproperties.ui.command.Duplicate"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+D">
+      </key>
+      <key
+            commandId="hu.skzs.multiproperties.ui.command.Disable"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M3+D">
+      </key>
    </extension>
 
 </plugin>

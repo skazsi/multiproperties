@@ -34,6 +34,12 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 public class Editor extends MultiPageEditorPart implements IResourceChangeListener, IRecordChangeListener, IStructuralChangeListener
 {
 
+	/**
+	 * The <code>ID</code> represents the MultiProperties Editor identifier. It is the same
+	 * value than how the editor is specified in the <code>plugin.xml</code>.
+	 */
+	public static final String ID = "hu.skzs.multiproperties.ui.editor"; //$NON-NLS-1$
+
 	private Table table;
 	private IFile file;
 	private final List<AbstractRecord> vecClipboard = new LinkedList<AbstractRecord>();
@@ -79,11 +85,6 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	public Table getTable()
 	{
 		return table;
-	}
-
-	public EditorContributor getContributor()
-	{
-		return null; //(EditorContributor) getEditorSite().getActionBarContributor();
 	}
 
 	public OutlinePage getOutlinePage()

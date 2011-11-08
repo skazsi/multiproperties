@@ -379,7 +379,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 			throw new IllegalArgumentException("The record does not exists in the table");
 		records.set(index, records.get(index - 1));
 		records.set(index - 1, record);
-		setDirty(true, record);
+		setDirty(true);
 	}
 
 	/**
@@ -393,7 +393,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 			throw new IllegalArgumentException("The record does not exists in the table");
 		records.set(index, records.get(index + 1));
 		records.set(index + 1, record);
-		setDirty(true, record);
+		setDirty(true);
 	}
 
 	/**

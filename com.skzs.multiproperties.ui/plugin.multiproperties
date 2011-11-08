@@ -328,5 +328,231 @@
             <Disabled>false</Disabled>
             <Value disabled="false">Are you sure to delete selected records?</Value>
         </Property>
+        <Property>
+            <Name>command.edit</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Edit...</Value>
+        </Property>
+        <Property>
+            <Name>command.edit.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Edit Selected Record</Value>
+        </Property>
+        <Property>
+            <Name>command.duplicate</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Duplicate</Value>
+        </Property>
+        <Property>
+            <Name>command.duplicate.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Duplicate Selected Records</Value>
+        </Property>
+        <Property>
+            <Name>command.disable</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Toggle Disabled</Value>
+        </Property>
+        <Property>
+            <Name>command.disable.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Toggle Disabled State Of Selected Record</Value>
+        </Property>
+        <Property>
+            <Name>command.moveup</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Move Up</Value>
+        </Property>
+        <Property>
+            <Name>command.moveup.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Move Up Selected Record</Value>
+        </Property>
+        <Property>
+            <Name>command.movedown</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Move Down</Value>
+        </Property>
+        <Property>
+            <Name>command.movedown.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Move Down Selected Record</Value>
+        </Property>
+        <Property>
+            <Name>command.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Toggle Tooltip</Value>
+        </Property>
+        <Property>
+            <Name>command.tooltip.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Toggle Tooltip</Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>WIZARD</Value>
+        </Comment>
+        <Comment>
+            <Value>property</Value>
+        </Comment>
+        <Property>
+            <Name>wizard.property.add.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add new property record</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.add.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the key and the values for the new property.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.edit.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Edit property record</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.edit.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the key and the values for the property.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.key</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Key: </Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.disabled</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Disabled</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.values</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Column values</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.fill.checked</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Fill checked values with this one</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.fill.all</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Fill all values with this one</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Description</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.warning.keyempty</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The key field is empty!</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.warning.keyexists</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The key already exists!</Value>
+        </Property>
+        <Comment>
+            <Value>comment</Value>
+        </Comment>
+        <Property>
+            <Name>wizard.comment.add.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add new comment record</Value>
+        </Property>
+        <Property>
+            <Name>wizard.comment.add.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the content for the new comment.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.comment.edit.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Edit comment record</Value>
+        </Property>
+        <Property>
+            <Name>wizard.comment.edit.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the content for the comment.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.comment.value</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Value: </Value>
+        </Property>
+        <Comment>
+            <Value>empty</Value>
+        </Comment>
+        <Property>
+            <Name>wizard.empty.add.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add new empty record</Value>
+        </Property>
+        <Comment>
+            <Value>position</Value>
+        </Comment>
+        <Property>
+            <Name>wizard.position.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Insert</Value>
+        </Property>
+        <Property>
+            <Name>wizard.position.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify where the new record should be inserted</Value>
+        </Property>
+        <Property>
+            <Name>wizard.position.insertbefore</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Insert before the selection</Value>
+        </Property>
+        <Property>
+            <Name>wizard.position.insertafter</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Insert after the selection</Value>
+        </Property>
+        <Property>
+            <Name>wizard.position.appendatend</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Append at end</Value>
+        </Property>
     </Records>
 </MultiProperties>

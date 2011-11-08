@@ -16,6 +16,8 @@ import org.eclipse.ui.PlatformUI;
  * <p>Available properties are the followings.</p>
  * <ul>
  * <li><code>isContinuousSelection</code> - check whether the current selection is continuous of {@link AbstractRecord} or not</li>
+ * <li><code>isBeginningSelection</code> - check whether the current selection begins at the beginning of the table or not</li>
+ * <li><code>isEndingSelection</code> - check whether the current selection ends at the beginning of the table or not</li>
  * </ul>
  * @author sallai
  */
@@ -26,6 +28,16 @@ public class MPEPropertyTester extends PropertyTester
 	 * Property indicating that the selection is monolithic.
 	 */
 	private static final String PROPERTY_IS_CONTINUOUS_SELECTION = "isContinuousSelection"; //$NON-NLS-1$
+
+	/**
+	 * Property indicating that the selection begins at the beginning of the table.
+	 */
+	private static final String PROPERTY_IS_BEGINNING_SELECTION = "isBeginningSelection"; //$NON-NLS-1$
+
+	/**
+	 * Property indicating that the selection ends at the beginning of the table.
+	 */
+	private static final String PROPERTY_IS_ENDING_SELECTION = "isEndingSelection"; //$NON-NLS-1$
 
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
 	{
@@ -41,9 +53,53 @@ public class MPEPropertyTester extends PropertyTester
 				return isContinuousSelection(editor.getTable(), (StructuredSelection) receiver);
 			return false;
 		}
+		else if (PROPERTY_IS_BEGINNING_SELECTION.equals(property))
+		{
+			AbstractRecord record = null;
+			if (receiver instanceof AbstractRecord)
+			{
+				record = (AbstractRecord) receiver;
+			}
+			else if (receiver instanceof StructuredSelection)
+			{
+				StructuredSelection structuredSelection = (StructuredSelection) receiver;
+				if (structuredSelection.isEmpty())
+					return false;
+				if (!(structuredSelection.getFirstElement() instanceof AbstractRecord))
+					return false;
+				record = (AbstractRecord) structuredSelection.getFirstElement();
+			}
+			else
+				return false;
+			return editor.getTable().indexOf(record) == 0;
+		}
+		else if (PROPERTY_IS_ENDING_SELECTION.equals(property))
+		{
+			AbstractRecord record = null;
+			if (receiver instanceof AbstractRecord)
+			{
+				record = (AbstractRecord) receiver;
+			}
+			else if (receiver instanceof StructuredSelection)
+			{
+				StructuredSelection structuredSelection = (StructuredSelection) receiver;
+				if (structuredSelection.isEmpty())
+					return false;
 
-		System.err.println("Unsupported property: " + property); //$NON-NLS-1$
-		return false;
+				Object[] recordObjects = structuredSelection.toArray();
+				if (!(recordObjects[recordObjects.length - 1] instanceof AbstractRecord))
+					return false;
+				record = (AbstractRecord) recordObjects[recordObjects.length - 1];
+			}
+			else
+				return false;
+			return editor.getTable().indexOf(record) == editor.getTable().size() - 1;
+		}
+		else
+		{
+			System.err.println("Unsupported property: " + property); //$NON-NLS-1$
+			return false;
+		}
 	}
 
 	/**
