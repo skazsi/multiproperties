@@ -24,7 +24,6 @@ public abstract class MPEditorFormPage extends MPEditorPage
 
 	/**
 	 * Default constructor.
-	 * @param editor the given instance of MultiProperties Editor
 	 */
 	public MPEditorFormPage()
 	{

@@ -9,12 +9,28 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 public class ColumnsPage extends MPEditorFormPage
 {
 
+	/**
+	 * The <code>PAGE_ID</code> represents the page identifier.
+	 * It is used for changing the pages.
+	 */
+	public static final String PAGE_ID = "columns"; //$NON-NLS-1$
+
 	private ColumnsMasterDetailsBlock columnsMasterDetailsBlock;
+
+	/**
+	 * Default constructor.
+	 */
+	public ColumnsPage()
+	{
+		super();
+		setId(PAGE_ID);
+	}
 
 	@Override
 	public void setActive()
 	{
-		//		if (active)
+
+		// TODO		if (active)
 		//		{
 		columnsMasterDetailsBlock.refresh();
 		//		}
