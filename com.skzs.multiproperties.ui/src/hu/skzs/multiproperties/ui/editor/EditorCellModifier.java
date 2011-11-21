@@ -14,7 +14,6 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Item;
 
-
 public class EditorCellModifier implements ICellModifier
 {
 
@@ -129,7 +128,7 @@ public class EditorCellModifier implements ICellModifier
 			final CommentRecord commentrecord = (CommentRecord) record;
 			commentrecord.setValue(value.toString());
 		}
-		if (editor.getOutlinePage() != null)
-			editor.getOutlinePage().update(record);
+		//		if (editor.getOutlinePage() != null)
+		//			editor.getOutlinePage().update(record);
 	}
 }

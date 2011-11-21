@@ -14,9 +14,32 @@ public abstract class MPEditorPage extends EditorPart
 {
 
 	/**
+	 * Identifier of the editor page
+	 */
+	protected String id;
+
+	/**
 	 * Instance of MultiProperties Editor
 	 */
 	protected Editor editor;
+
+	/**
+	 * Sets the identifier of the page.
+	 * @param id the given identifier
+	 */
+	public void setId(String id)
+	{
+		this.id = id;
+	}
+
+	/**
+	 * Returns the identifier of the page.
+	 * @return the identifier of the page
+	 */
+	public String getId()
+	{
+		return id;
+	}
 
 	/**
 	 * Sets the instance of MultiProperties Editor.

@@ -30,6 +30,12 @@ import org.eclipse.ui.forms.widgets.TableWrapData;
 public class OverviewPage extends MPEditorFormPage
 {
 
+	/**
+	 * The <code>PAGE_ID</code> represents the page identifier.
+	 * It is used for changing the pages.
+	 */
+	public static final String PAGE_ID = "overview"; //$NON-NLS-1$
+
 	//GeneralInfoSection
 	private Text name;
 	private Text description;
@@ -40,6 +46,15 @@ public class OverviewPage extends MPEditorFormPage
 	private Label count_of_disabled;
 	private Label count_of_comments;
 	private Label count_of_emptyline;
+
+	/**
+	 * Default constructor.
+	 */
+	public OverviewPage()
+	{
+		super();
+		setId(PAGE_ID);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -201,11 +216,11 @@ public class OverviewPage extends MPEditorFormPage
 		text.setImage("columns", Activator.getDefault().getImageRegistry().get("columns")); //$NON-NLS-1$ //$NON-NLS-2$
 		text.setImage("table", Activator.getDefault().getImageRegistry().get("table")); //$NON-NLS-1$ //$NON-NLS-2$
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<form><li style=\"image\" value=\"columns\"><a href=\"columns_page\">"); //$NON-NLS-1$
+		stringBuilder.append("<form><li style=\"image\" value=\"columns\"><a href=\"columns\">"); //$NON-NLS-1$
 		stringBuilder.append(Messages.getString("general.columns")); //$NON-NLS-1$
 		stringBuilder.append("</a>: "); //$NON-NLS-1$
 		stringBuilder.append(Messages.getString("overview.navigation.columns")); //$NON-NLS-1$
-		stringBuilder.append("</li><li style=\"image\" value=\"table\"><a href=\"table_page\">"); //$NON-NLS-1$
+		stringBuilder.append("</li><li style=\"image\" value=\"table\"><a href=\"table\">"); //$NON-NLS-1$
 		stringBuilder.append(Messages.getString("general.table")); //$NON-NLS-1$
 		stringBuilder.append("</a>: "); //$NON-NLS-1$
 		stringBuilder.append(Messages.getString("overview.navigation.table")); //$NON-NLS-1$
@@ -224,7 +239,7 @@ public class OverviewPage extends MPEditorFormPage
 
 			public void linkActivated(final org.eclipse.ui.forms.events.HyperlinkEvent e)
 			{
-				//				editor.setActivePage(e.getHref().toString());
+				editor.setActivePage(e.getHref().toString());
 			}
 		});
 		text.setLayoutData(new TableWrapData(TableWrapData.FILL));

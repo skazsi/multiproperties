@@ -6,6 +6,7 @@ import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.command.EditHandler;
 import hu.skzs.multiproperties.ui.command.TooltipHandler;
+import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
 
 import org.eclipse.core.commands.NotEnabledException;
 import org.eclipse.jface.action.MenuManager;
@@ -41,18 +42,37 @@ import org.eclipse.ui.handlers.RegistryToggleState;
 public class TablePage extends MPEditorPage
 {
 
+	/**
+	 * The <code>PAGE_ID</code> represents the page identifier.
+	 * It is used for changing the pages.
+	 */
+	public static final String PAGE_ID = "table"; //$NON-NLS-1$
+
 	private TableViewer tableviewer;
+
+	/**
+	 * The <code>preferenceListener</code> listens for any color related preference changes. In case of change,
+	 * it initiates a refresh on the table.
+	 */
 	IPropertyChangeListener preferenceListener = new IPropertyChangeListener() {
 
 		public void propertyChange(final PropertyChangeEvent event)
 		{
-			if (event.getProperty().equals("color_property_foreground") || (event.getProperty().equals("color_property_disengaged_foreground")) || (event.getProperty().equals("color_property_background")) || (event.getProperty().equals("color_comment_foreground"))
-					|| (event.getProperty().equals("color_comment_background")) || (event.getProperty().equals("color_empty_background")))
+			if (event.getProperty().startsWith(PreferenceConstants.COLOR_PREFIX))
 			{
 				tableviewer.refresh();
 			}
 		}
 	};
+
+	/**
+	 * Default constructor.
+	 */
+	public TablePage()
+	{
+		super();
+		setId(PAGE_ID);
+	}
 
 	public TableViewer getTableViewer()
 	{
@@ -107,9 +127,9 @@ public class TablePage extends MPEditorPage
 			}
 		});
 		refreshColumn();
-		tableviewer.setContentProvider(new EditorContentProvider(editor));
-		tableviewer.setLabelProvider(new EditorLabelProvider(editor));
-		tableviewer.setInput(editor.getEditorInput());
+		tableviewer.setContentProvider(new EditorContentProvider());
+		tableviewer.setLabelProvider(new EditorLabelProvider(editor.getTable()));
+		tableviewer.setInput(editor.getTable());
 		tableviewer.setCellModifier(new EditorCellModifier(editor, tableviewer));
 		// Disable native tooltip
 		tableviewer.getTable().setToolTipText(""); //$NON-NLS-1$

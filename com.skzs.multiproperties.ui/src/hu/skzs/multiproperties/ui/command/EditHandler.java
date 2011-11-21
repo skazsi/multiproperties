@@ -31,7 +31,6 @@ public class EditHandler extends AbstractHandler
 		IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if (editorPart instanceof Editor)
 		{
-			System.out.println(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().getActivePart());
 			ISelection selection = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().getSelection();
 			if (selection == null || selection.isEmpty())
 				return null;

@@ -6,6 +6,7 @@ import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
 import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 import hu.skzs.multiproperties.ui.Activator;
+import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +17,6 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IFindReplaceTarget;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Display;
@@ -87,11 +87,6 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		return table;
 	}
 
-	public OutlinePage getOutlinePage()
-	{
-		return fOutlinePage;
-	}
-
 	@Override
 	public void init(final IEditorSite site, final IEditorInput input) throws PartInitException
 	{
@@ -135,13 +130,29 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 			addPage(tablePage, getEditorInput());
 			setPageText(getPageCount() - 1, tablePage.getPageText());
 
-			final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-			//getContributor().setActiveEditor(this);
-			//setActivePage(store.getInt("initial_page"));
+			// Selecting the initial page specified by the preferences
+			setActivePage(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.INITIAL_PAGE));
 		}
 		catch (PartInitException e)
 		{
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Change the active page to that page which has the given identifier.
+	 * <p>The method does nothing if no editor page can be found with the given identifier.</p>
+	 * @param id the given identifier
+	 * @see MPEditorPage#setId(String)
+	 * @see MPEditorPage#getId()
+	 */
+	public void setActivePage(String id)
+	{
+		for (int i = 0; i < getPageCount(); i++)
+		{
+			MPEditorPage editorPage = (MPEditorPage) getEditor(i);
+			if (editorPage.getId().equals(id))
+				setActivePage(i);
 		}
 	}
 
@@ -219,7 +230,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	}
 
 	@Override
-	public Object getAdapter(final Class adapter)
+	public Object getAdapter(@SuppressWarnings("rawtypes") final Class adapter)
 	{
 		if (IFindReplaceTarget.class.equals(adapter))
 		{

@@ -412,6 +412,68 @@
         </Property>
         <Empty/>
         <Comment>
+            <Value>PREFERENCE</Value>
+        </Comment>
+        <Comment>
+            <Value>general</Value>
+        </Comment>
+        <Property>
+            <Name>preference.general.page.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Multi Properties Editor general settings.</Value>
+        </Property>
+        <Property>
+            <Name>preference.general.initialpage</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Initial page</Value>
+        </Property>
+        <Comment>
+            <Value>color</Value>
+        </Comment>
+        <Property>
+            <Name>preference.color.page.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Multi Properties Editor color settings.</Value>
+        </Property>
+        <Property>
+            <Name>preference.color.enabled.property</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Property record's foreground color</Value>
+        </Property>
+        <Property>
+            <Name>preference.color.disabled.property</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Disabled property record's foreground color</Value>
+        </Property>
+        <Property>
+            <Name>preference.color.comment</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Comment record's foreground color</Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>OUTLINE</Value>
+        </Comment>
+        <Property>
+            <Name>outline.column</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Column</Value>
+        </Property>
+        <Property>
+            <Name>outline.value</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Value</Value>
+        </Property>
+        <Empty/>
+        <Comment>
             <Value>WIZARD</Value>
         </Comment>
         <Comment>
