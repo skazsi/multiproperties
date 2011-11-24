@@ -45,6 +45,16 @@
         </Property>
         <Empty/>
         <Comment>
+            <Value>EDITOR</Value>
+        </Comment>
+        <Property>
+            <Name>editor.name</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">MultiProperties Editor</Value>
+        </Property>
+        <Empty/>
+        <Comment>
             <Value>EDITOR / OVERVIEW PAGE</Value>
         </Comment>
         <Property>
@@ -418,6 +428,12 @@
             <Value>general</Value>
         </Comment>
         <Property>
+            <Name>preference.general.page.name</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">MultiProperties</Value>
+        </Property>
+        <Property>
             <Name>preference.general.page.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
@@ -432,6 +448,12 @@
         <Comment>
             <Value>color</Value>
         </Comment>
+        <Property>
+            <Name>preference.color.page.name</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Colors</Value>
+        </Property>
         <Property>
             <Name>preference.color.page.description</Name>
             <Description></Description>
@@ -455,6 +477,16 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Comment record's foreground color</Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>PERSPECTIVE</Value>
+        </Comment>
+        <Property>
+            <Name>perspective.name</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">MultiProperties</Value>
         </Property>
         <Empty/>
         <Comment>

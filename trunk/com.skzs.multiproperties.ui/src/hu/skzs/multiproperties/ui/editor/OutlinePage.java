@@ -33,15 +33,9 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 public class OutlinePage implements IContentOutlinePage, ISelectionListener
 {
 
-	private final Editor editor;
 	private Composite composite;
 	private Label keylabel;
 	private Table table;
-
-	public OutlinePage(final Editor editor)
-	{
-		this.editor = editor;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -169,13 +163,19 @@ public class OutlinePage implements IContentOutlinePage, ISelectionListener
 	{
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
+	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection)
 	{
 		keylabel.setText(""); //$NON-NLS-1$
 		table.removeAll();
-		if (!(selection instanceof IStructuredSelection) || selection.isEmpty())
+
+		if (!(part instanceof Editor) || !(selection instanceof IStructuredSelection) || selection.isEmpty())
 			return;
 
+		Editor editor = (Editor) part;
 		IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 		if (structuredSelection.size() > 1)
 			return;
@@ -184,7 +184,7 @@ public class OutlinePage implements IContentOutlinePage, ISelectionListener
 			return;
 
 		final PropertyRecord propertyRecord = (PropertyRecord) structuredSelection.getFirstElement();
-		keylabel.setText((propertyRecord.isDisabled() ? "#" : "") + propertyRecord.getValue());
+		keylabel.setText(propertyRecord.getValue());
 		for (int i = 0; i < editor.getTable().getColumns().size(); i++)
 		{
 			if (propertyRecord.getColumnValue(editor.getTable().getColumns().get(i)) != null)

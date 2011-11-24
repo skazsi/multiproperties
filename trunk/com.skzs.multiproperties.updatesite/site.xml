@@ -9,9 +9,9 @@
    <feature url="features/hu.skzs.multiproperties.handler.java.feature_0.9.0.jar" id="hu.skzs.multiproperties.handler.java.feature" version="0.9.0" nl="en">
       <category name="hu.skzs.multiproperties.handler"/>
    </feature>
-   <category-def name="hu.skzs.multiproperties.base" label="MultiProperties Base">
+   <category-def name="hu.skzs.multiproperties.base" label="MultiProperties">
       <description>
-         Contains the MultiProperties Editor. For supporting an output format, like Java Properties files, install some handler plugins as well.
+         MultiProperties versions. For supporting an output format, like Java Properties files, install some handler plugins as well.
       </description>
    </category-def>
    <category-def name="hu.skzs.multiproperties.handler" label="MultiProperties Handlers"/>

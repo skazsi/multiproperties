@@ -3,6 +3,7 @@
       id="hu.skzs.multiproperties.feature"
       label="MultiProperties Feature"
       version="0.9.0"
+      provider-name="Krisztián Zsolt Sallai"
       nl="en">
 
    <description>
