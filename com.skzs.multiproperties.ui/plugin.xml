@@ -8,7 +8,7 @@
             extensions="multiproperties"
             icon="icons/title.gif"
             id="hu.skzs.multiproperties.ui.editor"
-            name="MultiProperties Editor"/>
+            name="%editor.name"/>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
@@ -19,12 +19,12 @@
       <page
             class="hu.skzs.multiproperties.ui.preferences.PreferencesPage"
             id="hu.skzs.multiproperties.ui.preferencespage"
-            name="MultiProperties"/>
+            name="%preference.general.page.name"/>
       <page
             category="hu.skzs.multiproperties.ui.preferencespage"
             class="hu.skzs.multiproperties.ui.preferences.ColorsPreferencesPage"
             id="hu.skzs.multiproperties.ui.colorspreferencespage"
-            name="Colors"/>
+            name="%preference.color.page.name"/>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
@@ -32,7 +32,7 @@
             class="hu.skzs.multiproperties.ui.perspectives.Perspective"
             icon="icons/title.gif"
             id="hu.skzs.multiproperties.ui.perspective"
-            name="MultiProperties"/>
+            name="%perspective.name"/>
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
