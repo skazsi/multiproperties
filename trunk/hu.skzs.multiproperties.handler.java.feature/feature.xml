@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="hu.skzs.multiproperties.handler.java.feature"
+      id="hu.skzs.multiproperties.handler.java"
       label="MultiProperties Java Handler Feature"
       version="0.9.0"
-      provider-name="Krisztián Zsolt Sallai"
-      nl="en">
+      provider-name="Krisztián Zsolt Sallai">
 
    <description>
       Java Handler for MultiProperties Editor.
