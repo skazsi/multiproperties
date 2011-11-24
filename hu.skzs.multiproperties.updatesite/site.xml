@@ -3,10 +3,10 @@
    <description name="MultiProperties update site">
       MultiProperties update site
    </description>
-   <feature url="features/hu.skzs.multiproperties.feature_0.9.0.jar" id="hu.skzs.multiproperties.feature" version="0.9.0" nl="en">
+   <feature url="features/hu.skzs.multiproperties.feature_0.9.0.jar" id="hu.skzs.multiproperties.feature" version="0.9.0" nl="">
       <category name="hu.skzs.multiproperties.base"/>
    </feature>
-   <feature url="features/hu.skzs.multiproperties.handler.java.feature_0.9.0.jar" id="hu.skzs.multiproperties.handler.java.feature" version="0.9.0" nl="en">
+   <feature url="features/hu.skzs.multiproperties.handler.java.feature_0.9.0.jar" id="hu.skzs.multiproperties.handler.java.feature" version="0.9.0" nl="">
       <category name="hu.skzs.multiproperties.handler"/>
    </feature>
    <category-def name="hu.skzs.multiproperties.base" label="MultiProperties">
