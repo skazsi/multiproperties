@@ -1,13 +1,12 @@
 #summary Creating a new MultiProperties file
 
-= Creating a new MultiProperties file =
+= Using wizard =
+The most easiest way to create a new MultiProperties file is to use the new wizard in [http://eclipse.org/ Eclipse]. Go to *File* > *New* > *Other...* in menu.
 
-Add your content here.
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/CreatingNewMultiPropertiesFile/mp_wizard1.jpg
 
+Then select *MultiProperties*, then on the next wizard page fill the *Location*, *File name* and *Name* fields properly. 
 
-= Details =
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/CreatingNewMultiPropertiesFile/mp_wizard2.jpg
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+By clicking on the *Finish* button, the wizard will create the new MultiProperties file.
