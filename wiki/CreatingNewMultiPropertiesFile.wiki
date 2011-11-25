@@ -1,6 +1,6 @@
-#summary One-sentence summary of this page.
+#Creating a new MultiProperties file
 
-= Introduction =
+= Creating a new MultiProperties file =
 
 Add your content here.
 
