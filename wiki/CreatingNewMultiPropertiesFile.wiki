@@ -1,4 +1,4 @@
-#Creating a new MultiProperties file
+# Creating a new MultiProperties file
 
 = Creating a new MultiProperties file =
 
