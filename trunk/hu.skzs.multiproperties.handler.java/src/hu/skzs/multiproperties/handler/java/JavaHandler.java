@@ -22,7 +22,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
-
 public class JavaHandler implements IHandler
 {
 
@@ -48,8 +47,8 @@ public class JavaHandler implements IHandler
 	{
 		try
 		{
-			final String containerName = configuration.substring(0, configuration.lastIndexOf("/"));
-			final String fileName = configuration.substring(configuration.lastIndexOf("/") + 1);
+			final String containerName = configuration.substring(0, configuration.lastIndexOf("/")); //$NON-NLS-1$
+			final String fileName = configuration.substring(configuration.lastIndexOf("/") + 1); //$NON-NLS-1$
 
 			final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			final IResource resource = root.findMember(new Path(containerName));
@@ -63,19 +62,24 @@ public class JavaHandler implements IHandler
 					final PropertyRecord record = (PropertyRecord) table.get(i);
 					if (record.getColumnValue(column) == null)
 						continue;
+
+					// If disabled, then it will be written as a comment
+					if (record.isDisabled())
+						strb.append("#"); //$NON-NLS-1$
+
 					strb.append(saveConvert(record.getValue(), true));
-					strb.append("=");
+					strb.append("="); //$NON-NLS-1$
 					strb.append(saveConvert(record.getColumnValue(column), false));
-					strb.append("\r\n");
+					strb.append("\r\n"); //$NON-NLS-1$
 				}
 				else if (table.get(i) instanceof CommentRecord)
 				{
 					final CommentRecord record = (CommentRecord) table.get(i);
-					strb.append("#" + record.getValue() + "\r\n");
+					strb.append("#" + record.getValue() + "\r\n"); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 				else if (table.get(i) instanceof EmptyRecord)
 				{
-					strb.append("\r\n");
+					strb.append("\r\n"); //$NON-NLS-1$
 				}
 			}
 

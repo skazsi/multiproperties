@@ -1,5 +1,7 @@
 package hu.skzs.multiproperties.handler.java.wizard;
 
+import hu.skzs.multiproperties.handler.java.Messages;
+
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -26,10 +28,10 @@ public class TargetPropertiesSelectionPage extends WizardPage
 
 	public TargetPropertiesSelectionPage(final String target)
 	{
-		super("target.properties.selection.page");
+		super("column.configuration.page"); //$NON-NLS-1$
 		this.target = target;
-		setTitle("Target properties file");
-		setDescription("Specify the target properties file.");
+		setTitle(Messages.getString("wizard.configuration.title")); //$NON-NLS-1$
+		setDescription(Messages.getString("wizard.configuration.description")); //$NON-NLS-1$
 	}
 
 	public void createControl(final Composite parent)
@@ -42,10 +44,10 @@ public class TargetPropertiesSelectionPage extends WizardPage
 		layout.verticalSpacing = 9;
 
 		Label label = new Label(container, SWT.NULL);
-		label.setText("&Location:");
+		label.setText(Messages.getString("wizard.configuration.location")); //$NON-NLS-1$
 		textLocation = new Text(container, SWT.BORDER | SWT.SINGLE);
-		if (target.lastIndexOf("/") != -1)
-			textLocation.setText(target.substring(0, target.lastIndexOf("/")));
+		if (target.lastIndexOf("/") != -1) //$NON-NLS-1$
+			textLocation.setText(target.substring(0, target.lastIndexOf("/"))); //$NON-NLS-1$
 		textLocation.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		textLocation.addModifyListener(new ModifyListener() {
 			public void modifyText(final ModifyEvent e)
@@ -55,7 +57,7 @@ public class TargetPropertiesSelectionPage extends WizardPage
 		});
 
 		final Button button = new Button(container, SWT.PUSH);
-		button.setText("Browse...");
+		button.setText(Messages.getString("wizard.configuration.location.browse")); //$NON-NLS-1$
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(final SelectionEvent e)
@@ -64,10 +66,10 @@ public class TargetPropertiesSelectionPage extends WizardPage
 			}
 		});
 		label = new Label(container, SWT.NULL);
-		label.setText("&File name:");
+		label.setText(Messages.getString("wizard.configuration.filename")); //$NON-NLS-1$
 		textFile = new Text(container, SWT.BORDER | SWT.SINGLE);
-		if (target.lastIndexOf("/") != -1)
-			textFile.setText(target.substring(target.lastIndexOf("/") + 1));
+		if (target.lastIndexOf("/") != -1) //$NON-NLS-1$
+			textFile.setText(target.substring(target.lastIndexOf("/") + 1)); //$NON-NLS-1$
 		textFile.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		textFile.addModifyListener(new ModifyListener() {
 			public void modifyText(final ModifyEvent e)
@@ -85,7 +87,7 @@ public class TargetPropertiesSelectionPage extends WizardPage
 
 	private void handleBrowse()
 	{
-		final ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), false, "Select new file container");
+		final ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), false, Messages.getString("wizard.configuration.location.browse.description")); //$NON-NLS-1$
 		if (dialog.open() == ContainerSelectionDialog.OK)
 		{
 			final Object[] result = dialog.getResult();
@@ -106,27 +108,27 @@ public class TargetPropertiesSelectionPage extends WizardPage
 
 		if (getLocation().length() == 0)
 		{
-			updateStatus("File location must be specified");
+			updateStatus(Messages.getString("wizard.configuration.error.mustspecified")); //$NON-NLS-1$
 			return;
 		}
 		if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0)
 		{
-			updateStatus("File location must exist");
+			updateStatus(Messages.getString("wizard.configuration.error.mustexists")); //$NON-NLS-1$
 			return;
 		}
 		if (!container.isAccessible())
 		{
-			updateStatus("Project must be writable");
+			updateStatus(Messages.getString("wizard.configuration.error.mustwriteable")); //$NON-NLS-1$
 			return;
 		}
 		if (fileName.length() == 0)
 		{
-			updateStatus("File name must be specified");
+			updateStatus(Messages.getString("wizard.configuration.error.validfile")); //$NON-NLS-1$
 			return;
 		}
 		if (fileName.replace('\\', '/').indexOf('/', 1) > 0)
 		{
-			updateStatus("File name must be valid");
+			updateStatus(Messages.getString("wizard.configuration.error.validfilename")); //$NON-NLS-1$
 			return;
 		}
 		updateStatus(null);

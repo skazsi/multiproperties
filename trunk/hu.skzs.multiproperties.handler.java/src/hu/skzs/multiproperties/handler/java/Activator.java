@@ -10,7 +10,7 @@ public class Activator extends AbstractUIPlugin
 {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "hu.skzs.multiproperties.handler.java";
+	public static final String PLUGIN_ID = "hu.skzs.multiproperties.handler.java"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;

@@ -4,10 +4,11 @@ Bundle-Name: MultiProperties Java Handler Plug-in
 Bundle-SymbolicName: hu.skzs.multiproperties.handler.java;singleton:=true
 Bundle-Version: 0.9.0
 Bundle-Activator: hu.skzs.multiproperties.handler.java.Activator
+Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  hu.skzs.multiproperties.base,
  org.eclipse.ui.ide,
  org.eclipse.core.resources
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
