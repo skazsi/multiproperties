@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<MultiProperties xmlns="multiproperties.indgroup.eu">
+<MultiProperties xmlns="hu.skzs.multiproperties">
     <Version>2.0</Version>
     <Name>MultiProperties UI</Name>
     <Description></Description>
@@ -539,7 +539,7 @@
             <Name>wizard.property.key</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">Key: </Value>
+            <Value disabled="false">Key</Value>
         </Property>
         <Property>
             <Name>wizard.property.disabled</Name>
