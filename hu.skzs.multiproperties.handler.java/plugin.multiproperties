@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MultiProperties xmlns="hu.skzs.multiproperties">
+    <Version>2.0</Version>
+    <Name>MultiProperties Java Handler</Name>
+    <Description></Description>
+    <Handler>Java Properties Handler</Handler>
+    <Columns>
+        <Key>
+            <Width>295</Width>
+        </Key>
+        <Column>
+            <Name>EN</Name>
+            <Description></Description>
+            <Width>518</Width>
+            <HandlerConfiguration>/hu.skzs.multiproperties.handler.java/plugin.properties</HandlerConfiguration>
+        </Column>
+    </Columns>
+    <Records>
+        <Comment>
+            <Value>WIZARD</Value>
+        </Comment>
+        <Property>
+            <Name>wizard.configuration.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Output properties file</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the output properties file.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.location</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Location</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.location.browse</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Browse...</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.location.browse.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Select location for the properties file.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.filename</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File name</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.error.mustspecified</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File location must be specified</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.error.mustexists</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File location must exist</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.error.mustwriteable</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Project must be writable</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.error.validfile</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File name must be specified</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.error.validfilename</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File name must be valid</Value>
+        </Property>
+    </Records>
+</MultiProperties>
