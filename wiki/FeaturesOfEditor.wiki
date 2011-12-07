@@ -23,3 +23,8 @@ http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multipro
 After you have selected a column, then you can edit its *Name* and *Description* properties. Furthermore if you have selected a handler, you can configure the handler settings for this columns by pressing the *Configure...* button. In case of *Java Properties Handler*, it means you can specify the target workspace folder and the desired file name for the [http://docs.oracle.com/javase/tutorial/essential/environment/properties.html Properties] file.
 
 == Table ==
+This page offers basically the editing capabilities of the content. You can add new property, comment or empty typed records, but you can also delete, edit and move the selected records in addition of some special features, like duplicating and disabling.
+
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/FeaturesOfEditor/table.jpg
+
+Although the edit wizard window offers quite comfortable editing, you can also edit a cell value directly by *Alt + mouse click* combination.
