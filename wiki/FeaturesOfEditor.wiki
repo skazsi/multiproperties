@@ -9,10 +9,17 @@ The MultiProperties Editor is a multi-page editor with three pages as follows.
 == Overview ==
 This page has four different sections. In the *General Information* you can specify the *Name* and *Description* values of the current MultiProperties file. These values are not used for other functions, so you can enter any kind of values here according to you needs.
 
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/FeaturesOfEditor/overview.jpg
+
 In the *Handler* section you can select an installed handler to be used for the current MultiProperties file. Note that you cannot select more than one, which means if you select for example the *Java Properties Handler*, then each columns can be saved into [http://docs.oracle.com/javase/tutorial/essential/environment/properties.html Properties] files only. You cannot mix different handlers in one MultiProperties file.
 
 If you want to change the already used handler to a different one, you have to confirm the change by a dialog window, because each columns will lose its handler configuration.
 
 == Columns ==
+On this page you can edit the columns of the editor. You can *Add*, *Remove*, *Move up* or *Move down* columns.
+
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/FeaturesOfEditor/columns.jpg
+
+After you have selected a column, then you can edit its *Name* and *Description* properties. Furthermore if you have selected a handler, you can configure the handler settings for this columns by pressing the *Configure...* button. In case of *Java Properties Handler*, it means you can specify the target workspace folder and the desired file name for the [http://docs.oracle.com/javase/tutorial/essential/environment/properties.html Properties] file.
 
 == Table ==
