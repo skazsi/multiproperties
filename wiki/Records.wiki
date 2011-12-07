@@ -1,0 +1,13 @@
+#summary What are the property, comment and empty record types.
+
+= Record types =
+
+The MultiProperties Editor currently supports three different record types.
+  * http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.ui/icons/record.gif *Property*
+  * http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.ui/icons/comment.gif *Comment*
+  * http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.ui/icons/empty.gif *Empty*
+
+== Property ==
+This is the most important record type. It has at first one key and as many values as many columns exists in the MultiProperties file. The _undefined_ is also a possible value, which means the key is not defined in the current column.
+
+The property 
