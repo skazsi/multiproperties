@@ -2,7 +2,7 @@
 
 = Record types =
 
-The MultiProperties Editor currently supports three different record types.
+The MultiProperties Editor currently supports three different record types. They are generic terms, because the editor itself cannot know how the configured handler will write them out into the output files.
   * http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.ui/icons/record.gif *Property*
   * http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.ui/icons/comment.gif *Comment*
   * http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.ui/icons/empty.gif *Empty*
@@ -10,4 +10,10 @@ The MultiProperties Editor currently supports three different record types.
 == Property ==
 This is the most important record type. It has at first one key and as many values as many columns exists in the MultiProperties file. The _undefined_ is also a possible value, which means the key is not defined in the current column.
 
-The property 
+The property record has also a disabled flag and a description value.
+
+== Comment ==
+The comment record is useful for inserting comments between the properties. Although it is up to the configured handler how it will be written out into the output files, but in case of *Java Properties Handler* these records will be written with {{{#}}} prefix character.
+
+== Empty ==
+The empty record is used only for cosmetic purpose. In case of *Java Properties Handler* these records will result only empty lines.
