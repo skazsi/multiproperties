@@ -11,8 +11,14 @@
         <Column>
             <Name>EN</Name>
             <Description></Description>
-            <Width>518</Width>
+            <Width>229</Width>
             <HandlerConfiguration>/hu.skzs.multiproperties.handler.java/plugin.properties</HandlerConfiguration>
+        </Column>
+        <Column>
+            <Name>HU</Name>
+            <Description></Description>
+            <Width>226</Width>
+            <HandlerConfiguration>/hu.skzs.multiproperties.handler.java/plugin_hu.properties</HandlerConfiguration>
         </Column>
     </Columns>
     <Records>
@@ -24,66 +30,77 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Output properties file</Value>
+            <Value disabled="false">Kimeneti properties fájl</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Specify the output properties file.</Value>
+            <Value disabled="false">Adja meg a kimeneti properties fájlt.</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.location</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Location</Value>
+            <Value disabled="false">Hely</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.location.browse</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Browse...</Value>
+            <Value disabled="false">Tallóz...</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.location.browse.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Select location for the properties file.</Value>
+            <Value disabled="false">Adja meg a helyét a properties fájlnak.</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.filename</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">File name</Value>
+            <Value disabled="false">Fájl név</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.mustspecified</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">File location must be specified</Value>
+            <Value disabled="false">File location must be specified!</Value>
+            <Value disabled="false">A fájl helye meg kell legyen adva!</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.mustexists</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">File location must exist</Value>
+            <Value disabled="false">File location must exist!</Value>
+            <Value disabled="false">A fájl helyének léteznie kell!</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.mustwriteable</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">Project must be writable</Value>
+            <Value disabled="false">Project must be writable!</Value>
+            <Value disabled="false">A projektnek írhatónak kell lennie!</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.validfile</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">File name must be specified</Value>
+            <Value disabled="false">File name must be specified!</Value>
+            <Value disabled="false">A fájl neve meg kell legyen adva!</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.validfilename</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">File name must be valid</Value>
+            <Value disabled="false">File name must be valid!</Value>
+            <Value disabled="false">A fájl nevének érvényesnek kell lennie!</Value>
         </Property>
     </Records>
 </MultiProperties>
