@@ -6,13 +6,19 @@
     <Handler>Java Properties Handler</Handler>
     <Columns>
         <Key>
-            <Width>265</Width>
+            <Width>235</Width>
         </Key>
         <Column>
             <Name>EN</Name>
             <Description></Description>
-            <Width>518</Width>
+            <Width>284</Width>
             <HandlerConfiguration>/hu.skzs.multiproperties.ui/plugin.properties</HandlerConfiguration>
+        </Column>
+        <Column>
+            <Name>HU</Name>
+            <Description></Description>
+            <Width>402</Width>
+            <HandlerConfiguration>/hu.skzs.multiproperties.ui/plugin_hu.properties</HandlerConfiguration>
         </Column>
     </Columns>
     <Records>
@@ -24,24 +30,28 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Overview</Value>
+            <Value disabled="false">Áttekintés</Value>
         </Property>
         <Property>
             <Name>general.columns</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Columns</Value>
+            <Value disabled="false">Oszlopok</Value>
         </Property>
         <Property>
             <Name>general.table</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Table</Value>
+            <Value disabled="false">Táblázat</Value>
         </Property>
         <Property>
             <Name>general.confirm.title</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Confirm</Value>
+            <Value disabled="false">Megerősítés</Value>
         </Property>
         <Empty/>
         <Comment>
@@ -51,6 +61,7 @@
             <Name>editor.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <Value disabled="false">MultiProperties Editor</Value>
             <Value disabled="false">MultiProperties Editor</Value>
         </Property>
         <Empty/>
@@ -62,6 +73,7 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Overview</Value>
+            <Value disabled="false">Áttekintés</Value>
         </Property>
         <Comment>
             <Value>general section</Value>
@@ -71,24 +83,28 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">General Information</Value>
+            <Value disabled="false">Általános Információk</Value>
         </Property>
         <Property>
             <Name>overview.general.section.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">This section describes general information about this multiproperties.</Value>
+            <Value disabled="false">A szekció általános információkat ad a multipropertiesről.</Value>
         </Property>
         <Property>
             <Name>overview.general.name</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Name: </Value>
+            <Value disabled="false">Név: </Value>
         </Property>
         <Property>
             <Name>overview.general.description</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Description: </Value>
+            <Value disabled="false">Megjegyzés: </Value>
         </Property>
         <Comment>
             <Value>handler section</Value>
@@ -98,30 +114,35 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Handler</Value>
+            <Value disabled="false">Kezelő</Value>
         </Property>
         <Property>
             <Name>overview.handler.section.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">The handlers are able to produce different kind of outputs from the multiproperties.</Value>
+            <Value disabled="false">A kezelők különböző kimenet képesek előállítani a multipropertiesből.</Value>
         </Property>
         <Property>
             <Name>overview.handler.handler</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Handler: </Value>
+            <Value disabled="false">Kezelő: </Value>
         </Property>
         <Property>
             <Name>overview.handler.handler.none</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">none</Value>
+            <Value disabled="false">semmi</Value>
         </Property>
         <Property>
             <Name>overview.handler.confirm.text</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Changing the handler implementation will cause the current handler configurations get lost. Are you sure to continue?</Value>
+            <Value disabled="false">A kezelő megváltoztatása a jelenlegi kezelő beállítások elvesztését vonja maga után. Biztosan folytatja?</Value>
         </Property>
         <Comment>
             <Value>navigation section</Value>
@@ -131,24 +152,28 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Navigation</Value>
+            <Value disabled="false">Navigáció</Value>
         </Property>
         <Property>
             <Name>overview.navigation.section.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">This section describes the pages of the editor shortly.</Value>
+            <Value disabled="false">Ez a szekció röviden ismerteti a szerkesztő oldalait.</Value>
         </Property>
         <Property>
             <Name>overview.navigation.columns</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">list of all columns contained by this multiproperties.</Value>
+            <Value disabled="false">megjelenítni az összes oszlopot ebben a multipropertiesben.</Value>
         </Property>
         <Property>
             <Name>overview.navigation.table</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">editable interface of columns in table format.</Value>
+            <Value disabled="false">szerkesztői felülete az oszloponak táblázatos formában.</Value>
         </Property>
         <Comment>
             <Value>statistics section</Value>
@@ -158,42 +183,49 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Statistics</Value>
+            <Value disabled="false">Statisztika</Value>
         </Property>
         <Property>
             <Name>overview.statistics.section.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">This section gives statistical information about this multiproperties.</Value>
+            <Value disabled="false">Statisztikai információkat nyújt ez a szekció a jelenlegi multipropertiesről.</Value>
         </Property>
         <Property>
             <Name>overview.statistics.countof.columns</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Count of columns: </Value>
+            <Value disabled="false">Oszlopok száma: </Value>
         </Property>
         <Property>
             <Name>overview.statistics.countof.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Count of property records: </Value>
+            <Value disabled="false">Property rekordok száma: </Value>
         </Property>
         <Property>
             <Name>overview.statistics.countof.disabled</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Count of disabled property records:  </Value>
+            <Value disabled="false">Letiltott property rekordok száma: </Value>
         </Property>
         <Property>
             <Name>overview.statistics.countof.comment</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Count of disabled comment records: </Value>
+            <Value disabled="false">Megjegyzés rekordok száma: </Value>
         </Property>
         <Property>
             <Name>overview.statistics.countof.empty</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Count of disabled empty records: </Value>
+            <Value disabled="false">Üres rekordok száma: </Value>
         </Property>
         <Empty/>
         <Comment>
@@ -204,48 +236,56 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Columns</Value>
+            <Value disabled="false">Oszlopok</Value>
         </Property>
         <Property>
             <Name>columns.button.add</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add...</Value>
+            <Value disabled="false">Hozzáad...</Value>
         </Property>
         <Property>
             <Name>columns.button.remove</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Remove</Value>
+            <Value disabled="false">Eltávolít</Value>
         </Property>
         <Property>
             <Name>columns.button.remove.confirm.text</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Are you sure to remove the selected column?</Value>
+            <Value disabled="false">Biztos eltávolítod a kiválasztott oszlopot?</Value>
         </Property>
         <Property>
             <Name>columns.button.up</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Up</Value>
+            <Value disabled="false">Fel</Value>
         </Property>
         <Property>
             <Name>columns.button.down</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Down</Value>
+            <Value disabled="false">Le</Value>
         </Property>
         <Property>
             <Name>columns.button.horizontal</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Horizontal layout</Value>
+            <Value disabled="false">Vízszintes elrendezés</Value>
         </Property>
         <Property>
             <Name>columns.button.vertical</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Vertical layout</Value>
+            <Value disabled="false">Függőleges elrendezés</Value>
         </Property>
         <Comment>
             <Value>column section</Value>
@@ -255,30 +295,35 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Selected column</Value>
+            <Value disabled="false">Kiválasztott oszlop</Value>
         </Property>
         <Property>
             <Name>columns.column.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Name</Value>
+            <Value disabled="false">Név</Value>
         </Property>
         <Property>
             <Name>columns.column.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Description</Value>
+            <Value disabled="false">Megjegyzés</Value>
         </Property>
         <Property>
             <Name>columns.column.handler</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Handler configuration</Value>
+            <Value disabled="false">Kezelő beállítás</Value>
         </Property>
         <Property>
             <Name>columns.column.handler.button</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Configure...</Value>
+            <Value disabled="false">Beállít...</Value>
         </Property>
         <Empty/>
         <Comment>
@@ -289,6 +334,7 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Key</Value>
+            <Value disabled="false">Kulcs</Value>
         </Property>
         <Empty/>
         <Comment>
@@ -299,126 +345,147 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add Property Record...</Value>
+            <Value disabled="false">Property Rekord Hozzáadása...</Value>
         </Property>
         <Property>
             <Name>command.add.property.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add Property Record</Value>
+            <Value disabled="false">Property Rekord Hozzáadása</Value>
         </Property>
         <Property>
             <Name>command.add.comment</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add Comment Record...</Value>
+            <Value disabled="false">Megjegyzés Rekord Hozzáadása...</Value>
         </Property>
         <Property>
             <Name>command.add.comment.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add Comment Record</Value>
+            <Value disabled="false">Megjegyzés Rekord Hozzáadása</Value>
         </Property>
         <Property>
             <Name>command.add.empty</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add Empty Record...</Value>
+            <Value disabled="false">Üres Rekord Hozzáadása...</Value>
         </Property>
         <Property>
             <Name>command.add.empty.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add Empty Record</Value>
+            <Value disabled="false">Üres Rekord Hozzáadása</Value>
         </Property>
         <Property>
             <Name>command.delete</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Delete</Value>
+            <Value disabled="false">Törlés</Value>
         </Property>
         <Property>
             <Name>command.delete.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Delete Selected Records</Value>
+            <Value disabled="false">Kijelölt Rekordok Törlése</Value>
         </Property>
         <Property>
             <Name>command.delete.confirm</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Are you sure to delete selected records?</Value>
+            <Value disabled="false">Biztosan törölni szeretnéd a kijelölt rekordokat?</Value>
         </Property>
         <Property>
             <Name>command.edit</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Edit...</Value>
+            <Value disabled="false">Szerkesztés...</Value>
         </Property>
         <Property>
             <Name>command.edit.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Edit Selected Record</Value>
+            <Value disabled="false">Kijelölt Rekord Szerkesztése</Value>
         </Property>
         <Property>
             <Name>command.duplicate</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Duplicate</Value>
+            <Value disabled="false">Duplikálás</Value>
         </Property>
         <Property>
             <Name>command.duplicate.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Duplicate Selected Records</Value>
+            <Value disabled="false">Kijelölt Rekordok Duplikálása</Value>
         </Property>
         <Property>
             <Name>command.disable</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Toggle Disabled</Value>
+            <Value disabled="false">Letiltás Átállítása</Value>
         </Property>
         <Property>
             <Name>command.disable.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Toggle Disabled State Of Selected Record</Value>
+            <Value disabled="false">Kijelölt Rekordok Letíltásának Átállítása</Value>
         </Property>
         <Property>
             <Name>command.moveup</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Move Up</Value>
+            <Value disabled="false">Mozgatás Fel</Value>
         </Property>
         <Property>
             <Name>command.moveup.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Move Up Selected Record</Value>
+            <Value disabled="false">Kijelölt Rekordok Mozgatása Fel</Value>
         </Property>
         <Property>
             <Name>command.movedown</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Move Down</Value>
+            <Value disabled="false">Mozgatás Le</Value>
         </Property>
         <Property>
             <Name>command.movedown.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Move Down Selected Record</Value>
+            <Value disabled="false">Kijelölt Rekordok Mozgatása Le</Value>
         </Property>
         <Property>
             <Name>command.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Toggle Tooltip</Value>
+            <Value disabled="false">Tooltip Átállítása</Value>
         </Property>
         <Property>
             <Name>command.tooltip.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Toggle Tooltip</Value>
+            <Value disabled="false">Tooltip Átállítása</Value>
         </Property>
         <Empty/>
         <Comment>
@@ -432,18 +499,21 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">MultiProperties</Value>
+            <Value disabled="false">MultiProperties</Value>
         </Property>
         <Property>
             <Name>preference.general.page.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">Multi Properties Editor general settings.</Value>
+            <Value disabled="false">MultiProperties Editor general settings.</Value>
+            <Value disabled="false">MultiProperties Editor általános beállítások.</Value>
         </Property>
         <Property>
             <Name>preference.general.initialpage</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Initial page</Value>
+            <Value disabled="false">Kezdő oldal</Value>
         </Property>
         <Comment>
             <Value>color</Value>
@@ -453,30 +523,35 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Colors</Value>
+            <Value disabled="false">Színek</Value>
         </Property>
         <Property>
             <Name>preference.color.page.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">Multi Properties Editor color settings.</Value>
+            <Value disabled="false">MultiProperties Editor color settings.</Value>
+            <Value disabled="false">MultiProperties Editor szín beállítások.</Value>
         </Property>
         <Property>
             <Name>preference.color.enabled.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Property record's foreground color</Value>
+            <Value disabled="false">Property rekord betű színe</Value>
         </Property>
         <Property>
             <Name>preference.color.disabled.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Disabled property record's foreground color</Value>
+            <Value disabled="false">Letíltott property rekord betű színe</Value>
         </Property>
         <Property>
             <Name>preference.color.comment</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Comment record's foreground color</Value>
+            <Value disabled="false">Megjegyzés rekord betű színe</Value>
         </Property>
         <Empty/>
         <Comment>
@@ -486,6 +561,7 @@
             <Name>perspective.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <Value disabled="false">MultiProperties</Value>
             <Value disabled="false">MultiProperties</Value>
         </Property>
         <Empty/>
@@ -497,12 +573,14 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Column</Value>
+            <Value disabled="false">Oszlop</Value>
         </Property>
         <Property>
             <Name>outline.value</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Value</Value>
+            <Value disabled="false">Érték</Value>
         </Property>
         <Empty/>
         <Comment>
@@ -516,72 +594,84 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add new property record</Value>
+            <Value disabled="false">Új property rekord hozzáadása</Value>
         </Property>
         <Property>
             <Name>wizard.property.add.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Specify the key and the values for the new property.</Value>
+            <Value disabled="false">Adja meg a kulcsot és az értékeket az új property rekornak.</Value>
         </Property>
         <Property>
             <Name>wizard.property.edit.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Edit property record</Value>
+            <Value disabled="false">Property rekord szerkesztése</Value>
         </Property>
         <Property>
             <Name>wizard.property.edit.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Specify the key and the values for the property.</Value>
+            <Value disabled="false">Adja meg a kulcsot és az értékeket a property rekornak.</Value>
         </Property>
         <Property>
             <Name>wizard.property.key</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Key</Value>
+            <Value disabled="false">Kulcs</Value>
         </Property>
         <Property>
             <Name>wizard.property.disabled</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Disabled</Value>
+            <Value disabled="false">Letíltott</Value>
         </Property>
         <Property>
             <Name>wizard.property.values</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Column values</Value>
+            <Value disabled="false">Oszlop értékek</Value>
         </Property>
         <Property>
             <Name>wizard.property.fill.checked</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Fill checked values with this one</Value>
+            <Value disabled="false">Kitölt minden értelmezett értéket ezzel az értékkel</Value>
         </Property>
         <Property>
             <Name>wizard.property.fill.all</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Fill all values with this one</Value>
+            <Value disabled="false">Kitölt minden értéket ezzel az értékkel</Value>
         </Property>
         <Property>
             <Name>wizard.property.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Description</Value>
+            <Value disabled="false">Megjegyzés</Value>
         </Property>
         <Property>
             <Name>wizard.property.warning.keyempty</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">The key field is empty!</Value>
+            <Value disabled="false">A kulcs mező üres!</Value>
         </Property>
         <Property>
             <Name>wizard.property.warning.keyexists</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">The key already exists!</Value>
+            <Value disabled="false">A kulcs már létezik!</Value>
         </Property>
         <Comment>
             <Value>comment</Value>
@@ -591,30 +681,35 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add new comment record</Value>
+            <Value disabled="false">Új megjegyzés rekord hozzáadása</Value>
         </Property>
         <Property>
             <Name>wizard.comment.add.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Specify the content for the new comment.</Value>
+            <Value disabled="false">Adja meg a tartalmát az új megjegyzés rekornak.</Value>
         </Property>
         <Property>
             <Name>wizard.comment.edit.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Edit comment record</Value>
+            <Value disabled="false">Megjegyzés rekord szerkesztése</Value>
         </Property>
         <Property>
             <Name>wizard.comment.edit.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">Specify the content for the comment.</Value>
+            <Value disabled="false">Specify the content for the comment record.</Value>
+            <Value disabled="false">Adja meg a tartalmát a megjegyzés rekordnak.</Value>
         </Property>
         <Property>
             <Name>wizard.comment.value</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Value: </Value>
+            <Value disabled="false">Érték: </Value>
         </Property>
         <Comment>
             <Value>empty</Value>
@@ -624,6 +719,7 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Add new empty record</Value>
+            <Value disabled="false">Új üres rekord hozzáadása</Value>
         </Property>
         <Comment>
             <Value>position</Value>
@@ -633,30 +729,35 @@
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Insert</Value>
+            <Value disabled="false">Beszúrás</Value>
         </Property>
         <Property>
             <Name>wizard.position.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Specify where the new record should be inserted</Value>
+            <Value disabled="false">Adja meg, hova legyen az új rekord beszúrva</Value>
         </Property>
         <Property>
             <Name>wizard.position.insertbefore</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Insert before the selection</Value>
+            <Value disabled="false">Beszúrás a kijelölés elött</Value>
         </Property>
         <Property>
             <Name>wizard.position.insertafter</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Insert after the selection</Value>
+            <Value disabled="false">Beszúrás a kijelölés után</Value>
         </Property>
         <Property>
             <Name>wizard.position.appendatend</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Append at end</Value>
+            <Value disabled="false">Hozzáfűzés a végére</Value>
         </Property>
     </Records>
 </MultiProperties>
