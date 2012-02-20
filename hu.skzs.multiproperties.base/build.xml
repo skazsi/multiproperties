@@ -13,11 +13,10 @@
 			</classpath>
 		</taskdef>
 
-		<xjc destdir="${basedir}/src" package="hu.skzs.multiproperties.base.model.schema" extension="true">
-			<!--produces dir="${basedir}/src/hu/skzs/test/model" includes="*impl/**" />
-			<arg value="-no-header"/-->
-			<schema dir="${basedir}/src/hu/skzs/multiproperties/base">
-			 	<include name="**/*.xsd"/>
+		<!-- File format 1.0 -->
+		<xjc destdir="${basedir}/src" package="hu.skzs.multiproperties.base.model.fileformat_1_0" extension="true">
+			<schema dir="${basedir}/src/hu/skzs/multiproperties/base/model/fileformat_1_0">
+			 	<include name="multiproperties.xsd"/>
 			</schema>
 		</xjc>
 	</target>
