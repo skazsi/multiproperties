@@ -7,6 +7,7 @@ import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter;
 import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterException;
 import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
+import hu.skzs.multiproperties.base.model.fileformat.UnsupportedSchemaVersionException;
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
 import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 import hu.skzs.multiproperties.ui.Activator;
@@ -217,6 +218,12 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 			table.setStructuralChangeListener(this);
 			table.setRecordChangeListener(this);
 			table.setDirty(false);
+		}
+		catch (UnsupportedSchemaVersionException e)
+		{
+			Activator.logError("Unexpected error occurred during loading content", e); //$NON-NLS-1$
+			MessageDialog.openError(getSite().getShell(), title, message);
+			throw e;
 		}
 		catch (SchemaConverterException e)
 		{
