@@ -64,6 +64,22 @@
             <Value disabled="false">MultiProperties Editor</Value>
             <Value disabled="false">MultiProperties Editor</Value>
         </Property>
+        <Property>
+            <Name>editor.marker.error.prefix</Name>
+            <Description>Should be ended with a space character.&#xD;
+See also the editor.marker.error.suffix property.</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">There are </Value>
+            <Value disabled="false"></Value>
+        </Property>
+        <Property>
+            <Name>editor.marker.error.suffix</Name>
+            <Description>Should be started with a space character.&#xD;
+See also the editor.marker.error.prefix property.</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false"> duplicated records</Value>
+            <Value disabled="false"> dupla rekord van</Value>
+        </Property>
         <Empty/>
         <Comment>
             <Value>EDITOR / OVERVIEW PAGE</Value>

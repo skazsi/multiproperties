@@ -1,11 +1,16 @@
 package hu.skzs.multiproperties.ui.editor;
 
+import hu.skzs.multiproperties.base.api.IHandler;
 import hu.skzs.multiproperties.base.model.AbstractRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
+import hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter;
+import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterException;
+import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
 import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 import hu.skzs.multiproperties.ui.Activator;
+import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
 
 import java.util.LinkedList;
@@ -16,7 +21,12 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.IFindReplaceTarget;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Display;
@@ -31,7 +41,8 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.part.MultiPageSelectionProvider;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
-public class Editor extends MultiPageEditorPart implements IResourceChangeListener, IRecordChangeListener, IStructuralChangeListener
+public class Editor extends MultiPageEditorPart implements IResourceChangeListener, IRecordChangeListener,
+		IStructuralChangeListener
 {
 
 	/**
@@ -41,7 +52,6 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	public static final String ID = "hu.skzs.multiproperties.ui.editor"; //$NON-NLS-1$
 
 	private Table table;
-	private IFile file;
 	private final List<AbstractRecord> vecClipboard = new LinkedList<AbstractRecord>();
 	private IFindReplaceTarget fFindReplaceTarget;
 	private OutlinePage fOutlinePage;
@@ -59,14 +69,16 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	{
 		if (event.getType() == IResourceChangeEvent.PRE_CLOSE)
 		{
-			Display.getDefault().asyncExec(new Runnable() {
+			Display.getDefault().asyncExec(new Runnable()
+			{
 
 				public void run()
 				{
 					final IWorkbenchPage[] pages = getSite().getWorkbenchWindow().getPages();
 					for (int i = 0; i < pages.length; i++)
 					{
-						if (((FileEditorInput) Editor.this.getEditorInput()).getFile().getProject().equals(event.getResource()))
+						if (((FileEditorInput) Editor.this.getEditorInput()).getFile().getProject()
+								.equals(event.getResource()))
 						{
 							final IEditorPart editorPart = pages[i].findEditor(Editor.this.getEditorInput());
 							pages[i].closeEditor(editorPart, true);
@@ -77,11 +89,22 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		}
 	}
 
+	/**
+	 * Returns the {@link IFile} instance. That file stores the MultiProperties content.
+	 * @return the {@link IFile} instance
+	 */
 	public IFile getFile()
 	{
-		return file;
+		IFileEditorInput fileEditorInput = (IFileEditorInput) getEditorInput();
+		return fileEditorInput.getFile();
 	}
 
+	/**
+	 * Returns the current {@link Table} instance.
+	 * <p>The instance can be changed during life cycle of an editor instance, because when an external modification occurs, a new {@link Table} instance is built.
+	 * Thus clients should not hold a reference to this returned instance.</p>
+	 * @return the current {@link Table} instance
+	 */
 	public Table getTable()
 	{
 		return table;
@@ -93,17 +116,12 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		super.init(site, input);
 		try
 		{
-			final IFileEditorInput fileeditorinput = (IFileEditorInput) input;
-			file = fileeditorinput.getFile();
-			table = new Table();
-			table.load(file);
-			table.setStructuralChangeListener(this);
-			table.setRecordChangeListener(this);
-			setPartName(file.getName());
+			setPartName(getFile().getName());
+			doLoad();
 		}
 		catch (final Throwable e)
 		{
-			throw new PartInitException("Unable to initialize the editor", e);
+			throw new PartInitException("Unable to initialize the editor", e); //$NON-NLS-1$
 		}
 	}
 
@@ -178,15 +196,96 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		return table.isDirty();
 	}
 
-	@Override
-	public void doSave(final IProgressMonitor monitor)
+	/**
+	 * Discards the previously loaded and constructed {@link Table} instance if there were any, then constructs a new instance based on the {@link #getFile()}.
+	 * <p>The method performs the followings:</p>
+	 * <ol>
+	 * <li>Constructs a {@link ISchemaConverter} based on the {@link #getFile()}</li>
+	 * <li>Constructs a new {@link Table} based on the {@link ISchemaConverter()}, thus the previous instance is discarded</li>
+	 * <li>Sets the {@link IStructuralChangeListener} and {@link IRecordChangeListener} of the {@link Table} to this editor instance</li>
+	 * <li>Sets the <code>dirty</code> flag of the table to <code>false</code></li>
+	 * </ol>
+	 * @throws SchemaConverterException
+	 * @see {@link #getFile()}
+	 */
+	private void doLoad() throws SchemaConverterException
 	{
 		try
 		{
-			final IFileEditorInput fileeditorinput = (IFileEditorInput) getEditorInput();
-			file = fileeditorinput.getFile();
-			table.save(file);
+			ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(getFile());
+			table = schemaConverter.convert(getFile());
+			table.setStructuralChangeListener(this);
+			table.setRecordChangeListener(this);
+			table.setDirty(false);
+		}
+		catch (SchemaConverterException e)
+		{
+			Activator.logError("Unexpected error occurred during loading content", e); //$NON-NLS-1$
+			throw e;
+		}
+	}
 
+	@Override
+	public void doSave(final IProgressMonitor monitor)
+	{
+		IFile file = getFile();
+
+		// Saving the content
+		try
+		{
+			ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(table);
+			schemaConverter.convert(file, table);
+			table.setDirty(false);
+		}
+		catch (final SchemaConverterException e)
+		{
+			Activator.logError("Unexpected error occurred during saving content", e); //$NON-NLS-1$
+		}
+
+		// Saving the columns with the configured handler
+		try
+		{
+			if (!table.getHandler().equals(""))
+			{
+				IConfigurationElement element = null;
+				final IExtensionRegistry reg = Platform.getExtensionRegistry();
+				final IConfigurationElement[] extensions = reg
+						.getConfigurationElementsFor("hu.skzs.multiproperties.handler"); //$NON-NLS-1$
+				for (int i = 0; i < extensions.length; i++)
+				{
+					if (extensions[i].getAttribute("name").equals(table.getHandler()))
+					{
+						element = extensions[i];
+						break;
+					}
+				}
+				final IHandler handler = (IHandler) element.createExecutableExtension("class");
+				for (int i = 0; i < table.getColumns().size(); i++)
+				{
+					if (!table.getColumns().get(i).getHandlerConfiguration().equals(""))
+					{
+						try
+						{
+							handler.save(table.getColumns().get(i).getHandlerConfiguration(), table, table.getColumns()
+									.get(i));
+						}
+						catch (final CoreException e)
+						{
+							MessageDialog.openError(null, "Error", e.getMessage());
+							Activator.log(e.getStatus());
+						}
+					}
+				}
+			}
+		}
+		catch (CoreException e)
+		{
+			Activator.logError("Unexpected error occurred during saving content by handler", e); //$NON-NLS-1$
+		}
+
+		// Setting the markers
+		try
+		{
 			int duplicated = 0;
 			for (int i = 0; i < table.size(); i++)
 			{
@@ -202,20 +301,23 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 				if (marker == null)
 				{
 					marker = file.createMarker(IMarker.PROBLEM);
-					marker.setAttribute(IMarker.MESSAGE, "There are " + duplicated + " duplicated records");
+					marker.setAttribute(
+							IMarker.MESSAGE,
+							Messages.getString("editor.marker.error.prefix") + duplicated + Messages.getString("editor.marker.error.suffix")); //$NON-NLS-1$ //$NON-NLS-2$
 					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
 				}
 			}
 		}
 		catch (final Throwable e)
 		{
-			e.printStackTrace();
+			Activator.logError("Unexpected error occurred during setting markers", e); //$NON-NLS-1$
 		}
 	}
 
 	@Override
 	public void doSaveAs()
 	{
+		// Do nothing
 	}
 
 	@Override

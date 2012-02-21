@@ -11,6 +11,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: hu.skzs.multiproperties.base.api,
  hu.skzs.multiproperties.base.model,
+ hu.skzs.multiproperties.base.model.fileformat,
  hu.skzs.multiproperties.base.model.listener
 Bundle-ClassPath: .,
  lib/jaxb/jaxb-impl.jar,
