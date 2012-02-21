@@ -9,9 +9,21 @@ public class UnsupportedSchemaVersionException extends SchemaConverterException
 {
 
 	private static final long serialVersionUID = 1L;
+	private final String version;
 
-	public UnsupportedSchemaVersionException(String alma)
+	/**
+	 * Default constructor
+	 * @param version the schema version which is not supported
+	 */
+	public UnsupportedSchemaVersionException(String version)
 	{
 		super();
+		this.version = version;
+	}
+
+	@Override
+	public String getLocalizedMessage()
+	{
+		return "Unsupported schema version: " + version; //$NON-NLS-1$
 	}
 }

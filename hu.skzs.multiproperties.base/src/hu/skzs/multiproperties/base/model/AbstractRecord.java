@@ -14,7 +14,7 @@ public abstract class AbstractRecord implements Cloneable
 	protected IRecordChangeListener recordChangeListener = null;
 	protected IStructuralChangeListener structuralChangeListener = null;
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	protected Observer getObserver()
 	{
 		try

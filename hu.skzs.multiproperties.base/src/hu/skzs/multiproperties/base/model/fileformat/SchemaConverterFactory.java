@@ -31,6 +31,8 @@ public class SchemaConverterFactory
 	 * @param file
 	 *            the given file
 	 * @return a newly constructed {@link SchemaConverter} instance
+	 * @throws UnsupportedSchemaVersionException
+	 *             if an unsupported schema is tried to be used
 	 * @throws SchemaConverterException
 	 *             if an unexpected error occurred
 	 */
@@ -70,6 +72,8 @@ public class SchemaConverterFactory
 	 * @param table
 	 *            the given table
 	 * @return a newly constructed {@link SchemaConverter} instance
+	 * @throws UnsupportedSchemaVersionException
+	 *             if an unsupported schema is tried to be used
 	 * @throws SchemaConverterException
 	 *             if an unexpected error occurred
 	 */
@@ -84,6 +88,8 @@ public class SchemaConverterFactory
 	 * @param version
 	 *            the given version
 	 * @return a newly constructed {@link SchemaConverter} instance
+	 * @throws UnsupportedSchemaVersionException
+	 *             if an unsupported schema is tried to be used
 	 * @throws SchemaConverterException
 	 *             if an unexpected error occurred
 	 */
@@ -98,6 +104,10 @@ public class SchemaConverterFactory
 			Class c = Class.forName(SCHEMA_CONVERTER_PACKAGE_PREFIX + _version + "." + SCHEMA_CONVERTER_CLASS_NAME); //$NON-NLS-1$
 			ISchemaConverter schemaConverter = (ISchemaConverter) c.newInstance();
 			return schemaConverter;
+		}
+		catch (ClassNotFoundException e)
+		{
+			throw new UnsupportedSchemaVersionException(version);
 		}
 		catch (Exception e)
 		{
