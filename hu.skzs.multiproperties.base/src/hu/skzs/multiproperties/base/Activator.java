@@ -12,7 +12,7 @@ public class Activator extends AbstractUIPlugin
 {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "hu.skzs.multiproperties.base";
+	public static final String PLUGIN_ID = "hu.skzs.multiproperties.base"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
@@ -61,7 +61,8 @@ public class Activator extends AbstractUIPlugin
 		Activator.getDefault().getLog().log(status);
 	}
 
-	private static IStatus createStatus(final int severity, final int code, final String message, final Throwable exception)
+	private static IStatus createStatus(final int severity, final int code, final String message,
+			final Throwable exception)
 	{
 		return new Status(severity, Activator.getDefault().getBundle().getSymbolicName(), code, message, exception);
 	}
