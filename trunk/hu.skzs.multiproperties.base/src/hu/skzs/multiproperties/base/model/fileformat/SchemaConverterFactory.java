@@ -43,7 +43,7 @@ public class SchemaConverterFactory
 		try
 		{
 			// Identifying the schema version
-			inputStream = file.getContents();
+			inputStream = file.getContents(true);
 			version = getVersion(inputStream);
 		}
 		catch (CoreException e)

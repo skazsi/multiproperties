@@ -222,7 +222,8 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		catch (UnsupportedSchemaVersionException e)
 		{
 			Activator.logError("Unexpected error occurred during loading content", e); //$NON-NLS-1$
-			MessageDialog.openError(getSite().getShell(), title, message);
+			MessageDialog.openError(getSite().getShell(),
+					Messages.getString("general.error.title"), Messages.getString("editor.error.unsupported")); //$NON-NLS-1$//$NON-NLS-2$
 			throw e;
 		}
 		catch (SchemaConverterException e)

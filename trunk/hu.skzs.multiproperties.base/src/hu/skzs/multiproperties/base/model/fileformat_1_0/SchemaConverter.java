@@ -29,13 +29,17 @@ public class SchemaConverter implements ISchemaConverter
 	private static final String SCHEMA_PACKAGE = "hu.skzs.multiproperties.base.model.fileformat_1_0"; //$NON-NLS-1$
 	private static final String SCHEMA_CHARSET = "UTF-8"; //$NON-NLS-1$
 
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(org.eclipse.core.resources.IFile)
+	 */
 	public Table convert(IFile file) throws SchemaConverterException
 	{
 		try
 		{
 			final JAXBContext jaxbContext = JAXBContext.newInstance(SCHEMA_PACKAGE);
 			final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			final MultiProperties multiproperties = (MultiProperties) unmarshaller.unmarshal(file.getContents());
+			final MultiProperties multiproperties = (MultiProperties) unmarshaller.unmarshal(file.getContents(true));
 
 			Table table = new Table();
 			// Fill up the models
@@ -84,9 +88,6 @@ public class SchemaConverter implements ISchemaConverter
 					table.add(new EmptyRecord());
 				}
 			}
-			// TODO: this should be moved somewhere else
-			table.setDirty(false);
-
 			return table;
 		}
 		catch (final Exception e)
@@ -95,6 +96,10 @@ public class SchemaConverter implements ISchemaConverter
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(org.eclipse.core.resources.IFile, hu.skzs.multiproperties.base.model.Table)
+	 */
 	public void convert(IFile file, Table table) throws SchemaConverterException
 	{
 		try
@@ -162,12 +167,9 @@ public class SchemaConverter implements ISchemaConverter
 			final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
 			marshaller.marshal(multiproperties, outputstream);
 			final ByteArrayInputStream inputstream = new ByteArrayInputStream(outputstream.toByteArray());
-			file.setContents(inputstream, IFile.KEEP_HISTORY, null);
-
-			// TODO: this should be moved somewhere else
-			table.setDirty(false);
+			file.setContents(inputstream, true, true, null);
 		}
-		catch (final Throwable e)
+		catch (final Exception e)
 		{
 			throw new SchemaConverterException("Unexpected error in schema conversion", e); //$NON-NLS-1$
 		}

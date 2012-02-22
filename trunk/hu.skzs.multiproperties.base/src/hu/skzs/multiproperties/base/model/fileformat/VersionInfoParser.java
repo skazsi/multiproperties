@@ -43,7 +43,6 @@ class VersionInfoParser extends DefaultHandler
 		if (insideVersionElement)
 		{
 			version = new String(ch, start, length);
-			System.out.println(version);
 		}
 	}
 
