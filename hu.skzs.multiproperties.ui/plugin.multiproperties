@@ -53,6 +53,13 @@
             <Value disabled="false">Confirm</Value>
             <Value disabled="false">Megerősítés</Value>
         </Property>
+        <Property>
+            <Name>general.error.title</Name>
+            <Description>	</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Error</Value>
+            <Value disabled="false">Hiba</Value>
+        </Property>
         <Empty/>
         <Comment>
             <Value>EDITOR</Value>
@@ -63,6 +70,13 @@
             <Disabled>false</Disabled>
             <Value disabled="false">MultiProperties Editor</Value>
             <Value disabled="false">MultiProperties Editor</Value>
+        </Property>
+        <Property>
+            <Name>editor.error.unsupported</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Your editor version does not support this content version.\nTry to update your editor.</Value>
+            <Value disabled="false">Ez a verziójú szerkesztő nem támogatja a megnyitni kívánt tartalom verzióját.\nPróbálja meg frissíteni a szerkesztőt.</Value>
         </Property>
         <Property>
             <Name>editor.marker.error.prefix</Name>
