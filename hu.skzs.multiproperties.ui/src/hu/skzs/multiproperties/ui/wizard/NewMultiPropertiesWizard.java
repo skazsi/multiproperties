@@ -1,8 +1,12 @@
 package hu.skzs.multiproperties.ui.wizard;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import hu.skzs.multiproperties.base.model.Table;
+import hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter;
+import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterException;
+import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
+import hu.skzs.multiproperties.ui.Activator;
+import hu.skzs.multiproperties.ui.Messages;
+
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IContainer;
@@ -29,34 +33,21 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
 /**
- * This is a sample new wizard. Its role is to create a new file 
- * resource in the provided container. If the container resource
- * (a folder or a project) is selected in the workspace 
- * when the wizard is opened, it will accept it as the target
- * container. The wizard creates one file with the extension
- * "history". If a sample multi-page editor (also available
- * as a template) is registered for the same extension, it will
- * be able to open it.
+ * The <code>NewMultiPropertiesWizard</code> creates new MultiProperties files.
+ * @author Krisztian_Zsolt_Sall
+ *
  */
-
 public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 {
 	private NewMultiPropertiesWizardPage page;
 	private ISelection selection;
 
-	/**
-	 * Constructor for ProjectHistoryWizard.
-	 */
 	public NewMultiPropertiesWizard()
 	{
 		super();
 		setNeedsProgressMonitor(true);
-		setWindowTitle("New MultiProperties");
+		setWindowTitle(Messages.getString("wizard.new.title")); //$NON-NLS-1$
 	}
-
-	/**
-	 * Adding the page to the wizard.
-	 */
 
 	@Override
 	public void addPages()
@@ -75,13 +66,17 @@ public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 	{
 		final String containerName = page.getLocation();
 		final String fileName = page.getFileName();
-		final String strName = page.getName();
-		final IRunnableWithProgress op = new IRunnableWithProgress() {
+
+		final Table table = new Table();
+		table.setName(page.getName());
+
+		final IRunnableWithProgress op = new IRunnableWithProgress()
+		{
 			public void run(final IProgressMonitor monitor) throws InvocationTargetException
 			{
 				try
 				{
-					doFinish(containerName, fileName, strName, monitor);
+					doFinish(table, containerName, fileName, monitor);
 				}
 				catch (final CoreException e)
 				{
@@ -104,49 +99,49 @@ public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 		catch (final InvocationTargetException e)
 		{
 			final Throwable realException = e.getTargetException();
-			MessageDialog.openError(getShell(), "Error", realException.getMessage());
+			MessageDialog.openError(getShell(), Messages.getString("general.error.title"), realException.getMessage()); //$NON-NLS-1$
 			return false;
 		}
 		return true;
 	}
 
 	/**
-	 * The worker method. It will find the container, create the
-	 * file if missing or just replace its contents, and open
-	 * the editor on the newly created file.
+	 * Creates a new MultiProperties file based on the given {@link Table}. It will be created in the <code>containerName</code> with <code>fileName</code>.
+	 * When the file is created it will be also opened.
+	 * @param containerName the container name
+	 * @param fileName the desired file name
+	 * @param monitor the progress monitor
+	 * @throws CoreException
 	 */
-
-	private void doFinish(final String containerName, final String fileName, final String name, final IProgressMonitor monitor) throws CoreException
+	private void doFinish(final Table table, final String containerName, final String fileName,
+			final IProgressMonitor monitor) throws CoreException
 	{
 		// create a sample file
-		monitor.beginTask("Creating " + fileName, 2);
+		monitor.beginTask(Messages.getString("wizard.new.progress.title"), 2); //$NON-NLS-1$
+		monitor.setTaskName(Messages.getString("wizard.new.progress.creating")); //$NON-NLS-1$
 		final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final IResource resource = root.findMember(new Path(containerName));
 		if (!resource.exists() || !(resource instanceof IContainer))
 		{
-			throwCoreException("Container \"" + containerName + "\" does not exist.");
+			throwCoreException("Container \"" + containerName + "\" does not exist."); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		final IContainer container = (IContainer) resource;
 		final IFile file = container.getFile(new Path(fileName));
+
 		try
 		{
-			final InputStream stream = openContentStream(name);
-			if (file.exists())
-			{
-				file.setContents(stream, true, true, monitor);
-			}
-			else
-			{
-				file.create(stream, true, monitor);
-			}
-			stream.close();
+			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter();
+			schemaConverter.convert(file, table);
 		}
-		catch (final IOException e)
+		catch (final SchemaConverterException e)
 		{
+			Activator.logError("Unable to create the new MultiProperties file", e); //$NON-NLS-1$
+			throwCoreException("Unable to create the new MultiProperties file"); //$NON-NLS-1$
 		}
 		monitor.worked(1);
-		monitor.setTaskName("Opening file for editing...");
-		getShell().getDisplay().asyncExec(new Runnable() {
+		monitor.setTaskName(Messages.getString("wizard.new.progress.opening")); //$NON-NLS-1$
+		getShell().getDisplay().asyncExec(new Runnable()
+		{
 			public void run()
 			{
 				final IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
@@ -162,21 +157,9 @@ public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 		monitor.worked(1);
 	}
 
-	/**
-	 * We will initialize file contents with a sample text.
-	 */
-	private InputStream openContentStream(final String name)
-	{
-		final StringBuffer strb = new StringBuffer("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><MultiProperties xmlns=\"hu.skzs.multiproperties\"><Version>1.0</Version>");
-		strb.append("<Name>" + name + "</Name>");
-		strb.append("<Description></Description><Handler></Handler><Columns><Key><Width>100</Width></Key></Columns><Records></Records></MultiProperties>");
-
-		return new ByteArrayInputStream(strb.toString().getBytes());
-	}
-
 	private void throwCoreException(final String message) throws CoreException
 	{
-		final IStatus status = new Status(IStatus.ERROR, "hu.skzs.multiproperties.ui", IStatus.OK, message, null);
+		final IStatus status = new Status(IStatus.ERROR, "hu.skzs.multiproperties.ui", IStatus.OK, message, null); //$NON-NLS-1$
 		throw new CoreException(status);
 	}
 

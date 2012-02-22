@@ -33,7 +33,7 @@ public class SchemaConverter implements ISchemaConverter
 	 * (non-Javadoc)
 	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(org.eclipse.core.resources.IFile)
 	 */
-	public Table convert(IFile file) throws SchemaConverterException
+	public Table convert(final IFile file) throws SchemaConverterException
 	{
 		try
 		{
@@ -41,7 +41,7 @@ public class SchemaConverter implements ISchemaConverter
 			final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			final MultiProperties multiproperties = (MultiProperties) unmarshaller.unmarshal(file.getContents(true));
 
-			Table table = new Table();
+			final Table table = new Table();
 			// Fill up the models
 			table.setVersion(multiproperties.getVersion());
 			table.setName(multiproperties.getName());
@@ -100,7 +100,7 @@ public class SchemaConverter implements ISchemaConverter
 	 * (non-Javadoc)
 	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(org.eclipse.core.resources.IFile, hu.skzs.multiproperties.base.model.Table)
 	 */
-	public void convert(IFile file, Table table) throws SchemaConverterException
+	public void convert(final IFile file, final Table table) throws SchemaConverterException
 	{
 		try
 		{
@@ -160,14 +160,22 @@ public class SchemaConverter implements ISchemaConverter
 			}
 
 			// Saving
-			file.setCharset(SCHEMA_CHARSET, null);
 			final JAXBContext jaxbContext = JAXBContext.newInstance(SCHEMA_PACKAGE);
 			final Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, new Boolean(true));
 			final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
 			marshaller.marshal(multiproperties, outputstream);
 			final ByteArrayInputStream inputstream = new ByteArrayInputStream(outputstream.toByteArray());
-			file.setContents(inputstream, true, true, null);
+			if (file.exists())
+			{
+				file.setCharset(SCHEMA_CHARSET, null);
+				file.setContents(inputstream, true, true, null);
+			}
+			else
+			{
+				file.create(inputstream, true, null);
+				file.setCharset(SCHEMA_CHARSET, null);
+			}
 		}
 		catch (final Exception e)
 		{

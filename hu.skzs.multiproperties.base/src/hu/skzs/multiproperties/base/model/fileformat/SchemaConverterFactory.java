@@ -22,6 +22,11 @@ import org.eclipse.core.runtime.CoreException;
 public class SchemaConverterFactory
 {
 
+	/**
+	 * The <code>NEWEST_VERSION</code> represents the newest schema version
+	 */
+	public static final String NEWEST_VERSION = "1.0"; //$NON-NLS-1$
+
 	private static final String SCHEMA_CONVERTER_PACKAGE_PREFIX = "hu.skzs.multiproperties.base.model.fileformat_"; //$NON-NLS-1$
 	private static final String SCHEMA_CONVERTER_CLASS_NAME = "SchemaConverter"; //$NON-NLS-1$
 
@@ -36,7 +41,7 @@ public class SchemaConverterFactory
 	 * @throws SchemaConverterException
 	 *             if an unexpected error occurred
 	 */
-	public static ISchemaConverter getSchemaConverter(IFile file) throws SchemaConverterException
+	public static ISchemaConverter getSchemaConverter(final IFile file) throws SchemaConverterException
 	{
 		InputStream inputStream = null;
 		String version = null;
@@ -46,7 +51,7 @@ public class SchemaConverterFactory
 			inputStream = file.getContents(true);
 			version = getVersion(inputStream);
 		}
-		catch (CoreException e)
+		catch (final CoreException e)
 		{
 			throw new SchemaConverterException("Unexpected error occurred during constructing schema converter", e); //$NON-NLS-1$
 		}
@@ -57,7 +62,7 @@ public class SchemaConverterFactory
 				{
 					inputStream.close();
 				}
-				catch (IOException e)
+				catch (final IOException e)
 				{
 					Activator.logWarn("Unable to close properly the input stream", e); //$NON-NLS-1$
 				}
@@ -77,9 +82,20 @@ public class SchemaConverterFactory
 	 * @throws SchemaConverterException
 	 *             if an unexpected error occurred
 	 */
-	public static ISchemaConverter getSchemaConverter(Table table) throws SchemaConverterException
+	public static ISchemaConverter getSchemaConverter(final Table table) throws SchemaConverterException
 	{
 		return getSchemaConverter(table.getVersion());
+	}
+
+	/**
+	 * Returns a newly constructed newest {@link SchemaConverter} instance. This method should be called by the new MultiProperties file action.
+	 * 
+	 * @return a newly constructed newest {@link SchemaConverter} instance
+	 * @throws SchemaConverterException if an unexpected error occurred
+	 */
+	public static ISchemaConverter getSchemaConverter() throws SchemaConverterException
+	{
+		return getSchemaConverter(NEWEST_VERSION);
 	}
 
 	/**
@@ -93,23 +109,24 @@ public class SchemaConverterFactory
 	 * @throws SchemaConverterException
 	 *             if an unexpected error occurred
 	 */
-	private static ISchemaConverter getSchemaConverter(String version) throws SchemaConverterException
+	private static ISchemaConverter getSchemaConverter(final String version) throws SchemaConverterException
 	{
-		String _version = version.replaceAll("\\.", "_"); //$NON-NLS-1$//$NON-NLS-2$
+		final String _version = version.replaceAll("\\.", "_"); //$NON-NLS-1$//$NON-NLS-2$
 
 		// Creating the schema converter instance
 		try
 		{
 			@SuppressWarnings("rawtypes")
-			Class c = Class.forName(SCHEMA_CONVERTER_PACKAGE_PREFIX + _version + "." + SCHEMA_CONVERTER_CLASS_NAME); //$NON-NLS-1$
-			ISchemaConverter schemaConverter = (ISchemaConverter) c.newInstance();
+			final Class c = Class.forName(SCHEMA_CONVERTER_PACKAGE_PREFIX + _version
+					+ "." + SCHEMA_CONVERTER_CLASS_NAME); //$NON-NLS-1$
+			final ISchemaConverter schemaConverter = (ISchemaConverter) c.newInstance();
 			return schemaConverter;
 		}
-		catch (ClassNotFoundException e)
+		catch (final ClassNotFoundException e)
 		{
 			throw new UnsupportedSchemaVersionException(version);
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			throw new SchemaConverterException("Unexpected exception when constructing schema converter", e); //$NON-NLS-1$
 		}
@@ -127,18 +144,18 @@ public class SchemaConverterFactory
 	 * @throws SchemaConverterException
 	 *             if an unexpected error occurred
 	 */
-	private static String getVersion(InputStream inputStream) throws SchemaConverterException
+	private static String getVersion(final InputStream inputStream) throws SchemaConverterException
 	{
 		try
 		{
-			SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-			SAXParser saxParser = saxParserFactory.newSAXParser();
+			final SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+			final SAXParser saxParser = saxParserFactory.newSAXParser();
 
-			VersionInfoParser versionInfoParser = new VersionInfoParser();
+			final VersionInfoParser versionInfoParser = new VersionInfoParser();
 			saxParser.parse(inputStream, versionInfoParser);
 			return versionInfoParser.getVersion();
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			throw new SchemaConverterException("Unable to identify the schema version", e); //$NON-NLS-1$
 		}

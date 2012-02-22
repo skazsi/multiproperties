@@ -1,5 +1,8 @@
 package hu.skzs.multiproperties.ui.wizard;
 
+import hu.skzs.multiproperties.ui.Messages;
+import hu.skzs.multiproperties.ui.util.LayoutFactory;
+
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -14,7 +17,6 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -29,83 +31,91 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
 public class NewMultiPropertiesWizardPage extends WizardPage
 {
-	private Text textLocation;
-	private Text textFile;
-	private Text textName;
-	private ISelection selection;
+	private Text location;
+	private Text file;
+	private Text name;
+	private final ISelection selection;
 
 	/**
 	 * Constructor for SampleNewWizardPage.
 	 * 
 	 * @param pageName
 	 */
-	public NewMultiPropertiesWizardPage(ISelection selection)
+	public NewMultiPropertiesWizardPage(final ISelection selection)
 	{
-		super("NewMultiPropertiesWizardPage");
-		setTitle("MultiProperties File");
-		setDescription("This wizard creates a new file with multiproperties extension that can be opened by a MultiProperties editor.");
+		super("multiproperties.new.general"); //$NON-NLS-1$
+		setTitle(Messages.getString("wizard.new.title")); //$NON-NLS-1$
+		setDescription(Messages.getString("wizard.new.general.description")); //$NON-NLS-1$
 		this.selection = selection;
 	}
 
 	/**
 	 * @see IDialogPage#createControl(Composite)
 	 */
-	public void createControl(Composite parent)
+	public void createControl(final Composite parent)
 	{
-		Composite container = new Composite(parent, SWT.NULL);
-		GridLayout layout = new GridLayout();
-		container.setLayout(layout);
-		layout.numColumns = 3;
-		layout.verticalSpacing = 9;
-		Label label = new Label(container, SWT.NULL);
-		label.setText("&Location:");
+		final Composite container = new Composite(parent, SWT.NULL);
+		container.setLayout(LayoutFactory.createGridLayout(3));
 
-		textLocation = new Text(container, SWT.BORDER | SWT.SINGLE);
+		// Location
+		Label label = new Label(container, SWT.NULL);
+		label.setText(Messages.getString("wizard.new.general.location")); //$NON-NLS-1$
+		location = new Text(container, SWT.BORDER | SWT.SINGLE);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		textLocation.setLayoutData(gd);
-		textLocation.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e)
+		location.setLayoutData(gd);
+		location.addModifyListener(new ModifyListener()
+		{
+			public void modifyText(final ModifyEvent e)
 			{
-				dialogChanged();
+				validate();
 			}
 		});
-
-		Button button = new Button(container, SWT.PUSH);
-		button.setText("Browse...");
-		button.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e)
+		final Button button = new Button(container, SWT.PUSH);
+		button.setText(Messages.getString("wizard.new.general.browse")); //$NON-NLS-1$
+		button.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(final SelectionEvent e)
 			{
 				handleBrowse();
 			}
 		});
+
+		// Filename
 		label = new Label(container, SWT.NULL);
-		label.setText("&File name:");
-		textFile = new Text(container, SWT.BORDER | SWT.SINGLE);
+		label.setText(Messages.getString("wizard.new.general.filename")); //$NON-NLS-1$
+		file = new Text(container, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
-		textFile.setLayoutData(gd);
-		textFile.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e)
+		file.setLayoutData(gd);
+		file.addModifyListener(new ModifyListener()
+		{
+			public void modifyText(final ModifyEvent e)
 			{
-				dialogChanged();
+				validate();
 			}
 		});
 		new Label(container, SWT.NONE);
 
+		LayoutFactory.createSeparatorInGrid(container, 3);
+
+		// Name
+
 		label = new Label(container, SWT.NULL);
-		label.setText("&Name:");
-		textName = new Text(container, SWT.BORDER | SWT.SINGLE);
+		label.setText(Messages.getString("wizard.new.general.name")); //$NON-NLS-1$
+		name = new Text(container, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;
-		textName.setLayoutData(gd);
-		textName.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e)
+		name.setLayoutData(gd);
+		name.addModifyListener(new ModifyListener()
+		{
+			public void modifyText(final ModifyEvent e)
 			{
-				dialogChanged();
+				validate();
 			}
 		});
 
 		initialize();
-		dialogChanged();
+		validate();
 		setControl(container);
 	}
 
@@ -117,10 +127,10 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 	{
 		if (selection != null && selection.isEmpty() == false && selection instanceof IStructuredSelection)
 		{
-			IStructuredSelection ssel = (IStructuredSelection) selection;
+			final IStructuredSelection ssel = (IStructuredSelection) selection;
 			if (ssel.size() > 1)
 				return;
-			Object obj = ssel.getFirstElement();
+			final Object obj = ssel.getFirstElement();
 			if (obj instanceof IResource)
 			{
 				IContainer container;
@@ -128,10 +138,10 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 					container = (IContainer) obj;
 				else
 					container = ((IResource) obj).getParent();
-				textLocation.setText(container.getFullPath().toString());
+				location.setText(container.getFullPath().toString());
 			}
 		}
-		textFile.setText("file.multiproperties");
+		file.setText("file.multiproperties"); //$NON-NLS-1$
 	}
 
 	/**
@@ -141,14 +151,15 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 
 	private void handleBrowse()
 	{
-		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace()
-				.getRoot(), false, "Select new file container");
+		final ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace()
+				.getRoot(), false, Messages.getString("wizard.new.general.browse.title")); //$NON-NLS-1$
 		if (dialog.open() == ContainerSelectionDialog.OK)
 		{
-			Object[] result = dialog.getResult();
+			final Object[] result = dialog.getResult();
 			if (result.length == 1)
 			{
-				textLocation.setText(((Path) result[0]).toString());
+				location.setText(((Path) result[0]).toString());
+				validate();
 			}
 		}
 	}
@@ -157,73 +168,72 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 	 * Ensures that both text fields are set.
 	 */
 
-	private void dialogChanged()
+	private void validate()
 	{
-		IResource container = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(getLocation()));
-		String fileName = getFileName();
-		String strName = getName();
+		setErrorMessage(null);
+		setPageComplete(true);
 
-		if (getLocation().length() == 0)
+		final IResource container = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(getLocation()));
+
+		// Container
+		if (location.getText().length() == 0)
 		{
-			updateStatus("File location must be specified");
-			return;
+			setPageComplete(false);
 		}
-		if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0)
+		else if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0)
 		{
-			updateStatus("File location must exist");
-			return;
+			setErrorMessage(Messages.getString("wizard.new.general.error.location.nonexists")); //$NON-NLS-1$
+			setPageComplete(false);
 		}
-		if (!container.isAccessible())
+		else if (!container.isAccessible())
 		{
-			updateStatus("Project must be writable");
-			return;
+			setErrorMessage(Messages.getString("wizard.new.general.error.location.nonaccessible")); //$NON-NLS-1$
+			setPageComplete(false);
 		}
-		if (fileName.length() == 0)
+
+		// Filename
+		if (file.getText().length() == 0)
 		{
-			updateStatus("File name must be specified");
-			return;
+			setPageComplete(false);
 		}
-		if (fileName.replace('\\', '/').indexOf('/', 1) > 0)
+		else if (file.getText().replace('\\', '/').indexOf('/', 1) > 0)
 		{
-			updateStatus("File name must be valid");
-			return;
+			if (getErrorMessage() == null)
+				setErrorMessage(Messages.getString("wizard.new.general.error.filename.nonvalid")); //$NON-NLS-1$
+			setPageComplete(false);
 		}
-		int dotLoc = fileName.lastIndexOf('.');
-		if (dotLoc != -1)
+		else if (file.getText().lastIndexOf('.') != -1)
 		{
-			String ext = fileName.substring(dotLoc + 1);
-			if (ext.equalsIgnoreCase("multiproperties") == false)
+			if (!file.getText().substring(file.getText().lastIndexOf('.') + 1).equalsIgnoreCase("multiproperties")) //$NON-NLS-1$
 			{
-				updateStatus("File extension must be \"multiproperties\"");
-				return;
+				if (getErrorMessage() == null)
+					setErrorMessage(Messages.getString("wizard.new.general.error.filename.invalidext")); //$NON-NLS-1$
+				setPageComplete(false);
 			}
 		}
-		if (strName.length() == 0)
-		{
-			updateStatus("Name must be specified");
-			return;
-		}
-		updateStatus(null);
-	}
 
-	private void updateStatus(String message)
-	{
-		setErrorMessage(message);
-		setPageComplete(message == null);
+		// Name
+		if (name.getText().length() == 0)
+		{
+			setPageComplete(false);
+		}
 	}
 
 	public String getLocation()
 	{
-		return textLocation.getText();
+		return location.getText();
 	}
 
 	public String getFileName()
 	{
-		return textFile.getText();
+		if (!file.getText().toLowerCase().endsWith(".multiproperties")) //$NON-NLS-1$
+			return file.getText() + ".multiproperties"; //$NON-NLS-1$
+		return file.getText();
 	}
 
+	@Override
 	public String getName()
 	{
-		return textName.getText();
+		return name.getText();
 	}
 }
