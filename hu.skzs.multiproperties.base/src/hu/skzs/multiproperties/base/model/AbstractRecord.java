@@ -1,5 +1,6 @@
 package hu.skzs.multiproperties.base.model;
 
+import hu.skzs.multiproperties.base.Activator;
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
 import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 
@@ -26,7 +27,7 @@ public abstract class AbstractRecord implements Cloneable
 		}
 		catch (final Throwable e)
 		{
-			e.printStackTrace();
+			Activator.logError(e);
 		}
 		return null;
 	}

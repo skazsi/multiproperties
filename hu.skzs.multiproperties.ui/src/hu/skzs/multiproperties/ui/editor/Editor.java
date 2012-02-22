@@ -96,7 +96,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	 */
 	public IFile getFile()
 	{
-		IFileEditorInput fileEditorInput = (IFileEditorInput) getEditorInput();
+		final IFileEditorInput fileEditorInput = (IFileEditorInput) getEditorInput();
 		return fileEditorInput.getFile();
 	}
 
@@ -132,19 +132,19 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		try
 		{
 			// Overview page
-			MPEditorPage overviewPage = new OverviewPage();
+			final MPEditorPage overviewPage = new OverviewPage();
 			overviewPage.setEditor(this);
 			addPage(overviewPage, getEditorInput());
 			setPageText(getPageCount() - 1, overviewPage.getPageText());
 
 			// Overview page
-			MPEditorPage columnsPage = new ColumnsPage();
+			final MPEditorPage columnsPage = new ColumnsPage();
 			columnsPage.setEditor(this);
 			addPage(columnsPage, getEditorInput());
 			setPageText(getPageCount() - 1, columnsPage.getPageText());
 
 			// Table page
-			MPEditorPage tablePage = new TablePage();
+			final MPEditorPage tablePage = new TablePage();
 			tablePage.setEditor(this);
 			addPage(tablePage, getEditorInput());
 			setPageText(getPageCount() - 1, tablePage.getPageText());
@@ -152,9 +152,9 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 			// Selecting the initial page specified by the preferences
 			setActivePage(Activator.getDefault().getPreferenceStore().getString(PreferenceConstants.INITIAL_PAGE));
 		}
-		catch (PartInitException e)
+		catch (final PartInitException e)
 		{
-			e.printStackTrace();
+			Activator.logError(e);
 		}
 	}
 
@@ -165,27 +165,27 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	 * @see MPEditorPage#setId(String)
 	 * @see MPEditorPage#getId()
 	 */
-	public void setActivePage(String id)
+	public void setActivePage(final String id)
 	{
 		for (int i = 0; i < getPageCount(); i++)
 		{
-			MPEditorPage editorPage = (MPEditorPage) getEditor(i);
+			final MPEditorPage editorPage = (MPEditorPage) getEditor(i);
 			if (editorPage.getId().equals(id))
 				setActivePage(i);
 		}
 	}
 
 	@Override
-	protected void pageChange(int newPageIndex)
+	protected void pageChange(final int newPageIndex)
 	{
 		// FIXME: check the super implementation
-		MultiPageSelectionProvider provider = (MultiPageSelectionProvider) getSite().getSelectionProvider();
-		SelectionChangedEvent event = new SelectionChangedEvent(provider, provider.getSelection());
+		final MultiPageSelectionProvider provider = (MultiPageSelectionProvider) getSite().getSelectionProvider();
+		final SelectionChangedEvent event = new SelectionChangedEvent(provider, provider.getSelection());
 		provider.fireSelectionChanged(event);
 		provider.firePostSelectionChanged(event);
 
 		// Notifying the selected page that it has been activated 
-		MPEditorPage editorPage = (MPEditorPage) getActiveEditor();
+		final MPEditorPage editorPage = (MPEditorPage) getActiveEditor();
 		editorPage.setActive();
 
 		super.pageChange(newPageIndex);
@@ -213,20 +213,20 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	{
 		try
 		{
-			ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(getFile());
+			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(getFile());
 			table = schemaConverter.convert(getFile());
 			table.setStructuralChangeListener(this);
 			table.setRecordChangeListener(this);
 			table.setDirty(false);
 		}
-		catch (UnsupportedSchemaVersionException e)
+		catch (final UnsupportedSchemaVersionException e)
 		{
 			Activator.logError("Unexpected error occurred during loading content", e); //$NON-NLS-1$
 			MessageDialog.openError(getSite().getShell(),
 					Messages.getString("general.error.title"), Messages.getString("editor.error.unsupported")); //$NON-NLS-1$//$NON-NLS-2$
 			throw e;
 		}
-		catch (SchemaConverterException e)
+		catch (final SchemaConverterException e)
 		{
 			Activator.logError("Unexpected error occurred during loading content", e); //$NON-NLS-1$
 			throw e;
@@ -236,12 +236,12 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	@Override
 	public void doSave(final IProgressMonitor monitor)
 	{
-		IFile file = getFile();
+		final IFile file = getFile();
 
 		// Saving the content
 		try
 		{
-			ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(table);
+			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(table);
 			schemaConverter.convert(file, table);
 			table.setDirty(false);
 		}
@@ -286,7 +286,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 				}
 			}
 		}
-		catch (CoreException e)
+		catch (final CoreException e)
 		{
 			Activator.logError("Unexpected error occurred during saving content by handler", e); //$NON-NLS-1$
 		}

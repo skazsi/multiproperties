@@ -16,14 +16,14 @@ public class Messages
 		{
 			RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault());
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
-			e.printStackTrace();
+			Activator.logError(e);
 			throw new RuntimeException(e);
 		}
 	}
 
-	public static ResourceBundle getResourceBundle(Object object)
+	public static ResourceBundle getResourceBundle(final Object object)
 	{
 		return RESOURCE_BUNDLE;
 	}

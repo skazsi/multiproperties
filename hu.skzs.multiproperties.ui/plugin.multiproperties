@@ -6,7 +6,7 @@
     <Handler>Java Properties Handler</Handler>
     <Columns>
         <Key>
-            <Width>235</Width>
+            <Width>305</Width>
         </Key>
         <Column>
             <Name>EN</Name>
@@ -821,7 +821,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Value disabled="false">Fájl megnyitása...</Value>
         </Property>
         <Property>
-            <Name>wizard.new.general.description</Name>
+            <Name>wizard.new.general.desc</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">This wizard creates a new file with multiproperties extension that can be opened by a MultiProperties editor.</Value>
@@ -861,6 +861,13 @@ See also the editor.marker.error.prefix property.</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Name</Value>
             <Value disabled="false">Név</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Description</Value>
+            <Value disabled="false">Megjegyzés</Value>
         </Property>
         <Property>
             <Name>wizard.new.general.error.location.nonexists</Name>
