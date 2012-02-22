@@ -1,5 +1,6 @@
 package hu.skzs.multiproperties.base.model;
 
+import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
 import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 
@@ -27,19 +28,19 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	/**
 	 * The name of the MultiProperties
 	 */
-	private String name;
+	private String name = ""; //$NON-NLS-1$
 	/**
 	 * The description of the MultiProperties
 	 */
-	private String description;
+	private String description = ""; //$NON-NLS-1$
 	/**
 	 * The version of the MultiProperties file.
 	 */
-	private String version;
+	private String version = SchemaConverterFactory.NEWEST_VERSION;
 	/**
 	 * The handler name.
 	 */
-	private String handler;
+	private String handler = ""; //$NON-NLS-1$
 	/**
 	 * The key column width
 	 */
@@ -163,7 +164,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 * @see #load(IFile)
 	 * @see #save(IFile)
 	 */
-	public void setVersion(String version)
+	public void setVersion(final String version)
 	{
 		this.version = version;
 	}
@@ -489,7 +490,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	public int remove(final AbstractRecord[] records)
 	{
 		int count = 0;
-		for (AbstractRecord record : records)
+		for (final AbstractRecord record : records)
 		{
 			if (this.records.remove(record))
 				count++;

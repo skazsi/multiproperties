@@ -1,6 +1,10 @@
 package hu.skzs.multiproperties.ui.util;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.TableWrapLayout;
 
 /**
@@ -39,7 +43,8 @@ public class LayoutFactory
 	 * @param marginHeight margin on top and bottom sides
 	 * @return a newly created TableWrapLayout object
 	 */
-	public static synchronized TableWrapLayout createTableWrapLayout(final int numColumns, final int marginWidth, final int marginHeight)
+	public static synchronized TableWrapLayout createTableWrapLayout(final int numColumns, final int marginWidth,
+			final int marginHeight)
 	{
 		final TableWrapLayout tableWrapLayout = new TableWrapLayout();
 		tableWrapLayout.numColumns = numColumns;
@@ -79,11 +84,30 @@ public class LayoutFactory
 	 * @param marginHeight margin on top and bottom sides
 	 * @return a newly created GridLayout object
 	 */
-	public static synchronized GridLayout createGridLayout(final int numColumns, final int marginWidth, final int marginHeight)
+	public static synchronized GridLayout createGridLayout(final int numColumns, final int marginWidth,
+			final int marginHeight)
 	{
 		final GridLayout gridLayout = new GridLayout(numColumns, false);
 		gridLayout.marginHeight = marginHeight;
 		gridLayout.marginWidth = marginWidth;
 		return gridLayout;
+	}
+
+	/**
+	 * Returns a newly created <code>Label</code> instance which represents a horizontal separator line.
+	 * <p>It can be used only in {@link GridLayout}.</p>
+	 * @param parent the parent composite
+	 * @param horizontalSpan specifies the number of column cells that the control will take up
+	 * @return a newly created <code>Label</code> instance which represents a horizontal separator line
+	 */
+	public static synchronized Label createSeparatorInGrid(final Composite parent, final int horizontalSpan)
+	{
+		final Label label = new Label(parent, SWT.SEPARATOR | SWT.SHADOW_OUT | SWT.HORIZONTAL);
+		final GridData gridData = new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL);
+		gridData.horizontalSpan = 3;
+		gridData.heightHint = 20;
+		gridData.verticalAlignment = GridData.VERTICAL_ALIGN_CENTER;
+		label.setLayoutData(gridData);
+		return label;
 	}
 }

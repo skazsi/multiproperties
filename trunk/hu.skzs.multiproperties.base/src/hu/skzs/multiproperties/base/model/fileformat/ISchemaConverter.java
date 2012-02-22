@@ -21,7 +21,8 @@ public interface ISchemaConverter
 	public Table convert(IFile file) throws SchemaConverterException;
 
 	/**
-	 * Persists the given {@link Table} instance into the given {@link IFile}..
+	 * Persists the given {@link Table} instance into the given {@link IFile}.
+	 * <p>If the <code>file</code> does not exists, then it will be created.</p>
 	 * @param file the given file
 	 * @param table the given table
 	 * @throws SchemaConverterException

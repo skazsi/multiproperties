@@ -789,5 +789,106 @@ See also the editor.marker.error.prefix property.</Description>
             <Value disabled="false">Append at end</Value>
             <Value disabled="false">Hozzáfűzés a végére</Value>
         </Property>
+        <Comment>
+            <Value>new MultiProperties</Value>
+        </Comment>
+        <Property>
+            <Name>wizard.new.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">New MultiProperties</Value>
+            <Value disabled="false">Új MultiProperties</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.progress.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Creating new MultiProperties file</Value>
+            <Value disabled="false">Új MultiProperties fájl létrehozása</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.progress.creating</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Creating the content...</Value>
+            <Value disabled="false">A tartalom létrehozása...</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.progress.opening</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File opening...</Value>
+            <Value disabled="false">Fájl megnyitása...</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">This wizard creates a new file with multiproperties extension that can be opened by a MultiProperties editor.</Value>
+            <Value disabled="false">Ez a varázsló egy új multiproperties kiterjesztésű fájlt hoz létre amit meg lehet nyitni MultiProperties szerkesztővel.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.location</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Location</Value>
+            <Value disabled="false">Hely</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.browse</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Browse...</Value>
+            <Value disabled="false">Tallózás...</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.browse.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Select new file container</Value>
+            <Value disabled="false">Válasszon egy új konténert</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.filename</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File name</Value>
+            <Value disabled="false">Fájlnév</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.name</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Name</Value>
+            <Value disabled="false">Név</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.error.location.nonexists</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File location must exist</Value>
+            <Value disabled="false">Fájl helye nem létezik</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.error.location.nonaccessible</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Project must be writable</Value>
+            <Value disabled="false">Fájl helye nem írható</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.error.filename.nonvalid</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File name must be valid</Value>
+            <Value disabled="false">Fájl neve nem érvényes</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.error.filename.invalidext</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File extension must be &quot;multiproperties&quot;</Value>
+            <Value disabled="false">Fájl kiterjesztése &quot;multiproperties&quot; kell legyen</Value>
+        </Property>
     </Records>
 </MultiProperties>
