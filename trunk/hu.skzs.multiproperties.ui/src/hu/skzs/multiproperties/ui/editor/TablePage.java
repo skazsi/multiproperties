@@ -54,7 +54,8 @@ public class TablePage extends MPEditorPage
 	 * The <code>preferenceListener</code> listens for any color related preference changes. In case of change,
 	 * it initiates a refresh on the table.
 	 */
-	IPropertyChangeListener preferenceListener = new IPropertyChangeListener() {
+	IPropertyChangeListener preferenceListener = new IPropertyChangeListener()
+	{
 
 		public void propertyChange(final PropertyChangeEvent event)
 		{
@@ -104,7 +105,7 @@ public class TablePage extends MPEditorPage
 	}
 
 	@Override
-	public void createPartControl(Composite parent)
+	public void createPartControl(final Composite parent)
 	{
 		parent.setLayout(new FillLayout());
 
@@ -114,7 +115,8 @@ public class TablePage extends MPEditorPage
 		final TableColumn tc = new TableColumn(tableviewer.getTable(), SWT.NONE, 0);
 		tc.setText(Messages.getString("tables.key")); //$NON-NLS-1$
 		tc.setWidth(editor.getTable().getKeyColumnWidth());
-		tc.addControlListener(new ControlListener() {
+		tc.addControlListener(new ControlListener()
+		{
 
 			public void controlMoved(final ControlEvent e)
 			{
@@ -138,7 +140,8 @@ public class TablePage extends MPEditorPage
 		getSite().setSelectionProvider(tableviewer);
 
 		// Implement a "fake" tooltip
-		final Listener labelListener = new Listener() {
+		final Listener labelListener = new Listener()
+		{
 
 			public void handleEvent(final Event event)
 			{
@@ -160,7 +163,8 @@ public class TablePage extends MPEditorPage
 				}
 			}
 		};
-		final Listener tableListener = new Listener() {
+		final Listener tableListener = new Listener()
+		{
 
 			Shell tip = null;
 			Label title = null;
@@ -184,17 +188,20 @@ public class TablePage extends MPEditorPage
 				}
 				case SWT.MouseHover:
 				{
-					ICommandService commandService = (ICommandService) PlatformUI.getWorkbench().getService(ICommandService.class);
+					final ICommandService commandService = (ICommandService) PlatformUI.getWorkbench().getService(
+							ICommandService.class);
 					if (commandService == null)
 						return;
 
-					Boolean showTooltip = (Boolean) commandService.getCommand(TooltipHandler.COMMAND_ID).getState(RegistryToggleState.STATE_ID).getValue();
+					final Boolean showTooltip = (Boolean) commandService.getCommand(TooltipHandler.COMMAND_ID)
+							.getState(RegistryToggleState.STATE_ID).getValue();
 					if (!showTooltip)
 						return;
 
 					if (tableviewer.getTable().getItem(new Point(event.x, event.y)) != null)
 					{
-						final AbstractRecord record = (AbstractRecord) tableviewer.getElementAt(tableviewer.getTable().indexOf(tableviewer.getTable().getItem(new Point(event.x, event.y))));
+						final AbstractRecord record = (AbstractRecord) tableviewer.getElementAt(tableviewer.getTable()
+								.indexOf(tableviewer.getTable().getItem(new Point(event.x, event.y))));
 						if (!(record instanceof PropertyRecord))
 							return;
 						final PropertyRecord propertyrecord = (PropertyRecord) record;
@@ -213,8 +220,10 @@ public class TablePage extends MPEditorPage
 							rowlayout.marginRight = 0;
 							tip.setLayout(rowlayout);
 							title = new Label(tip, SWT.NONE);
-							title.setForeground(tableviewer.getTable().getDisplay().getSystemColor(SWT.COLOR_INFO_FOREGROUND));
-							title.setBackground(tableviewer.getTable().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND));
+							title.setForeground(tableviewer.getTable().getDisplay()
+									.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
+							title.setBackground(tableviewer.getTable().getDisplay()
+									.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
 							title.setFont(EditorFontRegistry.get(EditorFontRegistry.TOOLTIP_TITLE));
 							title.setData("_TABLEITEM", item); //$NON-NLS-1$
 							title.setText(propertyrecord.getValue());
@@ -223,8 +232,10 @@ public class TablePage extends MPEditorPage
 							if (propertyrecord.getDescription() != null)
 							{
 								description = new Label(tip, SWT.NONE);
-								description.setForeground(tableviewer.getTable().getDisplay().getSystemColor(SWT.COLOR_INFO_FOREGROUND));
-								description.setBackground(tableviewer.getTable().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND));
+								description.setForeground(tableviewer.getTable().getDisplay()
+										.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
+								description.setBackground(tableviewer.getTable().getDisplay()
+										.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
 								description.setData("_TABLEITEM", item); //$NON-NLS-1$
 								description.setText(propertyrecord.getDescription());
 								description.addListener(SWT.MouseExit, labelListener);
@@ -232,7 +243,8 @@ public class TablePage extends MPEditorPage
 							}
 							final Point size = tip.computeSize(SWT.DEFAULT, SWT.DEFAULT);
 							final Rectangle rect = item.getBounds(0);
-							final Point pt = tableviewer.getTable().toDisplay(rect.x + tableviewer.getTable().getHorizontalBar().getSelection(), rect.y);
+							final Point pt = tableviewer.getTable().toDisplay(
+									rect.x + tableviewer.getTable().getHorizontalBar().getSelection(), rect.y);
 							tip.setBounds(pt.x, pt.y, size.x, size.y);
 							tip.setVisible(true);
 						}
@@ -250,23 +262,24 @@ public class TablePage extends MPEditorPage
 		tableviewer.getTable().setMenu(menuManager.createContextMenu(tableviewer.getTable()));
 		getSite().registerContextMenu(menuManager, tableviewer);
 
-		tableviewer.addDoubleClickListener(new IDoubleClickListener() {
+		tableviewer.addDoubleClickListener(new IDoubleClickListener()
+		{
 
 			public void doubleClick(final DoubleClickEvent event)
 			{
-				IHandlerService handlerService = (IHandlerService) getSite().getService(IHandlerService.class);
+				final IHandlerService handlerService = (IHandlerService) getSite().getService(IHandlerService.class);
 				try
 				{
 					handlerService.executeCommand(EditHandler.COMMAND_ID, null);
 				}
-				catch (NotEnabledException e)
+				catch (final NotEnabledException e)
 				{
 					// do nothing
 					// TODO: it should be investigated how the enabled state could be checked
 				}
-				catch (Exception e)
+				catch (final Exception e)
 				{
-					e.printStackTrace();
+					Activator.logError(e);
 				}
 			}
 		});
@@ -309,7 +322,8 @@ public class TablePage extends MPEditorPage
 			tc.setText(editor.getTable().getColumns().get(i).getName());
 			tc.setWidth(editor.getTable().getColumns().get(i).getWidth());
 			tc.setData(new Integer(i));
-			tc.addControlListener(new ControlListener() {
+			tc.addControlListener(new ControlListener()
+			{
 
 				public void controlMoved(final ControlEvent e)
 				{

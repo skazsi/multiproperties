@@ -68,7 +68,8 @@ public class ColumnPart implements IDetailsPage
 		toolkit.createLabel(client, Messages.getString("columns.column.name")); //$NON-NLS-1$
 		nametext = toolkit.createText(client, "", SWT.SINGLE); //$NON-NLS-1$
 		nametext.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
-		nametext.addModifyListener(new ModifyListener() {
+		nametext.addModifyListener(new ModifyListener()
+		{
 
 			public void modifyText(final ModifyEvent e)
 			{
@@ -80,8 +81,10 @@ public class ColumnPart implements IDetailsPage
 		griddata.verticalAlignment = GridData.BEGINNING;
 		label.setLayoutData(griddata);
 		descriptiontext = toolkit.createText(client, "", SWT.MULTI); //$NON-NLS-1$
-		descriptiontext.setLayoutData(new GridData(GridData.FILL_BOTH | GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL));
-		descriptiontext.addModifyListener(new ModifyListener() {
+		descriptiontext.setLayoutData(new GridData(GridData.FILL_BOTH | GridData.GRAB_HORIZONTAL
+				| GridData.GRAB_VERTICAL));
+		descriptiontext.addModifyListener(new ModifyListener()
+		{
 
 			public void modifyText(final ModifyEvent e)
 			{
@@ -90,7 +93,8 @@ public class ColumnPart implements IDetailsPage
 		});
 		toolkit.createLabel(client, Messages.getString("columns.column.handler")); //$NON-NLS-1$
 		configure = toolkit.createButton(client, Messages.getString("columns.column.handler.button"), SWT.PUSH); //$NON-NLS-1$
-		configure.addSelectionListener(new SelectionListener() {
+		configure.addSelectionListener(new SelectionListener()
+		{
 
 			public void widgetDefaultSelected(final SelectionEvent arg0)
 			{
@@ -102,7 +106,8 @@ public class ColumnPart implements IDetailsPage
 				{
 					IConfigurationElement element = null;
 					final IExtensionRegistry reg = Platform.getExtensionRegistry();
-					final IConfigurationElement[] extensions = reg.getConfigurationElementsFor(IHandler.HANDLER_EXTENSION_ID);
+					final IConfigurationElement[] extensions = reg
+							.getConfigurationElementsFor(IHandler.HANDLER_EXTENSION_ID);
 					for (int i = 0; i < extensions.length; i++)
 					{
 						if (extensions[i].getAttribute("name").equals(block.getEditor().getTable().getHandler())) //$NON-NLS-1$
@@ -112,11 +117,12 @@ public class ColumnPart implements IDetailsPage
 						}
 					}
 					final IHandler handler = (IHandler) element.createExecutableExtension("class"); //$NON-NLS-1$
-					handler_configuration = handler.configure(block.getEditor().getSite().getShell(), handler_configuration);
+					handler_configuration = handler.configure(block.getEditor().getSite().getShell(),
+							handler_configuration);
 				}
 				catch (final Throwable e)
 				{
-					e.printStackTrace();
+					Activator.logError(e);
 				}
 				handler_configuration_changed = true;
 			}

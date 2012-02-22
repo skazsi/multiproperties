@@ -23,29 +23,19 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
-/**
- * The "New" wizard page allows setting the container for the new file as well
- * as the file name. The page will only accept file name without the extension
- * OR with the extension that matches the expected one (history).
- */
-
-public class NewMultiPropertiesWizardPage extends WizardPage
+public class NewMultiPropertiesPage extends WizardPage
 {
 	private Text location;
 	private Text file;
 	private Text name;
+	private Text description;
 	private final ISelection selection;
 
-	/**
-	 * Constructor for SampleNewWizardPage.
-	 * 
-	 * @param pageName
-	 */
-	public NewMultiPropertiesWizardPage(final ISelection selection)
+	public NewMultiPropertiesPage(final ISelection selection)
 	{
 		super("multiproperties.new.general"); //$NON-NLS-1$
 		setTitle(Messages.getString("wizard.new.title")); //$NON-NLS-1$
-		setDescription(Messages.getString("wizard.new.general.description")); //$NON-NLS-1$
+		setDescription(Messages.getString("wizard.new.general.desc")); //$NON-NLS-1$
 		this.selection = selection;
 	}
 
@@ -61,8 +51,7 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 		Label label = new Label(container, SWT.NULL);
 		label.setText(Messages.getString("wizard.new.general.location")); //$NON-NLS-1$
 		location = new Text(container, SWT.BORDER | SWT.SINGLE);
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		location.setLayoutData(gd);
+		location.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		location.addModifyListener(new ModifyListener()
 		{
 			public void modifyText(final ModifyEvent e)
@@ -85,8 +74,7 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 		label = new Label(container, SWT.NULL);
 		label.setText(Messages.getString("wizard.new.general.filename")); //$NON-NLS-1$
 		file = new Text(container, SWT.BORDER | SWT.SINGLE);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		file.setLayoutData(gd);
+		file.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		file.addModifyListener(new ModifyListener()
 		{
 			public void modifyText(final ModifyEvent e)
@@ -103,9 +91,9 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 		label = new Label(container, SWT.NULL);
 		label.setText(Messages.getString("wizard.new.general.name")); //$NON-NLS-1$
 		name = new Text(container, SWT.BORDER | SWT.SINGLE);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		gd.horizontalSpan = 2;
-		name.setLayoutData(gd);
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+		gridData.horizontalSpan = 2;
+		name.setLayoutData(gridData);
 		name.addModifyListener(new ModifyListener()
 		{
 			public void modifyText(final ModifyEvent e)
@@ -113,6 +101,12 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 				validate();
 			}
 		});
+		label = new Label(container, SWT.NULL);
+		label.setText(Messages.getString("wizard.new.general.description")); //$NON-NLS-1$
+		description = new Text(container, SWT.BORDER | SWT.MULTI);
+		gridData = new GridData(GridData.FILL_BOTH | GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL);
+		gridData.horizontalSpan = 2;
+		description.setLayoutData(gridData);
 
 		initialize();
 		validate();
@@ -122,7 +116,6 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 	/**
 	 * Tests if the current workbench selection is a suitable container to use.
 	 */
-
 	private void initialize()
 	{
 		if (selection != null && selection.isEmpty() == false && selection instanceof IStructuredSelection)
@@ -231,9 +224,13 @@ public class NewMultiPropertiesWizardPage extends WizardPage
 		return file.getText();
 	}
 
-	@Override
-	public String getName()
+	public String getMultiPropertiesName()
 	{
 		return name.getText();
+	}
+
+	public String getMultiPropertiesDescription()
+	{
+		return description.getText();
 	}
 }

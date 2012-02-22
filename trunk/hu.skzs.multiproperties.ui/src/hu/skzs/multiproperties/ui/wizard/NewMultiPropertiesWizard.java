@@ -39,7 +39,7 @@ import org.eclipse.ui.ide.IDE;
  */
 public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 {
-	private NewMultiPropertiesWizardPage page;
+	private NewMultiPropertiesPage page;
 	private ISelection selection;
 
 	public NewMultiPropertiesWizard()
@@ -52,7 +52,7 @@ public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 	@Override
 	public void addPages()
 	{
-		page = new NewMultiPropertiesWizardPage(selection);
+		page = new NewMultiPropertiesPage(selection);
 		addPage(page);
 	}
 
@@ -68,7 +68,8 @@ public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 		final String fileName = page.getFileName();
 
 		final Table table = new Table();
-		table.setName(page.getName());
+		table.setName(page.getMultiPropertiesName());
+		table.setDescription(page.getMultiPropertiesDescription());
 
 		final IRunnableWithProgress op = new IRunnableWithProgress()
 		{
