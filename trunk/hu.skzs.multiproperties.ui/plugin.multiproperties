@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <MultiProperties xmlns="hu.skzs.multiproperties">
-    <Version>2.0</Version>
+    <Version>1.0</Version>
     <Name>MultiProperties UI</Name>
     <Description></Description>
     <Handler>Java Properties Handler</Handler>
@@ -18,7 +18,7 @@
             <Name>HU</Name>
             <Description></Description>
             <Width>402</Width>
-            <HandlerConfiguration>/hu.skzs.multiproperties.ui/plugin_hu.properties</HandlerConfiguration>
+            <HandlerConfiguration>/hu.skzs.multiproperties.ui/plugin_hu.properties|false|false|false</HandlerConfiguration>
         </Column>
     </Columns>
     <Records>
