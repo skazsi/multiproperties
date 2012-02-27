@@ -117,14 +117,18 @@ public class ColumnPart implements IDetailsPage
 						}
 					}
 					final IHandler handler = (IHandler) element.createExecutableExtension("class"); //$NON-NLS-1$
-					handler_configuration = handler.configure(block.getEditor().getSite().getShell(),
+					final String new_handler_configuration = handler.configure(block.getEditor().getSite().getShell(),
 							handler_configuration);
+					if (!new_handler_configuration.equals(handler_configuration))
+					{
+						handler_configuration = new_handler_configuration;
+						handler_configuration_changed = true;
+					}
 				}
 				catch (final Throwable e)
 				{
 					Activator.logError(e);
 				}
-				handler_configuration_changed = true;
 			}
 		});
 	}

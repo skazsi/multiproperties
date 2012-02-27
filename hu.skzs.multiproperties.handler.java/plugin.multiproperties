@@ -68,6 +68,27 @@
             <Value disabled="false">Fájl név</Value>
         </Property>
         <Property>
+            <Name>wizard.configuration.include.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Insert description of MultiProperties in the beginning as comment</Value>
+            <Value disabled="false">A MultiProperties megjegyzésének beszúrása előre</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.include.columndescription</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Insert description of column in the beginning as comment</Value>
+            <Value disabled="false">Az oszlop megjegyzésének beszúrása előre</Value>
+        </Property>
+        <Property>
+            <Name>wizard.configuration.include.disabled</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Write disabled properties as comment</Value>
+            <Value disabled="false">Letiltott property rekordok írása megjegyzésként</Value>
+        </Property>
+        <Property>
             <Name>wizard.configuration.error.mustspecified</Name>
             <Description></Description>
             <Disabled>false</Disabled>

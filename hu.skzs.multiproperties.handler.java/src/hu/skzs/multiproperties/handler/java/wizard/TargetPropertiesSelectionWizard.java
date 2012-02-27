@@ -1,5 +1,6 @@
 package hu.skzs.multiproperties.handler.java.wizard;
 
+import hu.skzs.multiproperties.handler.java.ConfigurationConverter;
 import hu.skzs.multiproperties.handler.java.Messages;
 
 import org.eclipse.jface.wizard.Wizard;
@@ -12,12 +13,12 @@ import org.eclipse.jface.wizard.Wizard;
  */
 public class TargetPropertiesSelectionWizard extends Wizard
 {
-	private String target;
+	private final ConfigurationConverter configurationConverter;
 	private TargetPropertiesSelectionPage targetPropertiesSelectionPage;
 
-	public TargetPropertiesSelectionWizard(final String target)
+	public TargetPropertiesSelectionWizard(final ConfigurationConverter configurationConverter)
 	{
-		this.target = target;
+		this.configurationConverter = configurationConverter;
 	}
 
 	@Override
@@ -26,19 +27,18 @@ public class TargetPropertiesSelectionWizard extends Wizard
 		setWindowTitle(Messages.getString("wizard.configuration.title")); //$NON-NLS-1$
 		// TODO: wizard picture is missing
 		//setDefaultPageImageDescriptor(Activator.getDefault().getImageRegistry().getDescriptor("edit_wiz"));
-		targetPropertiesSelectionPage = new TargetPropertiesSelectionPage(target);
+		targetPropertiesSelectionPage = new TargetPropertiesSelectionPage(configurationConverter);
 		addPage(targetPropertiesSelectionPage);
 	}
 
 	@Override
 	public boolean performFinish()
 	{
-		target = targetPropertiesSelectionPage.getLocation() + "/" + targetPropertiesSelectionPage.getFileName(); //$NON-NLS-1$
+		configurationConverter.setContainerName(targetPropertiesSelectionPage.getLocation());
+		configurationConverter.setFileName(targetPropertiesSelectionPage.getFileName());
+		configurationConverter.setIncludeDescription(targetPropertiesSelectionPage.isDescriptionIncluded());
+		configurationConverter.setIncludeColumnDescription(targetPropertiesSelectionPage.isColumnDescriptionIncluded());
+		configurationConverter.setIncludeDisabled(targetPropertiesSelectionPage.isDisabledPropertiesIncluded());
 		return true;
-	}
-
-	public String getConfiguration()
-	{
-		return target;
 	}
 }

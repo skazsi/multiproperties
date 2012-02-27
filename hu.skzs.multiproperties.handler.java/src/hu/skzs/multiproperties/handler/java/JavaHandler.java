@@ -8,7 +8,11 @@ import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.handler.java.wizard.TargetPropertiesSelectionWizard;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -22,20 +26,31 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * The <code>JavaHandler</code> is the default implementation of {@link IHandler}. It produces <code>java.util.Properties</code> typed output.
+ * @author sallai
+ * @see Properties
+ */
 public class JavaHandler implements IHandler
 {
 
 	/** A table of hex digits */
-	private static final char[] hexDigit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+	private static final char[] hexDigit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+			'F' };
 
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.api.IHandler#configure(org.eclipse.swt.widgets.Shell, java.lang.String)
+	 */
 	public String configure(final Shell shell, final String configuration) throws CoreException
 	{
 		try
 		{
-			final TargetPropertiesSelectionWizard wizard = new TargetPropertiesSelectionWizard(configuration);
+			final ConfigurationConverter configurationConverter = new ConfigurationConverter(configuration);
+			final TargetPropertiesSelectionWizard wizard = new TargetPropertiesSelectionWizard(configurationConverter);
 			final WizardDialog wizarddialog = new WizardDialog(shell, wizard);
 			wizarddialog.open();
-			return wizard.getConfiguration();
+			return configurationConverter.toString();
 		}
 		catch (final Throwable e)
 		{
@@ -43,18 +58,36 @@ public class JavaHandler implements IHandler
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.api.IHandler#save(java.lang.String, hu.skzs.multiproperties.base.model.Table, hu.skzs.multiproperties.base.model.Column)
+	 */
 	public void save(final String configuration, final Table table, final Column column) throws CoreException
 	{
 		try
 		{
-			final String containerName = configuration.substring(0, configuration.lastIndexOf("/")); //$NON-NLS-1$
-			final String fileName = configuration.substring(configuration.lastIndexOf("/") + 1); //$NON-NLS-1$
-
+			final ConfigurationConverter converter = new ConfigurationConverter(configuration);
 			final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			final IResource resource = root.findMember(new Path(containerName));
+			final IResource resource = root.findMember(new Path(converter.getContainerName()));
 			final IContainer container = (IContainer) resource;
-			final IFile file = container.getFile(new Path(fileName));
-			final StringBuffer strb = new StringBuffer();
+			final IFile file = container.getFile(new Path(converter.getFileName()));
+			final StringBuilder strb = new StringBuilder();
+
+			// Writing the description
+			if (converter.isDescriptionIncluded())
+			{
+				writeString(strb, table.getDescription());
+				strb.append("\r\n"); //$NON-NLS-1$
+			}
+
+			// Writing the column description
+			if (converter.isColumnDescriptionIncluded())
+			{
+				writeString(strb, column.getDescription());
+				strb.append("\r\n"); //$NON-NLS-1$
+			}
+
+			// Writing the records
 			for (int i = 0; i < table.size(); i++)
 			{
 				if (table.get(i) instanceof PropertyRecord)
@@ -65,7 +98,10 @@ public class JavaHandler implements IHandler
 
 					// If disabled, then it will be written as a comment
 					if (record.isDisabled())
-						strb.append("#"); //$NON-NLS-1$
+						if (converter.isDisabledPropertiesIncluded())
+							strb.append("#"); //$NON-NLS-1$
+						else
+							continue;
 
 					strb.append(saveConvert(record.getValue(), true));
 					strb.append("="); //$NON-NLS-1$
@@ -83,6 +119,7 @@ public class JavaHandler implements IHandler
 				}
 			}
 
+			// Writing the content
 			final ByteArrayInputStream stream = new ByteArrayInputStream(strb.toString().getBytes());
 			if (file.exists())
 			{
@@ -94,9 +131,25 @@ public class JavaHandler implements IHandler
 			}
 			stream.close();
 		}
-		catch (final Throwable e)
+		catch (final Exception e)
 		{
 			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, IStatus.ERROR, e.getMessage(), e));
+		}
+	}
+
+	/**
+	 * Writes a multi lined String object on the given {@link StringBuilder}.
+	 * @param stringBuilder
+	 * @param content
+	 * @throws IOException 
+	 */
+	private void writeString(final StringBuilder stringBuilder, final String content) throws IOException
+	{
+		final BufferedReader reader = new BufferedReader(new StringReader(content));
+		String line = null;
+		while ((line = reader.readLine()) != null)
+		{
+			stringBuilder.append("# " + line + "\r\n"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
