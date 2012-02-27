@@ -1,6 +1,8 @@
 package hu.skzs.multiproperties.handler.java.wizard;
 
+import hu.skzs.multiproperties.handler.java.ConfigurationConverter;
 import hu.skzs.multiproperties.handler.java.Messages;
+import hu.skzs.multiproperties.ui.util.LayoutFactory;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -22,14 +24,17 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 public class TargetPropertiesSelectionPage extends WizardPage
 {
 
-	private final String target;
+	private final ConfigurationConverter configurationConverter;
 	private Text textLocation;
 	private Text textFile;
+	private Button checkDescription;
+	private Button checkColumnDescription;
+	private Button checkDisabled;
 
-	public TargetPropertiesSelectionPage(final String target)
+	public TargetPropertiesSelectionPage(final ConfigurationConverter configurationConverter)
 	{
 		super("column.configuration.page"); //$NON-NLS-1$
-		this.target = target;
+		this.configurationConverter = configurationConverter;
 		setTitle(Messages.getString("wizard.configuration.title")); //$NON-NLS-1$
 		setDescription(Messages.getString("wizard.configuration.description")); //$NON-NLS-1$
 	}
@@ -39,17 +44,18 @@ public class TargetPropertiesSelectionPage extends WizardPage
 		final Composite container = new Composite(parent, SWT.NULL);
 		setControl(container);
 		final GridLayout layout = new GridLayout();
-		container.setLayout(layout);
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
+		container.setLayout(layout);
 
 		Label label = new Label(container, SWT.NULL);
 		label.setText(Messages.getString("wizard.configuration.location")); //$NON-NLS-1$
 		textLocation = new Text(container, SWT.BORDER | SWT.SINGLE);
-		if (target.lastIndexOf("/") != -1) //$NON-NLS-1$
-			textLocation.setText(target.substring(0, target.lastIndexOf("/"))); //$NON-NLS-1$
+		if (configurationConverter.getContainerName() != null)
+			textLocation.setText(configurationConverter.getContainerName());
 		textLocation.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		textLocation.addModifyListener(new ModifyListener() {
+		textLocation.addModifyListener(new ModifyListener()
+		{
 			public void modifyText(final ModifyEvent e)
 			{
 				dialogChanged();
@@ -58,7 +64,8 @@ public class TargetPropertiesSelectionPage extends WizardPage
 
 		final Button button = new Button(container, SWT.PUSH);
 		button.setText(Messages.getString("wizard.configuration.location.browse")); //$NON-NLS-1$
-		button.addSelectionListener(new SelectionAdapter() {
+		button.addSelectionListener(new SelectionAdapter()
+		{
 			@Override
 			public void widgetSelected(final SelectionEvent e)
 			{
@@ -68,15 +75,40 @@ public class TargetPropertiesSelectionPage extends WizardPage
 		label = new Label(container, SWT.NULL);
 		label.setText(Messages.getString("wizard.configuration.filename")); //$NON-NLS-1$
 		textFile = new Text(container, SWT.BORDER | SWT.SINGLE);
-		if (target.lastIndexOf("/") != -1) //$NON-NLS-1$
-			textFile.setText(target.substring(target.lastIndexOf("/") + 1)); //$NON-NLS-1$
+		if (configurationConverter.getFileName() != null)
+			textFile.setText(configurationConverter.getFileName());
 		textFile.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		textFile.addModifyListener(new ModifyListener() {
+		textFile.addModifyListener(new ModifyListener()
+		{
 			public void modifyText(final ModifyEvent e)
 			{
 				dialogChanged();
 			}
 		});
+
+		// Separator
+		LayoutFactory.createSeparatorInGrid(container, 3);
+
+		// Checks
+		checkDescription = new Button(container, SWT.CHECK);
+		checkDescription.setText(Messages.getString("wizard.configuration.include.description")); //$NON-NLS-1$
+		checkDescription.setSelection(configurationConverter.isDescriptionIncluded());
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+		gridData.horizontalSpan = 3;
+		checkDescription.setLayoutData(gridData);
+		checkColumnDescription = new Button(container, SWT.CHECK);
+		checkColumnDescription.setText(Messages.getString("wizard.configuration.include.columndescription")); //$NON-NLS-1$
+		checkColumnDescription.setSelection(configurationConverter.isColumnDescriptionIncluded());
+		gridData = new GridData(GridData.FILL_HORIZONTAL);
+		gridData.horizontalSpan = 3;
+		checkColumnDescription.setLayoutData(gridData);
+		checkDisabled = new Button(container, SWT.CHECK);
+		checkDisabled.setText(Messages.getString("wizard.configuration.include.disabled")); //$NON-NLS-1$
+		checkDisabled.setSelection(configurationConverter.isDisabledPropertiesIncluded());
+		gridData = new GridData(GridData.FILL_HORIZONTAL);
+		gridData.horizontalSpan = 3;
+		checkDisabled.setLayoutData(gridData);
+
 		dialogChanged();
 	}
 
@@ -87,7 +119,8 @@ public class TargetPropertiesSelectionPage extends WizardPage
 
 	private void handleBrowse()
 	{
-		final ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), false, Messages.getString("wizard.configuration.location.browse.description")); //$NON-NLS-1$
+		final ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace()
+				.getRoot(), false, Messages.getString("wizard.configuration.location.browse.description")); //$NON-NLS-1$
 		if (dialog.open() == ContainerSelectionDialog.OK)
 		{
 			final Object[] result = dialog.getResult();
@@ -148,5 +181,20 @@ public class TargetPropertiesSelectionPage extends WizardPage
 	public String getFileName()
 	{
 		return textFile.getText();
+	}
+
+	public boolean isDescriptionIncluded()
+	{
+		return checkDescription.getSelection();
+	}
+
+	public boolean isColumnDescriptionIncluded()
+	{
+		return checkColumnDescription.getSelection();
+	}
+
+	public boolean isDisabledPropertiesIncluded()
+	{
+		return checkDisabled.getSelection();
 	}
 }

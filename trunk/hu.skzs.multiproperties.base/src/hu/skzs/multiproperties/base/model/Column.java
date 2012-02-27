@@ -5,9 +5,9 @@ import hu.skzs.multiproperties.base.model.listener.IColumnChangeListener;
 public class Column
 {
 
-	private String strName = "";
-	private String strDescription = "";
-	private String strHandlerConfiguration = "";
+	private String strName = ""; //$NON-NLS-1$
+	private String strDescription = ""; //$NON-NLS-1$
+	private String strHandlerConfiguration = ""; //$NON-NLS-1$
 	private int iWidth = 150;
 	private IColumnChangeListener columnChangeListener = null;
 

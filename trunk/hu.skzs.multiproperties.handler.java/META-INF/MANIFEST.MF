@@ -8,6 +8,7 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  hu.skzs.multiproperties.base,
+ hu.skzs.multiproperties.ui,
  org.eclipse.ui.ide,
  org.eclipse.core.resources
 Bundle-ActivationPolicy: lazy
