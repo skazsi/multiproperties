@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MultiProperties xmlns="hu.skzs.multiproperties">
+    <Version>1.1</Version>
+    <Name>name</Name>
+    <Description>description</Description>
+    <Handler>handler</Handler>
+    <Columns>
+        <Key>
+            <Width>100</Width>
+        </Key>
+        <Column>
+            <Name>EN</Name>
+            <Description>EN description</Description>
+            <Width>200</Width>
+            <HandlerConfiguration>EN handler</HandlerConfiguration>
+        </Column>
+        <Column>
+            <Name>HU</Name>
+            <Description>HU description</Description>
+            <Width>200</Width>
+            <HandlerConfiguration>HU handler</HandlerConfiguration>
+        </Column>
+    </Columns>
+    <Records>
+        <Comment>
+            <Value>comment</Value>
+        </Comment>
+        <Property>
+            <Name>name</Name>
+            <Description>description</Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">EN value</Value>
+            <Value disabled="false">HU value</Value>
+        </Property>
+        <Property>
+            <Name>name</Name>
+            <Description>description</Description>
+            <Disabled>true</Disabled>
+            <Value disabled="false">EN value</Value>
+            <Value disabled="false">HU value</Value>
+        </Property>
+        <Empty/>
+    </Records>
+</MultiProperties>
