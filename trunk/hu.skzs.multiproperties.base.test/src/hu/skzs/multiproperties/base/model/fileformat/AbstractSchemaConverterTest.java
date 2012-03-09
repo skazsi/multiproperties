@@ -5,6 +5,9 @@ import hu.skzs.multiproperties.base.model.Columns;
 import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.junit.Assert;
 
 public abstract class AbstractSchemaConverterTest {
@@ -76,5 +79,36 @@ public abstract class AbstractSchemaConverterTest {
             Assert.assertEquals(values[i], property.getColumnValue(columns.get(i)));
         }
 
+    }
+
+    /**
+     * Assert whether a {@link InputStream} equals to an another one
+     * 
+     * @param expected
+     *            the expected input stream
+     * @param got
+     *            the got input stream
+     * @throws IOException
+     */
+    protected void assertEquals(InputStream expected, InputStream got) throws IOException
+    {
+        byte[] expectedBytes = readBytes(expected);
+        byte[] gotBytes = readBytes(got);
+
+        Assert.assertArrayEquals(expectedBytes, gotBytes);
+    }
+
+    private byte[] readBytes(InputStream inputStream) throws IOException
+    {
+        byte[] bytes = new byte[inputStream.available()];
+        int position = 0;
+        byte[] buffer = new byte[1024];
+        int read = 0;
+        while ((read = inputStream.read(buffer)) > -1)
+        {
+            System.arraycopy(buffer, 0, bytes, position, read);
+            position = position + read;
+        }
+        return bytes;
     }
 }
