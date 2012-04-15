@@ -20,7 +20,7 @@ public abstract class AbstractRecord implements Cloneable
 	{
 		try
 		{
-			final Field fField = Observable.class.getDeclaredField("obs");
+			final Field fField = Observable.class.getDeclaredField("obs"); //$NON-NLS-1$
 			fField.setAccessible(true);
 			final Vector vector = (Vector) fField.get(this);
 			return (Observer) vector.get(0);
