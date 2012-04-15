@@ -35,8 +35,8 @@ public class PropertyRecord extends AbstractRecord
 		if (this.value != null && this.value.equals(value))
 			return;
 		this.value = value;
-		if (structuralChangeListener != null)
-			structuralChangeListener.changed();
+		if (recordChangeListener != null)
+			recordChangeListener.changed(this);
 	}
 
 	public String getValue()
@@ -74,7 +74,8 @@ public class PropertyRecord extends AbstractRecord
 
 	public void putColumnValue(final Column column, final String value)
 	{
-		if (columnvalues.get(column) != null && columnvalues.get(column).equals(value) || columnvalues.get(column) == null && value == null)
+		if (columnvalues.get(column) != null && columnvalues.get(column).equals(value)
+				|| columnvalues.get(column) == null && value == null)
 			return;
 		columnvalues.put(column, value);
 		if (recordChangeListener != null)

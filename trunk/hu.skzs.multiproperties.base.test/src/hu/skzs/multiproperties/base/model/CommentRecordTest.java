@@ -1,6 +1,5 @@
 package hu.skzs.multiproperties.base.model;
 
-import hu.skzs.multiproperties.base.model.fileformat.AbstractSchemaConverterTest;
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
 import junit.framework.Assert;
 
@@ -13,7 +12,7 @@ import org.junit.Test;
  * @author sallai
  * 
  */
-public class CommentRecordTest extends AbstractSchemaConverterTest
+public class CommentRecordTest
 {
 
 	private static final String VALUE = "comment";
