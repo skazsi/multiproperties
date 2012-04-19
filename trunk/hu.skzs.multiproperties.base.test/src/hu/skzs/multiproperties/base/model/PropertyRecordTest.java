@@ -248,6 +248,65 @@ public class PropertyRecordTest
 	}
 
 	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDefaultColumnValue(String)} without using listener.
+	 * 
+	 */
+	@Test
+	public void testSetDefaultColumnValueWithoutListener()
+	{
+		// fixture
+		record = new PropertyRecord();
+
+		// when
+		record.setDefaultColumnValue(VALUE);
+
+		// then
+		Assert.assertEquals(VALUE, record.getDefaultColumnValue());
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDefaultColumnValue(String)} with using listener.
+	 * 
+	 */
+	@Test
+	public void testSetDefaultColumnValueWithListener()
+	{
+		// fixture
+		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		record = new PropertyRecord();
+		record.setRecordChangeListener(listenerMock);
+		listenerMock.changed(record);
+		EasyMock.replay(listenerMock);
+		// when
+		record.setDefaultColumnValue(VALUE);
+
+		// then
+		EasyMock.verify(listenerMock);
+		Assert.assertEquals(VALUE, record.getDefaultColumnValue());
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDefaultColumnValue(String)} with using listener.
+	 * Because the value is the same, it should not do anything.
+	 */
+	@Test
+	public void testSetDefaultColumnValueSameValue()
+	{
+		// fixture
+		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		record = new PropertyRecord();
+		record.setDefaultColumnValue(VALUE);
+		record.setRecordChangeListener(listenerMock);
+		EasyMock.replay(listenerMock);
+		// when
+		record.setDefaultColumnValue(VALUE);
+
+		// then
+		EasyMock.verify(listenerMock);
+		Assert.assertEquals(VALUE, record.getDefaultColumnValue());
+	}
+
+	/**
 	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#putColumnValue(Column,String)} without using listener.
 	 */
 	@Test
@@ -375,6 +434,7 @@ public class PropertyRecordTest
 		record = new PropertyRecord(VALUE);
 		record.setDescription(DESCRIPTION);
 		record.setDisabled(true);
+		record.setDefaultColumnValue(VALUE);
 		record.setRecordChangeListener(listenerMock);
 		// when
 		PropertyRecord cloned = (PropertyRecord) record.clone();
@@ -384,6 +444,7 @@ public class PropertyRecordTest
 		Assert.assertEquals(record.getValue(), cloned.getValue());
 		Assert.assertEquals(record.getDescription(), cloned.getDescription());
 		Assert.assertEquals(record.isDisabled(), cloned.isDisabled());
+		Assert.assertEquals(record.getDefaultColumnValue(), cloned.getDefaultColumnValue());
 		Assert.assertEquals(listenerMock, cloned.recordChangeListener);
 	}
 }
