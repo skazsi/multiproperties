@@ -19,5 +19,12 @@
 			 	<include name="multiproperties.xsd"/>
 			</schema>
 		</xjc>
+
+		<!-- File format 1.1 -->
+		<xjc destdir="${basedir}/src" package="hu.skzs.multiproperties.base.model.fileformat_1_1" extension="true">
+			<schema dir="${basedir}/src/hu/skzs/multiproperties/base/model/fileformat_1_1">
+			 	<include name="multiproperties.xsd"/>
+			</schema>
+		</xjc>
 	</target>
 </project>
