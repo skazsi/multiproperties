@@ -1,0 +1,75 @@
+<xsd:schema targetNamespace="hu.skzs.multiproperties" elementFormDefault="qualified"
+	xmlns="hu.skzs.multiproperties" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:element name="MultiProperties">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Version" type="xsd:string"/>
+				<xsd:element name="Name" type="xsd:string"/>
+				<xsd:element name="Description" type="xsd:string"/>
+				<xsd:element name="Handler" type="xsd:string"/>
+				<xsd:element name="Columns">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Key">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Width" type="xsd:int"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Column" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Name" type="xsd:string"/>
+										<xsd:element name="Description" type="xsd:string"/>
+										<xsd:element name="Width" type="xsd:int"/>
+										<xsd:element name="HandlerConfiguration" type="xsd:string"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Records">
+					<xsd:complexType>
+						<xsd:choice minOccurs="0" maxOccurs="unbounded">
+							<xsd:element name="Property">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Name" type="xsd:string"/>
+										<xsd:element name="Description" type="xsd:string"/>
+										<xsd:element name="Disabled" type="xsd:boolean"/>
+										<xsd:element name="DefaultValue" type="xsd:string" minOccurs="0"/>
+										<xsd:element name="Value" minOccurs="0" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:simpleContent>
+													<xsd:extension base="xsd:string">
+														<xsd:attribute name="disabled" type="xsd:boolean" />
+													</xsd:extension>
+												</xsd:simpleContent>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Comment">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Value" type="xsd:string"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Empty">
+								<xsd:complexType>
+									<xsd:sequence>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:choice>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

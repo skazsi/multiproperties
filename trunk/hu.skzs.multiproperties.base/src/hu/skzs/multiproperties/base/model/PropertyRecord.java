@@ -10,7 +10,8 @@ public class PropertyRecord extends AbstractRecord
 	private String value;
 	private String description;
 	private boolean disabled;
-	private Map<Column, String> columnvalues = new HashMap<Column, String>();
+	private String defaultColumnValue;
+	private Map<Column, String> columnValues = new HashMap<Column, String>();
 	private boolean duplicated;
 
 	@Override
@@ -72,26 +73,40 @@ public class PropertyRecord extends AbstractRecord
 		return disabled;
 	}
 
+	public void setDefaultColumnValue(final String defaultValue)
+	{
+		if (this.defaultColumnValue != null && this.defaultColumnValue.equals(defaultValue))
+			return;
+		this.defaultColumnValue = defaultValue;
+		if (recordChangeListener != null)
+			recordChangeListener.changed(this);
+	}
+
+	public String getDefaultColumnValue()
+	{
+		return defaultColumnValue;
+	}
+
 	public void putColumnValue(final Column column, final String value)
 	{
-		if (columnvalues.get(column) != null && columnvalues.get(column).equals(value)
-				|| columnvalues.get(column) == null && value == null)
+		if (columnValues.get(column) != null && columnValues.get(column).equals(value)
+				|| columnValues.get(column) == null && value == null)
 			return;
-		columnvalues.put(column, value);
+		columnValues.put(column, value);
 		if (recordChangeListener != null)
 			recordChangeListener.changed(this);
 	}
 
 	public String getColumnValue(final Column column)
 	{
-		return columnvalues.get(column);
+		return columnValues.get(column);
 	}
 
 	public String removeColumnValue(final Column column)
 	{
-		if (columnvalues.get(column) == null)
+		if (columnValues.get(column) == null)
 			return null;
-		final String value = columnvalues.remove(column);
+		final String value = columnValues.remove(column);
 		if (recordChangeListener != null)
 			recordChangeListener.changed(this);
 		return value;
@@ -118,14 +133,15 @@ public class PropertyRecord extends AbstractRecord
 		propertyrecord.value = value;
 		propertyrecord.description = description;
 		propertyrecord.disabled = disabled;
+		propertyrecord.defaultColumnValue = defaultColumnValue;
 		final Map<Column, String> columnvalues = new HashMap<Column, String>();
-		final Iterator<Column> iterator = this.columnvalues.keySet().iterator();
+		final Iterator<Column> iterator = this.columnValues.keySet().iterator();
 		while (iterator.hasNext())
 		{
 			final Column column = iterator.next();
 			columnvalues.put(column, getColumnValue(column));
 		}
-		propertyrecord.columnvalues = columnvalues;
+		propertyrecord.columnValues = columnvalues;
 		propertyrecord.setRecordChangeListener(recordChangeListener);
 		propertyrecord.setStructuralChangeListener(structuralChangeListener);
 		return propertyrecord;
