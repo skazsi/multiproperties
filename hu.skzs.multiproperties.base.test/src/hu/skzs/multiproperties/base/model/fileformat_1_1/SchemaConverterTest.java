@@ -1,4 +1,4 @@
-package hu.skzs.multiproperties.base.model.fileformat_1_0;
+package hu.skzs.multiproperties.base.model.fileformat_1_1;
 
 import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
@@ -32,7 +32,7 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 	private final SchemaConverter schemaConverter = new SchemaConverter();
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_0.SchemaConverter#convert(org.eclipse.core.resources.IFile)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(org.eclipse.core.resources.IFile)}.
 	 * 
 	 * @throws CoreException
 	 * @throws SchemaConverterException
@@ -62,20 +62,23 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 		assertEquals("EN", "EN " + DESCRIPTION, 200, "EN " + HANDLER, table.getColumns().get(0));
 		assertEquals("HU", "HU " + DESCRIPTION, 200, "HU " + HANDLER, table.getColumns().get(1));
 		// records
-		Assert.assertEquals(4, table.size());
+		Assert.assertEquals(5, table.size());
 		Assert.assertTrue(table.get(0) instanceof CommentRecord);
 		assertEquals(COMMENT, (CommentRecord) table.get(0));
 		Assert.assertTrue(table.get(1) instanceof PropertyRecord);
 		assertEquals(NAME, DESCRIPTION, false, null, new String[] { "EN value", "HU value" }, table.getColumns(),
 				(PropertyRecord) table.get(1));
 		Assert.assertTrue(table.get(2) instanceof PropertyRecord);
+		assertEquals(NAME, DESCRIPTION, false, DEFAULT_VALUE, new String[] { "EN value", "HU value" },
+				table.getColumns(), (PropertyRecord) table.get(1));
+		Assert.assertTrue(table.get(3) instanceof PropertyRecord);
 		assertEquals(NAME, DESCRIPTION, true, null, new String[] { "EN value", "HU value" }, table.getColumns(),
 				(PropertyRecord) table.get(2));
-		Assert.assertTrue(table.get(3) instanceof EmptyRecord);
+		Assert.assertTrue(table.get(4) instanceof EmptyRecord);
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_0.SchemaConverter#convert(org.eclipse.core.resources.IFile)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(org.eclipse.core.resources.IFile)}.
 	 * 
 	 * @throws CoreException
 	 * @throws SchemaConverterException
@@ -107,7 +110,7 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_0.SchemaConverter#convert(org.eclipse.core.resources.IFile)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(org.eclipse.core.resources.IFile)}.
 	 * 
 	 * @throws CoreException
 	 * @throws SchemaConverterException
@@ -121,7 +124,7 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 
 	/**
 	 * Test method for
-	 * {@link hu.skzs.multiproperties.base.model.fileformat_1_0.SchemaConverter#convert(org.eclipse.core.resources.IFile, hu.skzs.multiproperties.base.model.Table)}
+	 * {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(org.eclipse.core.resources.IFile, hu.skzs.multiproperties.base.model.Table)}
 	 * .
 	 * 
 	 * @throws SchemaConverterException
