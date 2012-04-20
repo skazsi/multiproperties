@@ -79,6 +79,13 @@
             <Value disabled="false">Ez a verziójú szerkesztő nem támogatja a megnyitni kívánt tartalom verzióját.\nPróbálja meg frissíteni a szerkesztőt.</Value>
         </Property>
         <Property>
+            <Name>editor.error.obsoleted</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Your editor version supports newer content version. Would you like to update the file to this version? Otherwise some data can get lost during saving.</Value>
+            <Value disabled="false">Ez a verziójú szerkesztő újabb tartalom verziót is támogat. Szeretné frissíteni a fájlt erre a verzióra? Különben bizonyos adatok elveszhetnek a mentés során.</Value>
+        </Property>
+        <Property>
             <Name>editor.marker.error.prefix</Name>
             <Description>Should be ended with a space character.&#xD;
 See also the editor.marker.error.suffix property.</Description>

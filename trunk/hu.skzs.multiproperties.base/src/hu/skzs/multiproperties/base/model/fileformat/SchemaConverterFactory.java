@@ -2,7 +2,6 @@ package hu.skzs.multiproperties.base.model.fileformat;
 
 import hu.skzs.multiproperties.base.Activator;
 import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.base.model.fileformat_1_0.SchemaConverter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,10 +24,10 @@ public class SchemaConverterFactory
 	/**
 	 * The <code>NEWEST_VERSION</code> represents the newest schema version
 	 */
-	public static final String NEWEST_VERSION = "1.0"; //$NON-NLS-1$
+	public static final String NEWEST_VERSION = hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter.VERSION;
 
-	private static final String SCHEMA_CONVERTER_PACKAGE_PREFIX = "hu.skzs.multiproperties.base.model.fileformat_"; //$NON-NLS-1$
-	private static final String SCHEMA_CONVERTER_CLASS_NAME = "SchemaConverter"; //$NON-NLS-1$
+	static final String SCHEMA_CONVERTER_PACKAGE_PREFIX = "hu.skzs.multiproperties.base.model.fileformat_"; //$NON-NLS-1$
+	static final String SCHEMA_CONVERTER_CLASS_NAME = "SchemaConverter"; //$NON-NLS-1$
 
 	/**
 	 * Returns a newly constructed {@link SchemaConverter} instance based on the given <code>file</code>.
