@@ -26,8 +26,18 @@ import org.eclipse.core.resources.IFile;
 public class SchemaConverter implements ISchemaConverter
 {
 
+	public static final String VERSION = "1.0"; //$NON-NLS-1$
 	private static final String SCHEMA_PACKAGE = "hu.skzs.multiproperties.base.model.fileformat_1_0"; //$NON-NLS-1$
 	private static final String SCHEMA_CHARSET = "UTF-8"; //$NON-NLS-1$
+
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#getVersion()
+	 */
+	public String getVersion()
+	{
+		return VERSION;
+	}
 
 	/*
 	 * (non-Javadoc)

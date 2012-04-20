@@ -13,6 +13,13 @@ public interface ISchemaConverter
 {
 
 	/**
+	 * Returns the version information.
+	 * <p>Example: <code>1.0</code></p>
+	 * @return the version information
+	 */
+	public String getVersion();
+
+	/**
 	 * Returns an instance of {@link Table} converted from the given {@link IFile}.
 	 * @param inputStream the given inputStream
 	 * @return an instance of {@link Table}

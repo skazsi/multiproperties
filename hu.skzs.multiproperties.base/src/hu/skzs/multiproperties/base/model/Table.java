@@ -166,7 +166,11 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 */
 	public void setVersion(final String version)
 	{
+		Assert.isNotNull(version);
+		if (version.equals(this.version))
+			return;
 		this.version = version;
+		setDirty(true);
 	}
 
 	/**

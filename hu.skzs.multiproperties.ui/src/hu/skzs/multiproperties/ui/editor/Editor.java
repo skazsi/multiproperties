@@ -218,6 +218,24 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 			table.setStructuralChangeListener(this);
 			table.setRecordChangeListener(this);
 			table.setDirty(false);
+
+			// Checking the file format version
+			if (!schemaConverter.getVersion().equals(SchemaConverterFactory.NEWEST_VERSION))
+			{
+				Display.getCurrent().asyncExec(new Runnable()
+				{
+
+					public void run()
+					{
+						if (MessageDialog.openConfirm(
+								getSite().getShell(),
+								Messages.getString("general.confirm.title"), Messages.getString("editor.error.obsoleted"))) //$NON-NLS-1$//$NON-NLS-2$
+						{
+							table.setVersion(SchemaConverterFactory.NEWEST_VERSION);
+						}
+					}
+				});
+			}
 		}
 		catch (final UnsupportedSchemaVersionException e)
 		{
