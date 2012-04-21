@@ -34,7 +34,7 @@ public class ColorsPreferencesPage extends FieldEditorPreferencePage implements 
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
-	public void init(IWorkbench workbench)
+	public void init(final IWorkbench workbench)
 	{
 	}
 
@@ -45,8 +45,15 @@ public class ColorsPreferencesPage extends FieldEditorPreferencePage implements 
 	@Override
 	public void createFieldEditors()
 	{
-		addField(new ColorFieldEditor(PreferenceConstants.COLOR_PROPERTY_FOREGROUND, Messages.getString("preference.color.enabled.property"), getFieldEditorParent())); //$NON-NLS-1$
-		addField(new ColorFieldEditor(PreferenceConstants.COLOR_DISABLED_PROPERTY_FOREGROUND, Messages.getString("preference.color.disabled.property"), getFieldEditorParent())); //$NON-NLS-1$
-		addField(new ColorFieldEditor(PreferenceConstants.COLOR_COMMENT_FOREGROUND, Messages.getString("preference.color.comment"), getFieldEditorParent())); //$NON-NLS-1$
+		addField(new ColorFieldEditor(PreferenceConstants.COLOR_PROPERTY_FOREGROUND,
+				Messages.getString("preference.color.enabled.property"), getFieldEditorParent())); //$NON-NLS-1$
+		addField(new ColorFieldEditor(PreferenceConstants.COLOR_PROPERTY_DEFAULTVALUE_FOREGROUND,
+				Messages.getString("preference.color.enabled.def.property"), getFieldEditorParent())); //$NON-NLS-1$
+		addField(new ColorFieldEditor(PreferenceConstants.COLOR_DISABLED_PROPERTY_FOREGROUND,
+				Messages.getString("preference.color.disabled.property"), getFieldEditorParent())); //$NON-NLS-1$
+		addField(new ColorFieldEditor(PreferenceConstants.COLOR_DISABLED_PROPERTY_DEFAULTVALUE_FOREGROUND,
+				Messages.getString("preference.color.disabled.def.property"), getFieldEditorParent())); //$NON-NLS-1$
+		addField(new ColorFieldEditor(PreferenceConstants.COLOR_COMMENT_FOREGROUND,
+				Messages.getString("preference.color.comment"), getFieldEditorParent())); //$NON-NLS-1$
 	}
 }

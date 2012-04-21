@@ -577,11 +577,25 @@ See also the editor.marker.error.prefix property.</Description>
             <Value disabled="false">Property rekord betű színe</Value>
         </Property>
         <Property>
+            <Name>preference.color.enabled.def.property</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Property record's foreground color with default value</Value>
+            <Value disabled="false">Property rekord betű színe alapértelmezett értékkel</Value>
+        </Property>
+        <Property>
             <Name>preference.color.disabled.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Disabled property record's foreground color</Value>
             <Value disabled="false">Letíltott property rekord betű színe</Value>
+        </Property>
+        <Property>
+            <Name>preference.color.disabled.def.property</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Disabled property record's foreground color with default value</Value>
+            <Value disabled="false">Letíltott property rekord betű színe alapértelmezett értékkel</Value>
         </Property>
         <Property>
             <Name>preference.color.comment</Name>
@@ -660,6 +674,13 @@ See also the editor.marker.error.prefix property.</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Key</Value>
             <Value disabled="false">Kulcs</Value>
+        </Property>
+        <Property>
+            <Name>wizard.property.defaultvalue</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Default value</Value>
+            <Value disabled="false">Alapértelmezett érték</Value>
         </Property>
         <Property>
             <Name>wizard.property.disabled</Name>

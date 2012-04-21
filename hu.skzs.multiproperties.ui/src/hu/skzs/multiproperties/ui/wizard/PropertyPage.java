@@ -41,6 +41,8 @@ public class PropertyPage extends WizardPage
 
 	// Form fields
 	private Text keyText;
+	private Button defaultValueBox;
+	private Text defaultValueText;
 	private Button disabled;
 	private Button[] checkboxes;
 	private Text[] valueFields;
@@ -56,7 +58,7 @@ public class PropertyPage extends WizardPage
 	 * @param propertyRecord the given property record
 	 * @param table the given table
 	 */
-	public PropertyPage(final PropertyRecord propertyRecord, Table table)
+	public PropertyPage(final PropertyRecord propertyRecord, final Table table)
 	{
 		super("property.page"); //$NON-NLS-1$
 		this.record = propertyRecord;
@@ -84,31 +86,96 @@ public class PropertyPage extends WizardPage
 		setControl(composite);
 		composite.setLayout(LayoutFactory.createGridLayout(1, 10, 10));
 
+		createKeyContent(composite);
+		createColumnValuesGroup(composite);
+		createDescriptionGroup(composite);
+		check();
+	}
+
+	/**
+	 * Creates the key, default value and disabled SWT widgets
+	 * @param parent the parent {@link Composite}
+	 */
+	private void createKeyContent(final Composite parent)
+	{
 		// Key group
-		final Composite keyComposite = new Composite(composite, SWT.NONE);
-		keyComposite.setLayout(LayoutFactory.createGridLayout(2));
-		keyComposite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
-		Label label = new Label(keyComposite, SWT.NONE);
+		final Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayout(LayoutFactory.createGridLayout(3));
+		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
+		// Key
+		Label label = new Label(composite, SWT.NONE);
 		label.setText(Messages.getString("wizard.property.key")); //$NON-NLS-1$
-		keyText = new Text(keyComposite, SWT.BORDER);
-		keyText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
+		keyText = new Text(composite, SWT.BORDER);
+		final GridData gridData = new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL);
+		gridData.horizontalSpan = 2;
+		keyText.setLayoutData(gridData);
 		if (record != null)
 			keyText.setText(record.getValue());
-		keyText.addModifyListener(new ModifyListener() {
+		keyText.addModifyListener(new ModifyListener()
+		{
 
 			public void modifyText(final ModifyEvent arg0)
 			{
 				check();
 			}
 		});
-		label = new Label(keyComposite, SWT.NONE);
-		disabled = new Button(keyComposite, SWT.CHECK);
+		// Default value
+		label = new Label(composite, SWT.NONE);
+		label.setText(""); //$NON-NLS-1$
+		defaultValueBox = new Button(composite, SWT.CHECK);
+		defaultValueBox.setSelection(record != null && record.getDefaultColumnValue() != null);
+		defaultValueBox.setText(Messages.getString("wizard.property.defaultvalue")); //$NON-NLS-1$
+		defaultValueBox.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(final SelectionEvent event)
+			{
+				defaultValueText.setEnabled(defaultValueBox.getSelection());
+				if (!defaultValueBox.getSelection())
+					defaultValueText.setText(""); //$NON-NLS-1$
+			}
+		});
+		defaultValueText = new Text(composite, SWT.BORDER);
+		defaultValueText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
+		if (record != null && record.getDefaultColumnValue() != null)
+		{
+			defaultValueText.setEnabled(true);
+			defaultValueText.setText(record.getDefaultColumnValue());
+		}
+		else
+		{
+			defaultValueText.setEnabled(false);
+			defaultValueText.setText(""); //$NON-NLS-1$
+		}
+		defaultValueText.addModifyListener(new ModifyListener()
+		{
+
+			public void modifyText(final ModifyEvent arg0)
+			{
+				for (int i = 0; i < table.getColumns().size(); i++)
+				{
+					if (!valueFields[i].getEnabled())
+						valueFields[i].setText(defaultValueText.getText());
+				}
+			}
+		});
+
+		// Disabled
+		label = new Label(composite, SWT.NONE);
+		disabled = new Button(composite, SWT.CHECK);
 		disabled.setText(Messages.getString("wizard.property.disabled")); //$NON-NLS-1$
 		if (record != null)
 			disabled.setSelection(record.isDisabled());
+	}
 
-		// Values group
-		final Group valuesGroup = new Group(composite, SWT.NONE);
+	/**
+	 * Creates the values SWT widgets
+	 * @param parent the parent {@link Composite}
+	 */
+	private void createColumnValuesGroup(final Composite parent)
+	{
+		final Group valuesGroup = new Group(parent, SWT.NONE);
 		valuesGroup.setText(Messages.getString("wizard.property.values")); //$NON-NLS-1$
 		valuesGroup.setLayout(new FillLayout());
 		valuesGroup.setLayoutData(new GridData(GridData.FILL_BOTH | GridData.GRAB_HORIZONTAL));
@@ -121,7 +188,7 @@ public class PropertyPage extends WizardPage
 		fillAllButtons = new Button[table.getColumns().size()];
 		for (int i = 0; i < table.getColumns().size(); i++)
 		{
-			label = new Label(valuesComposite, SWT.NONE);
+			final Label label = new Label(valuesComposite, SWT.NONE);
 			label.setText(table.getColumns().get(i).getName());
 			checkboxes[i] = new Button(valuesComposite, SWT.CHECK);
 			checkboxes[i].setData(new Integer(i));
@@ -146,9 +213,11 @@ public class PropertyPage extends WizardPage
 			{
 				checkboxes[i].setSelection(false);
 				valueFields[i].setEnabled(false);
+				valueFields[i].setText(defaultValueText.getText());
 				fillCheckedButtons[i].setEnabled(false);
 			}
-			checkboxes[i].addSelectionListener(new SelectionAdapter() {
+			checkboxes[i].addSelectionListener(new SelectionAdapter()
+			{
 
 				@Override
 				public void widgetSelected(final SelectionEvent event)
@@ -156,11 +225,15 @@ public class PropertyPage extends WizardPage
 					final Button checkbox = (Button) event.getSource();
 					final int index = ((Integer) checkbox.getData()).intValue();
 					valueFields[index].setEnabled(checkbox.getSelection());
-					valueFields[index].setText(""); //$NON-NLS-1$
+					if (checkbox.getSelection())
+						valueFields[index].setText(""); //$NON-NLS-1$
+					else
+						valueFields[index].setText(defaultValueText.getText());
 					fillCheckedButtons[index].setEnabled(checkbox.getSelection());
 				}
 			});
-			fillCheckedButtons[i].addSelectionListener(new SelectionAdapter() {
+			fillCheckedButtons[i].addSelectionListener(new SelectionAdapter()
+			{
 
 				@Override
 				public void widgetSelected(final SelectionEvent event)
@@ -177,7 +250,8 @@ public class PropertyPage extends WizardPage
 					}
 				}
 			});
-			fillAllButtons[i].addSelectionListener(new SelectionAdapter() {
+			fillAllButtons[i].addSelectionListener(new SelectionAdapter()
+			{
 
 				@Override
 				public void widgetSelected(final SelectionEvent event)
@@ -199,7 +273,8 @@ public class PropertyPage extends WizardPage
 		scrolledComposite.setContent(valuesComposite);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
-		scrolledComposite.addControlListener(new ControlAdapter() {
+		scrolledComposite.addControlListener(new ControlAdapter()
+		{
 
 			@Override
 			public void controlResized(final ControlEvent e)
@@ -209,18 +284,24 @@ public class PropertyPage extends WizardPage
 			}
 		});
 
-		// Description group
-		final Group descriptiongroup = new Group(composite, SWT.NONE);
-		descriptiongroup.setText(Messages.getString("wizard.property.description")); //$NON-NLS-1$
-		descriptiongroup.setLayout(new FillLayout());
-		GridData griddata = new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL);
+	}
+
+	/**
+	 * Creates the description SWT widgets
+	 * @param parent the parent {@link Composite}
+	 */
+	private void createDescriptionGroup(final Composite parent)
+	{
+		final Group group = new Group(parent, SWT.NONE);
+		group.setText(Messages.getString("wizard.property.description")); //$NON-NLS-1$
+		group.setLayout(new FillLayout());
+		final GridData griddata = new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL);
 		griddata.widthHint = SWT.DEFAULT;
 		griddata.heightHint = 60;
-		descriptiongroup.setLayoutData(griddata);
-		description = new Text(descriptiongroup, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
+		group.setLayoutData(griddata);
+		description = new Text(group, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
 		if (record != null && record.getDescription() != null)
 			description.setText(record.getDescription());
-		check();
 	}
 
 	/**
@@ -258,12 +339,24 @@ public class PropertyPage extends WizardPage
 	PropertyRecord getPropertyRecord()
 	{
 		final PropertyRecord propertyrecord = new PropertyRecord(keyText.getText().trim());
+
+		// Default value
+		if (defaultValueBox.getSelection())
+			propertyrecord.setDefaultColumnValue(defaultValueText.getText());
+		else
+			propertyrecord.setDefaultColumnValue(null);
+
+		// Disabled
 		propertyrecord.setDisabled(disabled.getSelection());
+
+		// Column values
 		for (int i = 0; i < table.getColumns().size(); i++)
 		{
 			if (checkboxes[i].getSelection())
 				propertyrecord.putColumnValue(table.getColumns().get(i), valueFields[i].getText());
 		}
+
+		// Description
 		propertyrecord.setDescription(description.getText());
 		return propertyrecord;
 	}

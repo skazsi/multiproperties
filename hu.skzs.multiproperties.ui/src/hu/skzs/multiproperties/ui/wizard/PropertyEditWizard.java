@@ -19,7 +19,7 @@ public class PropertyEditWizard extends Wizard
 	private final Table table;
 	private PropertyPage propertyPage;
 
-	public PropertyEditWizard(PropertyRecord propertyRecord, Table table)
+	public PropertyEditWizard(final PropertyRecord propertyRecord, final Table table)
 	{
 		this.propertyRecord = propertyRecord;
 		this.table = table;
@@ -39,6 +39,7 @@ public class PropertyEditWizard extends Wizard
 	{
 		final PropertyRecord modifiedRecord = propertyPage.getPropertyRecord();
 		propertyRecord.setValue(modifiedRecord.getValue());
+		propertyRecord.setDefaultColumnValue(modifiedRecord.getDefaultColumnValue());
 		propertyRecord.setDisabled(modifiedRecord.isDisabled());
 		for (int i = 0; i < table.getColumns().size(); i++)
 		{
