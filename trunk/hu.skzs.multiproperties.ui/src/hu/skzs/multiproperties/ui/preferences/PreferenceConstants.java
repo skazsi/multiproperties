@@ -16,7 +16,9 @@ public interface PreferenceConstants
 	/**
 	 * The <code>COLOR_PREFIX</code> is used by all color related constant as prefix value.
 	 * @see #COLOR_PROPERTY_FOREGROUND
+	 * @see #COLOR_PROPERTY_DEFAULTVALUE_FOREGROUND
 	 * @see #COLOR_DISABLED_PROPERTY_FOREGROUND
+	 * @see #COLOR_DISABLED_PROPERTY_DEFAULTVALUE_FOREGROUND
 	 * @see #COLOR_COMMENT_FOREGROUND
 	 */
 	public static final String COLOR_PREFIX = "color_"; //$NON-NLS-1$
@@ -27,9 +29,21 @@ public interface PreferenceConstants
 	public static final String COLOR_PROPERTY_FOREGROUND = COLOR_PREFIX + "property_foreground"; //$NON-NLS-1$
 
 	/**
+	 * The <code>COLOR_PROPERTY_DEFAULTVALUE_FOREGROUND</code> represents the enabled property's foreground color with default value. 
+	 */
+	public static final String COLOR_PROPERTY_DEFAULTVALUE_FOREGROUND = COLOR_PREFIX
+			+ "property_defaultvalue_foreground"; //$NON-NLS-1$
+
+	/**
 	 * The <code>COLOR_DISABLED_PROPERTY_FOREGROUND</code> represents the disabled property's foreground color. 
 	 */
 	public static final String COLOR_DISABLED_PROPERTY_FOREGROUND = COLOR_PREFIX + "disabled_property_foreground"; //$NON-NLS-1$
+
+	/**
+	 * The <code>COLOR_DISABLED_PROPERTY_DEFAULTVALUE_FOREGROUND</code> represents the disabled property's foreground color with default value. 
+	 */
+	public static final String COLOR_DISABLED_PROPERTY_DEFAULTVALUE_FOREGROUND = COLOR_PREFIX
+			+ "disabled_property_defaultvalue_foreground"; //$NON-NLS-1$
 
 	/**
 	 * The <code>COLOR_COMMENT_FOREGROUND</code> represents the comment's foreground color. 

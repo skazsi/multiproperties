@@ -24,8 +24,14 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer
 
 		// Coloring the table page
 		Activator.getDefault().getPreferenceStore().setDefault(PreferenceConstants.COLOR_PROPERTY_FOREGROUND, "0,0,0"); //$NON-NLS-1$
-		Activator.getDefault().getPreferenceStore().setDefault(PreferenceConstants.COLOR_DISABLED_PROPERTY_FOREGROUND, "255,0,0"); //$NON-NLS-1$
-		Activator.getDefault().getPreferenceStore().setDefault(PreferenceConstants.COLOR_COMMENT_FOREGROUND, "192,192,192"); //$NON-NLS-1$
+		Activator.getDefault().getPreferenceStore()
+				.setDefault(PreferenceConstants.COLOR_PROPERTY_DEFAULTVALUE_FOREGROUND, "128,128,128"); //$NON-NLS-1$
+		Activator.getDefault().getPreferenceStore()
+				.setDefault(PreferenceConstants.COLOR_DISABLED_PROPERTY_FOREGROUND, "255,0,0"); //$NON-NLS-1$
+		Activator.getDefault().getPreferenceStore()
+				.setDefault(PreferenceConstants.COLOR_DISABLED_PROPERTY_DEFAULTVALUE_FOREGROUND, "255,102,102"); //$NON-NLS-1$
+		Activator.getDefault().getPreferenceStore()
+				.setDefault(PreferenceConstants.COLOR_COMMENT_FOREGROUND, "192,192,192"); //$NON-NLS-1$
 
 		// Outline
 		Activator.getDefault().getPreferenceStore().setDefault(PreferenceConstants.OUTLINE_COLUMN_WIDTH, 100);

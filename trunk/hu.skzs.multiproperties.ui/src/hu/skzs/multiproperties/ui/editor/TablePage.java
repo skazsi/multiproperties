@@ -1,43 +1,36 @@
 package hu.skzs.multiproperties.ui.editor;
 
-import hu.skzs.multiproperties.base.model.AbstractRecord;
-import hu.skzs.multiproperties.base.model.PropertyRecord;
+import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.command.EditHandler;
-import hu.skzs.multiproperties.ui.command.TooltipHandler;
 import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
 
 import org.eclipse.core.commands.NotEnabledException;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ColumnViewerEditor;
+import org.eclipse.jface.viewers.ColumnViewerEditorActivationEvent;
+import org.eclipse.jface.viewers.ColumnViewerEditorActivationStrategy;
+import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
 import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.FocusCellOwnerDrawHighlighter;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.TableViewerEditor;
+import org.eclipse.jface.viewers.TableViewerFocusCellManager;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.events.ControlListener;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
-import org.eclipse.ui.handlers.RegistryToggleState;
 
 public class TablePage extends MPEditorPage
 {
@@ -109,159 +102,28 @@ public class TablePage extends MPEditorPage
 	{
 		parent.setLayout(new FillLayout());
 
+		// Table viewer
 		tableviewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		tableviewer.getTable().setLinesVisible(true);
 		tableviewer.getTable().setHeaderVisible(true);
-		final TableColumn tc = new TableColumn(tableviewer.getTable(), SWT.NONE, 0);
-		tc.setText(Messages.getString("tables.key")); //$NON-NLS-1$
-		tc.setWidth(editor.getTable().getKeyColumnWidth());
-		tc.addControlListener(new ControlListener()
-		{
-
-			public void controlMoved(final ControlEvent e)
-			{
-			}
-
-			public void controlResized(final ControlEvent e)
-			{
-				final TableColumn tablecolumn = (TableColumn) e.getSource();
-				editor.getTable().setKeyColumnWidth(tablecolumn.getWidth());
-			}
-		});
-		refreshColumn();
-		tableviewer.setContentProvider(new EditorContentProvider());
-		tableviewer.setLabelProvider(new EditorLabelProvider(editor.getTable()));
+		tableviewer.setContentProvider(new TableContentProvider());
 		tableviewer.setInput(editor.getTable());
-		tableviewer.setCellModifier(new EditorCellModifier(editor, tableviewer));
-		// Disable native tooltip
-		tableviewer.getTable().setToolTipText(""); //$NON-NLS-1$
+
+		createKeyColumn();
+		updateValueColumns();
+
+		// Enabling tooltip
+		ColumnViewerToolTipSupport.enableFor(tableviewer);
 
 		// Makes the selection available to the workbench
 		getSite().setSelectionProvider(tableviewer);
 
-		// Implement a "fake" tooltip
-		final Listener labelListener = new Listener()
-		{
-
-			public void handleEvent(final Event event)
-			{
-				final Label label = (Label) event.widget;
-				final Shell shell = label.getShell();
-				switch (event.type)
-				{
-				case SWT.MouseDown:
-					final Event e = new Event();
-					e.item = (TableItem) label.getData("_TABLEITEM"); //$NON-NLS-1$
-					// Assuming table is single select, set the selection as if
-					// the mouse down event went through to the table
-					tableviewer.getTable().setSelection(new TableItem[] { (TableItem) e.item });
-					tableviewer.getTable().notifyListeners(SWT.Selection, e);
-					// fall through
-				case SWT.MouseExit:
-					shell.dispose();
-					break;
-				}
-			}
-		};
-		final Listener tableListener = new Listener()
-		{
-
-			Shell tip = null;
-			Label title = null;
-			Label description = null;
-
-			public void handleEvent(final Event event)
-			{
-				switch (event.type)
-				{
-				case SWT.Dispose:
-				case SWT.KeyDown:
-				case SWT.MouseMove:
-				{
-					if (tip == null)
-						break;
-					tip.dispose();
-					tip = null;
-					title = null;
-					description = null;
-					break;
-				}
-				case SWT.MouseHover:
-				{
-					final ICommandService commandService = (ICommandService) PlatformUI.getWorkbench().getService(
-							ICommandService.class);
-					if (commandService == null)
-						return;
-
-					final Boolean showTooltip = (Boolean) commandService.getCommand(TooltipHandler.COMMAND_ID)
-							.getState(RegistryToggleState.STATE_ID).getValue();
-					if (!showTooltip)
-						return;
-
-					if (tableviewer.getTable().getItem(new Point(event.x, event.y)) != null)
-					{
-						final AbstractRecord record = (AbstractRecord) tableviewer.getElementAt(tableviewer.getTable()
-								.indexOf(tableviewer.getTable().getItem(new Point(event.x, event.y))));
-						if (!(record instanceof PropertyRecord))
-							return;
-						final PropertyRecord propertyrecord = (PropertyRecord) record;
-						final TableItem item = tableviewer.getTable().getItem(new Point(event.x, event.y));
-						if (item != null)
-						{
-							if (tip != null && !tip.isDisposed())
-								tip.dispose();
-							tip = new Shell(tableviewer.getTable().getShell(), SWT.ON_TOP | SWT.TOOL);
-							final RowLayout rowlayout = new RowLayout(SWT.VERTICAL);
-							rowlayout.fill = true;
-							rowlayout.spacing = 1;
-							rowlayout.marginTop = 0;
-							rowlayout.marginBottom = 0;
-							rowlayout.marginLeft = 0;
-							rowlayout.marginRight = 0;
-							tip.setLayout(rowlayout);
-							title = new Label(tip, SWT.NONE);
-							title.setForeground(tableviewer.getTable().getDisplay()
-									.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
-							title.setBackground(tableviewer.getTable().getDisplay()
-									.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
-							title.setFont(EditorFontRegistry.get(EditorFontRegistry.TOOLTIP_TITLE));
-							title.setData("_TABLEITEM", item); //$NON-NLS-1$
-							title.setText(propertyrecord.getValue());
-							title.addListener(SWT.MouseExit, labelListener);
-							title.addListener(SWT.MouseDown, labelListener);
-							if (propertyrecord.getDescription() != null)
-							{
-								description = new Label(tip, SWT.NONE);
-								description.setForeground(tableviewer.getTable().getDisplay()
-										.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
-								description.setBackground(tableviewer.getTable().getDisplay()
-										.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
-								description.setData("_TABLEITEM", item); //$NON-NLS-1$
-								description.setText(propertyrecord.getDescription());
-								description.addListener(SWT.MouseExit, labelListener);
-								description.addListener(SWT.MouseDown, labelListener);
-							}
-							final Point size = tip.computeSize(SWT.DEFAULT, SWT.DEFAULT);
-							final Rectangle rect = item.getBounds(0);
-							final Point pt = tableviewer.getTable().toDisplay(
-									rect.x + tableviewer.getTable().getHorizontalBar().getSelection(), rect.y);
-							tip.setBounds(pt.x, pt.y, size.x, size.y);
-							tip.setVisible(true);
-						}
-					}
-				}
-				}
-			}
-		};
-		tableviewer.getTable().addListener(SWT.Dispose, tableListener);
-		tableviewer.getTable().addListener(SWT.KeyDown, tableListener);
-		tableviewer.getTable().addListener(SWT.MouseMove, tableListener);
-		tableviewer.getTable().addListener(SWT.MouseHover, tableListener);
-
+		// Creating the context menu
 		final MenuManager menuManager = new MenuManager();
 		tableviewer.getTable().setMenu(menuManager.createContextMenu(tableviewer.getTable()));
 		getSite().registerContextMenu(menuManager, tableviewer);
 
+		// Double clicking
 		tableviewer.addDoubleClickListener(new IDoubleClickListener()
 		{
 
@@ -283,6 +145,44 @@ public class TablePage extends MPEditorPage
 				}
 			}
 		});
+
+		final TableViewerFocusCellManager focusCellManager = new TableViewerFocusCellManager(tableviewer,
+				new FocusCellOwnerDrawHighlighter(tableviewer));
+		final ColumnViewerEditorActivationStrategy actSupport = new ColumnViewerEditorActivationStrategy(tableviewer)
+		{
+			@Override
+			protected boolean isEditorActivationEvent(final ColumnViewerEditorActivationEvent event)
+			{
+				return event.eventType == ColumnViewerEditorActivationEvent.TRAVERSAL
+						|| (event.eventType == ColumnViewerEditorActivationEvent.KEY_PRESSED && event.keyCode == SWT.CR)
+						|| event.eventType == ColumnViewerEditorActivationEvent.PROGRAMMATIC;
+			}
+		};
+		TableViewerEditor.create(tableviewer, focusCellManager, actSupport, ColumnViewerEditor.TABBING_HORIZONTAL
+				| ColumnViewerEditor.TABBING_MOVE_TO_ROW_NEIGHBOR | ColumnViewerEditor.TABBING_VERTICAL
+				| ColumnViewerEditor.KEYBOARD_ACTIVATION);
+	}
+
+	/**
+	 * Create the key column.
+	 * @param tableViewer
+	 */
+	private void createKeyColumn()
+	{
+		final TableViewerColumn keyTableViewerColumn = new TableViewerColumn(tableviewer, SWT.NONE);
+		keyTableViewerColumn.setLabelProvider(new TableColumnLabelProvider());
+		keyTableViewerColumn.setEditingSupport(new TableEditingSupport(tableviewer));
+		keyTableViewerColumn.getColumn().setText(Messages.getString("tables.key")); //$NON-NLS-1$
+		keyTableViewerColumn.getColumn().setWidth(editor.getTable().getKeyColumnWidth());
+		keyTableViewerColumn.getColumn().addControlListener(new ControlAdapter()
+		{
+			@Override
+			public void controlResized(final ControlEvent e)
+			{
+				final TableColumn tablecolumn = (TableColumn) e.getSource();
+				editor.getTable().setKeyColumnWidth(tablecolumn.getWidth());
+			}
+		});
 	}
 
 	@Override
@@ -290,7 +190,7 @@ public class TablePage extends MPEditorPage
 	{
 		if (editor.getTable().getColumns().isStale())
 		{
-			refreshColumn();
+			updateValueColumns();
 			tableviewer.refresh();
 			editor.getTable().getColumns().setStale(false);
 		}
@@ -299,48 +199,46 @@ public class TablePage extends MPEditorPage
 		//			editor.getOutlinePage().update(null);
 	}
 
-	private void refreshColumn()
+	/**
+	 * Updates the value columns
+	 */
+	private void updateValueColumns()
 	{
+		// Turning off the redraw flag on the table viewer
 		tableviewer.getTable().setRedraw(false);
-		// removes the olds
+
+		// Removing the value columns
 		int col = tableviewer.getTable().getColumnCount();
 		while (col > 1)
 		{
 			final TableColumn tc = tableviewer.getTable().getColumn(--col);
 			tc.dispose();
 		}
-		// add the news
-		final String[] columnproperties = new String[editor.getTable().getColumns().size() + 1];
-		columnproperties[0] = "0"; //$NON-NLS-1$
-		final TextCellEditor keyscelleditor = new TextCellEditor(tableviewer.getTable());
-		final TextCellEditor valuescelleditor = new TextCellEditor(tableviewer.getTable());
-		final CellEditor[] celleditors = new CellEditor[editor.getTable().getColumns().size() + 1];
-		celleditors[0] = keyscelleditor;
+
+		// Adding the new value columns
 		for (int i = 0; i < editor.getTable().getColumns().size(); i++)
 		{
-			final TableColumn tc = new TableColumn(tableviewer.getTable(), SWT.NONE, i + 1);
-			tc.setText(editor.getTable().getColumns().get(i).getName());
-			tc.setWidth(editor.getTable().getColumns().get(i).getWidth());
-			tc.setData(new Integer(i));
-			tc.addControlListener(new ControlListener()
+			final Column column = editor.getTable().getColumns().get(i);
+
+			final TableViewerColumn tableViewerColumn = new TableViewerColumn(tableviewer, SWT.NONE, i + 1);
+			tableViewerColumn.setLabelProvider(new TableColumnLabelProvider(editor.getTable().getColumns().get(i)));
+			tableViewerColumn.setEditingSupport(new TableEditingSupport(tableviewer, column));
+
+			final TableColumn tableColumn = tableViewerColumn.getColumn();
+			tableColumn.setText(editor.getTable().getColumns().get(i).getName());
+			tableColumn.setWidth(editor.getTable().getColumns().get(i).getWidth());
+			tableColumn.addControlListener(new ControlAdapter()
 			{
-
-				public void controlMoved(final ControlEvent e)
-				{
-				}
-
+				@Override
 				public void controlResized(final ControlEvent e)
 				{
 					final TableColumn tablecolumn = (TableColumn) e.getSource();
-					final Integer index = (Integer) tablecolumn.getData();
-					editor.getTable().getColumns().get(index.intValue()).setWidth(tablecolumn.getWidth());
+					column.setWidth(tablecolumn.getWidth());
 				}
 			});
-			columnproperties[i + 1] = "" + (i + 1); //$NON-NLS-1$
-			celleditors[i + 1] = valuescelleditor;
 		}
-		tableviewer.setColumnProperties(columnproperties);
-		tableviewer.setCellEditors(celleditors);
+
+		// Turning on the redraw flag on the table viewer
 		tableviewer.getTable().setRedraw(true);
 	}
 }

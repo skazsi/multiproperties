@@ -36,8 +36,9 @@ public class PropertyRecord extends AbstractRecord
 		if (this.value != null && this.value.equals(value))
 			return;
 		this.value = value;
-		if (recordChangeListener != null)
-			recordChangeListener.changed(this);
+		// The structural change listener is used, because the key value change is a that kind of modification
+		if (structuralChangeListener != null)
+			structuralChangeListener.changed();
 	}
 
 	public String getValue()

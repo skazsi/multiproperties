@@ -6,10 +6,10 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 /**
- * The <code>EditorContentProvider</code> is a standard content provider for the table page.
+ * The <code>TableContentProvider</code> is the content provider for the table page.
  * @author sallai
  */
-public class EditorContentProvider implements IStructuredContentProvider
+public class TableContentProvider implements IStructuredContentProvider
 {
 
 	/**
@@ -21,7 +21,7 @@ public class EditorContentProvider implements IStructuredContentProvider
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
 	 */
-	public void inputChanged(Viewer v, Object oldInput, Object newInput)
+	public void inputChanged(final Viewer v, final Object oldInput, final Object newInput)
 	{
 		table = (Table) newInput;
 	}
@@ -38,7 +38,7 @@ public class EditorContentProvider implements IStructuredContentProvider
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
 	 */
-	public Object[] getElements(Object parent)
+	public Object[] getElements(final Object parent)
 	{
 		return table.toArray();
 	}

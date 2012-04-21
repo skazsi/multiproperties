@@ -1,6 +1,7 @@
 package hu.skzs.multiproperties.base.model;
 
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
+import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 import junit.framework.Assert;
 
 import org.easymock.EasyMock;
@@ -83,10 +84,10 @@ public class PropertyRecordTest
 	public void testSetValueWithListener()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		IStructuralChangeListener listenerMock = EasyMock.createStrictMock(IStructuralChangeListener.class);
 		record = new PropertyRecord();
-		record.setRecordChangeListener(listenerMock);
-		listenerMock.changed(record);
+		record.setStructuralChangeListener(listenerMock);
+		listenerMock.changed();
 		EasyMock.replay(listenerMock);
 		// when
 		record.setValue(VALUE);
