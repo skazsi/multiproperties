@@ -10,17 +10,11 @@ import org.eclipse.core.commands.NotEnabledException;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.jface.viewers.ColumnViewerEditor;
-import org.eclipse.jface.viewers.ColumnViewerEditorActivationEvent;
-import org.eclipse.jface.viewers.ColumnViewerEditorActivationStrategy;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
 import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.FocusCellOwnerDrawHighlighter;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.TableViewerEditor;
-import org.eclipse.jface.viewers.TableViewerFocusCellManager;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
@@ -146,21 +140,20 @@ public class TablePage extends MPEditorPage
 			}
 		});
 
-		final TableViewerFocusCellManager focusCellManager = new TableViewerFocusCellManager(tableviewer,
-				new FocusCellOwnerDrawHighlighter(tableviewer));
-		final ColumnViewerEditorActivationStrategy actSupport = new ColumnViewerEditorActivationStrategy(tableviewer)
+	}
+
+	@Override
+	public void setActive()
+	{
+		if (editor.getTable().getColumns().isStale())
 		{
-			@Override
-			protected boolean isEditorActivationEvent(final ColumnViewerEditorActivationEvent event)
-			{
-				return event.eventType == ColumnViewerEditorActivationEvent.TRAVERSAL
-						|| (event.eventType == ColumnViewerEditorActivationEvent.KEY_PRESSED && event.keyCode == SWT.CR)
-						|| event.eventType == ColumnViewerEditorActivationEvent.PROGRAMMATIC;
-			}
-		};
-		TableViewerEditor.create(tableviewer, focusCellManager, actSupport, ColumnViewerEditor.TABBING_HORIZONTAL
-				| ColumnViewerEditor.TABBING_MOVE_TO_ROW_NEIGHBOR | ColumnViewerEditor.TABBING_VERTICAL
-				| ColumnViewerEditor.KEYBOARD_ACTIVATION);
+			updateValueColumns();
+			tableviewer.refresh();
+			editor.getTable().getColumns().setStale(false);
+		}
+		// TODO: not active flag is specified
+		//		if (!active && editor.getOutlinePage() != null)
+		//			editor.getOutlinePage().update(null);
 	}
 
 	/**
@@ -183,20 +176,6 @@ public class TablePage extends MPEditorPage
 				editor.getTable().setKeyColumnWidth(tablecolumn.getWidth());
 			}
 		});
-	}
-
-	@Override
-	public void setActive()
-	{
-		if (editor.getTable().getColumns().isStale())
-		{
-			updateValueColumns();
-			tableviewer.refresh();
-			editor.getTable().getColumns().setStale(false);
-		}
-		// TODO: not active flag is specified
-		//		if (!active && editor.getOutlinePage() != null)
-		//			editor.getOutlinePage().update(null);
 	}
 
 	/**

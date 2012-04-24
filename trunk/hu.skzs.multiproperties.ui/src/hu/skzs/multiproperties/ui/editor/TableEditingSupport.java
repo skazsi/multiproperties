@@ -3,11 +3,15 @@ package hu.skzs.multiproperties.ui.editor;
 import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
+import hu.skzs.multiproperties.ui.command.InlineEditHandler;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.commands.ICommandService;
+import org.eclipse.ui.handlers.RegistryToggleState;
 
 /**
  * The <code>TableEditingSupport</code> is the editing support implementation for the table page.
@@ -57,6 +61,14 @@ public class TableEditingSupport extends EditingSupport
 	@Override
 	protected boolean canEdit(final Object element)
 	{
+		// Checking the inline editing enabled state
+		final ICommandService commandService = (ICommandService) PlatformUI.getWorkbench().getService(
+				ICommandService.class);
+		final Boolean inlineEdit = (Boolean) commandService.getCommand(InlineEditHandler.COMMAND_ID)
+				.getState(RegistryToggleState.STATE_ID).getValue();
+		if (!inlineEdit)
+			return false;
+
 		if (element instanceof PropertyRecord)
 		{
 			final PropertyRecord propertyRecord = (PropertyRecord) element;

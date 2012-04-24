@@ -103,6 +103,14 @@
             name="%command.movedown">
       </command>
       <command
+            id="hu.skzs.multiproperties.ui.command.InlineEdit"
+            name="%command.inlineedit">
+		   <state
+		         class="org.eclipse.ui.handlers.RegistryToggleState:false"
+		         id="org.eclipse.ui.commands.toggleState">
+		   </state>
+      </command>
+      <command
             id="hu.skzs.multiproperties.ui.command.ToggleTooltip"
             name="%command.tooltip">
 		   <state
@@ -137,6 +145,9 @@
             commandId="hu.skzs.multiproperties.ui.command.MoveDown"
             icon="icons/move_down_e.gif"
             disabledIcon="icons/move_down_d.gif"/>
+      <image
+            commandId="hu.skzs.multiproperties.ui.command.InlineEdit"
+            icon="icons/inline_edit.gif"/>
       <image
             commandId="hu.skzs.multiproperties.ui.command.ToggleTooltip"
             icon="icons/tooltip.gif"/>
@@ -208,6 +219,15 @@
 	                  commandId="hu.skzs.multiproperties.ui.command.MoveDown"
 	                  label="%command.movedown"
 	                  tooltip="%command.movedown.tooltip">
+		            <visibleWhen>
+		               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
+		            </visibleWhen>
+	            </command>
+	            <command
+	                  commandId="hu.skzs.multiproperties.ui.command.InlineEdit"
+	                  label="%command.inlineedit"
+	                  tooltip="%command.inlineedit.tooltip"
+	                  style="toggle">
 		            <visibleWhen>
 		               <reference definitionId="hu.skzs.multiproperties.ui.definition.editorActive"/>
 		            </visibleWhen>
@@ -482,6 +502,10 @@
       <handler
       		class="hu.skzs.multiproperties.ui.command.FindReplaceHandler"
             commandId="org.eclipse.ui.edit.findReplace">
+      </handler>
+      <handler
+      		class="hu.skzs.multiproperties.ui.command.InlineEditHandler"
+            commandId="hu.skzs.multiproperties.ui.command.InlineEdit">
       </handler>
       <handler
       		class="hu.skzs.multiproperties.ui.command.TooltipHandler"

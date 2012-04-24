@@ -524,6 +524,20 @@ See also the editor.marker.error.prefix property.</Description>
             <Value disabled="false">Toggle Tooltip</Value>
             <Value disabled="false">Tooltip Átállítása</Value>
         </Property>
+        <Property>
+            <Name>command.inlineedit</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Toggle Inline Edit Mode</Value>
+            <Value disabled="false">Közvetlen Szerkesztés Átállítása</Value>
+        </Property>
+        <Property>
+            <Name>command.inlineedit.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Toggle Inline Edit Mode</Value>
+            <Value disabled="false">Közvetlen Szerkesztés Átállítása</Value>
+        </Property>
         <Empty/>
         <Comment>
             <Value>PREFERENCE</Value>
