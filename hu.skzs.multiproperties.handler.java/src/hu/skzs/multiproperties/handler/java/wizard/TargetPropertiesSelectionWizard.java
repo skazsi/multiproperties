@@ -39,6 +39,7 @@ public class TargetPropertiesSelectionWizard extends Wizard
 		configurationConverter.setIncludeDescription(targetPropertiesSelectionPage.isDescriptionIncluded());
 		configurationConverter.setIncludeColumnDescription(targetPropertiesSelectionPage.isColumnDescriptionIncluded());
 		configurationConverter.setIncludeDisabled(targetPropertiesSelectionPage.isDisabledPropertiesIncluded());
+		configurationConverter.setDisableDefaultValues(targetPropertiesSelectionPage.isDisableDefault());
 		return true;
 	}
 }

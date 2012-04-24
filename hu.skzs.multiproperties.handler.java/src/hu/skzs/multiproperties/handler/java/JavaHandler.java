@@ -93,7 +93,11 @@ public class JavaHandler implements IHandler
 				if (table.get(i) instanceof PropertyRecord)
 				{
 					final PropertyRecord record = (PropertyRecord) table.get(i);
-					if (record.getColumnValue(column) == null)
+					String value = record.getColumnValue(column);
+					if (value == null)
+						if (record.getDefaultColumnValue() != null && !converter.isDisableDefaultValues())
+							value = record.getDefaultColumnValue();
+					if (value == null)
 						continue;
 
 					// If disabled, then it will be written as a comment
@@ -105,7 +109,7 @@ public class JavaHandler implements IHandler
 
 					strb.append(saveConvert(record.getValue(), true));
 					strb.append("="); //$NON-NLS-1$
-					strb.append(saveConvert(record.getColumnValue(column), false));
+					strb.append(saveConvert(value, false));
 					strb.append("\r\n"); //$NON-NLS-1$
 				}
 				else if (table.get(i) instanceof CommentRecord)

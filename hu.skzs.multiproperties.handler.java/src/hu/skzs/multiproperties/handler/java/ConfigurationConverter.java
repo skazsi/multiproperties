@@ -17,6 +17,7 @@ public class ConfigurationConverter
 	private boolean includeDescription;
 	private boolean includeColumnDescription;
 	private boolean includeDisabled;
+	private boolean disableDefault;
 
 	/**
 	 * Default constructor, which parses the given <code>configuration</code>.
@@ -37,6 +38,10 @@ public class ConfigurationConverter
 				includeDescription = Boolean.parseBoolean(tokenizer.nextToken());
 				includeColumnDescription = Boolean.parseBoolean(tokenizer.nextToken());
 				includeDisabled = Boolean.parseBoolean(tokenizer.nextToken());
+				if (tokenizer.hasMoreTokens())
+				{
+					disableDefault = Boolean.parseBoolean(tokenizer.nextToken());
+				}
 			}
 			else
 			{
@@ -69,6 +74,8 @@ public class ConfigurationConverter
 		stringBuilder.append(Boolean.toString(includeColumnDescription));
 		stringBuilder.append(DELIM);
 		stringBuilder.append(Boolean.toString(includeDisabled));
+		stringBuilder.append(DELIM);
+		stringBuilder.append(Boolean.toString(disableDefault));
 		return stringBuilder.toString();
 	}
 
@@ -160,5 +167,23 @@ public class ConfigurationConverter
 	public boolean isDisabledPropertiesIncluded()
 	{
 		return includeDisabled;
+	}
+
+	/**
+	 * Sets whether the default values should NOT be written
+	 * @param disableDefault specifies whether the default values should NOT be written
+	 */
+	public void setDisableDefaultValues(final boolean disableDefault)
+	{
+		this.disableDefault = disableDefault;
+	}
+
+	/**
+	 * Returns whether the default values should NOT be written
+	 * @return whether the default values should NOT be written
+	 */
+	public boolean isDisableDefaultValues()
+	{
+		return disableDefault;
 	}
 }
