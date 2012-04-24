@@ -151,9 +151,6 @@ public class TablePage extends MPEditorPage
 			tableviewer.refresh();
 			editor.getTable().getColumns().setStale(false);
 		}
-		// TODO: not active flag is specified
-		//		if (!active && editor.getOutlinePage() != null)
-		//			editor.getOutlinePage().update(null);
 	}
 
 	/**

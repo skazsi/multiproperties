@@ -37,6 +37,7 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.part.MultiPageSelectionProvider;
@@ -55,7 +56,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	private Table table;
 	private final List<AbstractRecord> vecClipboard = new LinkedList<AbstractRecord>();
 	private IFindReplaceTarget fFindReplaceTarget;
-	private OutlinePage fOutlinePage;
+	private OutlinePage outlinePage;
 
 	public Editor()
 	{
@@ -368,13 +369,17 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		}
 		if (IContentOutlinePage.class.equals(adapter))
 		{
-			if (fOutlinePage == null)
-				fOutlinePage = new OutlinePage();
-			return fOutlinePage;
+			if (outlinePage == null)
+				outlinePage = new OutlinePage();
+			return outlinePage;
 		}
 		return super.getAdapter(adapter);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.model.listener.IRecordChangeListener#changed(hu.skzs.multiproperties.base.model.AbstractRecord)
+	 */
 	public void changed(final AbstractRecord record)
 	{
 		if (getActiveEditor() instanceof TablePage)
@@ -383,8 +388,13 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 			tablePage.getTableViewer().refresh(record);
 		}
 		firePropertyChange(IEditorPart.PROP_DIRTY);
+		refreshOutline();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener#changed()
+	 */
 	public void changed()
 	{
 		if (getActiveEditor() instanceof TablePage)
@@ -393,5 +403,18 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 			tablePage.getTableViewer().refresh();
 		}
 		firePropertyChange(IEditorPart.PROP_DIRTY);
+		refreshOutline();
+	}
+
+	/**
+	 * Refreshes the outline
+	 */
+	private void refreshOutline()
+	{
+		if (outlinePage != null)
+		{
+			outlinePage.selectionChanged(this, PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getSelectionService().getSelection());
+		}
 	}
 }
