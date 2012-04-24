@@ -30,6 +30,7 @@ public class TargetPropertiesSelectionPage extends WizardPage
 	private Button checkDescription;
 	private Button checkColumnDescription;
 	private Button checkDisabled;
+	private Button checkDisableDefault;
 
 	public TargetPropertiesSelectionPage(final ConfigurationConverter configurationConverter)
 	{
@@ -108,6 +109,12 @@ public class TargetPropertiesSelectionPage extends WizardPage
 		gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		checkDisabled.setLayoutData(gridData);
+		checkDisableDefault = new Button(container, SWT.CHECK);
+		checkDisableDefault.setText(Messages.getString("wizard.configuration.disable.defaultvalues")); //$NON-NLS-1$
+		checkDisableDefault.setSelection(configurationConverter.isDisableDefaultValues());
+		gridData = new GridData(GridData.FILL_HORIZONTAL);
+		gridData.horizontalSpan = 3;
+		checkDisableDefault.setLayoutData(gridData);
 
 		dialogChanged();
 	}
@@ -196,5 +203,10 @@ public class TargetPropertiesSelectionPage extends WizardPage
 	public boolean isDisabledPropertiesIncluded()
 	{
 		return checkDisabled.getSelection();
+	}
+
+	public boolean isDisableDefault()
+	{
+		return checkDisableDefault.getSelection();
 	}
 }

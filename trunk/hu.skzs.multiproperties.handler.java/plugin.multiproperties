@@ -89,6 +89,13 @@
             <Value disabled="false">Letiltott property rekordok írása megjegyzésként</Value>
         </Property>
         <Property>
+            <Name>wizard.configuration.disable.defaultvalues</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Disable default values</Value>
+            <Value disabled="false">Alapértelmezett értékek tiltása</Value>
+        </Property>
+        <Property>
             <Name>wizard.configuration.error.mustspecified</Name>
             <Description></Description>
             <Disabled>false</Disabled>
