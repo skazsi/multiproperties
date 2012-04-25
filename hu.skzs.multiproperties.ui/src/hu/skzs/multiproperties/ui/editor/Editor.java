@@ -370,7 +370,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		if (IContentOutlinePage.class.equals(adapter))
 		{
 			if (outlinePage == null)
-				outlinePage = new OutlinePage();
+				outlinePage = new OutlinePage(table);
 			return outlinePage;
 		}
 		return super.getAdapter(adapter);
