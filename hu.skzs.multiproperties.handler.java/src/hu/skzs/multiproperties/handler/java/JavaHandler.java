@@ -71,60 +71,9 @@ public class JavaHandler implements IHandler
 			final IResource resource = root.findMember(new Path(converter.getContainerName()));
 			final IContainer container = (IContainer) resource;
 			final IFile file = container.getFile(new Path(converter.getFileName()));
-			final StringBuilder strb = new StringBuilder();
-
-			// Writing the description
-			if (converter.isDescriptionIncluded())
-			{
-				writeString(strb, table.getDescription());
-				strb.append("\r\n"); //$NON-NLS-1$
-			}
-
-			// Writing the column description
-			if (converter.isColumnDescriptionIncluded())
-			{
-				writeString(strb, column.getDescription());
-				strb.append("\r\n"); //$NON-NLS-1$
-			}
-
-			// Writing the records
-			for (int i = 0; i < table.size(); i++)
-			{
-				if (table.get(i) instanceof PropertyRecord)
-				{
-					final PropertyRecord record = (PropertyRecord) table.get(i);
-					String value = record.getColumnValue(column);
-					if (value == null)
-						if (record.getDefaultColumnValue() != null && !converter.isDisableDefaultValues())
-							value = record.getDefaultColumnValue();
-					if (value == null)
-						continue;
-
-					// If disabled, then it will be written as a comment
-					if (record.isDisabled())
-						if (converter.isDisabledPropertiesIncluded())
-							strb.append("#"); //$NON-NLS-1$
-						else
-							continue;
-
-					strb.append(saveConvert(record.getValue(), true));
-					strb.append("="); //$NON-NLS-1$
-					strb.append(saveConvert(value, false));
-					strb.append("\r\n"); //$NON-NLS-1$
-				}
-				else if (table.get(i) instanceof CommentRecord)
-				{
-					final CommentRecord record = (CommentRecord) table.get(i);
-					strb.append("#" + record.getValue() + "\r\n"); //$NON-NLS-1$ //$NON-NLS-2$
-				}
-				else if (table.get(i) instanceof EmptyRecord)
-				{
-					strb.append("\r\n"); //$NON-NLS-1$
-				}
-			}
 
 			// Writing the content
-			final ByteArrayInputStream stream = new ByteArrayInputStream(strb.toString().getBytes());
+			final ByteArrayInputStream stream = new ByteArrayInputStream(convert(converter, table, column));
 			if (file.exists())
 			{
 				file.setContents(stream, false, true, null);
@@ -139,6 +88,72 @@ public class JavaHandler implements IHandler
 		{
 			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, IStatus.ERROR, e.getMessage(), e));
 		}
+	}
+
+	/**
+	 * Converts and returns the content of the given {@link Column} based on the given {@link ConfigurationConverter}
+	 * @param converter the given converter configuration
+	 * @param table the given table
+	 * @param column the given column
+	 * @return the converted content of the given column 
+	 * @throws IOException 
+	 */
+	public byte[] convert(final ConfigurationConverter converter, final Table table, final Column column)
+			throws IOException
+	{
+		final StringBuilder strb = new StringBuilder();
+
+		// Writing the description
+		if (converter.isDescriptionIncluded())
+		{
+			writeString(strb, table.getDescription());
+			strb.append("\r\n"); //$NON-NLS-1$
+		}
+
+		// Writing the column description
+		if (converter.isColumnDescriptionIncluded())
+		{
+			writeString(strb, column.getDescription());
+			strb.append("\r\n"); //$NON-NLS-1$
+		}
+
+		// Writing the records
+		for (int i = 0; i < table.size(); i++)
+		{
+			if (table.get(i) instanceof PropertyRecord)
+			{
+				final PropertyRecord record = (PropertyRecord) table.get(i);
+				String value = record.getColumnValue(column);
+				if (value == null)
+					if (record.getDefaultColumnValue() != null && !converter.isDisableDefaultValues())
+						value = record.getDefaultColumnValue();
+				if (value == null)
+					continue;
+
+				// If disabled, then it will be written as a comment
+				if (record.isDisabled())
+					if (converter.isDisabledPropertiesIncluded())
+						strb.append("#"); //$NON-NLS-1$
+					else
+						continue;
+
+				strb.append(saveConvert(record.getValue(), true));
+				strb.append("="); //$NON-NLS-1$
+				strb.append(saveConvert(value, false));
+				strb.append("\r\n"); //$NON-NLS-1$
+			}
+			else if (table.get(i) instanceof CommentRecord)
+			{
+				final CommentRecord record = (CommentRecord) table.get(i);
+				strb.append("#" + record.getValue() + "\r\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			else if (table.get(i) instanceof EmptyRecord)
+			{
+				strb.append("\r\n"); //$NON-NLS-1$
+			}
+		}
+
+		return strb.toString().getBytes();
 	}
 
 	/**
