@@ -6,7 +6,6 @@ import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 import java.util.LinkedList;
 import java.util.List;
 
-
 public class Columns implements IColumnChangeListener
 {
 
@@ -77,9 +76,9 @@ public class Columns implements IColumnChangeListener
 		return columns.size();
 	}
 
-	public Object[] toArray()
+	public Column[] toArray()
 	{
-		return columns.toArray();
+		return columns.toArray(new Column[] {});
 	}
 
 	public void columnChanged(final Column column)
