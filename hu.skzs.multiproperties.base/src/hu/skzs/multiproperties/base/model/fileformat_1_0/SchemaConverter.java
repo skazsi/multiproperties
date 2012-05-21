@@ -10,6 +10,9 @@ import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -39,17 +42,19 @@ public class SchemaConverter implements ISchemaConverter
 		return VERSION;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(org.eclipse.core.resources.IFile)
+	/**
+	 * Returns an instance of {@link Table} converted from the given {@link InputStream}.
+	 * @param inputStream the given inputStream
+	 * @return an instance of {@link Table}
+	 * @throws SchemaConverterException
 	 */
-	public Table convert(final IFile file) throws SchemaConverterException
+	private Table convert(final InputStream inputStream) throws SchemaConverterException
 	{
 		try
 		{
 			final JAXBContext jaxbContext = JAXBContext.newInstance(SCHEMA_PACKAGE);
 			final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			final MultiProperties multiproperties = (MultiProperties) unmarshaller.unmarshal(file.getContents(true));
+			final MultiProperties multiproperties = (MultiProperties) unmarshaller.unmarshal(inputStream);
 
 			final Table table = new Table();
 			// Fill up the models
@@ -99,6 +104,38 @@ public class SchemaConverter implements ISchemaConverter
 				}
 			}
 			return table;
+		}
+		catch (final Exception e)
+		{
+			throw new SchemaConverterException("Unexpected error in schema conversion", e); //$NON-NLS-1$
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(org.eclipse.core.resources.IFile)
+	 */
+	public Table convert(final IFile file) throws SchemaConverterException
+	{
+		try
+		{
+			return convert(file.getContents(true));
+		}
+		catch (final Exception e)
+		{
+			throw new SchemaConverterException("Unexpected error in schema conversion", e); //$NON-NLS-1$
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(java.io.File)
+	 */
+	public Table convert(final File file) throws SchemaConverterException
+	{
+		try
+		{
+			return convert(new FileInputStream(file));
 		}
 		catch (final Exception e)
 		{

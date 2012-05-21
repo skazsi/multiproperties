@@ -5,6 +5,9 @@ import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
+import hu.skzs.multiproperties.handler.java.writer.WorkspaceWriter;
+import hu.skzs.multiproperties.handler.java.writer.Writer;
+import hu.skzs.multiproperties.handler.java.writer.WriterConfigurationException;
 
 import java.io.IOException;
 
@@ -68,11 +71,11 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final ConfigurationConverter converter = createConfigurationConverter(false, false, false, true);
+		final Writer writer = createWriter(false, false, false, true);
 		// when
 
-		final byte[] enBytes = handler.convert(converter, table, table.getColumns().get(0));
-		final byte[] huBytes = handler.convert(converter, table, table.getColumns().get(1));
+		final byte[] enBytes = handler.convert(writer, table, table.getColumns().get(0));
+		final byte[] huBytes = handler.convert(writer, table, table.getColumns().get(1));
 
 		// then
 		Assert.assertEquals(PROP_EN_SIMPLE, new String(enBytes));
@@ -92,10 +95,10 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final ConfigurationConverter converter = createConfigurationConverter(true, false, false, true);
+		final Writer writer = createWriter(true, false, false, true);
 		// when
 
-		final byte[] bytes = handler.convert(converter, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_DESCRIPTION, new String(bytes));
@@ -114,10 +117,10 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final ConfigurationConverter converter = createConfigurationConverter(false, true, false, true);
+		final Writer writer = createWriter(false, true, false, true);
 		// when
 
-		final byte[] bytes = handler.convert(converter, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_COLUMN_DESCRIPTION, new String(bytes));
@@ -136,10 +139,10 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final ConfigurationConverter converter = createConfigurationConverter(true, true, false, true);
+		final Writer writer = createWriter(true, true, false, true);
 		// when
 
-		final byte[] bytes = handler.convert(converter, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_BOTH_DESCRIPTION, new String(bytes));
@@ -158,10 +161,10 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, true, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final ConfigurationConverter converter = createConfigurationConverter(false, false, false, true);
+		final Writer writer = createWriter(false, false, false, true);
 		// when
 
-		final byte[] bytes = handler.convert(converter, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_DISABLED, new String(bytes));
@@ -180,10 +183,10 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, true, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final ConfigurationConverter converter = createConfigurationConverter(false, false, true, true);
+		final Writer writer = createWriter(false, false, true, true);
 		// when
 
-		final byte[] bytes = handler.convert(converter, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_DISABLED_INCLUDED, new String(bytes));
@@ -202,11 +205,11 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, DEFAULT, false, table.getColumns().toArray(), new String[] { null,
 				2 + HU + VALUE }));
-		final ConfigurationConverter converter = createConfigurationConverter(false, false, false, false);
+		final Writer writer = createWriter(false, false, false, false);
 		// when
 
-		final byte[] enBytes = handler.convert(converter, table, table.getColumns().get(0));
-		final byte[] huBytes = handler.convert(converter, table, table.getColumns().get(1));
+		final byte[] enBytes = handler.convert(writer, table, table.getColumns().get(0));
+		final byte[] huBytes = handler.convert(writer, table, table.getColumns().get(1));
 
 		// then
 		Assert.assertEquals(PROP_EN_DEFAULT, new String(enBytes));
@@ -226,11 +229,11 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, DEFAULT, false, table.getColumns().toArray(), new String[] { null,
 				2 + HU + VALUE }));
-		final ConfigurationConverter converter = createConfigurationConverter(false, false, false, true);
+		final Writer writer = createWriter(false, false, false, true);
 		// when
 
-		final byte[] enBytes = handler.convert(converter, table, table.getColumns().get(0));
-		final byte[] huBytes = handler.convert(converter, table, table.getColumns().get(1));
+		final byte[] enBytes = handler.convert(writer, table, table.getColumns().get(0));
+		final byte[] huBytes = handler.convert(writer, table, table.getColumns().get(1));
 
 		// then
 		Assert.assertEquals(PROP_EN_DEFAULT_DISABLED, new String(enBytes));
@@ -252,32 +255,40 @@ public class JavaHandlerTest
 		table.add(new CommentRecord(COMMENT));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final ConfigurationConverter converter = createConfigurationConverter(false, false, false, false);
+		final Writer writer = createWriter(false, false, false, false);
 		// when
 
-		final byte[] bytes = handler.convert(converter, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_RECORDS, new String(bytes));
 	}
 
 	/**
-	 * Returns a newly constructed test {@link ConfigurationConverter} instance based on the given parameters.
+	 * Returns a newly constructed test {@link Writer} instance based on the given parameters.
 	 * @param description
 	 * @param columnDescription
 	 * @param disabled
 	 * @param defaultValues
 	 * @return
+	 * @throws RuntimeException 
 	 */
-	private ConfigurationConverter createConfigurationConverter(final boolean description,
-			final boolean columnDescription, final boolean disabled, final boolean defaultValues)
+	private Writer createWriter(final boolean description, final boolean columnDescription, final boolean disabled,
+			final boolean defaultValues)
 	{
-		final ConfigurationConverter converter = new ConfigurationConverter(""); //$NON-NLS-1$
-		converter.setIncludeDescription(description);
-		converter.setIncludeColumnDescription(columnDescription);
-		converter.setIncludeDisabled(disabled);
-		converter.setDisableDefaultValues(defaultValues);
-		return converter;
+		try
+		{
+			final Writer writer = new WorkspaceWriter(""); //$NON-NLS-1$
+			writer.setIncludeDescription(description);
+			writer.setIncludeColumnDescription(columnDescription);
+			writer.setIncludeDisabled(disabled);
+			writer.setDisableDefaultValues(defaultValues);
+			return writer;
+		}
+		catch (final WriterConfigurationException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

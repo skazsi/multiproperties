@@ -3,6 +3,8 @@ package hu.skzs.multiproperties.base.model.fileformat;
 import hu.skzs.multiproperties.base.Activator;
 import hu.skzs.multiproperties.base.model.Table;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -10,7 +12,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 
 /**
  * The <code>SchemaConverterFactory</code> constructs {@link ISchemaConverter} instances.
@@ -50,7 +51,48 @@ public class SchemaConverterFactory
 			inputStream = file.getContents(true);
 			version = getVersion(inputStream);
 		}
-		catch (final CoreException e)
+		catch (final Exception e)
+		{
+			throw new SchemaConverterException("Unexpected error occurred during constructing schema converter", e); //$NON-NLS-1$
+		}
+		finally
+		{
+			if (inputStream != null)
+				try
+				{
+					inputStream.close();
+				}
+				catch (final IOException e)
+				{
+					Activator.logWarn("Unable to close properly the input stream", e); //$NON-NLS-1$
+				}
+		}
+
+		return getSchemaConverter(version);
+	}
+
+	/**
+	 * Returns a newly constructed {@link SchemaConverter} instance based on the given <code>file</code>.
+	 * 
+	 * @param file
+	 *            the given file
+	 * @return a newly constructed {@link SchemaConverter} instance
+	 * @throws UnsupportedSchemaVersionException
+	 *             if an unsupported schema is tried to be used
+	 * @throws SchemaConverterException
+	 *             if an unexpected error occurred
+	 */
+	public static ISchemaConverter getSchemaConverter(final File file) throws SchemaConverterException
+	{
+		InputStream inputStream = null;
+		String version = null;
+		try
+		{
+			// Identifying the schema version
+			inputStream = new FileInputStream(file);
+			version = getVersion(inputStream);
+		}
+		catch (final Exception e)
 		{
 			throw new SchemaConverterException("Unexpected error occurred during constructing schema converter", e); //$NON-NLS-1$
 		}

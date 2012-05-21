@@ -1,29 +1,34 @@
-package hu.skzs.multiproperties.handler.java;
+package hu.skzs.multiproperties.handler.java.writer;
 
 import java.util.StringTokenizer;
 
 /**
- * The <code>ConfigurationConverter</code> is able to convert the handler's configuration between the Java properties and
- * persisted formats.
- * @author sallai
- *
+ * A {@link Writer} implementation is responsible for writing the output file in addition of
+ * of parsing and formating the handler configuration.
+ * <p>Known implementations are {@link WorkspaceWriter} and {@link FileSystemWriter}.</p>
+ * @author SKZS
+ * @see WorkspaceWriter
+ * @see FileSystemWriter
  */
-public class ConfigurationConverter
+public abstract class Writer
 {
 
-	private static final String DELIM = "|"; //$NON-NLS-1$
-	private String containerName;
-	private String fileName;
-	private boolean includeDescription;
-	private boolean includeColumnDescription;
-	private boolean includeDisabled;
-	private boolean disableDefault;
+	protected static final String DELIM = "|"; //$NON-NLS-1$
+
+	protected boolean includeDescription;
+	protected boolean includeColumnDescription;
+	protected boolean includeDisabled;
+	/**
+	 * @since 1.1 file format version
+	 */
+	protected boolean disableDefault;
 
 	/**
 	 * Default constructor, which parses the given <code>configuration</code>.
 	 * @param configuration the given configuration
+	 * @throws WriterConfigurationException when the format is invalid
 	 */
-	public ConfigurationConverter(final String configuration)
+	public Writer(final String configuration) throws WriterConfigurationException
 	{
 		if (configuration.equals("")) //$NON-NLS-1$
 			return;
@@ -32,12 +37,10 @@ public class ConfigurationConverter
 			if (configuration.indexOf(DELIM) > -1)
 			{
 				final StringTokenizer tokenizer = new StringTokenizer(configuration, DELIM);
-				final String path = tokenizer.nextToken();
-				containerName = path.substring(0, path.lastIndexOf("/")); //$NON-NLS-1$
-				fileName = path.substring(path.lastIndexOf("/") + 1); //$NON-NLS-1$
-				includeDescription = Boolean.parseBoolean(tokenizer.nextToken());
-				includeColumnDescription = Boolean.parseBoolean(tokenizer.nextToken());
-				includeDisabled = Boolean.parseBoolean(tokenizer.nextToken());
+				parsePath(tokenizer.nextToken());
+				includeDescription = parseBoolean(tokenizer.nextToken());
+				includeColumnDescription = parseBoolean(tokenizer.nextToken());
+				includeDisabled = parseBoolean(tokenizer.nextToken());
 				if (tokenizer.hasMoreTokens())
 				{
 					disableDefault = Boolean.parseBoolean(tokenizer.nextToken());
@@ -46,14 +49,13 @@ public class ConfigurationConverter
 			else
 			{
 				// The previous version did not supported the three boolean flags
-				containerName = configuration.substring(0, configuration.lastIndexOf("/")); //$NON-NLS-1$
-				fileName = configuration.substring(configuration.lastIndexOf("/") + 1); //$NON-NLS-1$
+				parsePath(configuration);
 			}
 		}
-		catch (final RuntimeException e)
+		catch (final Exception e)
 		{
-			Activator.logError("Unexpected error occurred during parsing the handler configuration", e); //$NON-NLS-1$
-			throw e;
+			throw new WriterConfigurationException(
+					"Unexpected error occurred during parsing the handler configuration", e); //$NON-NLS-1$
 		}
 	}
 
@@ -65,9 +67,7 @@ public class ConfigurationConverter
 	public String toString()
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(containerName);
-		stringBuilder.append("/"); //$NON-NLS-1$
-		stringBuilder.append(fileName);
+		stringBuilder.append(formatPath());
 		stringBuilder.append(DELIM);
 		stringBuilder.append(Boolean.toString(includeDescription));
 		stringBuilder.append(DELIM);
@@ -80,39 +80,41 @@ public class ConfigurationConverter
 	}
 
 	/**
-	 * Sets the container name
-	 * @param containerName the given container name
+	 * Parses the path part of the configuration.
+	 * @param path the given part part of the configuration
 	 */
-	public void setContainerName(final String containerName)
-	{
-		this.containerName = containerName;
-	}
+	public abstract void parsePath(String path);
 
 	/**
-	 * Returns the container name
-	 * @return the container name
+	 * Returns the formatted path part of the configuration.
 	 */
-	public String getContainerName()
-	{
-		return containerName;
-	}
+	public abstract String formatPath();
 
 	/**
-	 * Sets the file name
-	 * @param fileName the given file name
+	 * Writes the given <code>bytes</code> content.
+	 * @param bytes the given content in byte array
+	 * @throws WriterException when writing failed
 	 */
-	public void setFileName(final String fileName)
-	{
-		this.fileName = fileName;
-	}
+	public abstract void write(byte[] bytes) throws WriterException;
 
 	/**
-	 * Returns the file name
-	 * @return the file name
+	 * Returns the boolean value of the given value string. Return only <code>true</code>, if the given
+	 * <code>value</code> parameter equals to "true" by ignoring the case. Return only <code>false</code>,
+	 * if the given <code>value</code> parameter equals to "false" by ignoring the case.
+	 * @param value the given boolean string
+	 * @return the boolean value of the given value string
+	 * @throws WriterConfigurationException if the value cannot be parsed as boolean
 	 */
-	public String getFileName()
+	protected boolean parseBoolean(final String value) throws WriterConfigurationException
 	{
-		return fileName;
+		if (value == null)
+			throw new WriterConfigurationException("The boolean text cannot be null"); //$NON-NLS-1$
+		if (value.equalsIgnoreCase(Boolean.TRUE.toString()))
+			return true;
+		else if (value.equalsIgnoreCase(Boolean.FALSE.toString()))
+			return false;
+		else
+			throw new WriterConfigurationException("Not a boolean value text: " + value); //$NON-NLS-1$
 	}
 
 	/**
@@ -172,6 +174,7 @@ public class ConfigurationConverter
 	/**
 	 * Sets whether the default values should NOT be written
 	 * @param disableDefault specifies whether the default values should NOT be written
+	 * @since 1.1 file format version
 	 */
 	public void setDisableDefaultValues(final boolean disableDefault)
 	{
@@ -181,9 +184,11 @@ public class ConfigurationConverter
 	/**
 	 * Returns whether the default values should NOT be written
 	 * @return whether the default values should NOT be written
+	 * @since 1.1 file format version
 	 */
 	public boolean isDisableDefaultValues()
 	{
 		return disableDefault;
 	}
+
 }

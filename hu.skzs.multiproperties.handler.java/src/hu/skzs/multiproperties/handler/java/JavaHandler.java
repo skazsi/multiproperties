@@ -1,5 +1,6 @@
 package hu.skzs.multiproperties.handler.java;
 
+import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.base.api.IHandler;
 import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.base.model.CommentRecord;
@@ -7,21 +8,17 @@ import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.handler.java.wizard.TargetPropertiesSelectionWizard;
+import hu.skzs.multiproperties.handler.java.writer.WorkspaceWriter;
+import hu.skzs.multiproperties.handler.java.writer.Writer;
+import hu.skzs.multiproperties.handler.java.writer.WriterFactory;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Properties;
 
-import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -46,11 +43,11 @@ public class JavaHandler implements IHandler
 	{
 		try
 		{
-			final ConfigurationConverter configurationConverter = new ConfigurationConverter(configuration);
-			final TargetPropertiesSelectionWizard wizard = new TargetPropertiesSelectionWizard(configurationConverter);
+			final Writer writer = WriterFactory.getWriter(configuration); // it must be WorkspaceWriter in this case
+			final TargetPropertiesSelectionWizard wizard = new TargetPropertiesSelectionWizard((WorkspaceWriter) writer);
 			final WizardDialog wizarddialog = new WizardDialog(shell, wizard);
 			wizarddialog.open();
-			return configurationConverter.toString();
+			return writer.toString();
 		}
 		catch (final Throwable e)
 		{
@@ -62,31 +59,16 @@ public class JavaHandler implements IHandler
 	 * (non-Javadoc)
 	 * @see hu.skzs.multiproperties.base.api.IHandler#save(java.lang.String, hu.skzs.multiproperties.base.model.Table, hu.skzs.multiproperties.base.model.Column)
 	 */
-	public void save(final String configuration, final Table table, final Column column) throws CoreException
+	public void save(final String configuration, final Table table, final Column column) throws HandlerException
 	{
 		try
 		{
-			final ConfigurationConverter converter = new ConfigurationConverter(configuration);
-			final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			final IResource resource = root.findMember(new Path(converter.getContainerName()));
-			final IContainer container = (IContainer) resource;
-			final IFile file = container.getFile(new Path(converter.getFileName()));
-
-			// Writing the content
-			final ByteArrayInputStream stream = new ByteArrayInputStream(convert(converter, table, column));
-			if (file.exists())
-			{
-				file.setContents(stream, false, true, null);
-			}
-			else
-			{
-				file.create(stream, false, null);
-			}
-			stream.close();
+			final Writer writer = WriterFactory.getWriter(configuration);
+			writer.write(convert(writer, table, column));
 		}
 		catch (final Exception e)
 		{
-			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, IStatus.ERROR, e.getMessage(), e));
+			throw new HandlerException("Unexpected error occured during saving the column by handler", e); //$NON-NLS-1$
 		}
 	}
 
@@ -98,20 +80,19 @@ public class JavaHandler implements IHandler
 	 * @return the converted content of the given column 
 	 * @throws IOException 
 	 */
-	public byte[] convert(final ConfigurationConverter converter, final Table table, final Column column)
-			throws IOException
+	public byte[] convert(final Writer writer, final Table table, final Column column) throws IOException
 	{
 		final StringBuilder strb = new StringBuilder();
 
 		// Writing the description
-		if (converter.isDescriptionIncluded())
+		if (writer.isDescriptionIncluded())
 		{
 			writeString(strb, table.getDescription());
 			strb.append("\r\n"); //$NON-NLS-1$
 		}
 
 		// Writing the column description
-		if (converter.isColumnDescriptionIncluded())
+		if (writer.isColumnDescriptionIncluded())
 		{
 			writeString(strb, column.getDescription());
 			strb.append("\r\n"); //$NON-NLS-1$
@@ -125,14 +106,14 @@ public class JavaHandler implements IHandler
 				final PropertyRecord record = (PropertyRecord) table.get(i);
 				String value = record.getColumnValue(column);
 				if (value == null)
-					if (record.getDefaultColumnValue() != null && !converter.isDisableDefaultValues())
+					if (record.getDefaultColumnValue() != null && !writer.isDisableDefaultValues())
 						value = record.getDefaultColumnValue();
 				if (value == null)
 					continue;
 
 				// If disabled, then it will be written as a comment
 				if (record.isDisabled())
-					if (converter.isDisabledPropertiesIncluded())
+					if (writer.isDisabledPropertiesIncluded())
 						strb.append("#"); //$NON-NLS-1$
 					else
 						continue;

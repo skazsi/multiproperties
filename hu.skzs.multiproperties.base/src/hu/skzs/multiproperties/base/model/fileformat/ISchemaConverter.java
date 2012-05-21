@@ -2,6 +2,8 @@ package hu.skzs.multiproperties.base.model.fileformat;
 
 import hu.skzs.multiproperties.base.model.Table;
 
+import java.io.File;
+
 import org.eclipse.core.resources.IFile;
 
 /**
@@ -26,6 +28,17 @@ public interface ISchemaConverter
 	 * @throws SchemaConverterException
 	 */
 	public Table convert(IFile file) throws SchemaConverterException;
+
+	/**
+	 * Returns an instance of {@link Table} converted from the given {@link File}.
+	 * <p><strong>Note:</strong> This method should be used only for non-standard uses cases, such
+	 * as command line, debug, etc. Furthermore there is no opposing method with <code>convert(File, Table)</code>
+	 * signature.</p>
+	 * @param inputStream the given inputStream
+	 * @return an instance of {@link Table}
+	 * @throws SchemaConverterException
+	 */
+	public Table convert(File file) throws SchemaConverterException;
 
 	/**
 	 * Persists the given {@link Table} instance into the given {@link IFile}.
