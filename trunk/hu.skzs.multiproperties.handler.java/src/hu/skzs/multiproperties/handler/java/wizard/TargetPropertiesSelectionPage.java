@@ -1,7 +1,7 @@
 package hu.skzs.multiproperties.handler.java.wizard;
 
-import hu.skzs.multiproperties.handler.java.ConfigurationConverter;
 import hu.skzs.multiproperties.handler.java.Messages;
+import hu.skzs.multiproperties.handler.java.writer.WorkspaceWriter;
 import hu.skzs.multiproperties.ui.util.LayoutFactory;
 
 import org.eclipse.core.resources.IResource;
@@ -24,7 +24,7 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 public class TargetPropertiesSelectionPage extends WizardPage
 {
 
-	private final ConfigurationConverter configurationConverter;
+	private final WorkspaceWriter writer;
 	private Text textLocation;
 	private Text textFile;
 	private Button checkDescription;
@@ -32,10 +32,10 @@ public class TargetPropertiesSelectionPage extends WizardPage
 	private Button checkDisabled;
 	private Button checkDisableDefault;
 
-	public TargetPropertiesSelectionPage(final ConfigurationConverter configurationConverter)
+	public TargetPropertiesSelectionPage(final WorkspaceWriter writer)
 	{
 		super("column.configuration.page"); //$NON-NLS-1$
-		this.configurationConverter = configurationConverter;
+		this.writer = writer;
 		setTitle(Messages.getString("wizard.configuration.title")); //$NON-NLS-1$
 		setDescription(Messages.getString("wizard.configuration.description")); //$NON-NLS-1$
 	}
@@ -52,8 +52,8 @@ public class TargetPropertiesSelectionPage extends WizardPage
 		Label label = new Label(container, SWT.NULL);
 		label.setText(Messages.getString("wizard.configuration.location")); //$NON-NLS-1$
 		textLocation = new Text(container, SWT.BORDER | SWT.SINGLE);
-		if (configurationConverter.getContainerName() != null)
-			textLocation.setText(configurationConverter.getContainerName());
+		if (writer.getContainerName() != null)
+			textLocation.setText(writer.getContainerName());
 		textLocation.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		textLocation.addModifyListener(new ModifyListener()
 		{
@@ -76,8 +76,8 @@ public class TargetPropertiesSelectionPage extends WizardPage
 		label = new Label(container, SWT.NULL);
 		label.setText(Messages.getString("wizard.configuration.filename")); //$NON-NLS-1$
 		textFile = new Text(container, SWT.BORDER | SWT.SINGLE);
-		if (configurationConverter.getFileName() != null)
-			textFile.setText(configurationConverter.getFileName());
+		if (writer.getFileName() != null)
+			textFile.setText(writer.getFileName());
 		textFile.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		textFile.addModifyListener(new ModifyListener()
 		{
@@ -93,25 +93,25 @@ public class TargetPropertiesSelectionPage extends WizardPage
 		// Checks
 		checkDescription = new Button(container, SWT.CHECK);
 		checkDescription.setText(Messages.getString("wizard.configuration.include.description")); //$NON-NLS-1$
-		checkDescription.setSelection(configurationConverter.isDescriptionIncluded());
+		checkDescription.setSelection(writer.isDescriptionIncluded());
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		checkDescription.setLayoutData(gridData);
 		checkColumnDescription = new Button(container, SWT.CHECK);
 		checkColumnDescription.setText(Messages.getString("wizard.configuration.include.columndescription")); //$NON-NLS-1$
-		checkColumnDescription.setSelection(configurationConverter.isColumnDescriptionIncluded());
+		checkColumnDescription.setSelection(writer.isColumnDescriptionIncluded());
 		gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		checkColumnDescription.setLayoutData(gridData);
 		checkDisabled = new Button(container, SWT.CHECK);
 		checkDisabled.setText(Messages.getString("wizard.configuration.include.disabled")); //$NON-NLS-1$
-		checkDisabled.setSelection(configurationConverter.isDisabledPropertiesIncluded());
+		checkDisabled.setSelection(writer.isDisabledPropertiesIncluded());
 		gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		checkDisabled.setLayoutData(gridData);
 		checkDisableDefault = new Button(container, SWT.CHECK);
 		checkDisableDefault.setText(Messages.getString("wizard.configuration.disable.defaultvalues")); //$NON-NLS-1$
-		checkDisableDefault.setSelection(configurationConverter.isDisableDefaultValues());
+		checkDisableDefault.setSelection(writer.isDisableDefaultValues());
 		gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		checkDisableDefault.setLayoutData(gridData);

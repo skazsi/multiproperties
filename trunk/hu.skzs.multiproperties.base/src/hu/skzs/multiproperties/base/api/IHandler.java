@@ -58,8 +58,8 @@ public interface IHandler
 	 * @param configuration the current configuration String for the current {@link Column} object 
 	 * @param table the {@link Table} object
 	 * @param column the current {@link Column} object
-	 * @throws CoreException
+	 * @throws HandlerException when an unexpected error occur
 	 * @see {@link #configure(Shell, String)}
 	 */
-	public void save(String configuration, Table table, Column column) throws CoreException;
+	public void save(String configuration, Table table, Column column) throws HandlerException;
 }

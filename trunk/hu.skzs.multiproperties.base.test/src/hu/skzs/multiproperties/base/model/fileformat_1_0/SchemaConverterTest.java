@@ -116,7 +116,7 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 	public void testConvertIFileNull() throws CoreException, SchemaConverterException
 	{
 		// when
-		schemaConverter.convert(null);
+		schemaConverter.convert((IFile) null);
 	}
 
 	/**

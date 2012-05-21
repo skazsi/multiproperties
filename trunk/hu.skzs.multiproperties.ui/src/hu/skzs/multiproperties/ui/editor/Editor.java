@@ -296,10 +296,10 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 							handler.save(table.getColumns().get(i).getHandlerConfiguration(), table, table.getColumns()
 									.get(i));
 						}
-						catch (final CoreException e)
+						catch (final Exception e)
 						{
 							MessageDialog.openError(null, "Error", e.getMessage());
-							Activator.log(e.getStatus());
+							Activator.logError("Unexpected error occured during saving the column by handler", e); //$NON-NLS-1$
 						}
 					}
 				}

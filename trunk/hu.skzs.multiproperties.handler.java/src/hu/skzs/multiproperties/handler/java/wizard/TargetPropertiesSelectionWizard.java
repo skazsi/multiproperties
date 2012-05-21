@@ -1,7 +1,7 @@
 package hu.skzs.multiproperties.handler.java.wizard;
 
-import hu.skzs.multiproperties.handler.java.ConfigurationConverter;
 import hu.skzs.multiproperties.handler.java.Messages;
+import hu.skzs.multiproperties.handler.java.writer.WorkspaceWriter;
 
 import org.eclipse.jface.wizard.Wizard;
 
@@ -13,12 +13,12 @@ import org.eclipse.jface.wizard.Wizard;
  */
 public class TargetPropertiesSelectionWizard extends Wizard
 {
-	private final ConfigurationConverter configurationConverter;
+	private final WorkspaceWriter writer;
 	private TargetPropertiesSelectionPage targetPropertiesSelectionPage;
 
-	public TargetPropertiesSelectionWizard(final ConfigurationConverter configurationConverter)
+	public TargetPropertiesSelectionWizard(final WorkspaceWriter configurationConverter)
 	{
-		this.configurationConverter = configurationConverter;
+		this.writer = configurationConverter;
 	}
 
 	@Override
@@ -27,19 +27,19 @@ public class TargetPropertiesSelectionWizard extends Wizard
 		setWindowTitle(Messages.getString("wizard.configuration.title")); //$NON-NLS-1$
 		// TODO: wizard picture is missing
 		//setDefaultPageImageDescriptor(Activator.getDefault().getImageRegistry().getDescriptor("edit_wiz"));
-		targetPropertiesSelectionPage = new TargetPropertiesSelectionPage(configurationConverter);
+		targetPropertiesSelectionPage = new TargetPropertiesSelectionPage(writer);
 		addPage(targetPropertiesSelectionPage);
 	}
 
 	@Override
 	public boolean performFinish()
 	{
-		configurationConverter.setContainerName(targetPropertiesSelectionPage.getLocation());
-		configurationConverter.setFileName(targetPropertiesSelectionPage.getFileName());
-		configurationConverter.setIncludeDescription(targetPropertiesSelectionPage.isDescriptionIncluded());
-		configurationConverter.setIncludeColumnDescription(targetPropertiesSelectionPage.isColumnDescriptionIncluded());
-		configurationConverter.setIncludeDisabled(targetPropertiesSelectionPage.isDisabledPropertiesIncluded());
-		configurationConverter.setDisableDefaultValues(targetPropertiesSelectionPage.isDisableDefault());
+		writer.setContainerName(targetPropertiesSelectionPage.getLocation());
+		writer.setFileName(targetPropertiesSelectionPage.getFileName());
+		writer.setIncludeDescription(targetPropertiesSelectionPage.isDescriptionIncluded());
+		writer.setIncludeColumnDescription(targetPropertiesSelectionPage.isColumnDescriptionIncluded());
+		writer.setIncludeDisabled(targetPropertiesSelectionPage.isDisabledPropertiesIncluded());
+		writer.setDisableDefaultValues(targetPropertiesSelectionPage.isDisableDefault());
 		return true;
 	}
 }
