@@ -35,12 +35,13 @@ public abstract class MPEditorFormPage extends MPEditorPage
 	 * @see org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
-	public final void createPartControl(Composite parent)
+	public final void createPartControl(final Composite parent)
 	{
 		final ScrolledForm scrolledForm = formToolkit.createScrolledForm(parent);
 		final IManagedForm managedForm = new ManagedForm(formToolkit, scrolledForm);
 
-		BusyIndicator.showWhile(parent.getDisplay(), new Runnable() {
+		BusyIndicator.showWhile(parent.getDisplay(), new Runnable()
+		{
 			public void run()
 			{
 				createFormContent(managedForm);

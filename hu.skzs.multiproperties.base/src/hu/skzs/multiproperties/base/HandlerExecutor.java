@@ -130,8 +130,6 @@ public class HandlerExecutor
 		stringBuilder.append("Note:\n"); //$NON-NLS-1$
 		stringBuilder
 				.append("If you don't specify the columnConfig paramater, then the column configuration stored in the MultiProperties will be used.\n"); //$NON-NLS-1$
-		stringBuilder
-				.append("It also means that the same handler is set in the MultiProperties, and that column has a valid configuration.\n"); //$NON-NLS-1$
 		return stringBuilder.toString();
 	}
 }

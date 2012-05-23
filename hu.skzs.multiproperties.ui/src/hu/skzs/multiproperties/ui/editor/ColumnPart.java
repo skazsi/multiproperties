@@ -4,6 +4,7 @@ import hu.skzs.multiproperties.base.api.IHandler;
 import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
+import hu.skzs.multiproperties.ui.util.ErrorDialogWithStackTrace;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -125,9 +126,10 @@ public class ColumnPart implements IDetailsPage
 						handler_configuration_changed = true;
 					}
 				}
-				catch (final Throwable e)
+				catch (final Exception e)
 				{
 					Activator.logError(e);
+					ErrorDialogWithStackTrace.openError(null, Messages.getString("editor.error.handler.configure"), e); //$NON-NLS-1$
 				}
 			}
 		});

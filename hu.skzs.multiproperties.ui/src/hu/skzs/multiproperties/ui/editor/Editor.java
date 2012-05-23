@@ -13,6 +13,7 @@ import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
+import hu.skzs.multiproperties.ui.util.ErrorDialogWithStackTrace;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -179,15 +180,15 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	@Override
 	protected void pageChange(final int newPageIndex)
 	{
+		// Notifying the selected page that it has been activated 
+		final MPEditorPage editorPage = (MPEditorPage) getActiveEditor();
+		editorPage.setActive();
+
 		// FIXME: check the super implementation
 		final MultiPageSelectionProvider provider = (MultiPageSelectionProvider) getSite().getSelectionProvider();
 		final SelectionChangedEvent event = new SelectionChangedEvent(provider, provider.getSelection());
 		provider.fireSelectionChanged(event);
 		provider.firePostSelectionChanged(event);
-
-		// Notifying the selected page that it has been activated 
-		final MPEditorPage editorPage = (MPEditorPage) getActiveEditor();
-		editorPage.setActive();
 
 		super.pageChange(newPageIndex);
 	}
@@ -298,8 +299,9 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 						}
 						catch (final Exception e)
 						{
-							MessageDialog.openError(null, "Error", e.getMessage());
-							Activator.logError("Unexpected error occured during saving the column by handler", e); //$NON-NLS-1$
+							Activator.logError(e);
+							ErrorDialogWithStackTrace.openError(getSite().getShell(),
+									Messages.getString("editor.error.handler.save"), e); //$NON-NLS-1$
 						}
 					}
 				}
@@ -335,7 +337,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 				}
 			}
 		}
-		catch (final Throwable e)
+		catch (final Exception e)
 		{
 			Activator.logError("Unexpected error occurred during setting markers", e); //$NON-NLS-1$
 		}

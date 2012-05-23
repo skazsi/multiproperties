@@ -6,7 +6,6 @@ import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -39,10 +38,10 @@ public interface IHandler
 	 * @param shell the given {@link Shell}
 	 * @param configuration the current configuration String for the current {@link Column} object
 	 * @return the modified configuration String
-	 * @throws CoreException
+	 * @throws HandlerException
 	 * @see {@link #save(String, Table, Column)}
 	 */
-	public String configure(Shell shell, String configuration) throws CoreException;
+	public String configure(Shell shell, String configuration) throws HandlerException;
 
 	/**
 	 * This method is called by the MultiProperties plugin when the save action is activated.

@@ -17,9 +17,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Properties;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -39,7 +36,7 @@ public class JavaHandler implements IHandler
 	 * (non-Javadoc)
 	 * @see hu.skzs.multiproperties.base.api.IHandler#configure(org.eclipse.swt.widgets.Shell, java.lang.String)
 	 */
-	public String configure(final Shell shell, final String configuration) throws CoreException
+	public String configure(final Shell shell, final String configuration) throws HandlerException
 	{
 		try
 		{
@@ -49,9 +46,9 @@ public class JavaHandler implements IHandler
 			wizarddialog.open();
 			return writer.toString();
 		}
-		catch (final Throwable e)
+		catch (final Exception e)
 		{
-			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, IStatus.ERROR, e.getMessage(), e));
+			throw new HandlerException("Unexpected error occured during configuring the column by handler"); //$NON-NLS-1$
 		}
 	}
 

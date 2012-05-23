@@ -43,7 +43,10 @@ public class WorkspaceWriter extends Writer
 		{
 			final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			final IResource resource = root.findMember(new Path(containerName));
+			if (resource == null)
+				throw new WriterException("Non existing workspace location: " + containerName); //$NON-NLS-1$
 			final IContainer container = (IContainer) resource;
+
 			final IFile file = container.getFile(new Path(fileName));
 
 			// Writing the content

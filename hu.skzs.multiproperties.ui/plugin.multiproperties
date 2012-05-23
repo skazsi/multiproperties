@@ -86,6 +86,20 @@
             <Value disabled="false">Ez a verziójú szerkesztő újabb tartalom verziót is támogat. Szeretné frissíteni a fájlt erre a verzióra? Különben bizonyos adatok elveszhetnek a mentés során.</Value>
         </Property>
         <Property>
+            <Name>editor.error.handler.save</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The selected handler could not save the content of a column.</Value>
+            <Value disabled="false">A kiválasztott kezelő nem tudta elmenteni az oszlop tartalmát.</Value>
+        </Property>
+        <Property>
+            <Name>editor.error.handler.configure</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Configuring the handler for the selected column get failed.</Value>
+            <Value disabled="false">A kezelő beállítása a kiválasztott oszlophoz nem sikerült.</Value>
+        </Property>
+        <Property>
             <Name>editor.marker.error.prefix</Name>
             <Description>Should be ended with a space character.&#xD;
 See also the editor.marker.error.suffix property.</Description>
@@ -254,14 +268,14 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.statistics.countof.comment</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">Count of disabled comment records: </Value>
+            <Value disabled="false">Count of comment records: </Value>
             <Value disabled="false">Megjegyzés rekordok száma: </Value>
         </Property>
         <Property>
             <Name>overview.statistics.countof.empty</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">Count of disabled empty records: </Value>
+            <Value disabled="false">Count of empty records: </Value>
             <Value disabled="false">Üres rekordok száma: </Value>
         </Property>
         <Empty/>
