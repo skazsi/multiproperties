@@ -2,7 +2,7 @@
 <feature
       id="hu.skzs.multiproperties"
       label="MultiProperties Feature"
-      version="0.9.1"
+      version="1.0.0"
       provider-name="Krisztián Zsolt Sallai">
 
    <description>
@@ -30,14 +30,14 @@ files having similar structure in one table.
          id="hu.skzs.multiproperties.base"
          download-size="0"
          install-size="0"
-         version="0.9.1"
+         version="1.0.0"
          unpack="false"/>
 
    <plugin
          id="hu.skzs.multiproperties.ui"
          download-size="0"
          install-size="0"
-         version="0.9.1"
+         version="1.0.0"
          unpack="false"/>
 
 </feature>
