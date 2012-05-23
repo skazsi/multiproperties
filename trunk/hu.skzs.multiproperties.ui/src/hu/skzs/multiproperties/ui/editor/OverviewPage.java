@@ -71,10 +71,10 @@ public class OverviewPage extends MPEditorFormPage
 	 * @see hu.skzs.multiproperties.ui.editors.MPEditorFormPage#createFormContent(org.eclipse.ui.forms.IManagedForm)
 	 */
 	@Override
-	public void createFormContent(IManagedForm managedForm)
+	public void createFormContent(final IManagedForm managedForm)
 	{
-		ScrolledForm scrolledForm = managedForm.getForm();
-		Composite body = managedForm.getForm().getBody();
+		final ScrolledForm scrolledForm = managedForm.getForm();
+		final Composite body = managedForm.getForm().getBody();
 
 		// Form
 		formToolkit.decorateFormHeading(scrolledForm.getForm());
@@ -107,10 +107,12 @@ public class OverviewPage extends MPEditorFormPage
 		composite.setLayout(LayoutFactory.createTableWrapLayout(2, 0, 0));
 		section.setClient(composite);
 		// Name
-		formToolkit.createLabel(composite, Messages.getString("overview.general.name"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
+		formToolkit
+				.createLabel(composite, Messages.getString("overview.general.name"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
 		name = formToolkit.createText(composite, editor.getTable().getName(), SWT.NONE);
 		name.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
-		name.addModifyListener(new ModifyListener() {
+		name.addModifyListener(new ModifyListener()
+		{
 
 			public void modifyText(final ModifyEvent arg0)
 			{
@@ -118,12 +120,15 @@ public class OverviewPage extends MPEditorFormPage
 			}
 		});
 		// Description
-		formToolkit.createLabel(composite, Messages.getString("overview.general.description"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
-		description = formToolkit.createText(composite, editor.getTable().getDescription(), SWT.MULTI | SWT.WRAP | SWT.H_SCROLL | SWT.V_SCROLL);
+		formToolkit
+				.createLabel(composite, Messages.getString("overview.general.description"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
+		description = formToolkit.createText(composite, editor.getTable().getDescription(), SWT.MULTI | SWT.WRAP
+				| SWT.H_SCROLL | SWT.V_SCROLL);
 		final TableWrapData tableWrapData = new TableWrapData(TableWrapData.FILL_GRAB);
 		tableWrapData.heightHint = 160;
 		description.setLayoutData(tableWrapData);
-		description.addModifyListener(new ModifyListener() {
+		description.addModifyListener(new ModifyListener()
+		{
 
 			public void modifyText(final ModifyEvent arg0)
 			{
@@ -142,7 +147,8 @@ public class OverviewPage extends MPEditorFormPage
 		composite.setLayout(LayoutFactory.createTableWrapLayout(2, 0, 0));
 		section.setClient(composite);
 		// Handler
-		formToolkit.createLabel(composite, Messages.getString("overview.handler.handler"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
+		formToolkit
+				.createLabel(composite, Messages.getString("overview.handler.handler"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
 		handler = new Combo(composite, SWT.BORDER | SWT.READ_ONLY);
 		handler.setLayoutData(new TableWrapData(TableWrapData.FILL));
 
@@ -166,16 +172,19 @@ public class OverviewPage extends MPEditorFormPage
 			handler.add(editor.getTable().getHandler());
 			handler.select(handler.getItemCount() - 1);
 		}
-		handler.addSelectionListener(new SelectionAdapter() {
+		handler.addSelectionListener(new SelectionAdapter()
+		{
 
 			@Override
 			public void widgetSelected(final SelectionEvent arg0)
 			{
-				if (handler.getSelectionIndex() == 0 && editor.getTable().getHandler().equals("") || editor.getTable().getHandler().equals(handler.getText())) //$NON-NLS-1$
+				if (handler.getSelectionIndex() == 0
+						&& editor.getTable().getHandler().equals("") || editor.getTable().getHandler().equals(handler.getText())) //$NON-NLS-1$
 					return;
 				if (!editor.getTable().getHandler().equals("")) //$NON-NLS-1$
 				{
-					if (MessageDialog.openConfirm(editor.getSite().getShell(), Messages.getString("general.confirm.title"), Messages.getString("overview.handler.confirm.text"))) //$NON-NLS-1$//$NON-NLS-2$
+					if (MessageDialog.openConfirm(editor.getSite().getShell(), Messages
+							.getString("general.confirm.title"), Messages.getString("overview.handler.confirm.text"))) //$NON-NLS-1$//$NON-NLS-2$
 					{
 						// Clearing the handler configurations
 						for (int i = 0; i < editor.getTable().getColumns().size(); i++)
@@ -215,7 +224,7 @@ public class OverviewPage extends MPEditorFormPage
 		final FormText text = formToolkit.createFormText(composite, true);
 		text.setImage("columns", Activator.getDefault().getImageRegistry().get("columns")); //$NON-NLS-1$ //$NON-NLS-2$
 		text.setImage("table", Activator.getDefault().getImageRegistry().get("table")); //$NON-NLS-1$ //$NON-NLS-2$
-		StringBuilder stringBuilder = new StringBuilder();
+		final StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("<form><li style=\"image\" value=\"columns\"><a href=\"columns\">"); //$NON-NLS-1$
 		stringBuilder.append(Messages.getString("general.columns")); //$NON-NLS-1$
 		stringBuilder.append("</a>: "); //$NON-NLS-1$
@@ -227,7 +236,8 @@ public class OverviewPage extends MPEditorFormPage
 		stringBuilder.append("</li></form>"); //$NON-NLS-1$
 
 		text.setText(stringBuilder.toString(), true, false);
-		text.addHyperlinkListener(new IHyperlinkListener() {
+		text.addHyperlinkListener(new IHyperlinkListener()
+		{
 
 			public void linkEntered(final org.eclipse.ui.forms.events.HyperlinkEvent e)
 			{
@@ -253,18 +263,29 @@ public class OverviewPage extends MPEditorFormPage
 		section.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
 		final Composite composite = formToolkit.createComposite(section);
 		composite.setLayout(LayoutFactory.createTableWrapLayout(2, 0, 0));
+		formToolkit.paintBordersFor(composite);
 		section.setClient(composite);
 		// Counters
-		formToolkit.createLabel(composite, Messages.getString("overview.statistics.countof.columns"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
+		formToolkit
+				.createLabel(composite, Messages.getString("overview.statistics.countof.columns"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
 		count_of_properties = formToolkit.createLabel(composite, "", SWT.NONE); //$NON-NLS-1$
-		formToolkit.createLabel(composite, Messages.getString("overview.statistics.countof.property"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
+		count_of_properties.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
+		formToolkit
+				.createLabel(composite, Messages.getString("overview.statistics.countof.property"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
 		count_of_keys = formToolkit.createLabel(composite, "", SWT.NONE); //$NON-NLS-1$
-		formToolkit.createLabel(composite, Messages.getString("overview.statistics.countof.disabled"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
+		count_of_keys.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
+		formToolkit
+				.createLabel(composite, Messages.getString("overview.statistics.countof.disabled"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
 		count_of_disabled = formToolkit.createLabel(composite, "", SWT.NONE); //$NON-NLS-1$
-		formToolkit.createLabel(composite, Messages.getString("overview.statistics.countof.comment"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
+		count_of_disabled.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
+		formToolkit
+				.createLabel(composite, Messages.getString("overview.statistics.countof.comment"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
 		count_of_comments = formToolkit.createLabel(composite, "", SWT.NONE); //$NON-NLS-1$
-		formToolkit.createLabel(composite, Messages.getString("overview.statistics.countof.empty"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
+		count_of_comments.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
+		formToolkit
+				.createLabel(composite, Messages.getString("overview.statistics.countof.empty"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
 		count_of_emptyline = formToolkit.createLabel(composite, "", SWT.NONE); //$NON-NLS-1$
+		count_of_emptyline.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
 	}
 
 	/*
@@ -275,6 +296,7 @@ public class OverviewPage extends MPEditorFormPage
 	public void setActive()
 	{
 		final Table table = editor.getTable();
+		System.out.println(table.getColumns().size());
 		count_of_properties.setText(String.valueOf(table.getColumns().size()));
 		count_of_keys.setText(String.valueOf(table.sizeOfProperties()));
 		count_of_disabled.setText(String.valueOf(table.sizeOfDisabled()));
