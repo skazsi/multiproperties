@@ -1,22 +1,17 @@
 package hu.skzs.multiproperties.base.model.fileformat;
 
-import hu.skzs.multiproperties.base.Activator;
 import hu.skzs.multiproperties.base.model.Table;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.eclipse.core.resources.IFile;
-
 /**
  * The <code>SchemaConverterFactory</code> constructs {@link ISchemaConverter} instances.
  * 
- * @author Krisztian_Zsolt_Sall
+ * @author sallai
  * 
  */
 public class SchemaConverterFactory
@@ -31,85 +26,28 @@ public class SchemaConverterFactory
 	static final String SCHEMA_CONVERTER_CLASS_NAME = "SchemaConverter"; //$NON-NLS-1$
 
 	/**
-	 * Returns a newly constructed {@link SchemaConverter} instance based on the given <code>file</code>.
+	 * Returns a newly constructed {@link SchemaConverter} instance based on the given <code>content</code>.
 	 * 
-	 * @param file
-	 *            the given file
+	 * @param content
+	 *            the given contents byte array
 	 * @return a newly constructed {@link SchemaConverter} instance
 	 * @throws UnsupportedSchemaVersionException
 	 *             if an unsupported schema is tried to be used
 	 * @throws SchemaConverterException
 	 *             if an unexpected error occurred
 	 */
-	public static ISchemaConverter getSchemaConverter(final IFile file) throws SchemaConverterException
+	public static ISchemaConverter getSchemaConverter(final byte[] content) throws SchemaConverterException
 	{
-		InputStream inputStream = null;
-		String version = null;
 		try
 		{
 			// Identifying the schema version
-			inputStream = file.getContents(true);
-			version = getVersion(inputStream);
+			final String version = getVersion(new ByteArrayInputStream(content));
+			return getSchemaConverter(version);
 		}
 		catch (final Exception e)
 		{
 			throw new SchemaConverterException("Unexpected error occurred during constructing schema converter", e); //$NON-NLS-1$
 		}
-		finally
-		{
-			if (inputStream != null)
-				try
-				{
-					inputStream.close();
-				}
-				catch (final IOException e)
-				{
-					Activator.logWarn("Unable to close properly the input stream", e); //$NON-NLS-1$
-				}
-		}
-
-		return getSchemaConverter(version);
-	}
-
-	/**
-	 * Returns a newly constructed {@link SchemaConverter} instance based on the given <code>file</code>.
-	 * 
-	 * @param file
-	 *            the given file
-	 * @return a newly constructed {@link SchemaConverter} instance
-	 * @throws UnsupportedSchemaVersionException
-	 *             if an unsupported schema is tried to be used
-	 * @throws SchemaConverterException
-	 *             if an unexpected error occurred
-	 */
-	public static ISchemaConverter getSchemaConverter(final File file) throws SchemaConverterException
-	{
-		InputStream inputStream = null;
-		String version = null;
-		try
-		{
-			// Identifying the schema version
-			inputStream = new FileInputStream(file);
-			version = getVersion(inputStream);
-		}
-		catch (final Exception e)
-		{
-			throw new SchemaConverterException("Unexpected error occurred during constructing schema converter", e); //$NON-NLS-1$
-		}
-		finally
-		{
-			if (inputStream != null)
-				try
-				{
-					inputStream.close();
-				}
-				catch (final IOException e)
-				{
-					Activator.logWarn("Unable to close properly the input stream", e); //$NON-NLS-1$
-				}
-		}
-
-		return getSchemaConverter(version);
 	}
 
 	/**
@@ -129,7 +67,8 @@ public class SchemaConverterFactory
 	}
 
 	/**
-	 * Returns a newly constructed newest {@link SchemaConverter} instance. This method should be called by the new MultiProperties file action.
+	 * Returns a newly constructed newest {@link SchemaConverter} instance.
+	 * <p>This method should be called for creating the latest schema format.</p>
 	 * 
 	 * @return a newly constructed newest {@link SchemaConverter} instance
 	 * @throws SchemaConverterException if an unexpected error occurred

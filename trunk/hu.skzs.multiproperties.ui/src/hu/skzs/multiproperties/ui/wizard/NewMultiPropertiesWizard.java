@@ -6,7 +6,10 @@ import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterException;
 import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
+import hu.skzs.multiproperties.ui.editor.Editor;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IContainer;
@@ -131,8 +134,18 @@ public class NewMultiPropertiesWizard extends Wizard implements INewWizard
 
 		try
 		{
-			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter();
-			schemaConverter.convert(file, table);
+			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(table);
+			final InputStream inputStream = new ByteArrayInputStream(schemaConverter.convert(table));
+			if (file.exists())
+			{
+				file.setCharset(Editor.SCHEMA_CHARSET, null);
+				file.setContents(inputStream, true, true, null);
+			}
+			else
+			{
+				file.create(inputStream, true, null);
+				file.setCharset(Editor.SCHEMA_CHARSET, null);
+			}
 		}
 		catch (final SchemaConverterException e)
 		{

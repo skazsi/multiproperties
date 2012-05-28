@@ -1,6 +1,7 @@
 package hu.skzs.multiproperties.ui.editor;
 
 import hu.skzs.multiproperties.base.api.IHandler;
+import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
 import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
@@ -117,9 +118,10 @@ public class ColumnPart implements IDetailsPage
 							break;
 						}
 					}
-					final IHandler handler = (IHandler) element.createExecutableExtension("class"); //$NON-NLS-1$
-					final String new_handler_configuration = handler.configure(block.getEditor().getSite().getShell(),
-							handler_configuration);
+					final IHandlerConfigurator handlerConfigurator = (IHandlerConfigurator) element
+							.createExecutableExtension("configuratorClass"); //$NON-NLS-1$
+					final String new_handler_configuration = handlerConfigurator.configure(block.getEditor().getSite()
+							.getShell(), handler_configuration);
 					if (!new_handler_configuration.equals(handler_configuration))
 					{
 						handler_configuration = new_handler_configuration;

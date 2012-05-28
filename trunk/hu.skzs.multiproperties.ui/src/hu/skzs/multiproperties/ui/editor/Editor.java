@@ -1,11 +1,11 @@
 package hu.skzs.multiproperties.ui.editor;
 
 import hu.skzs.multiproperties.base.api.IHandler;
+import hu.skzs.multiproperties.base.io.InputStreamContentReader;
 import hu.skzs.multiproperties.base.model.AbstractRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter;
-import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterException;
 import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
 import hu.skzs.multiproperties.base.model.fileformat.UnsupportedSchemaVersionException;
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
@@ -15,6 +15,8 @@ import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
 import hu.skzs.multiproperties.ui.util.ErrorDialogWithStackTrace;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -53,6 +55,11 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	 * value than how the editor is specified in the <code>plugin.xml</code>.
 	 */
 	public static final String ID = "hu.skzs.multiproperties.ui.editor"; //$NON-NLS-1$
+
+	/**
+	 * The <code>SCHEMA_CHARSET</code> specifies the used encoding for the MultiProperties file.
+	 */
+	public static final String SCHEMA_CHARSET = "UTF-8"; //$NON-NLS-1$
 
 	private Table table;
 	private final List<AbstractRecord> vecClipboard = new LinkedList<AbstractRecord>();
@@ -208,15 +215,17 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	 * <li>Sets the {@link IStructuralChangeListener} and {@link IRecordChangeListener} of the {@link Table} to this editor instance</li>
 	 * <li>Sets the <code>dirty</code> flag of the table to <code>false</code></li>
 	 * </ol>
-	 * @throws SchemaConverterException
+	 * @throws Exception
 	 * @see {@link #getFile()}
 	 */
-	private void doLoad() throws SchemaConverterException
+	private void doLoad() throws Exception
 	{
 		try
 		{
-			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(getFile());
-			table = schemaConverter.convert(getFile());
+			final InputStream inputStream = getFile().getContents(true);
+			final byte[] content = new InputStreamContentReader(inputStream).getContent();
+			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(content);
+			table = schemaConverter.convert(content);
 			table.setStructuralChangeListener(this);
 			table.setRecordChangeListener(this);
 			table.setDirty(false);
@@ -241,14 +250,8 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		}
 		catch (final UnsupportedSchemaVersionException e)
 		{
-			Activator.logError("Unexpected error occurred during loading content", e); //$NON-NLS-1$
 			MessageDialog.openError(getSite().getShell(),
 					Messages.getString("general.error.title"), Messages.getString("editor.error.unsupported")); //$NON-NLS-1$//$NON-NLS-2$
-			throw e;
-		}
-		catch (final SchemaConverterException e)
-		{
-			Activator.logError("Unexpected error occurred during loading content", e); //$NON-NLS-1$
 			throw e;
 		}
 	}
@@ -262,12 +265,25 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		try
 		{
 			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(table);
-			schemaConverter.convert(file, table);
+			final InputStream inputStream = new ByteArrayInputStream(schemaConverter.convert(table));
+			if (file.exists())
+			{
+				file.setCharset(SCHEMA_CHARSET, null);
+				file.setContents(inputStream, true, true, null);
+			}
+			else
+			{
+				file.create(inputStream, true, null);
+				file.setCharset(SCHEMA_CHARSET, null);
+			}
+
 			table.setDirty(false);
 		}
-		catch (final SchemaConverterException e)
+		catch (final Exception e)
 		{
-			Activator.logError("Unexpected error occurred during saving content", e); //$NON-NLS-1$
+			Activator.logError("Unexpected schema converter error occurred during saving content", e); //$NON-NLS-1$
+			ErrorDialogWithStackTrace.openError(getSite().getShell(), Messages.getString("editor.error.file.save"), e); //$NON-NLS-1$
+			return;
 		}
 
 		// Saving the columns with the configured handler

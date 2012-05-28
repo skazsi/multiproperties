@@ -5,6 +5,7 @@
          point="hu.skzs.multiproperties.handler">
          <handler
          	name="Java Properties Handler"
-         	class="hu.skzs.multiproperties.handler.java.JavaHandler"/>
+         	class="hu.skzs.multiproperties.handler.java.JavaHandler"
+         	configuratorClass="hu.skzs.multiproperties.handler.java.JavaHandlerConfigurator"/>
    </extension>
 </plugin>

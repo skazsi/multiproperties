@@ -2,13 +2,9 @@ package hu.skzs.multiproperties.base.model.fileformat;
 
 import hu.skzs.multiproperties.base.model.Table;
 
-import java.io.File;
-
-import org.eclipse.core.resources.IFile;
-
 /**
  * The <code>ISchemaConverter</code> interface and it implementations are responsible for
- * converting between an {@link IFile} and the models.  
+ * converting between a byte array and the models.  
  * @author sallai
  */
 public interface ISchemaConverter
@@ -22,30 +18,18 @@ public interface ISchemaConverter
 	public String getVersion();
 
 	/**
-	 * Returns an instance of {@link Table} converted from the given {@link IFile}.
-	 * @param inputStream the given inputStream
+	 * Returns an instance of {@link Table} converted from the given <code>content<code>.
+	 * @param content the given content
 	 * @return an instance of {@link Table}
 	 * @throws SchemaConverterException
 	 */
-	public Table convert(IFile file) throws SchemaConverterException;
+	public Table convert(byte[] content) throws SchemaConverterException;
 
 	/**
-	 * Returns an instance of {@link Table} converted from the given {@link File}.
-	 * <p><strong>Note:</strong> This method should be used only for non-standard uses cases, such
-	 * as command line, debug, etc. Furthermore there is no opposing method with <code>convert(File, Table)</code>
-	 * signature.</p>
-	 * @param inputStream the given inputStream
-	 * @return an instance of {@link Table}
-	 * @throws SchemaConverterException
-	 */
-	public Table convert(File file) throws SchemaConverterException;
-
-	/**
-	 * Persists the given {@link Table} instance into the given {@link IFile}.
-	 * <p>If the <code>file</code> does not exists, then it will be created.</p>
-	 * @param file the given file
+	 * Returns a newly constructed byte array converted form the given {@link Table}.
 	 * @param table the given table
+	 * @return the converted content as byte array
 	 * @throws SchemaConverterException
 	 */
-	public void convert(IFile file, Table table) throws SchemaConverterException;
+	public byte[] convert(Table table) throws SchemaConverterException;
 }

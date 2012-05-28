@@ -296,7 +296,6 @@ public class OverviewPage extends MPEditorFormPage
 	public void setActive()
 	{
 		final Table table = editor.getTable();
-		System.out.println(table.getColumns().size());
 		count_of_properties.setText(String.valueOf(table.getColumns().size()));
 		count_of_keys.setText(String.valueOf(table.sizeOfProperties()));
 		count_of_disabled.setText(String.valueOf(table.sizeOfDisabled()));
