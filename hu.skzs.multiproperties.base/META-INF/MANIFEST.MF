@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MultiProperties Base Plug-in
 Bundle-SymbolicName: hu.skzs.multiproperties.base;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-Activator: hu.skzs.multiproperties.base.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -10,6 +10,7 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: hu.skzs.multiproperties.base.api,
+ hu.skzs.multiproperties.base.io,
  hu.skzs.multiproperties.base.model,
  hu.skzs.multiproperties.base.model.fileformat,
  hu.skzs.multiproperties.base.model.listener

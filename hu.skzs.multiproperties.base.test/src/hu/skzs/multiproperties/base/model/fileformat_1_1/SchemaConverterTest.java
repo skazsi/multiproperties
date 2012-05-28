@@ -7,16 +7,11 @@ import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.base.model.fileformat.AbstractSchemaConverterTest;
 import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterException;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import junit.framework.Assert;
 
-import org.easymock.Capture;
-import org.easymock.EasyMock;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.junit.Test;
 
 /**
@@ -32,25 +27,18 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 	private final SchemaConverter schemaConverter = new SchemaConverter();
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(org.eclipse.core.resources.IFile)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(byte[])}.
 	 * 
-	 * @throws CoreException
 	 * @throws SchemaConverterException
+	 * @throws IOException 
 	 */
 	@Test
-	public void testConvertIFile() throws CoreException, SchemaConverterException
+	public void testConvertIFile() throws SchemaConverterException, IOException
 	{
-		// fixture
-		IFile fileMock = EasyMock.createStrictMock(IFile.class);
-		InputStream inputStream = SchemaConverterTest.class.getResourceAsStream(NORMAL_FILE);
-		EasyMock.expect(fileMock.getContents(EasyMock.anyBoolean())).andReturn(inputStream);
-		EasyMock.replay(fileMock);
-
 		// when
-		Table table = schemaConverter.convert(fileMock);
+		Table table = schemaConverter.convert(readBytes(SchemaConverterTest.class.getResourceAsStream(NORMAL_FILE)));
 
 		// then
-		EasyMock.verify(fileMock);
 		Assert.assertNotNull(table);
 		Assert.assertEquals(VERSION, table.getVersion());
 		Assert.assertEquals(NAME, table.getName());
@@ -78,25 +66,18 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(org.eclipse.core.resources.IFile)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(byte[])}.
 	 * 
-	 * @throws CoreException
 	 * @throws SchemaConverterException
+	 * @throws IOException 
 	 */
 	@Test
-	public void testConvertIFileEmpty() throws CoreException, SchemaConverterException
+	public void testConvertIFileEmpty() throws SchemaConverterException, IOException
 	{
-		// fixture
-		IFile fileMock = EasyMock.createStrictMock(IFile.class);
-		InputStream inputStream = SchemaConverterTest.class.getResourceAsStream(EMPTY_FILE);
-		EasyMock.expect(fileMock.getContents(EasyMock.anyBoolean())).andReturn(inputStream);
-		EasyMock.replay(fileMock);
-
 		// when
-		Table table = schemaConverter.convert(fileMock);
+		Table table = schemaConverter.convert(readBytes(SchemaConverterTest.class.getResourceAsStream(EMPTY_FILE)));
 
 		// then
-		EasyMock.verify(fileMock);
 		Assert.assertNotNull(table);
 		Assert.assertEquals(VERSION, table.getVersion());
 		Assert.assertEquals(NAME, table.getName());
@@ -110,32 +91,29 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(org.eclipse.core.resources.IFile)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(byte[])}.
 	 * 
-	 * @throws CoreException
 	 * @throws SchemaConverterException
 	 */
 	@Test(expected = SchemaConverterException.class)
-	public void testConvertIFileNull() throws CoreException, SchemaConverterException
+	public void testConvertIFileNull() throws SchemaConverterException
 	{
 		// when
-		schemaConverter.convert((IFile) null);
+		schemaConverter.convert((byte[]) null);
 	}
 
 	/**
 	 * Test method for
-	 * {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(org.eclipse.core.resources.IFile, hu.skzs.multiproperties.base.model.Table)}
+	 * {@link hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter#convert(hu.skzs.multiproperties.base.model.Table)}
 	 * .
 	 * 
 	 * @throws SchemaConverterException
-	 * @throws CoreException
 	 * @throws IOException
 	 */
 	@Test
-	public void testConvertIFileTable() throws SchemaConverterException, CoreException, IOException
+	public void testConvertIFileTable() throws SchemaConverterException, IOException
 	{
 		// fixture
-		IFile fileMock = EasyMock.createNiceMock(IFile.class);
 		Table table = new Table();
 		table.setVersion(VERSION);
 		table.setName(NAME);
@@ -143,15 +121,10 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 		table.setHandler(HANDLER);
 		table.setKeyColumnWidth(100);
 
-		Capture<InputStream> capture = new Capture<InputStream>();
-		fileMock.create(EasyMock.capture(capture), EasyMock.eq(true), (IProgressMonitor) EasyMock.isNull());
-		EasyMock.replay(fileMock);
-
 		// when
-		schemaConverter.convert(fileMock, table);
+		byte[] content = schemaConverter.convert(table);
 
 		// then
-		EasyMock.verify(fileMock);
-		assertEquals(SchemaConverterTest.class.getResourceAsStream(EMPTY_FILE), capture.getValue());
+		assertEquals(SchemaConverterTest.class.getResourceAsStream(EMPTY_FILE), new ByteArrayInputStream(content));
 	}
 }

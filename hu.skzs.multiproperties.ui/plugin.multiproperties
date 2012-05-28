@@ -86,6 +86,13 @@
             <Value disabled="false">Ez a verziójú szerkesztő újabb tartalom verziót is támogat. Szeretné frissíteni a fájlt erre a verzióra? Különben bizonyos adatok elveszhetnek a mentés során.</Value>
         </Property>
         <Property>
+            <Name>editor.error.file.save</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Unable to save the content.</Value>
+            <Value disabled="false">Nem lehetséges a mentés.</Value>
+        </Property>
+        <Property>
             <Name>editor.error.handler.save</Name>
             <Description></Description>
             <Disabled>false</Disabled>

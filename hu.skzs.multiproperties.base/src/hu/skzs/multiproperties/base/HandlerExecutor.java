@@ -1,6 +1,7 @@
 package hu.skzs.multiproperties.base;
 
 import hu.skzs.multiproperties.base.api.IHandler;
+import hu.skzs.multiproperties.base.io.InputStreamContentReader;
 import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter;
@@ -8,6 +9,7 @@ import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
 import hu.skzs.multiproperties.base.parameter.Parameters;
 
 import java.io.File;
+import java.io.FileInputStream;
 
 public class HandlerExecutor
 {
@@ -26,10 +28,11 @@ public class HandlerExecutor
 			validateParameters(parameters);
 
 			final File multiPropertiesFile = parameters.getFileParameter().getValue();
+			final byte[] content = new InputStreamContentReader(new FileInputStream(multiPropertiesFile)).getContent();
 
 			// Loading the MultiProperties file
-			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(multiPropertiesFile);
-			final Table table = schemaConverter.convert(multiPropertiesFile);
+			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(content);
+			final Table table = schemaConverter.convert(content);
 
 			// Identifying the column
 			final Column column = getColumn(parameters.getColumnNameParameter().getValue(), table);

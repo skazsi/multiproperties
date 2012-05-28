@@ -107,7 +107,13 @@ public abstract class AbstractSchemaConverterTest
 		Assert.assertArrayEquals(expectedBytes, gotBytes);
 	}
 
-	private byte[] readBytes(InputStream inputStream) throws IOException
+	/**
+	 * Returns the content of the given input stream as byte array.
+	 * @param inputStream
+	 * @return
+	 * @throws IOException
+	 */
+	protected byte[] readBytes(InputStream inputStream) throws IOException
 	{
 		byte[] bytes = new byte[inputStream.available()];
 		int position = 0;

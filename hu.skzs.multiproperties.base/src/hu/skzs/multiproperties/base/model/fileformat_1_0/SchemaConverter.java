@@ -10,16 +10,11 @@ import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
-import org.eclipse.core.resources.IFile;
 
 /**
  * The <code>SchemaConverter</code> is an implementation of {@link ISchemaConverter} for <code>1.0</code> format.
@@ -31,7 +26,6 @@ public class SchemaConverter implements ISchemaConverter
 
 	public static final String VERSION = "1.0"; //$NON-NLS-1$
 	private static final String SCHEMA_PACKAGE = "hu.skzs.multiproperties.base.model.fileformat_1_0"; //$NON-NLS-1$
-	private static final String SCHEMA_CHARSET = "UTF-8"; //$NON-NLS-1$
 
 	/*
 	 * (non-Javadoc)
@@ -42,19 +36,18 @@ public class SchemaConverter implements ISchemaConverter
 		return VERSION;
 	}
 
-	/**
-	 * Returns an instance of {@link Table} converted from the given {@link InputStream}.
-	 * @param inputStream the given inputStream
-	 * @return an instance of {@link Table}
-	 * @throws SchemaConverterException
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(byte[])
 	 */
-	private Table convert(final InputStream inputStream) throws SchemaConverterException
+	public Table convert(final byte[] content) throws SchemaConverterException
 	{
 		try
 		{
 			final JAXBContext jaxbContext = JAXBContext.newInstance(SCHEMA_PACKAGE);
 			final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			final MultiProperties multiproperties = (MultiProperties) unmarshaller.unmarshal(inputStream);
+			final MultiProperties multiproperties = (MultiProperties) unmarshaller.unmarshal(new ByteArrayInputStream(
+					content));
 
 			final Table table = new Table();
 			// Fill up the models
@@ -113,41 +106,9 @@ public class SchemaConverter implements ISchemaConverter
 
 	/*
 	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(org.eclipse.core.resources.IFile)
+	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(hu.skzs.multiproperties.base.model.Table)
 	 */
-	public Table convert(final IFile file) throws SchemaConverterException
-	{
-		try
-		{
-			return convert(file.getContents(true));
-		}
-		catch (final Exception e)
-		{
-			throw new SchemaConverterException("Unexpected error in schema conversion", e); //$NON-NLS-1$
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(java.io.File)
-	 */
-	public Table convert(final File file) throws SchemaConverterException
-	{
-		try
-		{
-			return convert(new FileInputStream(file));
-		}
-		catch (final Exception e)
-		{
-			throw new SchemaConverterException("Unexpected error in schema conversion", e); //$NON-NLS-1$
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.base.model.fileformat.ISchemaConverter#convert(org.eclipse.core.resources.IFile, hu.skzs.multiproperties.base.model.Table)
-	 */
-	public void convert(final IFile file, final Table table) throws SchemaConverterException
+	public byte[] convert(final Table table) throws SchemaConverterException
 	{
 		try
 		{
@@ -212,17 +173,7 @@ public class SchemaConverter implements ISchemaConverter
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, new Boolean(true));
 			final ByteArrayOutputStream outputstream = new ByteArrayOutputStream();
 			marshaller.marshal(multiproperties, outputstream);
-			final ByteArrayInputStream inputstream = new ByteArrayInputStream(outputstream.toByteArray());
-			if (file.exists())
-			{
-				file.setCharset(SCHEMA_CHARSET, null);
-				file.setContents(inputstream, true, true, null);
-			}
-			else
-			{
-				file.create(inputstream, true, null);
-				file.setCharset(SCHEMA_CHARSET, null);
-			}
+			return outputstream.toByteArray();
 		}
 		catch (final Exception e)
 		{

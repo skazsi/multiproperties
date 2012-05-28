@@ -1,7 +1,5 @@
 package hu.skzs.multiproperties.handler.java.writer;
 
-import hu.skzs.multiproperties.handler.java.Activator;
-
 /**
  * Factory implementation for providing {@link Writer} implementation.
  * @author sallai
@@ -23,9 +21,27 @@ public class WriterFactory
 	 */
 	public static Writer getWriter(final String configuration) throws WriterConfigurationException
 	{
-		if (Activator.getDefault() != null)
+		if (presenceOfEclipse())
 			return new WorkspaceWriter(configuration);
 		else
 			return new FileSystemWriter(configuration);
+	}
+
+	/**
+	 * Returns a boolean value about the presence of Eclipse.
+	 * <p>The check is based on the presence of AbstractUIPlugin class.</p>
+	 * @return a boolean value about the presence of Eclipse
+	 */
+	private static boolean presenceOfEclipse()
+	{
+		try
+		{
+			Class.forName("org.eclipse.ui.plugin.AbstractUIPlugin"); //$NON-NLS-1$
+			return true;
+		}
+		catch (final ClassNotFoundException e)
+		{
+			return false;
+		}
 	}
 }

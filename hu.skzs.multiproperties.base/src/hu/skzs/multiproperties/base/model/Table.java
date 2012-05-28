@@ -9,9 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.Assert;
-
 /**
  * The <code>Table</code> object represents the entire MultiProperties object. It is basically the root model object of a MultiProperties
  * content.
@@ -76,7 +73,9 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 */
 	public void setName(final String name)
 	{
-		Assert.isNotNull(name);
+		if (name == null)
+			throw new IllegalArgumentException("Name cannot be null"); //$NON-NLS-1$
+
 		// TODO: an if should be here to skip the setting of same value
 		this.name = name;
 		setDirty(true);
@@ -102,7 +101,9 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 */
 	public void setDescription(final String description)
 	{
-		Assert.isNotNull(description);
+		if (description == null)
+			throw new IllegalArgumentException("Description cannot be null"); //$NON-NLS-1$
+
 		// TODO: an if should be here to skip the setting of same value
 		this.description = description;
 		setDirty(true);
@@ -129,7 +130,9 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 */
 	public void setRecordChangeListener(final IRecordChangeListener listener)
 	{
-		Assert.isNotNull(listener);
+		if (listener == null)
+			throw new IllegalArgumentException("Listener cannot be null"); //$NON-NLS-1$
+
 		this.recordChangeListener = listener;
 	}
 
@@ -143,16 +146,14 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 */
 	public void setStructuralChangeListener(final IStructuralChangeListener listener)
 	{
-		Assert.isNotNull(listener);
+		if (listener == null)
+			throw new IllegalArgumentException("Listener cannot be null"); //$NON-NLS-1$
+
 		this.structuralChangeListener = listener;
 	}
 
 	/**
 	 * Sets the version of the MultiProperties file format.
-	 * <p>
-	 * The {@link #load(IFile)} and {@link #save(IFile)} methods chooses the appropriate schema, or in other word file format based on this
-	 * value.
-	 * </p>
 	 * <p>
 	 * In normal cases this setter method cannot be called from outside, except when an older file is loaded with a newer version of
 	 * MultiProperties plugin and the user chooses the content to be converted to the newer format.
@@ -161,12 +162,12 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 * @param version
 	 *            the given version
 	 * @see #getVersion()
-	 * @see #load(IFile)
-	 * @see #save(IFile)
 	 */
 	public void setVersion(final String version)
 	{
-		Assert.isNotNull(version);
+		if (version == null)
+			throw new IllegalArgumentException("Version cannot be null"); //$NON-NLS-1$
+
 		if (version.equals(this.version))
 			return;
 		this.version = version;
@@ -178,8 +179,6 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 * 
 	 * @return the version
 	 * @see #setVersion(String)
-	 * @see #load(IFile)
-	 * @see #save(IFile)
 	 */
 	public String getVersion()
 	{
@@ -196,7 +195,9 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 */
 	public void setHandler(final String handler)
 	{
-		Assert.isNotNull(handler);
+		if (handler == null)
+			throw new IllegalArgumentException("Handler cannot be null"); //$NON-NLS-1$
+
 		if (handler.equals(this.handler))
 			return;
 		this.handler = handler;
@@ -328,7 +329,9 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 */
 	public void add(final AbstractRecord record)
 	{
-		Assert.isNotNull(record);
+		if (record == null)
+			throw new IllegalArgumentException("Record cannot be null"); //$NON-NLS-1$
+
 		records.add(record);
 		record.setRecordChangeListener(this);
 		record.setStructuralChangeListener(this);
@@ -350,7 +353,9 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 */
 	public void insert(final AbstractRecord record, final int index)
 	{
-		Assert.isNotNull(record);
+		if (record == null)
+			throw new IllegalArgumentException("Record cannot be null"); //$NON-NLS-1$
+
 		if (index < 0 || index > records.size())
 			throw new IllegalArgumentException("The index is out of bounds (" + index + "/" + records.size() + ")"); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 		records.add(index, record);

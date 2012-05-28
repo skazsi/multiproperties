@@ -7,8 +7,6 @@ import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.handler.java.wizard.TargetPropertiesSelectionWizard;
-import hu.skzs.multiproperties.handler.java.writer.WorkspaceWriter;
 import hu.skzs.multiproperties.handler.java.writer.Writer;
 import hu.skzs.multiproperties.handler.java.writer.WriterFactory;
 
@@ -16,9 +14,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Properties;
-
-import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.swt.widgets.Shell;
 
 /**
  * The <code>JavaHandler</code> is the default implementation of {@link IHandler}. It produces <code>java.util.Properties</code> typed output.
@@ -31,26 +26,6 @@ public class JavaHandler implements IHandler
 	/** A table of hex digits */
 	private static final char[] hexDigit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
 			'F' };
-
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.base.api.IHandler#configure(org.eclipse.swt.widgets.Shell, java.lang.String)
-	 */
-	public String configure(final Shell shell, final String configuration) throws HandlerException
-	{
-		try
-		{
-			final Writer writer = WriterFactory.getWriter(configuration); // it must be WorkspaceWriter in this case
-			final TargetPropertiesSelectionWizard wizard = new TargetPropertiesSelectionWizard((WorkspaceWriter) writer);
-			final WizardDialog wizarddialog = new WizardDialog(shell, wizard);
-			wizarddialog.open();
-			return writer.toString();
-		}
-		catch (final Exception e)
-		{
-			throw new HandlerException("Unexpected error occured during configuring the column by handler"); //$NON-NLS-1$
-		}
-	}
 
 	/*
 	 * (non-Javadoc)
