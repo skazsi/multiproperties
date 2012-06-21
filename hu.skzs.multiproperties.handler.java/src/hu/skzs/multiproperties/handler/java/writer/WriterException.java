@@ -29,11 +29,4 @@ public class WriterException extends Exception
 	{
 		super(cause);
 	}
-
-	protected WriterException(final String message, final Throwable cause, final boolean enableSuppression,
-			final boolean writableStackTrace)
-	{
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
 }
