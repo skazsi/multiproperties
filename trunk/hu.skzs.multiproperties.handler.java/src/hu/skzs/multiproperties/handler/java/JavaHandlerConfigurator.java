@@ -9,6 +9,7 @@ import hu.skzs.multiproperties.handler.java.writer.WriterFactory;
 
 import java.util.Properties;
 
+import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -32,12 +33,14 @@ public class JavaHandlerConfigurator implements IHandlerConfigurator
 			final Writer writer = WriterFactory.getWriter(configuration); // it must be WorkspaceWriter in this case
 			final TargetPropertiesSelectionWizard wizard = new TargetPropertiesSelectionWizard((WorkspaceWriter) writer);
 			final WizardDialog wizarddialog = new WizardDialog(shell, wizard);
-			wizarddialog.open();
-			return writer.toString();
+			if (wizarddialog.open() == Window.OK)
+				return writer.toString();
+			else
+				return null;
 		}
 		catch (final Exception e)
 		{
-			throw new HandlerException("Unexpected error occured during configuring the column by handler"); //$NON-NLS-1$
+			throw new HandlerException("Unexpected error occured during configuring the column by handler", e); //$NON-NLS-1$
 		}
 	}
 }
