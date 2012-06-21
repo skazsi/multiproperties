@@ -65,6 +65,7 @@ public class ColumnPart implements IDetailsPage
 		final Composite client = toolkit.createComposite(section);
 		client.setLayout(new GridLayout(2, false));
 		section.setClient(client);
+		toolkit.paintBordersFor(client);
 
 		// Fields
 		toolkit.createLabel(client, Messages.getString("columns.column.name")); //$NON-NLS-1$
@@ -122,7 +123,7 @@ public class ColumnPart implements IDetailsPage
 							.createExecutableExtension("configuratorClass"); //$NON-NLS-1$
 					final String new_handler_configuration = handlerConfigurator.configure(block.getEditor().getSite()
 							.getShell(), handler_configuration);
-					if (!new_handler_configuration.equals(handler_configuration))
+					if (new_handler_configuration != null && !new_handler_configuration.equals(handler_configuration))
 					{
 						handler_configuration = new_handler_configuration;
 						handler_configuration_changed = true;
