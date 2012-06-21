@@ -4,6 +4,7 @@ import hu.skzs.multiproperties.base.api.IHandler;
 import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
+import hu.skzs.multiproperties.ui.util.ComboPart;
 import hu.skzs.multiproperties.ui.util.LayoutFactory;
 
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -15,7 +16,6 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -39,7 +39,7 @@ public class OverviewPage extends MPEditorFormPage
 	//GeneralInfoSection
 	private Text name;
 	private Text description;
-	private Combo handler;
+	private ComboPart handler;
 	//StatisticsSection
 	private Label count_of_properties;
 	private Label count_of_keys;
@@ -104,12 +104,14 @@ public class OverviewPage extends MPEditorFormPage
 		section.setDescription(Messages.getString("overview.general.section.description")); //$NON-NLS-1$
 		section.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
 		final Composite composite = formToolkit.createComposite(section);
-		composite.setLayout(LayoutFactory.createTableWrapLayout(2, 0, 0));
+		composite.setLayout(LayoutFactory.createTableWrapLayout(2, 2, 5));
 		section.setClient(composite);
+		formToolkit.paintBordersFor(composite);
+
 		// Name
 		formToolkit
 				.createLabel(composite, Messages.getString("overview.general.name"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
-		name = formToolkit.createText(composite, editor.getTable().getName(), SWT.NONE);
+		name = formToolkit.createText(composite, editor.getTable().getName(), SWT.SINGLE);
 		name.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
 		name.addModifyListener(new ModifyListener()
 		{
@@ -144,13 +146,16 @@ public class OverviewPage extends MPEditorFormPage
 		section.setDescription(Messages.getString("overview.handler.section.description")); //$NON-NLS-1$
 		section.setLayoutData(new TableWrapData(TableWrapData.FILL_GRAB));
 		final Composite composite = formToolkit.createComposite(section);
-		composite.setLayout(LayoutFactory.createTableWrapLayout(2, 0, 0));
+		composite.setLayout(LayoutFactory.createTableWrapLayout(2, 2, 5));
 		section.setClient(composite);
+		formToolkit.paintBordersFor(composite);
+
 		// Handler
 		formToolkit
 				.createLabel(composite, Messages.getString("overview.handler.handler"), SWT.NONE).setForeground(formToolkit.getColors().getColor(IFormColors.TITLE)); //$NON-NLS-1$
-		handler = new Combo(composite, SWT.BORDER | SWT.READ_ONLY);
-		handler.setLayoutData(new TableWrapData(TableWrapData.FILL));
+		handler = new ComboPart();
+		handler.createControl(composite, formToolkit, SWT.READ_ONLY);
+		handler.getControl().setLayoutData(new TableWrapData(TableWrapData.FILL));
 
 		final IExtensionRegistry reg = Platform.getExtensionRegistry();
 		final IConfigurationElement[] extensions = reg.getConfigurationElementsFor(IHandler.HANDLER_EXTENSION_ID);

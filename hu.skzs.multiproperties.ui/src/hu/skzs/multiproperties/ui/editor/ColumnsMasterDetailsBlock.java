@@ -65,7 +65,8 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 			remove_button.setEnabled(true);
 			final Column column = (Column) ((IStructuredSelection) selection).getFirstElement();
 			up_button.setEnabled(editor.getTable().getColumns().indexOf(column) > 0);
-			down_button.setEnabled(editor.getTable().getColumns().indexOf(column) < editor.getTable().getColumns().size() - 1);
+			down_button.setEnabled(editor.getTable().getColumns().indexOf(column) < editor.getTable().getColumns()
+					.size() - 1);
 		}
 	}
 
@@ -87,6 +88,7 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 		section.setLayoutData(new GridData(GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL | GridData.FILL_BOTH));
 		final Composite composite = toolkit.createComposite(section);
 		composite.setLayout(LayoutFactory.createGridLayout(2, 5, 5));
+		toolkit.paintBordersFor(composite);
 		section.setClient(composite);
 		final SectionPart sectionPart = new SectionPart(section);
 		managedForm.addPart(sectionPart);
@@ -96,7 +98,8 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 		table.setLayoutData(new GridData(GridData.FILL_BOTH | GridData.GRAB_HORIZONTAL | GridData.GRAB_HORIZONTAL));
 		//toolkit.paintBordersFor(client);
 		tableViewer = new TableViewer(table);
-		tableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+		tableViewer.addSelectionChangedListener(new ISelectionChangedListener()
+		{
 
 			public void selectionChanged(final SelectionChangedEvent event)
 			{
@@ -115,7 +118,8 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 		// Add
 		add_button = toolkit.createButton(buttonComposite, Messages.getString("columns.button.add"), SWT.PUSH); //$NON-NLS-1$
 		add_button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
-		add_button.addSelectionListener(new SelectionAdapter() {
+		add_button.addSelectionListener(new SelectionAdapter()
+		{
 
 			@Override
 			public void widgetSelected(final SelectionEvent e)
@@ -132,7 +136,8 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 		remove_button = toolkit.createButton(buttonComposite, Messages.getString("columns.button.remove"), SWT.PUSH); //$NON-NLS-1$
 		remove_button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
 		remove_button.setEnabled(false);
-		remove_button.addSelectionListener(new SelectionAdapter() {
+		remove_button.addSelectionListener(new SelectionAdapter()
+		{
 
 			@Override
 			public void widgetSelected(final SelectionEvent e)
@@ -141,7 +146,9 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 				if (selection.isEmpty())
 					return;
 				final Column column = (Column) ((IStructuredSelection) selection).getFirstElement();
-				if (MessageDialog.openConfirm(editor.getSite().getShell(), Messages.getString("general.confirm.title"), Messages.getString("columns.button.remove.confirm.text"))) //$NON-NLS-1$//$NON-NLS-2$
+				if (MessageDialog.openConfirm(
+						editor.getSite().getShell(),
+						Messages.getString("general.confirm.title"), Messages.getString("columns.button.remove.confirm.text"))) //$NON-NLS-1$//$NON-NLS-2$
 				{
 					editor.getTable().getColumns().remove(editor.getTable().getColumns().indexOf(column));
 					tableViewer.refresh();
@@ -154,7 +161,8 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 		up_button = toolkit.createButton(buttonComposite, Messages.getString("columns.button.up"), SWT.PUSH); //$NON-NLS-1$
 		up_button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
 		up_button.setEnabled(false);
-		up_button.addSelectionListener(new SelectionAdapter() {
+		up_button.addSelectionListener(new SelectionAdapter()
+		{
 
 			@Override
 			public void widgetSelected(final SelectionEvent e)
@@ -172,7 +180,8 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 		down_button = toolkit.createButton(buttonComposite, Messages.getString("columns.button.down"), SWT.PUSH); //$NON-NLS-1$
 		down_button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
 		down_button.setEnabled(false);
-		down_button.addSelectionListener(new SelectionAdapter() {
+		down_button.addSelectionListener(new SelectionAdapter()
+		{
 
 			@Override
 			public void widgetSelected(final SelectionEvent e)
@@ -198,7 +207,8 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 	protected void createToolBarActions(final IManagedForm managedForm)
 	{
 		final ScrolledForm form = managedForm.getForm();
-		final Action horizontalAction = new Action(Messages.getString("columns.button.horizontal"), Action.AS_RADIO_BUTTON) { //$NON-NLS-1$
+		final Action horizontalAction = new Action(
+				Messages.getString("columns.button.horizontal"), Action.AS_RADIO_BUTTON) { //$NON-NLS-1$
 
 			@Override
 			public void run()
