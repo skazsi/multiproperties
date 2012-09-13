@@ -23,7 +23,27 @@
     </Columns>
     <Records>
         <Comment>
+            <Value>GENERAL</Value>
+        </Comment>
+        <Property>
+            <Name>general.filename</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Properties file</Value>
+            <Value disabled="false">Properties fájl</Value>
+        </Property>
+        <Property>
+            <Name>general.browse</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Browse...</Value>
+            <Value disabled="false">Tallózás...</Value>
+        </Property>
+        <Comment>
             <Value>WIZARD</Value>
+        </Comment>
+        <Comment>
+            <Value>Configuration</Value>
         </Comment>
         <Property>
             <Name>wizard.configuration.title</Name>
@@ -129,6 +149,52 @@
             <Disabled>false</Disabled>
             <Value disabled="false">File name must be valid!</Value>
             <Value disabled="false">A fájl nevének érvényesnek kell lennie!</Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>Importer</Value>
+        </Comment>
+        <Property>
+            <Name>wizard.importer.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Properties file selection</Value>
+            <Value disabled="false">Properties fájl választás</Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the properties file to be imported.</Value>
+            <Value disabled="false">Adja meg az importálandó properties fájlt.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.error.emptyfilename</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File must be specified!</Value>
+            <Value disabled="false">Adja meg a fájl!</Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.error.mustexists</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Properties file must exist!</Value>
+            <Value disabled="false">A properties fájlnak léteznie kell!</Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.error.validfile</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Valid file must be specified!</Value>
+            <Value disabled="false">Érvényes fájl kell legyen megadva!</Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.error.readable</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The file is not readable!</Value>
+            <Value disabled="false">A fájl nem olvasható!</Value>
         </Property>
     </Records>
 </MultiProperties>

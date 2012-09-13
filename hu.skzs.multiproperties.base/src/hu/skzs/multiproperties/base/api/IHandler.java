@@ -24,6 +24,21 @@ public interface IHandler
 	public static final String HANDLER_EXTENSION_ID = "hu.skzs.multiproperties.handler"; //$NON-NLS-1$
 
 	/**
+	 * Constant value containing the name attribute of importer extension point.
+	 */
+	public static final String NAME = "name"; //$NON-NLS-1$
+
+	/**
+	 * Constant value containing the class attribute of importer extension point.
+	 */
+	public static final String CLASS = "class"; //$NON-NLS-1$
+
+	/**
+	 * Constant value containing the configurator class attribute of importer extension point.
+	 */
+	public static final String CONFIGURATOR_CLASS = "configuratorClass"; //$NON-NLS-1$
+
+	/**
 	 * This method is called by the MultiProperties plugin when the save action is activated.
 	 * 
 	 * <p>At this point the MultiProperties file (the XML) is saved, and this {@link #save(String, Table, Column)}

@@ -4,6 +4,7 @@ import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.util.LayoutFactory;
+import hu.skzs.multiproperties.ui.wizard.importer.ImporterWizard;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -12,6 +13,8 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.wizard.IWizard;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -20,6 +23,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.DetailsPart;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.MasterDetailsBlock;
@@ -38,6 +42,7 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 	private Button remove_button;
 	private Button up_button;
 	private Button down_button;
+	private Button import_button;
 
 	public ColumnsMasterDetailsBlock(final MPEditorFormPage page)
 	{
@@ -156,8 +161,8 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 				}
 			}
 		});
-		// Up
 		toolkit.createLabel(buttonComposite, ""); //$NON-NLS-1$
+		// Up
 		up_button = toolkit.createButton(buttonComposite, Messages.getString("columns.button.up"), SWT.PUSH); //$NON-NLS-1$
 		up_button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
 		up_button.setEnabled(false);
@@ -193,6 +198,28 @@ public class ColumnsMasterDetailsBlock extends MasterDetailsBlock
 				editor.getTable().getColumns().moveDown(column);
 				tableViewer.refresh();
 				refreshButtons();
+			}
+		});
+		toolkit.createLabel(buttonComposite, ""); //$NON-NLS-1$
+		// Import
+		import_button = toolkit.createButton(buttonComposite, Messages.getString("columns.button.import"), SWT.PUSH); //$NON-NLS-1$
+		import_button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
+		import_button.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(final SelectionEvent e)
+			{
+				Column column = null;
+				final ISelection selection = tableViewer.getSelection();
+				if (!selection.isEmpty())
+					column = (Column) ((IStructuredSelection) selection).getFirstElement();
+
+				// Opening the import wizard
+				final IWizard wizard = new ImporterWizard(column, editor.getTable());
+				final WizardDialog wizarddialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+						.getShell(), wizard);
+				wizarddialog.open();
 			}
 		});
 	}

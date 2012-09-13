@@ -13,7 +13,9 @@ Export-Package: hu.skzs.multiproperties.base.api,
  hu.skzs.multiproperties.base.io,
  hu.skzs.multiproperties.base.model,
  hu.skzs.multiproperties.base.model.fileformat,
- hu.skzs.multiproperties.base.model.listener
+ hu.skzs.multiproperties.base.model.listener,
+ hu.skzs.multiproperties.base.registry,
+ hu.skzs.multiproperties.base.registry.element
 Bundle-ClassPath: .,
  lib/jaxb/jaxb-impl.jar,
  lib/jaxb/jaxb-xjc.jar,

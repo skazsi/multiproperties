@@ -1,15 +1,14 @@
 package hu.skzs.multiproperties.ui.editor;
 
-import hu.skzs.multiproperties.base.api.IHandler;
 import hu.skzs.multiproperties.base.model.Table;
+import hu.skzs.multiproperties.base.registry.element.HandlerRegistryElement;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.util.ComboPart;
 import hu.skzs.multiproperties.ui.util.LayoutFactory;
 
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionRegistry;
-import org.eclipse.core.runtime.Platform;
+import java.util.List;
+
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -157,16 +156,14 @@ public class OverviewPage extends MPEditorFormPage
 		handler.createControl(composite, formToolkit, SWT.READ_ONLY);
 		handler.getControl().setLayoutData(new TableWrapData(TableWrapData.FILL));
 
-		final IExtensionRegistry reg = Platform.getExtensionRegistry();
-		final IConfigurationElement[] extensions = reg.getConfigurationElementsFor(IHandler.HANDLER_EXTENSION_ID);
+		final List<HandlerRegistryElement> elements = Activator.getDefault().getHandlerRegistry().getElements();
 		handler.add(Messages.getString("overview.handler.handler.none")); //$NON-NLS-1$
 		handler.select(0);
 		boolean found_configured_handler = false;
-		for (int i = 0; i < extensions.length; i++)
+		for (final HandlerRegistryElement element : elements)
 		{
-			final IConfigurationElement element = extensions[i];
-			handler.add(element.getAttribute("name")); //$NON-NLS-1$
-			if (editor.getTable().getHandler().equals(element.getAttribute("name"))) //$NON-NLS-1$
+			handler.add(element.getName());
+			if (editor.getTable().getHandler().equals(element.getName()))
 			{
 				handler.select(handler.getItems().length - 1);
 				found_configured_handler = true;

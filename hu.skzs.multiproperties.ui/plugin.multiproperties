@@ -100,6 +100,13 @@
             <Value disabled="false">A kiválasztott kezelő nem tudta elmenteni az oszlop tartalmát.</Value>
         </Property>
         <Property>
+            <Name>editor.error.file.save.unknown</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The handler could not save the content, because it does not exist.</Value>
+            <Value disabled="false">A kezelő nem tudja elmenteni a tartalmat, mert az nem létezik.</Value>
+        </Property>
+        <Property>
             <Name>editor.error.handler.configure</Name>
             <Description></Description>
             <Disabled>false</Disabled>
@@ -332,6 +339,13 @@ See also the editor.marker.error.prefix property.</Description>
             <Value disabled="false">Le</Value>
         </Property>
         <Property>
+            <Name>columns.button.import</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Import...</Value>
+            <Value disabled="false">Import...</Value>
+        </Property>
+        <Property>
             <Name>columns.button.horizontal</Name>
             <Description></Description>
             <Disabled>false</Disabled>
@@ -382,6 +396,13 @@ See also the editor.marker.error.prefix property.</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Configure...</Value>
             <Value disabled="false">Beállít...</Value>
+        </Property>
+        <Property>
+            <Name>columns.column.handler.unknown</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">You cannot configure the handler, because it is non existing.</Value>
+            <Value disabled="false">Nem módosíthat a kezelő beállításán, mert a kezelő nem létezik.</Value>
         </Property>
         <Empty/>
         <Comment>
@@ -851,6 +872,100 @@ See also the editor.marker.error.prefix property.</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Append at end</Value>
             <Value disabled="false">Hozzáfűzés a végére</Value>
+        </Property>
+        <Comment>
+            <Value>import</Value>
+        </Comment>
+        <Property>
+            <Name>wizard.import.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Import</Value>
+            <Value disabled="false">Import</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.importers.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Importer selection</Value>
+            <Value disabled="false">Importer választás</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.importers.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Select the desired importer to be used</Value>
+            <Value disabled="false">Válassza ki a használni kívánt importert</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.importers.warning</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">There is no available importer</Value>
+            <Value disabled="false">Nincs elérhető importer</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.importers.label</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Select an importer</Value>
+            <Value disabled="false">Válasszon egy importert</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.method.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Method selection</Value>
+            <Value disabled="false">Eljárás választás</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.method.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Select the desired method to be used</Value>
+            <Value disabled="false">Válassza ki a használni kívánt eljárást</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.method.structrure</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Structure import</Value>
+            <Value disabled="false">Struktúra importálása</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.method.structrure.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Importing the structure includes not just the property records, but the comment and empty records too. All imported record will be appended in the end of the table. The property values are not imported.</Value>
+            <Value disabled="false">A struktúra importálása magába foglalja a property rekordok mellett a megjegyzés és üres rekordokat is. Minden rekord a táblázat végére kerül beszúrásra. A property rekordok értéke nem kerül importálásra.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.method.keyvalue</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Key-value based import</Value>
+            <Value disabled="false">Kulcs-érték párok importálása</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.method.keyvalue.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Importing only the property records together with their values. If the property already exists, then only its value is overwritten. Otherwise a new property will be inserted in the end of the table.</Value>
+            <Value disabled="false">Csak a property rekordok importálása az értékeikkel. Ha már létezik akkor csak az értéke kerül felülírásra. Különben egy új property kerül beszúrásra a táblázat végére.</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.method.value</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Value import</Value>
+            <Value disabled="false">Értékek importálása</Value>
+        </Property>
+        <Property>
+            <Name>wizard.import.method.value.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Importing only values of the already existing properties. If the property does not exist, it will not be created.</Value>
+            <Value disabled="false">Csak a property rekordok értékének importálása. Ha még nem létezik egy property, akkor az nem kerül létrehozásra.</Value>
         </Property>
         <Comment>
             <Value>new MultiProperties</Value>
