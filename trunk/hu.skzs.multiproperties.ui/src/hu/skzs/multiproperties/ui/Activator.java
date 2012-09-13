@@ -1,5 +1,8 @@
 package hu.skzs.multiproperties.ui;
 
+import hu.skzs.multiproperties.base.registry.HandlerRegistry;
+import hu.skzs.multiproperties.base.registry.ImporterRegistry;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -64,6 +67,24 @@ public class Activator extends AbstractUIPlugin
 	public static FormToolkit getToolkit()
 	{
 		return toolkit;
+	}
+
+	/**
+	 * Returns the {@link ImporterRegistry} singleton instance.
+	 * @return the {@link ImporterRegistry} singleton instance
+	 */
+	public ImporterRegistry getImporterRegistry()
+	{
+		return ImporterRegistry.getInstance();
+	}
+
+	/**
+	 * Returns the {@link HandlerRegistry} singleton instance.
+	 * @return the {@link HandlerRegistry} singleton instance
+	 */
+	public HandlerRegistry getHandlerRegistry()
+	{
+		return HandlerRegistry.getInstance();
 	}
 
 	/**

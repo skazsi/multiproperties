@@ -8,4 +8,12 @@
          	class="hu.skzs.multiproperties.handler.java.JavaHandler"
          	configuratorClass="hu.skzs.multiproperties.handler.java.JavaHandlerConfigurator"/>
    </extension>
+   <extension
+         point="hu.skzs.multiproperties.importer">
+         <importer
+               class="hu.skzs.multiproperties.handler.java.importer.JavaImporter"
+               icon="icons/java_prop.gif"
+               name="Java Properties Importer"
+               wizardClass="hu.skzs.multiproperties.handler.java.wizard.JavaImporterWizard"/>
+   </extension>
 </plugin>

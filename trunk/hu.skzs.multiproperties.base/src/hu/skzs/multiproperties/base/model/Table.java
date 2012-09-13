@@ -395,7 +395,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 * @param record
 	 *            the property string to search for
 	 * @see #indexOf(AbstractRecord)
-	 * @return the index of the first occurrence
+	 * @return the index of the first occurrence or <code>-1</code> if there is no such property record
 	 */
 	public int indexOf(final String property)
 	{
@@ -419,7 +419,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 * @param position
 	 *            The position where the search should be started
 	 * @see #indexOf(AbstractRecord)
-	 * @return the index of the first occurrence
+	 * @return the index of the first occurrence or <code>-1</code> if there is no such property record
 	 */
 	public int indexOf(final String property, final int position)
 	{

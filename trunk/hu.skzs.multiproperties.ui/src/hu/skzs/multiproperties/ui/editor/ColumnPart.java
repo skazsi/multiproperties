@@ -1,22 +1,19 @@
 package hu.skzs.multiproperties.ui.editor;
 
-import hu.skzs.multiproperties.base.api.IHandler;
-import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
 import hu.skzs.multiproperties.base.model.Column;
+import hu.skzs.multiproperties.base.registry.element.HandlerRegistryElement;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.util.ErrorDialogWithStackTrace;
 
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionRegistry;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -96,33 +93,28 @@ public class ColumnPart implements IDetailsPage
 		});
 		toolkit.createLabel(client, Messages.getString("columns.column.handler")); //$NON-NLS-1$
 		configure = toolkit.createButton(client, Messages.getString("columns.column.handler.button"), SWT.PUSH); //$NON-NLS-1$
-		configure.addSelectionListener(new SelectionListener()
+		configure.addSelectionListener(new SelectionAdapter()
 		{
 
-			public void widgetDefaultSelected(final SelectionEvent arg0)
-			{
-			}
-
+			@Override
 			public void widgetSelected(final SelectionEvent arg0)
 			{
 				try
 				{
-					IConfigurationElement element = null;
-					final IExtensionRegistry reg = Platform.getExtensionRegistry();
-					final IConfigurationElement[] extensions = reg
-							.getConfigurationElementsFor(IHandler.HANDLER_EXTENSION_ID);
-					for (int i = 0; i < extensions.length; i++)
+					// Getting the handler element
+					final HandlerRegistryElement element = Activator.getDefault().getHandlerRegistry()
+							.getElementByName(block.getEditor().getTable().getHandler());
+					if (element == null)
 					{
-						if (extensions[i].getAttribute("name").equals(block.getEditor().getTable().getHandler())) //$NON-NLS-1$
-						{
-							element = extensions[i];
-							break;
-						}
+						MessageDialog.openError(
+								null,
+								Messages.getString("general.error.title"), Messages.getString("columns.column.handler.unknown")); //$NON-NLS-1$ //$NON-NLS-2$
+						return;
 					}
-					final IHandlerConfigurator handlerConfigurator = (IHandlerConfigurator) element
-							.createExecutableExtension("configuratorClass"); //$NON-NLS-1$
-					final String new_handler_configuration = handlerConfigurator.configure(block.getEditor().getSite()
-							.getShell(), handler_configuration);
+
+					// Invoking the handler configuration
+					final String new_handler_configuration = element.getHandlerConfigurator().configure(
+							block.getEditor().getSite().getShell(), handler_configuration);
 					if (new_handler_configuration != null && !new_handler_configuration.equals(handler_configuration))
 					{
 						handler_configuration = new_handler_configuration;

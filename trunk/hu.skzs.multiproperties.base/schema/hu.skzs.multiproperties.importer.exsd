@@ -3,10 +3,10 @@
 <schema targetNamespace="hu.skzs.multiproperties.base" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="hu.skzs.multiproperties.base" id="hu.skzs.multiproperties.handler" name="MultiProperties Handler"/>
+         <meta.schema plugin="hu.skzs.multiproperties.base" id="hu.skzs.multiproperties.importer" name="MultiProperties Importer"/>
       </appinfo>
       <documentation>
-         This extension point allows to add handlers to the MultiProperties Editor.
+         This extension point allows to add importers to the MultiProperties Editor.
       </documentation>
    </annotation>
 
@@ -18,26 +18,26 @@
       </annotation>
       <complexType>
          <choice minOccurs="0" maxOccurs="unbounded">
-            <element ref="handler"/>
+            <element ref="importer"/>
          </choice>
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  a fully qualified identifier of the target extension point
                </documentation>
             </annotation>
          </attribute>
          <attribute name="id" type="string">
             <annotation>
                <documentation>
-                  
+                  an optional identifier of the extension instance
                </documentation>
             </annotation>
          </attribute>
          <attribute name="name" type="string">
             <annotation>
                <documentation>
-                  
+                  an optional name of the extension instance
                </documentation>
                <appinfo>
                   <meta.attribute translatable="true"/>
@@ -47,35 +47,42 @@
       </complexType>
    </element>
 
-   <element name="handler">
+   <element name="importer">
       <complexType>
-         <attribute name="class" type="string" use="required">
-            <annotation>
-               <documentation>
-                  a fully qualified name of the Java class implementing &lt;samp&gt;hu.skzs.multiproperties.base.api.IHandler&lt;/samp&gt;.
-               </documentation>
-               <appinfo>
-                  <meta.attribute kind="java" basedOn=":hu.skzs.multiproperties.base.api.IHandler"/>
-               </appinfo>
-            </annotation>
-         </attribute>
-         <attribute name="configuratorClass" type="string" use="required">
-            <annotation>
-               <documentation>
-                  a fully qualified name of the Java class implementing &lt;samp&gt;hu.skzs.multiproperties.base.api.IHandlerConfigurator&lt;/samp&gt;.
-               </documentation>
-               <appinfo>
-                  <meta.attribute kind="java" basedOn=":hu.skzs.multiproperties.base.api.IHandlerConfigurator"/>
-               </appinfo>
-            </annotation>
-         </attribute>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  The name of the handler.
+                  The name of the importer.
                </documentation>
                <appinfo>
                   <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="icon" type="string">
+            <annotation>
+               <documentation>
+                  Relative path of the image which represents the importer.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a fully qualified name of the Java class implementing &lt;samp&gt;hu.skzs.multiproperties.base.api.IImporter&lt;/samp&gt;.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":hu.skzs.multiproperties.base.api.IImporter"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="wizardClass" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a fully qualified name of the Java class extends &lt;samp&gt;hu.skzs.multiproperties.base.api.AbstractImporterWizard&lt;/samp&gt;.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="hu.skzs.multiproperties.base.api.AbstractImporterWizard:"/>
                </appinfo>
             </annotation>
          </attribute>

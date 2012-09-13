@@ -10,6 +10,7 @@ import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
 import hu.skzs.multiproperties.base.model.fileformat.UnsupportedSchemaVersionException;
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
 import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
+import hu.skzs.multiproperties.base.registry.element.HandlerRegistryElement;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
@@ -25,14 +26,11 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.IFindReplaceTarget;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -61,6 +59,9 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	 */
 	public static final String SCHEMA_CHARSET = "UTF-8"; //$NON-NLS-1$
 
+	private MPEditorPage overviewPage;
+	private MPEditorPage columnsPage;
+	private TablePage tablePage;
 	private Table table;
 	private final List<AbstractRecord> vecClipboard = new LinkedList<AbstractRecord>();
 	private IFindReplaceTarget fFindReplaceTarget;
@@ -141,19 +142,19 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		try
 		{
 			// Overview page
-			final MPEditorPage overviewPage = new OverviewPage();
+			overviewPage = new OverviewPage();
 			overviewPage.setEditor(this);
 			addPage(overviewPage, getEditorInput());
 			setPageText(getPageCount() - 1, overviewPage.getPageText());
 
 			// Overview page
-			final MPEditorPage columnsPage = new ColumnsPage();
+			columnsPage = new ColumnsPage();
 			columnsPage.setEditor(this);
 			addPage(columnsPage, getEditorInput());
 			setPageText(getPageCount() - 1, columnsPage.getPageText());
 
 			// Table page
-			final MPEditorPage tablePage = new TablePage();
+			tablePage = new TablePage();
 			tablePage.setEditor(this);
 			addPage(tablePage, getEditorInput());
 			setPageText(getPageCount() - 1, tablePage.getPageText());
@@ -291,39 +292,42 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		{
 			if (!table.getHandler().equals(""))
 			{
-				IConfigurationElement element = null;
-				final IExtensionRegistry reg = Platform.getExtensionRegistry();
-				final IConfigurationElement[] extensions = reg
-						.getConfigurationElementsFor("hu.skzs.multiproperties.handler"); //$NON-NLS-1$
-				for (int i = 0; i < extensions.length; i++)
+				// Getting the handler element
+				final HandlerRegistryElement element = Activator.getDefault().getHandlerRegistry()
+						.getElementByName(table.getHandler());
+				if (element == null)
 				{
-					if (extensions[i].getAttribute("name").equals(table.getHandler()))
+					MessageDialog
+							.openError(
+									null,
+									Messages.getString("general.error.title"), Messages.getString("editor.error.file.save.unknown")); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+				else
+				{
+					// Invoking the handler saving
+					final IHandler handler = element.getHandler();
+					for (int i = 0; i < table.getColumns().size(); i++)
 					{
-						element = extensions[i];
-						break;
+						if (!table.getColumns().get(i).getHandlerConfiguration().equals(""))
+						{
+							try
+							{
+								handler.save(table.getColumns().get(i).getHandlerConfiguration(), table, table
+										.getColumns().get(i));
+							}
+							catch (final Exception e)
+							{
+								Activator.logError(e);
+								ErrorDialogWithStackTrace.openError(getSite().getShell(),
+										Messages.getString("editor.error.handler.save"), e); //$NON-NLS-1$
+							}
+						}
 					}
 				}
-				final IHandler handler = (IHandler) element.createExecutableExtension("class");
-				for (int i = 0; i < table.getColumns().size(); i++)
-				{
-					if (!table.getColumns().get(i).getHandlerConfiguration().equals(""))
-					{
-						try
-						{
-							handler.save(table.getColumns().get(i).getHandlerConfiguration(), table, table.getColumns()
-									.get(i));
-						}
-						catch (final Exception e)
-						{
-							Activator.logError(e);
-							ErrorDialogWithStackTrace.openError(getSite().getShell(),
-									Messages.getString("editor.error.handler.save"), e); //$NON-NLS-1$
-						}
-					}
-				}
+
 			}
 		}
-		catch (final CoreException e)
+		catch (final Exception e)
 		{
 			Activator.logError("Unexpected error occurred during saving content by handler", e); //$NON-NLS-1$
 		}
@@ -400,10 +404,11 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	 */
 	public void changed(final AbstractRecord record)
 	{
-		if (getActiveEditor() instanceof TablePage)
+		if (tablePage != null)
 		{
-			final TablePage tablePage = (TablePage) getActiveEditor();
-			tablePage.getTableViewer().refresh(record);
+			final TableViewer tableViewer = tablePage.getTableViewer();
+			if (tableViewer != null)
+				tableViewer.refresh(record);
 		}
 		firePropertyChange(IEditorPart.PROP_DIRTY);
 		refreshOutline();
@@ -415,10 +420,13 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	 */
 	public void changed()
 	{
-		if (getActiveEditor() instanceof TablePage)
 		{
-			final TablePage tablePage = (TablePage) getActiveEditor();
-			tablePage.getTableViewer().refresh();
+			if (tablePage != null)
+			{
+				final TableViewer tableViewer = tablePage.getTableViewer();
+				if (tableViewer != null)
+					tableViewer.refresh();
+			}
 		}
 		firePropertyChange(IEditorPart.PROP_DIRTY);
 		refreshOutline();
