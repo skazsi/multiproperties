@@ -39,11 +39,16 @@ public class MPEPropertyTester extends PropertyTester
 	 */
 	private static final String PROPERTY_IS_ENDING_SELECTION = "isEndingSelection"; //$NON-NLS-1$
 
-	public boolean test(Object receiver, String property, Object[] args, Object expectedValue)
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.core.expressions.IPropertyTester#test(java.lang.Object, java.lang.String, java.lang.Object[], java.lang.Object)
+	 */
+	public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue)
 	{
 		if (!(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor() instanceof Editor))
-			throw new IllegalStateException("The MPE property tester can be used for active MP editor only"); //$NON-NLS-1$
-		Editor editor = (Editor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+			return false;
+		final Editor editor = (Editor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+				.getActiveEditor();
 
 		if (PROPERTY_IS_CONTINUOUS_SELECTION.equals(property))
 		{
@@ -62,7 +67,7 @@ public class MPEPropertyTester extends PropertyTester
 			}
 			else if (receiver instanceof StructuredSelection)
 			{
-				StructuredSelection structuredSelection = (StructuredSelection) receiver;
+				final StructuredSelection structuredSelection = (StructuredSelection) receiver;
 				if (structuredSelection.isEmpty())
 					return false;
 				if (!(structuredSelection.getFirstElement() instanceof AbstractRecord))
@@ -82,11 +87,11 @@ public class MPEPropertyTester extends PropertyTester
 			}
 			else if (receiver instanceof StructuredSelection)
 			{
-				StructuredSelection structuredSelection = (StructuredSelection) receiver;
+				final StructuredSelection structuredSelection = (StructuredSelection) receiver;
 				if (structuredSelection.isEmpty())
 					return false;
 
-				Object[] recordObjects = structuredSelection.toArray();
+				final Object[] recordObjects = structuredSelection.toArray();
 				if (!(recordObjects[recordObjects.length - 1] instanceof AbstractRecord))
 					return false;
 				record = (AbstractRecord) recordObjects[recordObjects.length - 1];
@@ -108,20 +113,20 @@ public class MPEPropertyTester extends PropertyTester
 	 * @param structuredSelection the given selection
 	 * @return <code>true</code> if the selection is continuous, otherwise it returns <code>false</code>
 	 */
-	private boolean isContinuousSelection(Table table, StructuredSelection structuredSelection)
+	private boolean isContinuousSelection(final Table table, final StructuredSelection structuredSelection)
 	{
 		@SuppressWarnings("rawtypes")
-		Iterator iterator = structuredSelection.iterator();
+		final Iterator iterator = structuredSelection.iterator();
 		int iMin = -1;
 		int iMax = -1;
 		while (iterator.hasNext())
 		{
-			Object object = iterator.next();
+			final Object object = iterator.next();
 			if (!(object instanceof AbstractRecord))
 				return false;
 
-			AbstractRecord record = (AbstractRecord) object;
-			int index = table.indexOf(record);
+			final AbstractRecord record = (AbstractRecord) object;
+			final int index = table.indexOf(record);
 			if (iMin == -1 && iMax == -1)
 			{
 				iMin = index;
