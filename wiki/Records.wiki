@@ -8,7 +8,7 @@ The MultiProperties Editor currently supports three different record types. They
   * http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.ui/icons/empty.gif *Empty*
 
 == Property ==
-This is the most important record type. It has at first one key and as many values as many columns exists in the MultiProperties file. The _undefined_ is also a possible value, which means the key is not defined in the current column.
+This is the most important record type. It has at first one key and as many values as many columns exists in the MultiProperties file. The _undefined_ is also a possible value, which means the key is not defined in the current column. In the latter case the default value can provide a value if it used for the property record.
 
 The property record has also a disabled flag and a description value.
 
