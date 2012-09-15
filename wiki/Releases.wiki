@@ -1,13 +1,37 @@
-#summary One-sentence summary of this page.
+#summary All releases
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== 1.1.0 ==
+2012-09-13 r117
+ * issue7 Import properties files
+ * issue19 IllegalArgumentException is thrown in some cases
+ * issue17 On Windows XP the widgets does not have visible borders on the Overview and Columns page. Furthermore the handler selector combo is not flat.
+ * issue16 The command line usage requires too much class dependency
+ * issue18 Exception is thrown when the Java handler configuration wizard is canceled
+== 1.0.0 ==
+2012-05-23 r108
+ * issue11 Supporting default value
+ * issue12 Command line execution
+ * issue13 Changing the activation of inline editing
+ * issue6 Outline view is not refreshed after editing a property typed record
+=== Note ===
+When you try to open a previous MultiProperties file with the new 1.0.0 version, you will be prompted for updating the file to the new format.
+== 0.9.1 ==
+2012-02-27 r82
+ * issue8 Description of multiproperties file should be used as comment at top of all peroperties files
+ * issue3 Java Properties Handler doesn't handle the disabled record well
+ * issue2 The new MPE wizard doesn't allow to specify the description
+ * issue4 The plugin doesn't log into the framework's log file
+ * issue9 Localization support is missing
+ * issue10 Supporting different XML file format
+=== Note ===
+The previous [#0.9.0 0.9.0] version used invalid MultiProperties file format version value. Such a `.multiproperties` should be modified manually before trying to open it with the [#0.9.1 0.9.1] version. Ensure that the `.multiproperties` file has `1.0` value in the `Version` element in the beginning part of the XML instead of `2.0`.
+{{{
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MultiProperties xmlns="hu.skzs.multiproperties">
+  <Version>1.0</Version>
+  ...
+</MultiProperties>
+}}}
+== 0.9.0 ==
+2011-11-24 r45
+ * First version
