@@ -31,7 +31,7 @@ If you don't specify the columnConfig paramater, then the column configuration s
 = Converting a column =
 Enter the following command to print out the usage.
  <pre>java -classpath hu.skzs.multiproperties.base_1.1.0.jar;hu.skzs.multiproperties.handler.java_1.1.0.jar hu.skzs.multiproperties.base.HandlerExecutor -file file.multiproperties -columnName EN -columnConfig "EN.properties|true|true|true|false" -handlerClass hu.skzs.multiproperties.handler.java.JavaHandler</pre>
-It will produce the desired `EN.properties` file. Please see the [Java Properties configuration#Java_Properties_configuration] format for understanding the boolean values in the end of the column configuration.
+It will produce the desired `EN.properties` file. Please see the [#Java_Properties_configuration Java Properties configuration] format for understanding the boolean values in the end of the column configuration.
 
 = Java Properties configuration =
 If you would like to use the *Java Properties* handler, then most probably you need to know the it's configuration format. It uses the `|` sign as a separator and stores the following values in order.
