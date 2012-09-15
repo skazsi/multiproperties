@@ -1,6 +1,6 @@
 #summary Command line usage of handlers
 
-The MultiProperties let the handlers to be used from command line too. That means you can take any `multiproperties` file as input, then transform one of it's column to the desired output by choosing any of your available handler.
+The MultiProperties lets the handlers to be used from command line too. That means you can take any `multiproperties` file as input, then convert one of it's column to the desired output by choosing any of your available handler.
 
 = Preparation =
 The _base_ part of the plugin contains a small framework for using the handlers from command line. The framework can be found in the `hu.skzs.multiproperties.base_X.Y.Z.jar`, so you need to put his `jar` on the classpath together with your desired handler. In the example below the *Java Properties* handler is used, which is represented by `hu.skzs.multiproperties.handler.java_X.Y.Z.jar`. Please note that the `X`, `Y` and `Z` means the major, minor and bugfix version numbers. In the following the `1.1.0` version is used.
@@ -29,7 +29,7 @@ If you don't specify the columnConfig paramater, then the column configuration s
 </pre>
 
 = Converting a column =
-Enter the following command to print out the usage.
+Enter the following command to convert for example the `file.multiproperties` file's *EN* called column into `EN.properties` file with the *Java Properties* handler.
  <pre>java -classpath hu.skzs.multiproperties.base_1.1.0.jar;hu.skzs.multiproperties.handler.java_1.1.0.jar hu.skzs.multiproperties.base.HandlerExecutor -file file.multiproperties -columnName EN -columnConfig "EN.properties|true|true|true|false" -handlerClass hu.skzs.multiproperties.handler.java.JavaHandler</pre>
 It will produce the desired `EN.properties` file. Please see the [#Java_Properties_configuration Java Properties configuration] format for understanding the boolean values in the end of the column configuration.
 
