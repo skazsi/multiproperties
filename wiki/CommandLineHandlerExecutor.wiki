@@ -39,7 +39,7 @@ If you would like to use the *Java Properties* handler, then most probably you n
  # Include MultiProperties description as comment in the beginning of the output properties file. (boolean, only `true` and `false` are valid values)
  # Include the selected column description as comment in the beginning of the output properties file. (boolean, only `true` and `false` are valid values)
  # Include disabled property records as comment. (boolean, only `true` and `false` are valid values)
- # Disable the default values. (boolean, only `true` and `false` are valid values)
+ # Disable the [Records#Property default values]. (boolean, only `true` and `false` are valid values)
 Example:
  `"c:\EN.properties|true|true|true|false"`
 
