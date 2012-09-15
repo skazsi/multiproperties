@@ -12,6 +12,8 @@ This is the most important record type. It has at first one key and as many valu
 
 The property record has also a disabled flag and a description value.
 
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/Records/Records1.jpg
+
 == Comment ==
 The comment record is useful for inserting comments between the properties. Although it is up to the configured handler how it will be written out into the output files, but in case of *Java Properties Handler* these records will be written with {{{#}}} prefix character.
 
