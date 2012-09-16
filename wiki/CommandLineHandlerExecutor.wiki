@@ -1,9 +1,14 @@
 #summary Command line usage of handlers
 
-The MultiProperties lets the handlers to be used from command line too. That means you can take any `multiproperties` file as input, then convert one of it's column to the desired output by choosing any of your available handler.
+The handlers can be used from command line too. That means you can take any `multiproperties` file as input, then convert one of it's column to the desired output by choosing any of your available handler.
 
 = Preparation =
-The _base_ part of the plugin contains a small framework for using the handlers from command line. The framework can be found in the `hu.skzs.multiproperties.base_X.Y.Z.jar`, so you need to put his `jar` on the classpath together with your desired handler. In the example below the *Java Properties* handler is used, which is represented by `hu.skzs.multiproperties.handler.java_X.Y.Z.jar`. Please note that the `X`, `Y` and `Z` means the major, minor and bugfix version numbers. In the following the `1.1.0` version is used.
+First of all you need to collect  the _base_ plugin `jar` file of the MultiProperties feature together with the handler plugin `jar` file. Hereinafter the *Java Properties* handler will be used, so finally you need to collect the following `jar` files from your Eclipse installation's `plugin` folder.
+ * `hu.skzs.multiproperties.base_X.Y.Z.jar`
+ * `hu.skzs.multiproperties.handler.java_X.Y.Z.jar`
+Please note that the `X`, `Y` and `Z` means the major, minor and bugfix version numbers.  In the following the `1.1.0` version is used.
+
+If your handler requires some additional `jar` files on the classpath, you need to take care of them too.
 
 = Printing the usage =
 Enter the following command to print out the usage.
