@@ -16,11 +16,11 @@ In the *Handler* section you can select an installed handler to be used for the 
 If you want to change the already used handler to a different one, you have to confirm the change by a dialog window, because each columns will lose its handler configuration.
 
 == Columns ==
-On this page you can edit the columns of the editor. You can *Add*, *Remove*, *Move up* or *Move down* columns.
+On this page you can edit the columns of the editor. You can *Add*, *Remove*, *Move up* or *Move down* columns. The [ImportingContent content importing] can be triggered also from here.
 
 http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/FeaturesOfEditor/columns.jpg
 
-After you have selected a column, then you can edit its *Name* and *Description* properties. Furthermore if you have selected a handler, you can configure the handler settings for this columns by pressing the *Configure...* button. In case of *Java Properties Handler*, it means you can specify the target workspace folder and the desired file name for the [http://docs.oracle.com/javase/tutorial/essential/environment/properties.html Properties] file.
+After you have selected a column, then you can edit its *Name* and *Description* properties. Furthermore if you have selected a handler, you can configure the handler settings for this columns by pressing the *Configure...* button. In case of *Java Properties Handler*, it means you can specify the target workspace folder and the desired file name for the [http://docs.oracle.com/javase/tutorial/essential/environment/properties.html Properties] file in addition of further settings.
 
 == Table ==
 This page offers basically the editing capabilities of the content. You can add new [Records property, comment or empty] typed records, but you can also delete, edit and move the selected records in addition of some special features, like duplicating and disabling.
