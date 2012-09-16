@@ -1,0 +1,4 @@
+#summary How to import content into an existing MultiProperties file
+
+= Importing content =
+You can import content into your MultiProperties file by triggering the *Import* function. Go to the http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.ui/icons/columns.gif [FeaturesOfEditor#Columns Columns] page and click on the *Import* button.
