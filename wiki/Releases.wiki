@@ -2,7 +2,7 @@
 
 = 1.1.0 =
 2012-09-13 r117
- * issue7 Import properties files
+ * issue7 [ImportingContent Import] properties files
  * issue19 IllegalArgumentException is thrown in some cases
  * issue17 On Windows XP the widgets does not have visible borders on the Overview and Columns page. Furthermore the handler selector combo is not flat.
  * issue16 The command line usage requires too much class dependency
@@ -10,7 +10,7 @@
 = 1.0.0 =
 2012-05-23 r108
  * issue11 Supporting default value
- * issue12 Command line execution
+ * issue12 [CommandLineHandlerExecutor Command line execution] 
  * issue13 Changing the activation of inline editing
  * issue6 Outline view is not refreshed after editing a property typed record
 == Note ==
