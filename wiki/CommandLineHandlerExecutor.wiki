@@ -48,7 +48,5 @@ If you would like to use the *Java Properties* handler, then most probably you n
 Example:
  `"c:\EN.properties|true|true|true|false"`
 
-
-
 = Ant/Maven build process =
-TBD
+While the MultiProperties does not support directly the And and Maven build processes, until both of them give the possibility to call any Java application as a build step. This chapter is finally just a hint instead of a detailed description.
