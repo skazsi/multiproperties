@@ -44,5 +44,10 @@ The _header_ and _footer_ can be used for including such contents like the [Feat
 The _body_ part includes the content of the given column. The [Records#Property property] records produce the above seen `INSERT` statements. The [Records#Comment comment] records are written out simply with a preceding `--` sign. Finally the [Records#Empty empty] records result empty lines only.
 
 === Markers ===
-The _header_, _footer_ and finally the _body_ which has [Records#Property property], [Records#Comment comment] and [Records#Empty empty] sub elements can be specified as constants with handler configuration. But to make the output dynamic, in other word to include actual values into the constant values, the following markers can be used. The marker format starts with `${` characters, followed by the name of marker
- * description
+The _header_, _footer_ and finally the _body_ which has [Records#Property property], [Records#Comment comment] and [Records#Empty empty] sub elements can be specified with constants by handler configuration. But to make the output dynamic, in other word to include actual values into the constant values, the following markers can be used.
+ * `description` - [FeaturesOfEditor#Overview description of MultiProperties]
+ * `columnName` - [FeaturesOfEditor#Columns name of column]
+ * `columnDescription` - [FeaturesOfEditor#Columns description of column]
+ * `key` - key value of [Records#Property property] record
+ * `value` - value of [Records#Property property] record associated to the given column or value of [Records#Comment comment] record
+The marker format is started with `${` characters, followed by the name of marker, and ended with `}` character. Example: `${description}`.
