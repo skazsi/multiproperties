@@ -5,7 +5,7 @@ This tutorial wiki page describes how you can implement a new handler. The descr
 
 == Goal of the handler ==
 By the end of this tutorial we will get a new handler which is able to produce any kind of text based files from the columns. The content of the lines in the files are specified by the handler configuration, having constant values with markers to the actual values. To make it clear or easier to understand why is it usefull, imagine the following need.
- We have a `localization` named database table with the below seen structure.
+We have a `localization` named database table with the below seen structure.
 <code language="sql">
 CREATE TABLE localization(
   key varchar NOT NULL,
@@ -14,7 +14,24 @@ CREATE TABLE localization(
   CONSTRAINT pk_localization PRIMARY KEY (key,lang)
 );
 </code>
- When we save the MultiProperties content, we would like to produce the following SQL file for example for the *EN* named column.
+When we save the MultiProperties content having *EN* and *DE* columns, we would like to produce the following SQL file for the *EN* column...
+<code language="sql">
+DELETE localization WHERE lang = 'EN';
+ When we save the MultiProperties content having *EN* and *DE* columns, we would like to produce the following SQL file for the *EN* column.
+<code language="sql">
+DELETE localization WHERE lang = 'EN';
+
+-- comment line
+INSERT INTO localization VALUES ('fruit.apple', 'EN', 'Apple');
+INSERT INTO localization VALUES ('fruit.plum', 'EN', 'Plum');
+COMMIT;
+</code>
+-- comment line
+INSERT INTO localization VALUES ('fruit.apple', 'EN', 'Apple');
+INSERT INTO localization VALUES ('fruit.plum', 'EN', 'Plum');
+
+</code>
+...and the following SQL file for the *DE* column.
 <code language="sql">
 DELETE localization WHERE lang = 'EN';
 
