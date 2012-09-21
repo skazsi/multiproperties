@@ -1,5 +1,7 @@
 #summary How to implement new handler
 
+= !!! THIS PAGE IS UNDER CONSTRUCTION !!! = 
+
 = Introduction =
 This tutorial wiki page describes how you can implement a new handler. The description assumes that you are familiar with the Eclipse *plugin development* on basic level and in some cases with *SWT*.
 
@@ -17,26 +19,30 @@ CREATE TABLE localization(
 When we save the MultiProperties content having *EN* and *DE* columns, we would like to produce the following SQL file for the *EN* column...
 <code language="sql">
 DELETE localization WHERE lang = 'EN';
- When we save the MultiProperties content having *EN* and *DE* columns, we would like to produce the following SQL file for the *EN* column.
-<code language="sql">
-DELETE localization WHERE lang = 'EN';
 
 -- comment line
 INSERT INTO localization VALUES ('fruit.apple', 'EN', 'Apple');
 INSERT INTO localization VALUES ('fruit.plum', 'EN', 'Plum');
 COMMIT;
-</code>
--- comment line
-INSERT INTO localization VALUES ('fruit.apple', 'EN', 'Apple');
-INSERT INTO localization VALUES ('fruit.plum', 'EN', 'Plum');
-
 </code>
 ...and the following SQL file for the *DE* column.
 <code language="sql">
-DELETE localization WHERE lang = 'EN';
+DELETE localization WHERE lang = 'DE';
 
 -- comment line
-INSERT INTO localization VALUES ('fruit.apple', 'EN', 'Apple');
-INSERT INTO localization VALUES ('fruit.plum', 'EN', 'Plum');
+INSERT INTO localization VALUES ('fruit.apple', 'DE', 'Apfel');
+INSERT INTO localization VALUES ('fruit.plum', 'DE', 'Pflaume');
 COMMIT;
 </code>
+Finally we can easily refresh the content of `localization` table for each supported language by executing the given specific SQL script file.
+
+== Required features ==
+To satisfy the above detailed requirements the following features are needed. First of all the output file encoding should be *UTF-8* in order to support the national/special characters too. Furthermore the output file structure is split up into 3 major parts, such as _header_, _body_ and _footer_.
+
+The _header_ and _footer_ can be used for including such contents like the [FeaturesOfEditor#Overview description of MultiProperties] or [FeaturesOfEditor#Columns description of column] as comment, it can be also useful for including the `DELETE` or `COMMIT` statements.
+
+The _body_ part includes the content of the given column. The [Records#Property property] records produce the above seen `INSERT` statements. The [Records#Comment comment] records are written out simply with a preceding `--` sign. Finally the [Records#Empty empty] records result empty lines only.
+
+=== Markers ===
+The _header_, _footer_ and finally the _body_ which has [Records#Property property], [Records#Comment comment] and [Records#Empty empty] sub elements can be specified as constants with handler configuration. But to make the output dynamic, in other word to include actual values into the constant values, the following markers can be used. The marker format starts with `${` characters, followed by the name of marker
+ * description
