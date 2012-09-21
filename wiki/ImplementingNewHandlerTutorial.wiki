@@ -1,5 +1,7 @@
 #summary How to implement new handler
 
+<wiki:toc max_depth="10" />
+
 = !!! THIS PAGE IS UNDER CONSTRUCTION !!! = 
 
 = Introduction =
@@ -54,3 +56,45 @@ The marker format is started with `${` characters, followed by the name of marke
 
 = Creating the project =
 Create a new plug-in project for the new handler. Go to *File* > *New* > *Other...*, then select the *Plug-in Project* under *Plug-in Development*. The _Project name_ is `hu.skzs.multiproperties.handler.text`. In the following wizard page select the `J2SE-1.5` possibility for the _Execution Environment_. Finally deselect the template selection. We are going to build the plug-in from scratch. Finishing the wizard will create the new project.
+
+== Manifest editor ==
+By creating the project the manifest editor will be opened automatically, but you can do the same manually anytime by opening the `plugin.xml` file in the root folder of project.
+
+On the *Overview* page of the manifest editor select the *This plug-in is a singleton* checkbox. On the *Dependencies* page add the followings to the *Required Plug-ins* section.
+ * `org.eclipse.ui`
+ * `org.eclipse.ui.ide`
+ * `org.eclipse.core.runtime`
+ * `org.eclipse.core.resources`
+ * `hu.skzs.multiproperties.base`
+
+== Handler classes ==
+Create a new Java class in the `hu.skzs.multiproperties.handler.text` package with `TextHandler` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandler` interface.
+<code language="java">
+package hu.skzs.multiproperties.handler.text;
+
+import hu.skzs.multiproperties.base.api.HandlerException;
+import hu.skzs.multiproperties.base.api.IHandler;
+import hu.skzs.multiproperties.base.model.Column;
+import hu.skzs.multiproperties.base.model.Table;
+
+public class TextHandler implements IHandler {
+    public void save(String configuration, Table table, Column column) throws HandlerException {
+        // TODO Auto-generated method stub
+    }
+}
+</code>
+Then create a new Java class in the `hu.skzs.multiproperties.handler.text` package with `TextHandlerConfigurator` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandlerConfigurator` interface.
+<code language="java">
+package hu.skzs.multiproperties.handler.text;
+
+import org.eclipse.swt.widgets.Shell;
+import hu.skzs.multiproperties.base.api.HandlerException;
+import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
+
+public class TextHandlerConfigurator implements IHandlerConfigurator {
+    public String configure(Shell shell, String configuration) throws HandlerException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+}
+</code>
