@@ -51,3 +51,6 @@ The _header_, _footer_ and finally the _body_ which has [Records#Property proper
  * `key` - key value of [Records#Property property] record
  * `value` - value of [Records#Property property] record associated to the given column or value of [Records#Comment comment] record
 The marker format is started with `${` characters, followed by the name of marker, and ended with `}` character. Example: `${description}`.
+
+= Creating the project =
+Create a new plug-in project for the new handler. Go to *File* > *New* > *Other...*, then select the *Plug-in Project* under *Plug-in Development*. The _Project name_ is `hu.skzs.multiproperties.handler.text`. In the following wizard page select the `J2SE-1.5` possibility for the _Execution Environment_. Finally deselect the template selection. We are going to build the plug-in from scratch. Finishing the wizard will create the new project.
