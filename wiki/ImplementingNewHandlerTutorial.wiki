@@ -83,8 +83,9 @@ public class TextHandler implements IHandler {
     }
 }
 </code>
-Then create a new Java class in the `hu.skzs.multiproperties.handler.text` package with `TextHandlerConfigurator` name. 
-The class must implement the `hu.skzs.multiproperties.base.api.IHandlerConfigurator` interface.
+
+Then create a new Java class in the `hu.skzs.multiproperties.handler.text` package with `TextHandlerConfigurator` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandlerConfigurator` interface.
+
 <code language="java">
 package hu.skzs.multiproperties.handler.text;
 
