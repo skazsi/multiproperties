@@ -137,3 +137,8 @@ public class FileSystemConfigurator extends AbstractConfigurator {
     // FIXME: create the getter and setter methods for fileName fields
 }
 </code>
+
+The `FileSystemConfigurator` class is the file system based implementation of `AbstractConfigurator` class. You need to implement the missing getter and setter methods again for `fileName` field.
+
+<code language="java">
+package
