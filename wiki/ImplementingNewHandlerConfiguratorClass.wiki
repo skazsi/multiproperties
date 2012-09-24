@@ -78,7 +78,9 @@ public abstract class AbstractConfigurator {
     // FIXME: create all of the getter and setter methods for headerPattern, propertyPattern, commentPattern, emptyPattern and footerPattern fields
 }
 </code>
+
 The `WorkspaceConfigurator` class is the Eclipse workspace based implementation of `AbstractConfigurator` class. You need to implement the missing getter and setter methods again for `containerName` and `fileName` fields.
+
 <code language="java">
 package hu.skzs.multiproperties.handler.text.configurator;
 
@@ -113,7 +115,9 @@ public class WorkspaceConfigurator extends AbstractConfigurator {
 
 }
 </code>
+
 The `FileSystemConfigurator` class is the file system based implementation of `AbstractConfigurator` class. You need to implement the missing getter and setter methods again for `fileName` field.
+
 <code language="java">
 package hu.skzs.multiproperties.handler.text.configurator;
 
