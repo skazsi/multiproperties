@@ -16,7 +16,7 @@ path\/header\/property\/comment\/empty\/footer
 The above seen format uses the backslash `\` and slash `/` characters together as field separator.
 
 == Configurator implementations ==
-Create a new `hu.skzs.multiproperties.handler.text.configurator` package for handler configuration codes. First of all, we need a _configurator_ class for formatting and parsing the above seen configuration format. But if we would like to use the handler from command line too, then the `path` part means a file system location instead of Eclipse workspace. That means we need two different implementations, and a proper factory pattern chooses the current implementation to be used.
+Create a new `hu.skzs.multiproperties.handler.text.configurator` package for handler configuration codes. First of all, we need a _configurator_ class for *formatting* and *parsing* the above seen configuration format. But when we use the handler from [CommandLineHandlerExecutor command line], then the `path` part of the configuration means a *file system* location instead of Eclipse *workspace* location. That means we need two different implementations, and of course a factory class which is able to choose the proper implementation.
 
 === Configurator classes ===
 See below the `AbstractConfigurator` class. Please note that the constructor will parse the String based configuration, and the `toString` method will format it. Furthermore at this point we cannot know whether the plug-in is used from [CommandLineHandlerExecutor command line] or not, the implementation is abstract together with the abstract `parsePath` and `formatPath` methods.
@@ -78,7 +78,66 @@ public abstract class AbstractConfigurator {
     // FIXME: create all of the getter and setter methods for headerPattern, propertyPattern, commentPattern, emptyPattern and footerPattern fields
 }
 </code>
+The `WorkspaceConfigurator` class is the Eclipse workspace based implementation of `AbstractConfigurator` class. You need to implement the missing getter and setter methods again for `containerName` and `fileName` fields.
+<code language="java">
+package hu.skzs.multiproperties.handler.text.configurator;
 
+import hu.skzs.multiproperties.handler.text.writer.WriterConfigurationException;
 
+public class WorkspaceConfigurator extends AbstractConfigurator {
 
- 
+    private String containerName;
+    private String fileName;
+
+    public WorkspaceConfigurator(final String configuration) throws WriterConfigurationException {
+        super(configuration);
+    }
+
+    @Override
+    public void parsePath(final String path)
+    {
+        containerName = path.substring(0, path.lastIndexOf("/"));
+        fileName = path.substring(path.lastIndexOf("/") + 1);
+    }
+
+    @Override
+    public String formatPath()
+    {
+        final StringBuilder stringBuilder = new StringBuilder(containerName);
+        stringBuilder.append("/");
+        stringBuilder.append(fileName);
+        return stringBuilder.toString();
+    }
+
+    // FIXME: create all of the getter and setter methods for containerName and fileName fields
+
+}
+</code>
+The `FileSystemConfigurator` class is the file system based implementation of `AbstractConfigurator` class. You need to implement the missing getter and setter methods again for `fileName` field.
+<code language="java">
+package hu.skzs.multiproperties.handler.text.configurator;
+
+import hu.skzs.multiproperties.handler.text.writer.WriterConfigurationException;
+
+public class FileSystemConfigurator extends AbstractConfigurator {
+
+    private String fileName;
+
+    public FileSystemConfigurator(final String configuration) throws WriterConfigurationException {
+        super(configuration);
+    }
+
+    @Override
+    public void parsePath(final String path) {
+        fileName = path;
+    }
+
+    @Override
+    public String formatPath() {
+        return fileName;
+    }
+
+    // FIXME: create the getter and setter methods for fileName fields
+}
+
+</code>
