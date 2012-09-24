@@ -15,8 +15,69 @@ path\/header\/property\/comment\/empty\/footer
 }}}
 The above seen format uses the backslash `\` and slash `/` characters together as field separator.
 
-= Writer implementations =
-While the `IHandler` interface already defines the `save` method, there worrying about the actual serialization of the content is not the best idea. We will just make the content into 
+== Configurator implementations ==
+Create a new `hu.skzs.multiproperties.handler.text.configurator` package for handler configuration codes. First of all, we need a _configurator_ class for formatting and parsing the above seen configuration format. But if we would like to use the handler from command line too, then the `path` part means a file system location instead of Eclipse workspace. That means we need two different implementations, and a proper factory pattern chooses the current implementation to be used.
+
+=== Configurator classes ===
+See below the `AbstractConfigurator` class. Please note that the constructor will parse the String based configuration, and the `toString` method will format it. Furthermore at this point we cannot know whether the plug-in is used from [CommandLineHandlerExecutor command line] or not, the implementation is abstract together with the abstract `parsePath` and `formatPath` methods.
+
+Finally you need to implement the missing getter and setter methods for `headerPattern`, `footerPattern`, `propertyPattern`, `commentPattern`, `emptyPattern` fields. You need to implemented them.
+<code language="java">package hu.skzs.multiproperties.handler.text.configurator;
+
+import hu.skzs.multiproperties.handler.text.writer.WriterConfigurationException;
+
+import java.util.StringTokenizer;
+
+public abstract class AbstractConfigurator {
+    protected static final String DELIM = "\\/";
+
+    protected String headerPattern;
+    protected String footerPattern;
+    protected String propertyPattern;
+    protected String commentPattern;
+    protected String emptyPattern;
+
+    public AbstractConfigurator(final String configuration) throws WriterConfigurationException {
+        if (configuration == null || configuration.equals(""))
+            return;
+        try {
+            final StringTokenizer tokenizer = new StringTokenizer(configuration, DELIM);
+            parsePath(tokenizer.nextToken());
+            headerPattern = tokenizer.nextToken();
+            propertyPattern = tokenizer.nextToken();
+            commentPattern = tokenizer.nextToken();
+            emptyPattern = tokenizer.nextToken();
+            footerPattern = tokenizer.nextToken();
+        }
+        catch (final Exception e) {
+            throw new WriterConfigurationException("Unexpected error occurred during parsing the handler configuration", e);
+        }
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(formatPath());
+        stringBuilder.append(DELIM);
+        stringBuilder.append(headerPattern);
+        stringBuilder.append(DELIM);
+        stringBuilder.append(propertyPattern);
+        stringBuilder.append(DELIM);
+        stringBuilder.append(commentPattern);
+        stringBuilder.append(DELIM);
+        stringBuilder.append(emptyPattern);
+        stringBuilder.append(DELIM);
+        stringBuilder.append(footerPattern);
+        return stringBuilder.toString();
+    }
+
+    public abstract void parsePath(String path);
+
+    public abstract String formatPath();
+
+    // FIXME: create all of the getter and setter methods for headerPattern, propertyPattern, commentPattern, emptyPattern and footerPattern fields
+}
+</code>
 
 
 
