@@ -138,7 +138,35 @@ public class FileSystemConfigurator extends AbstractConfigurator {
 }
 </code>
 
-The `FileSystemConfigurator` class is the file system based implementation of `AbstractConfigurator` class. You need to implement the missing getter and setter methods again for `fileName` field.
+The `ConfiguratorFactory` class can be used for getting an actually proper configurator implementation.
 
 <code language="java">
-package
+package hu.skzs.multiproperties.handler.text.configurator;
+
+public class ConfiguratorFactory {
+
+    private static Boolean presenseOfEclipse;
+
+    public static AbstractConfigurator getConfigurator(final String configuration) throws ConfiguratorException {
+        if (presenceOfEclipse())
+            return new WorkspaceConfigurator(configuration);
+        else
+            return new FileSystemConfigurator(configuration);
+    }
+
+    private static boolean presenceOfEclipse() {
+        if (presenseOfEclipse == null) {
+            try {
+                Class.forName("org.eclipse.ui.plugin.AbstractUIPlugin");
+                presenseOfEclipse = Boolean.TRUE;
+                return true;
+            }
+            catch (final ClassNotFoundException e) {
+                presenseOfEclipse = Boolean.FALSE;
+                return false;
+            }
+        }
+        return presenseOfEclipse.booleanValue();
+    }
+}
+</code>
