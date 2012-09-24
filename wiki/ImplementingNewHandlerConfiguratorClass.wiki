@@ -22,9 +22,7 @@ Create a new `hu.skzs.multiproperties.handler.text.configurator` package for han
 See below the `AbstractConfigurator` class. Please note that the constructor will parse the String based configuration, and the `toString` method will format it. Furthermore at this point we cannot know whether the plug-in is used from [CommandLineHandlerExecutor command line] or not, the implementation is abstract together with the abstract `parsePath` and `formatPath` methods.
 
 Finally you need to implement the missing getter and setter methods for `headerPattern`, `footerPattern`, `propertyPattern`, `commentPattern`, `emptyPattern` fields. You need to implemented them.
-<code language="java">package hu.skzs.multiproperties.handler.text.configurator;
-
-import hu.skzs.multiproperties.handler.text.writer.WriterConfigurationException;
+<code language="java">package package hu.skzs.multiproperties.handler.text.configurator;
 
 import java.util.StringTokenizer;
 
@@ -37,7 +35,7 @@ public abstract class AbstractConfigurator {
     protected String commentPattern;
     protected String emptyPattern;
 
-    public AbstractConfigurator(final String configuration) throws WriterConfigurationException {
+    public AbstractConfigurator(final String configuration) throws ConfiguratorException {
         if (configuration == null || configuration.equals(""))
             return;
         try {
@@ -50,7 +48,7 @@ public abstract class AbstractConfigurator {
             footerPattern = tokenizer.nextToken();
         }
         catch (final Exception e) {
-            throw new WriterConfigurationException("Unexpected error occurred during parsing the handler configuration", e);
+            throw new ConfiguratorException("Unexpected error occurred during parsing the handler configuration", e);
         }
     }
 
@@ -84,14 +82,12 @@ The `WorkspaceConfigurator` class is the Eclipse workspace based implementation 
 <code language="java">
 package hu.skzs.multiproperties.handler.text.configurator;
 
-import hu.skzs.multiproperties.handler.text.writer.WriterConfigurationException;
-
 public class WorkspaceConfigurator extends AbstractConfigurator {
 
     private String containerName;
     private String fileName;
 
-    public WorkspaceConfigurator(final String configuration) throws WriterConfigurationException {
+    public WorkspaceConfigurator(final String configuration) throws ConfiguratorException {
         super(configuration);
     }
 
@@ -112,7 +108,6 @@ public class WorkspaceConfigurator extends AbstractConfigurator {
     }
 
     // FIXME: create all of the getter and setter methods for containerName and fileName fields
-
 }
 </code>
 
@@ -121,13 +116,11 @@ The `FileSystemConfigurator` class is the file system based implementation of `A
 <code language="java">
 package hu.skzs.multiproperties.handler.text.configurator;
 
-import hu.skzs.multiproperties.handler.text.writer.WriterConfigurationException;
-
 public class FileSystemConfigurator extends AbstractConfigurator {
 
     private String fileName;
 
-    public FileSystemConfigurator(final String configuration) throws WriterConfigurationException {
+    public FileSystemConfigurator(final String configuration) throws ConfiguratorException {
         super(configuration);
     }
 
@@ -143,5 +136,4 @@ public class FileSystemConfigurator extends AbstractConfigurator {
 
     // FIXME: create the getter and setter methods for fileName fields
 }
-
 </code>
