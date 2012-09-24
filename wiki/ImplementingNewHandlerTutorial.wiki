@@ -98,3 +98,21 @@ public class TextHandlerConfigurator implements IHandlerConfigurator {
     }
 }
 </code>
+
+== Add Handler extension ==
+On the *Extensions* page of the manifest editor add a new handler extension. The extension point is `hu.skzs.multiproperties.handler`. The newly created extension parameters are the following:
+|| *Parameter* || *Value* ||
+|| name || `Text Handler` ||
+|| class || `hu.skzs.multiproperties.handler.text.TextHandler` ||
+|| configuratorClass || `hu.skzs.multiproperties.handler.text.TextHandlerConfigurator` ||
+
+Alternatively you can also add the extension by editing the `plugin.xml` file in the root of the plug-in project.
+<code language="xml"><plugin>
+  <extension point="hu.skzs.multiproperties.handler">
+    <handler
+      class="hu.skzs.multiproperties.handler.text.TextHandler"
+      configuratorClass="hu.skzs.multiproperties.handler.text.TextHandlerConfigurator"
+      name="Text Handler">
+    </handler>
+  </extension>
+</plugin></code>
