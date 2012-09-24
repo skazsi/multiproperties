@@ -1,0 +1,23 @@
+#summary How to implement new handler configurator class
+
+= Introduction =
+
+This page describes a possible way for implementing a handler configurator class. The goal of the example is still the same than it is described in the [ImplementingNewHandlerTutorial first part] of the tutorial. If you haven't read it, you should consider to do.
+
+As it is already written in the [ImplementingNewHandlerTutorial first part] of the tutorial, we have the skeleton of the new handler, together with it's handler `class` and `configuratorClass` implementations, furthermore it is already visible for the MultiProperties plug-in, but it does not do anything. By the end of this wiki page, the handler configuration will be implemented. That means the new handler can be configured by the *Configure* button on the [FeaturesOfEditor#Columns Columns] page.
+
+= Handler configuration =
+When the MultiProperties is saved, the selected handler will be invoked for each column to do something. In this case it means the handler needs to write a text file for each column. The content of the text file depends not just on the current column content, but as it is described in the [ImplementingNewHandlerTutorial#Required_features required features] section, the _header_, _footer_ and the _body_ parts are customizable.
+
+Because the MultiProperties format provides only a String based field for each column configuration, the example will uses the following format for storing the handler configuration for each column.
+{{{
+path\/header\/property\/comment\/empty\/footer
+}}}
+The above seen format uses the backslash `\` and slash `/` characters together as field separator.
+
+= Writer implementations =
+While the `IHandler` interface already defines the `save` method, there worrying about the actual serialization of the content is not the best idea. We will just make the content into 
+
+
+
+ 
