@@ -3,7 +3,7 @@
 = Introduction =
 This tutorial wiki page describes how you can implement a new handler. The description assumes that you are familiar with the Eclipse *plugin development* on basic level and in some cases with *SWT*.
 
-== Goal of the handler ==
+== Goal of the new handler ==
 By the end of this tutorial we will get a new handler which is able to produce any kind of text based files from the columns. The content of the lines in the files are specified by the handler configuration, having constant values with markers to the actual values. To make it clear or easier to understand why is it usefull, imagine the following need.
 We have a `localization` named database table with the below seen structure.
 <code language="sql">
@@ -34,14 +34,14 @@ COMMIT;
 </code>
 Finally we can easily refresh the content of `localization` table for each supported language by executing the given specific SQL script file.
 
-== Required features ==
+= Required features =
 To satisfy the above detailed requirements the following features are needed. First of all the output file encoding should be *UTF-8* in order to support the national/special characters too. Furthermore the output file structure is split up into 3 major parts, such as _header_, _body_ and _footer_.
 
 The _header_ and _footer_ can be used for including such contents like the [FeaturesOfEditor#Overview description of MultiProperties] or [FeaturesOfEditor#Columns description of column] as comment, it can be also useful for including the `DELETE` or `COMMIT` statements.
 
 The _body_ part includes the content of the given column. The [Records#Property property] records produce the above seen `INSERT` statements. The [Records#Comment comment] records are written out simply with a preceding `--` sign. Finally the [Records#Empty empty] records result empty lines only.
 
-=== Markers ===
+== Markers ==
 The _header_, _footer_ and finally the _body_ which has [Records#Property property], [Records#Comment comment] and [Records#Empty empty] sub elements can be specified with constants by handler configuration. But to make the output dynamic, in other word to include actual values into the constant values, the following markers can be used.
  * `description` - [FeaturesOfEditor#Overview description of MultiProperties]
  * `columnName` - [FeaturesOfEditor#Columns name of column]
