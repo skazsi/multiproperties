@@ -1,9 +1,5 @@
 #summary How to implement new handler
 
-<wiki:toc max_depth="10" />
-
-= !!! THIS PAGE IS UNDER CONSTRUCTION !!! = 
-
 = Introduction =
 This tutorial wiki page describes how you can implement a new handler. The description assumes that you are familiar with the Eclipse *plugin development* on basic level and in some cases with *SWT*.
 
@@ -104,7 +100,7 @@ public class TextHandlerConfigurator implements IHandlerConfigurator {
 == Add Handler extension ==
 On the *Extensions* page of the manifest editor add a new handler extension. The extension point is `hu.skzs.multiproperties.handler`. The newly created extension parameters are the following:
 || *Parameter* || *Value* ||
-|| name || `Text Handler` ||
+|| name || `Text File Handler` ||
 || class || `hu.skzs.multiproperties.handler.text.TextHandler` ||
 || configuratorClass || `hu.skzs.multiproperties.handler.text.TextHandlerConfigurator` ||
 
@@ -114,7 +110,7 @@ Alternatively you can also add the extension by editing the `plugin.xml` file in
     <handler
       class="hu.skzs.multiproperties.handler.text.TextHandler"
       configuratorClass="hu.skzs.multiproperties.handler.text.TextHandlerConfigurator"
-      name="Text Handler">
+      name="Text File Handler">
     </handler>
   </extension>
 </plugin></code>
