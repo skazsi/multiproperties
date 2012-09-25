@@ -15,7 +15,7 @@ path\/header\/property\/comment\/empty\/footer
 }}}
 The above seen format uses the backslash `\` and slash `/` characters together as field separator.
 
-= Configurator implementations =
+= Configurator =
 Create a new `hu.skzs.multiproperties.handler.text.configurator` package for handler configuration codes. First of all, we need a _configurator_ class for *formatting* and *parsing* the above seen configuration format. But when we use the handler from [CommandLineHandlerExecutor command line], then the `path` part of the configuration means a *file system* location instead of Eclipse *workspace* location. That means we need two different implementations, and of course a factory class which is able to choose the proper implementation.
 
 == Configurator classes ==
@@ -199,3 +199,12 @@ public class ConfiguratorException extends HandlerException {
     }
 }
 </code>
+
+= Writer =
+Create a new `hu.skzs.multiproperties.handler.text.writer` package for handler writer codes. Based on a `configuration` implementation and on the content byte array, a writer class is able to produce the output file.
+
+== Writer classes ==
+See below the `AbstractConfigurator` class. Please note that the constructor will parse the String based configuration, and the `toString` method will format it. Furthermore at this point we cannot know whether the plug-in is used from [CommandLineHandlerExecutor command line] or not, so this is just an abstract implementation together with the abstract `parsePath` and `formatPath` methods.
+
+Finally you need to implement the missing getter and setter methods for `headerPattern`, `footerPattern`, `propertyPattern`, `commentPattern`, `emptyPattern` fields.
+<code language="java">package package 
