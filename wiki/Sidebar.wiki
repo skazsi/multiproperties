@@ -8,5 +8,6 @@
   * [CommandLineHandlerExecutor Command line usage of handlers]
  * Customization
   * [ImplementingNewHandlerTutorial How to implement new handler]
-   * [ImplementingNewHandlerConfiguratorClass Implementing handler configurator class]
+   * [ImplementingNewHandlerProject Creating the project]
+   * [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
   
