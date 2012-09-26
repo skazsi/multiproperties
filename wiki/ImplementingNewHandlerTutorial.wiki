@@ -1,10 +1,11 @@
 #summary How to implement new handler
 
 = Introduction =
-This tutorial wiki page describes how you can implement a new handler. The description assumes that you are familiar with the Eclipse *plugin development* on basic level and in some cases with *SWT*.
+This tutorial wiki page describes how you can implement a new handler. The description assumes that you are familiar with the Eclipse [http://www.eclipse.org/pde/ plugin development] on basic level together with [http://www.eclipse.org/swt/ SWT] and [http://wiki.eclipse.org/JFace JFace].
 
-== Goal of the new handler ==
-By the end of this tutorial we will get a new handler which is able to produce any kind of text based files from the columns. The content of the lines in the files are specified by the handler configuration, having constant values with markers to the actual values. To make it clear or easier to understand why is it usefull, imagine the following need.
+== Test Handler as example ==
+By the end of this tutorial we get a new *Test Handler* named handler which is able to produce almost any kind of text files from the content of columns. To be more realistic, lets imagine the followings.
+
 We have a `localization` named database table with the below seen structure.
 <code language="sql">
 CREATE TABLE localization(
@@ -32,17 +33,17 @@ INSERT INTO localization VALUES ('fruit.apple', 'DE', 'Apfel');
 INSERT INTO localization VALUES ('fruit.plum', 'DE', 'Pflaume');
 COMMIT;
 </code>
-Finally we can easily refresh the content of `localization` table for each supported language by executing the given specific SQL script file.
+As a result we can easily refresh the content of `localization` table for each supported language by executing the given language specific SQL script file.
 
 = Required features =
-To satisfy the above detailed requirements the following features are needed. First of all the output file encoding should be *UTF-8* in order to support the national/special characters too. Furthermore the output file structure is split up into 3 major parts, such as _header_, _body_ and _footer_.
+To satisfy the above detailed requirements the following features are needed. First of all the output file encoding should be *UTF-8* in order to support the national/special characters too. Furthermore the output file structure can be split up into 3 major parts, _header_, _body_ and _footer_.
 
-The _header_ and _footer_ can be used for including such contents like the [FeaturesOfEditor#Overview description of MultiProperties] or [FeaturesOfEditor#Columns description of column] as comment, it can be also useful for including the `DELETE` or `COMMIT` statements.
+The _header_ and _footer_ can be used for including such contents like the [FeaturesOfEditor#Overview description of MultiProperties] or [FeaturesOfEditor#Columns description of column] as comment, but it can also include the `DELETE` or `COMMIT` statements.
 
 The _body_ part includes the content of the given column. The [Records#Property property] records produce the above seen `INSERT` statements. The [Records#Comment comment] records are written out simply with a preceding `--` sign. Finally the [Records#Empty empty] records result empty lines only.
 
 == Markers ==
-The _header_, _footer_ and finally the _body_ which has [Records#Property property], [Records#Comment comment] and [Records#Empty empty] sub elements can be specified with constants by handler configuration. But to make the output dynamic, in other word to include actual values into the constant values, the following markers can be used.
+The _header_, _footer_ and finally the _body_ which has [Records#Property property], [Records#Comment comment] and [Records#Empty empty] sub elements can be specified with constant values by the handler configuration. But to make the output dynamic, in other word to include actual values into the constant values, the following markers can be used.
  * `description` - [FeaturesOfEditor#Overview description of MultiProperties]
  * `columnName` - [FeaturesOfEditor#Columns name of column]
  * `columnDescription` - [FeaturesOfEditor#Columns description of column]
@@ -50,11 +51,24 @@ The _header_, _footer_ and finally the _body_ which has [Records#Property proper
  * `value` - value of [Records#Property property] record associated to the given column or value of [Records#Comment comment] record
 The marker format is started with `${` characters, followed by the name of marker, and ended with `}` character. Example: `${description}`.
 
+According to the above seen specification, we will use the following patterns in order to get our desired SQL files.
+|| *Pattern* || *Value* ||
+|| Header || `DELETE localization WHERE lang = '${columnName}';` ||
+|| Footer || `COMMIT;` ||
+|| Property record || `INSERT INTO localization VALUES ('${key}', '${columnName}', '${value}');` ||
+|| Comment record || `-- ${value}` ||
+|| Empty record ||  ||
+
+There is a line break sign in the end of each pattern.
+
+== Limitations ==
+The solution cannot handle properly such [FeaturesOfEditor#Overview descriptions] and [FeaturesOfEditor#Columns column descriptions] which consists of multiple lines. The second and further lines will break the SQL script.
+
 = Creating the project =
-Create a new plug-in project for the new handler. Go to *File* > *New* > *Other...*, then select the *Plug-in Project* under *Plug-in Development*. The _Project name_ is `hu.skzs.multiproperties.handler.text`. In the following wizard page select the `J2SE-1.5` possibility for the _Execution Environment_. Finally deselect the template selection. We are going to build the plug-in from scratch. Finishing the wizard will create the new project.
+Create a new plug-in project for the new handler. Go to *File* > *New* > *Other...*, then select the *Plug-in Project* under *Plug-in Development* category. The _Project name_ is `hu.skzs.multiproperties.handler.test`. In the following wizard page select the `J2SE-1.5` possibility for the _Execution Environment_. Finally deselect the template selection. We are going to build the plug-in from scratch. Finishing the wizard will create the new project.
 
 == Manifest editor ==
-By creating the project the manifest editor will be opened automatically, but you can do the same manually anytime by opening the `plugin.xml` file in the root folder of project.
+By creating the project the manifest editor will be opened automatically, but you can open it manually anytime by opening the `plugin.xml` file in the root folder of project.
 
 On the *Overview* page of the manifest editor select the *This plug-in is a singleton* checkbox. On the *Dependencies* page add the followings to the *Required Plug-ins* section.
  * `org.eclipse.ui`
@@ -64,32 +78,32 @@ On the *Overview* page of the manifest editor select the *This plug-in is a sing
  * `hu.skzs.multiproperties.base`
 
 == Handler classes ==
-Create a new Java class in the `hu.skzs.multiproperties.handler.text` package with `TextHandler` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandler` interface.
+Create a new Java class in the `hu.skzs.multiproperties.handler.text` package with `TestHandler` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandler` interface.
 <code language="java">
-package hu.skzs.multiproperties.handler.text;
+package hu.skzs.multiproperties.handler.test;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.base.api.IHandler;
 import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.base.model.Table;
 
-public class TextHandler implements IHandler {
+public class TestHandler implements IHandler {
     public void save(String configuration, Table table, Column column) throws HandlerException {
         // TODO Auto-generated method stub
     }
 }
 </code>
 
-Then create a new Java class in the `hu.skzs.multiproperties.handler.text` package with `TextHandlerConfigurator` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandlerConfigurator` interface.
+Then create a new Java class in the `hu.skzs.multiproperties.handler.test` package with `TestHandlerConfigurator` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandlerConfigurator` interface.
 
 <code language="java">
-package hu.skzs.multiproperties.handler.text;
+package hu.skzs.multiproperties.handler.test;
 
 import org.eclipse.swt.widgets.Shell;
 import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
 
-public class TextHandlerConfigurator implements IHandlerConfigurator {
+public class TestHandlerConfigurator implements IHandlerConfigurator {
     public String configure(Shell shell, String configuration) throws HandlerException {
         // TODO Auto-generated method stub
         return null;
@@ -100,17 +114,20 @@ public class TextHandlerConfigurator implements IHandlerConfigurator {
 == Add Handler extension ==
 On the *Extensions* page of the manifest editor add a new handler extension. The extension point is `hu.skzs.multiproperties.handler`. The newly created extension parameters are the following:
 || *Parameter* || *Value* ||
-|| name || `Text File Handler` ||
-|| class || `hu.skzs.multiproperties.handler.text.TextHandler` ||
-|| configuratorClass || `hu.skzs.multiproperties.handler.text.TextHandlerConfigurator` ||
+|| name || `Test Handler` ||
+|| class || `hu.skzs.multiproperties.handler.test.TestHandler` ||
+|| configuratorClass || `hu.skzs.multiproperties.handler.test.TestHandlerConfigurator` ||
 
 Alternatively you can also add the extension by editing the `plugin.xml` file in the root of the plug-in project.
 <code language="xml"><plugin>
   <extension point="hu.skzs.multiproperties.handler">
     <handler
-      class="hu.skzs.multiproperties.handler.text.TextHandler"
-      configuratorClass="hu.skzs.multiproperties.handler.text.TextHandlerConfigurator"
-      name="Text File Handler">
+      class="hu.skzs.multiproperties.handler.test.TestHandler"
+      configuratorClass="hu.skzs.multiproperties.handler.test.TestHandlerConfigurator"
+      name="Test Handler">
     </handler>
   </extension>
 </plugin></code>
+
+== Test ==
+If you have performed the above steps properly, then on the *Overview* page of manifest editor just click on the *Launch an Eclipse application* link.
