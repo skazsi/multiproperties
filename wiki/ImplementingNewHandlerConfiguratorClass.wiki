@@ -688,7 +688,7 @@ public class TextHandlerConfigurationWizard extends Wizard
 </code>
 
 = Finishing the configurator =
-To finish the configurator class we just need to update the already existing `TextHandlerConfigurator` class as follows.
+To finish the configurator class we just need to update the already existing `TestHandlerConfigurator` class as follows.
 
 <code language="java">package hu.skzs.multiproperties.handler.test;
 
