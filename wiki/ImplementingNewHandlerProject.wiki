@@ -14,7 +14,7 @@ On the *Overview* page of the manifest editor select the *This plug-in is a sing
  * `hu.skzs.multiproperties.base`
 
 == Handler classes ==
-Create a new Java class in the `hu.skzs.multiproperties.handler.text` package with `TestHandler` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandler` interface.
+Create a new Java class in the `hu.skzs.multiproperties.handler.test` package with `TestHandler` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandler` interface.
 <code language="java">
 package hu.skzs.multiproperties.handler.test;
 
