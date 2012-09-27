@@ -46,7 +46,7 @@ public class TestHandler implements IHandler
 		try
 		{
 			final StringBuilder strb = new StringBuilder();
-		strb.append(replaceMarkers(configuration.getHeaderPattern(), table, column, null));
+			strb.append(replaceMarkers(configuration.getHeaderPattern(), table, column, null));
 			for (int i = 0; i < table.size(); i++)
 			{
 				final AbstractRecord record = table.get(i);
@@ -65,7 +65,7 @@ public class TestHandler implements IHandler
 				strb.append(replaceMarkers(pattern, table, column, record));
 			}
 			strb.append(replaceMarkers(configuration.getFooterPattern(), table, column, null));
-			return strb.toString().getBytes("UTF-8"); //$NON-NLS-1$
+			return strb.toString().getBytes("UTF-8");
 		}
 		catch (final Exception e)
 		{
