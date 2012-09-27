@@ -363,7 +363,7 @@ public class WriterFactory
 }
 </code>
 
-= Configurator classes =
+= Wizard classes =
 
 Create a new `hu.skzs.multiproperties.handler.test.wizard` package for handler configuration wizard codes. On the first page of the wizard the user can specify the target workspace location and the file name. On the second page the patterns can be specified.
 
