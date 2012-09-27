@@ -658,7 +658,7 @@ public class TestHandlerConfigurationWizard extends Wizard
 	private TextFileSelectionPage textFileSelectionPage;
 	private PatternPage patternPage;
 
-	public TextHandlerConfigurationWizard(final WorkspaceConfigurator configurator)
+	public TestHandlerConfigurationWizard(final WorkspaceConfigurator configurator)
 	{
 		this.configurator = configurator;
 	}
