@@ -1,7 +1,7 @@
 #summary How to implement new handler configurator class
 
 Previous step: [ImplementingNewHandlerProject Creating the new project for the new handler]<br/>
-Next step: [ImplementingNewHandlerClass How to implement new handler configurator class]
+Next step: [ImplementingNewHandlerClass How to implement new handler class]
 
 -----
 
@@ -733,4 +733,4 @@ If you launch the test Eclipse again, then you can now use the *Configure* butto
 --------
 
 Previous step: [ImplementingNewHandlerProject Creating the new project for the new handler]<br/>
-Next step: [ImplementingNewHandlerClass How to implement new handler configurator class]
+Next step: [ImplementingNewHandlerClass How to implement new handler class]
