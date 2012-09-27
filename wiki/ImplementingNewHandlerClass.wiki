@@ -1,0 +1,1 @@
+#summary How to implement new handler configurator class
