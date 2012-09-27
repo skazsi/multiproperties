@@ -10,4 +10,5 @@
   * [ImplementingNewHandlerTutorial How to implement new handler]
    * [ImplementingNewHandlerProject Creating the project]
    * [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
+   * [ImplementingNewHandlerClass Implementing handler class]
   
