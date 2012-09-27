@@ -1,5 +1,13 @@
 #summary Creating the new project for the new handler.
 
+Previous step: [ImplementingNewHandlerTutorial How to implement new handler]<br/>
+Next step: [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
+
+----
+
+= Introduction =
+By the end of this wiki page, we will have the skeleton of the new handler. 
+
 = Creating the project =
 Create a new plug-in project for the new handler. Go to *File* > *New* > *Other...*, then select the *Plug-in Project* under *Plug-in Development* category. The _Project name_ is `hu.skzs.multiproperties.handler.test`. In the following wizard page select the `J2SE-1.5` possibility for the _Execution Environment_. Finally deselect the template selection. We are going to build the plug-in from scratch. Finishing the wizard will create the new project.
 
@@ -65,8 +73,9 @@ Alternatively you can also add the extension by editing the `plugin.xml` file in
   </extension>
 </plugin></code>
 
-== Test ==
+== Testing ==
 If you have performed the above steps properly, then on the *Overview* page of manifest editor just click on the *Launch an Eclipse application* link.
 
-<hr/>
+----
+Previous step: [ImplementingNewHandlerTutorial How to implement new handler]<br/>
 Next step: [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
