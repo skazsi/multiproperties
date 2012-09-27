@@ -1,5 +1,10 @@
 #summary How to implement new handler configurator class
 
+Previous step: [ImplementingNewHandlerProject Creating the new project for the new handler]<br/>
+Next step: [ImplementingNewHandlerClass How to implement new handler configurator class]
+
+-----
+
 = Introduction =
 As it is already written in the [ImplementingNewHandlerTutorial previous part] of the tutorial, we have the skeleton of the new handler, together with it's empty `class` and `configuratorClass` implementations, but it does not do anything. By the end of this wiki page, a real handler configuration will be implemented. That means the new handler can be configured by the *Configure* button on the [FeaturesOfEditor#Columns Columns] page for each column.
 
@@ -721,3 +726,8 @@ public class TextHandlerConfigurator implements IHandlerConfigurator
 	}
 }
 </code>
+
+--------
+
+Previous step: [ImplementingNewHandlerProject Creating the new project for the new handler]<br/>
+Next step: [ImplementingNewHandlerClass How to implement new handler configurator class]
