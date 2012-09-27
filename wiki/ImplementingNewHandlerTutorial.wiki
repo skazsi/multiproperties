@@ -66,5 +66,6 @@ The solution cannot handle properly such [FeaturesOfEditor#Overview descriptions
 
 = Implementation =
 Follow the instructions in the following sub pages.
- * [ImplementingNewHandlerProject Creating the project]
- * [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
+ # [ImplementingNewHandlerProject Creating the project]
+ # [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
+ # [ImplementingNewHandlerClass Implementing handler class]
