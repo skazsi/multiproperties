@@ -100,6 +100,10 @@ public class TestHandler implements IHandler
 }
 </code>
 
+= Testing =
+
+If you launch the test Eclipse again, then the MultiProperties plug-in can save the content according to the handler configuration. If you set the patterns according to the [ImplementingNewHandlerTutorial#Markers first page of the tutorial], then the handler will produce our text files properly.
+
 -----
 
 Previous step: [ImplementingNewHandlerConfiguratorClass How to implement new handler configurator class]
