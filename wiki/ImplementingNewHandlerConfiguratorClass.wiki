@@ -680,5 +680,44 @@ public class TextHandlerConfigurationWizard extends Wizard
 		return true;
 	}
 }
+</code>
 
+= Finishing the configurator =
+To finish the configurator class we just need to update the already existing `TextHandlerConfigurator` class as follows.
+
+<code language="java">package hu.skzs.multiproperties.handler.test;
+
+import hu.skzs.multiproperties.base.api.HandlerException;
+import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
+import hu.skzs.multiproperties.handler.test.configurator.ConfiguratorFactory;
+import hu.skzs.multiproperties.handler.test.configurator.WorkspaceConfigurator;
+import hu.skzs.multiproperties.handler.test.wizard.TextHandlerConfigurationWizard;
+
+import org.eclipse.jface.window.Window;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
+
+public class TextHandlerConfigurator implements IHandlerConfigurator
+{
+
+	public String configure(final Shell shell, final String configuration) throws HandlerException
+	{
+		try
+		{
+			final WorkspaceConfigurator workspaceConfigurator = (WorkspaceConfigurator) ConfiguratorFactory
+					.getConfigurator(configuration); // it must be WorkspaceConfigurator in this case
+
+			final TextHandlerConfigurationWizard wizard = new TextHandlerConfigurationWizard(workspaceConfigurator);
+			final WizardDialog wizarddialog = new WizardDialog(shell, wizard);
+			if (wizarddialog.open() == Window.OK)
+				return workspaceConfigurator.toString();
+			else
+				return null;
+		}
+		catch (final Exception e)
+		{
+			throw new HandlerException("Unexpected error occurred during configuring the column by handler", e);
+		}
+	}
+}
 </code>
