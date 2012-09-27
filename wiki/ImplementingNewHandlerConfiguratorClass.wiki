@@ -727,6 +727,9 @@ public class TextHandlerConfigurator implements IHandlerConfigurator
 }
 </code>
 
+= Testing =
+If you launch the test Eclipse again, then you can now use the *Configure* button. It will open our wizard, the MultiProperties plug-in will store our changes in the `multiproperties` file, etc. Only the handler class itself is left.
+
 --------
 
 Previous step: [ImplementingNewHandlerProject Creating the new project for the new handler]<br/>
