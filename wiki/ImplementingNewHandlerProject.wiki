@@ -69,4 +69,4 @@ Alternatively you can also add the extension by editing the `plugin.xml` file in
 If you have performed the above steps properly, then on the *Overview* page of manifest editor just click on the *Launch an Eclipse application* link.
 
 <hr/>
-Next: [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
+Next step: [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
