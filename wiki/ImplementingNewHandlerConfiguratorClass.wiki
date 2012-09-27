@@ -30,7 +30,7 @@ import hu.skzs.multiproperties.base.api.HandlerException;
 
 public abstract class AbstractConfigurator
 {
-	static final String DELIM = "/#/";
+	public static final String DELIM = "/#/";
 
 	protected String headerPattern;
 	protected String footerPattern;
