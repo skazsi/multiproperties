@@ -702,7 +702,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
-public class TextHandlerConfigurator implements IHandlerConfigurator
+public class TestHandlerConfigurator implements IHandlerConfigurator
 {
 
 	public String configure(final Shell shell, final String configuration) throws HandlerException
