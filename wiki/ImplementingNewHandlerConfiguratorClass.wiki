@@ -644,7 +644,7 @@ public class PatternPage extends WizardPage
 }
 </code>
 
-The `TextHandlerConfigurationWizard` is the JFace wizard implementation. Please note that when the user finish the wizard, then the `performFinish` method only updates the related fields in the configurator. Because the wizard cannot be used from [CommandLineHandlerExecutor command line], thus the configurator instance can be only `WorkspaceConfigurator` and never `FileSystemConfigurator`.
+The `TestHandlerConfigurationWizard` is the JFace wizard implementation. Please note that when the user finish the wizard, then the `performFinish` method only updates the related fields in the configurator. Because the wizard cannot be used from [CommandLineHandlerExecutor command line], thus the configurator instance can be only `WorkspaceConfigurator` and never `FileSystemConfigurator`.
 
 <code language="java">package hu.skzs.multiproperties.handler.test.wizard;
 
@@ -652,7 +652,7 @@ import hu.skzs.multiproperties.handler.test.configurator.WorkspaceConfigurator;
 
 import org.eclipse.jface.wizard.Wizard;
 
-public class TextHandlerConfigurationWizard extends Wizard
+public class TestHandlerConfigurationWizard extends Wizard
 {
 	private final WorkspaceConfigurator configurator;
 	private TextFileSelectionPage textFileSelectionPage;
@@ -696,7 +696,7 @@ import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
 import hu.skzs.multiproperties.handler.test.configurator.ConfiguratorFactory;
 import hu.skzs.multiproperties.handler.test.configurator.WorkspaceConfigurator;
-import hu.skzs.multiproperties.handler.test.wizard.TextHandlerConfigurationWizard;
+import hu.skzs.multiproperties.handler.test.wizard.TestHandlerConfigurationWizard;
 
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -712,7 +712,7 @@ public class TestHandlerConfigurator implements IHandlerConfigurator
 			final WorkspaceConfigurator workspaceConfigurator = (WorkspaceConfigurator) ConfiguratorFactory
 					.getConfigurator(configuration); // it must be WorkspaceConfigurator in this case
 
-			final TextHandlerConfigurationWizard wizard = new TextHandlerConfigurationWizard(workspaceConfigurator);
+			final TestHandlerConfigurationWizard wizard = new TestHandlerConfigurationWizard(workspaceConfigurator);
 			final WizardDialog wizarddialog = new WizardDialog(shell, wizard);
 			if (wizarddialog.open() == Window.OK)
 				return workspaceConfigurator.toString();
