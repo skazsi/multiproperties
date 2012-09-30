@@ -4,5 +4,4 @@ Bundle-Name: MultiProperties Java Handler Test Plug-in
 Bundle-SymbolicName: hu.skzs.multiproperties.handler.java.test
 Bundle-Version: 0.9.1
 Fragment-Host: hu.skzs.multiproperties.handler.java;bundle-version="0.9.1"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.junit
