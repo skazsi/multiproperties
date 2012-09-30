@@ -731,6 +731,10 @@ public class TestHandlerConfigurator implements IHandlerConfigurator
 = Testing =
 If you launch the test Eclipse again, then you can now use the *Configure* button. It will open our wizard, the MultiProperties plug-in will store our changes in the `multiproperties` file, etc. Only the handler class itself is left.
 
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/ImplementingNewHandler/configuration01.jpg
+
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/ImplementingNewHandler/configuration02.jpg
+
 --------
 
 Previous step: [ImplementingNewHandlerProject Creating the new project for the new handler]<br/>
