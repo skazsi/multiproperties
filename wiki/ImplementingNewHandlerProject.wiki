@@ -21,6 +21,8 @@ On the *Overview* page of the manifest editor select the *This plug-in is a sing
  * `org.eclipse.core.resources`
  * `hu.skzs.multiproperties.base`
 
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/ImplementingNewHandler/dependencies.jpg
+
 == Handler classes ==
 Create a new Java class in the `hu.skzs.multiproperties.handler.test` package with `TestHandler` name. The class must implement the `hu.skzs.multiproperties.base.api.IHandler` interface.
 <code language="java">
@@ -61,6 +63,8 @@ On the *Extensions* page of the manifest editor add a new handler extension. The
 || name || `Test Handler` ||
 || class || `hu.skzs.multiproperties.handler.test.TestHandler` ||
 || configuratorClass || `hu.skzs.multiproperties.handler.test.TestHandlerConfigurator` ||
+
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/ImplementingNewHandler/extensions.jpg
 
 Alternatively you can also add the extension by editing the `plugin.xml` file in the root of the plug-in project.
 <code language="xml"><plugin>
