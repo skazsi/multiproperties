@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MultiProperties Text File Handler Test Plug-in
+Bundle-SymbolicName: hu.skzs.multiproperties.handler.text.test
+Bundle-Version: 0.9.1
+Fragment-Host: hu.skzs.multiproperties.handler.text;bundle-version="0.9.1"
+Require-Bundle: org.junit
