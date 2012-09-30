@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MultiProperties Text File Handler Plug-in
+Bundle-SymbolicName: hu.skzs.multiproperties.handler.text;singleton:=true
+Bundle-Version: 1.1.0
+Bundle-Activator: hu.skzs.multiproperties.handler.text.Activator
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ hu.skzs.multiproperties.base;bundle-version="1.0.1",
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
