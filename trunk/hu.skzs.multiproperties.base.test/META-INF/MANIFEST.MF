@@ -4,5 +4,4 @@ Bundle-Name: MultiProperties Base Test Plug-in
 Bundle-SymbolicName: hu.skzs.multiproperties.base.test
 Bundle-Version: 0.9.1
 Fragment-Host: hu.skzs.multiproperties.base;bundle-version="0.9.1"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.junit
