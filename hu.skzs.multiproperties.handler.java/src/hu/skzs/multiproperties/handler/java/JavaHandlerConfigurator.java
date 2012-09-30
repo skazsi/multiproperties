@@ -40,7 +40,7 @@ public class JavaHandlerConfigurator implements IHandlerConfigurator
 		}
 		catch (final Exception e)
 		{
-			throw new HandlerException("Unexpected error occured during configuring the column by handler", e); //$NON-NLS-1$
+			throw new HandlerException("Unexpected error occurred during configuring the column by handler", e); //$NON-NLS-1$
 		}
 	}
 }

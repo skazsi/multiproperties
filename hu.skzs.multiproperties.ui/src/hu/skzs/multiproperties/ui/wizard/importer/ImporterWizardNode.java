@@ -72,7 +72,7 @@ public class ImporterWizardNode implements IWizardNode
 		}
 		catch (final CoreException e)
 		{
-			Activator.logError("Unexpected error occured during instantiating wizard", e); //$NON-NLS-1$
+			Activator.logError("Unexpected error occurred during instantiating wizard", e); //$NON-NLS-1$
 		}
 		return importerWizard;
 	}
