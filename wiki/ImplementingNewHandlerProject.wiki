@@ -80,6 +80,8 @@ Alternatively you can also add the extension by editing the `plugin.xml` file in
 = Testing =
 If you have performed the above steps properly, then on the *Overview* page of manifest editor just click on the *Launch an Eclipse application* link.
 
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/ImplementingNewHandler/test_multiproperties.jpg
+
 ----
 Previous step: [ImplementingNewHandlerTutorial How to implement new handler]<br/>
 Next step: [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
