@@ -40,12 +40,12 @@ public class JavaHandler implements IHandler
 		}
 		catch (final Exception e)
 		{
-			throw new HandlerException("Unexpected error occured during saving the column by handler", e); //$NON-NLS-1$
+			throw new HandlerException("Unexpected error occurred during saving the column by handler", e); //$NON-NLS-1$
 		}
 	}
 
 	/**
-	 * Converts and returns the content of the given {@link Column} based on the given {@link ConfigurationConverter}
+	 * Converts and returns the content of the given {@link Column} based on the given {@link Writer}
 	 * @param converter the given converter configuration
 	 * @param table the given table
 	 * @param column the given column

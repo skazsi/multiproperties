@@ -88,7 +88,7 @@ public class ImporterWizard extends Wizard
 		}
 		catch (final Exception e)
 		{
-			Activator.logError("Unexpected error occured during importing", e); //$NON-NLS-1$
+			Activator.logError("Unexpected error occurred during importing", e); //$NON-NLS-1$
 		}
 		return true;
 	}

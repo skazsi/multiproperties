@@ -129,7 +129,7 @@ public class JavaImporter implements IImporter
 		}
 		catch (final Exception e)
 		{
-			throw new ImporterException("Unexpected error occured during importing", e); //$NON-NLS-1$
+			throw new ImporterException("Unexpected error occurred during importing", e); //$NON-NLS-1$
 		}
 		finally
 		{

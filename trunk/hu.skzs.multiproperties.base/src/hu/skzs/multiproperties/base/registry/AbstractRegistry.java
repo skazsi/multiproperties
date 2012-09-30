@@ -72,7 +72,7 @@ public abstract class AbstractRegistry<T extends AbstractRegistryElement>
 			}
 			catch (final CoreException e)
 			{
-				Activator.logError("Unexpected error occured during parsing the extension element", e); //$NON-NLS-1$
+				Activator.logError("Unexpected error occurred during parsing the extension element", e); //$NON-NLS-1$
 			}
 		}
 		Collections.sort(elements, comparator);
