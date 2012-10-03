@@ -8,8 +8,10 @@ import hu.skzs.multiproperties.base.api.HandlerException;
  */
 public abstract class AbstractConfigurator
 {
+
 	public static final String DELIM = "/#/"; //$NON-NLS-1$
 
+	protected String encodingPattern;
 	protected String headerPattern;
 	protected String footerPattern;
 	protected String propertyPattern;
@@ -29,15 +31,19 @@ public abstract class AbstractConfigurator
 		try
 		{
 			final String[] tokens = configuration.split(DELIM);
-			if (tokens.length != 7)
+			if (tokens.length != 8)
 				throw new IllegalArgumentException("Invalid configuration: " + configuration); //$NON-NLS-1$
 
 			parsePath(tokens[0]);
-			headerPattern = tokens[1];
-			propertyPattern = tokens[2];
-			commentPattern = tokens[3];
-			emptyPattern = tokens[4];
-			footerPattern = tokens[5];
+			if (tokens[1].length() == 0)
+				encodingPattern = null;
+			else
+				encodingPattern = tokens[1];
+			headerPattern = tokens[2];
+			propertyPattern = tokens[3];
+			commentPattern = tokens[4];
+			emptyPattern = tokens[5];
+			footerPattern = tokens[6];
 			// The last pattern is the ETX. It is used only when the last token is empty String,
 			// in that case the split does not result enough tokens.
 		}
@@ -57,6 +63,9 @@ public abstract class AbstractConfigurator
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(formatPath());
+		stringBuilder.append(DELIM);
+		if (encodingPattern != null)
+			stringBuilder.append(encodingPattern);
 		stringBuilder.append(DELIM);
 		stringBuilder.append(headerPattern);
 		stringBuilder.append(DELIM);
@@ -83,6 +92,26 @@ public abstract class AbstractConfigurator
 	 * Returns the formatted path part of the configuration.
 	 */
 	public abstract String formatPath();
+
+	/**
+	 * Returns the encoding pattern or <code>null</code> if default encoding
+	 * is used.
+	 * @return the encoding pattern or <code>null</code> if default encoding
+	 * is used
+	 */
+	public String getEncodingPattern()
+	{
+		return encodingPattern;
+	}
+
+	/**
+	 * Sets the encoding. Can be <code>null</code> for using default encoding.
+	 * @param encodingPattern the given encoding pattern
+	 */
+	public void setEncodingPattern(final String encodingPattern)
+	{
+		this.encodingPattern = encodingPattern;
+	}
 
 	public String getHeaderPattern()
 	{
