@@ -4,14 +4,14 @@ import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
 import hu.skzs.multiproperties.handler.text.configurator.ConfiguratorFactory;
 import hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator;
-import hu.skzs.multiproperties.handler.text.wizard.TextHandlerConfigurationWizard;
+import hu.skzs.multiproperties.handler.text.preference.OutputFilePreferencePage;
+import hu.skzs.multiproperties.handler.text.preference.PatternsPreferencePage;
 
 import org.eclipse.jface.preference.IPreferenceNode;
 import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.jface.preference.PreferenceManager;
 import org.eclipse.jface.preference.PreferenceNode;
 import org.eclipse.jface.window.Window;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -30,21 +30,20 @@ public class TextHandlerConfigurator implements IHandlerConfigurator
 	{
 		try
 		{
-			final ColorsPreferencesPage page = new ColorsPreferencesPage();
-			final PreferenceManager mgr = new PreferenceManager();
-			final IPreferenceNode node = new PreferenceNode("1", page);
-			mgr.addToRoot(node);
-			final PreferenceDialog dialog = new PreferenceDialog(shell, mgr);
-			dialog.create();
-			dialog.setMessage("page.getTitle()");
-			dialog.open();
-
 			final WorkspaceConfigurator workspaceConfigurator = (WorkspaceConfigurator) ConfiguratorFactory
 					.getConfigurator(configuration); // it must be WorkspaceConfigurator in this case
 
-			final TextHandlerConfigurationWizard wizard = new TextHandlerConfigurationWizard(workspaceConfigurator);
-			final WizardDialog wizarddialog = new WizardDialog(shell, wizard);
-			if (wizarddialog.open() == Window.OK)
+			final OutputFilePreferencePage outputPage = new OutputFilePreferencePage(workspaceConfigurator);
+			final PatternsPreferencePage patternPage = new PatternsPreferencePage(workspaceConfigurator);
+			final PreferenceManager mgr = new PreferenceManager();
+			final IPreferenceNode outputNode = new PreferenceNode("outputPage", outputPage); //$NON-NLS-1$
+			final IPreferenceNode patternNode = new PreferenceNode("patternPage", patternPage); //$NON-NLS-1$
+			mgr.addToRoot(outputNode);
+			mgr.addToRoot(patternNode);
+			final PreferenceDialog dialog = new PreferenceDialog(shell, mgr);
+			dialog.create();
+			//dialog.setMessage("page.getTitle()");
+			if (dialog.open() == Window.OK)
 				return workspaceConfigurator.toString();
 			else
 				return null;

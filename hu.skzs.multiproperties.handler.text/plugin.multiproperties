@@ -32,6 +32,175 @@
             <Value disabled="false">Text File Handler</Value>
             <Value disabled="false">Szöveges Fájl Kezelő</Value>
         </Property>
+        <Empty/>
+        <Comment>
+            <Value>PREFERENCE</Value>
+        </Comment>
+        <Comment>
+            <Value>Configuration</Value>
+        </Comment>
+        <Property>
+            <Name>preference.output.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Output text file</Value>
+            <Value disabled="false">Kimeneti szöveges fájl</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the output text file.</Value>
+            <Value disabled="false">Adja meg a kimeneti szöveges fájlt.</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.location</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Location</Value>
+            <Value disabled="false">Hely</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.location.browse</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Browse...</Value>
+            <Value disabled="false">Tallóz...</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.location.browse.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Select location for the text file.</Value>
+            <Value disabled="false">Adja meg a helyét a szöveges fájlnak.</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.filename</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File name</Value>
+            <Value disabled="false">Fájl név</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.encoding.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Output file encoding</Value>
+            <Value disabled="false">Kimeneti fájl kódolása</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.encoding.default</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Workspace default encoding: </Value>
+            <Value disabled="false">Workspace alapértelmezett kódolása: </Value>
+        </Property>
+        <Property>
+            <Name>preference.output.error.mustspecified</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File location must be specified!</Value>
+            <Value disabled="false">A fájl helye meg kell legyen adva!</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.error.mustexists</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File location must exist!</Value>
+            <Value disabled="false">A fájl helyének léteznie kell!</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.error.mustwriteable</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Project must be writable!</Value>
+            <Value disabled="false">A projektnek írhatónak kell lennie!</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.error.validfilename</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File name must be valid!</Value>
+            <Value disabled="false">A fájl nevének érvényesnek kell lennie!</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.error.validfile</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File name must be specified!</Value>
+            <Value disabled="false">A fájl neve meg kell legyen adva!</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.error.invalid.encoding</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The selected encoding is not supported.</Value>
+            <Value disabled="false">A megadott kódolás nem támogatott!</Value>
+        </Property>
+        <Property>
+            <Name>preference.pattern.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Patterns</Value>
+            <Value disabled="false">Minták</Value>
+        </Property>
+        <Property>
+            <Name>preference.pattern.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the desired patterns.</Value>
+            <Value disabled="false">Adja meg a kívánt mintákat.</Value>
+        </Property>
+        <Property>
+            <Name>preference.pattern.footer</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Footer pattern</Value>
+            <Value disabled="false">Lábléc minta</Value>
+        </Property>
+        <Property>
+            <Name>preference.pattern.header</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Header pattern</Value>
+            <Value disabled="false">Fejléc minta</Value>
+        </Property>
+        <Property>
+            <Name>preference.pattern.property</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Property record pattern</Value>
+            <Value disabled="false">Property rekord minta</Value>
+        </Property>
+        <Property>
+            <Name>preference.pattern.comment</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Comment record pattern</Value>
+            <Value disabled="false">Megjegyzés rekord minta</Value>
+        </Property>
+        <Property>
+            <Name>preference.pattern.empty</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Empty record pattern</Value>
+            <Value disabled="false">Üres rekord minta</Value>
+        </Property>
+        <Property>
+            <Name>preference.pattern.error.invalid.prefix</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The </Value>
+            <Value disabled="false">A </Value>
+        </Property>
+        <Property>
+            <Name>preference.pattern.error.invalid.suffix</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false"> character sequence is not allowed!</Value>
+            <Value disabled="false"> karakter sorozat nem megengedett!</Value>
+        </Property>
+        <Empty/>
         <Comment>
             <Value>WIZARD</Value>
         </Comment>
@@ -41,77 +210,77 @@
         <Property>
             <Name>wizard.configuration.title</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Output text file</Value>
             <Value disabled="false">Kimeneti szöveges fájl</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.description</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Specify the output text file.</Value>
             <Value disabled="false">Adja meg a kimeneti szöveges fájlt.</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.location</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Location</Value>
             <Value disabled="false">Hely</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.location.browse</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Browse...</Value>
             <Value disabled="false">Tallóz...</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.location.browse.description</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Select location for the text file.</Value>
             <Value disabled="false">Adja meg a helyét a szöveges fájlnak.</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.filename</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">File name</Value>
             <Value disabled="false">Fájl név</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.mustspecified</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">File location must be specified!</Value>
             <Value disabled="false">A fájl helye meg kell legyen adva!</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.mustexists</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">File location must exist!</Value>
             <Value disabled="false">A fájl helyének léteznie kell!</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.mustwriteable</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Project must be writable!</Value>
             <Value disabled="false">A projektnek írhatónak kell lennie!</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.validfilename</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">File name must be valid!</Value>
             <Value disabled="false">A fájl nevének érvényesnek kell lennie!</Value>
         </Property>
         <Property>
             <Name>wizard.configuration.error.validfile</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">File name must be specified!</Value>
             <Value disabled="false">A fájl neve meg kell legyen adva!</Value>
         </Property>
@@ -119,63 +288,63 @@
         <Property>
             <Name>wizard.pattern.title</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Patterns</Value>
             <Value disabled="false">Minták</Value>
         </Property>
         <Property>
             <Name>wizard.pattern.description</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Specify the desired patterns.</Value>
             <Value disabled="false">Adja meg a kívánt mintákat.</Value>
         </Property>
         <Property>
-            <Name>wizard.pattern.header</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Header pattern</Value>
-            <Value disabled="false">Fejléc minta</Value>
-        </Property>
-        <Property>
             <Name>wizard.pattern.footer</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Footer pattern</Value>
             <Value disabled="false">Lábléc minta</Value>
         </Property>
         <Property>
+            <Name>wizard.pattern.header</Name>
+            <Description></Description>
+            <Disabled>true</Disabled>
+            <Value disabled="false">Header pattern</Value>
+            <Value disabled="false">Fejléc minta</Value>
+        </Property>
+        <Property>
             <Name>wizard.pattern.property</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Property record pattern</Value>
             <Value disabled="false">Property rekord minta</Value>
         </Property>
         <Property>
             <Name>wizard.pattern.comment</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Comment record pattern</Value>
             <Value disabled="false">Megjegyzés rekord minta</Value>
         </Property>
         <Property>
             <Name>wizard.pattern.empty</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">Empty record pattern</Value>
             <Value disabled="false">Üres rekord minta</Value>
         </Property>
         <Property>
             <Name>wizard.pattern.error.invalid.prefix</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false">The </Value>
             <Value disabled="false">A </Value>
         </Property>
         <Property>
             <Name>wizard.pattern.error.invalid.suffix</Name>
             <Description></Description>
-            <Disabled>false</Disabled>
+            <Disabled>true</Disabled>
             <Value disabled="false"> character sequence is not allowed!</Value>
             <Value disabled="false"> karakter sorozat nem megengedett!</Value>
         </Property>
