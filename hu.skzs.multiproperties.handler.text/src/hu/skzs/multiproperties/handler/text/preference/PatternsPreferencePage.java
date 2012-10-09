@@ -24,7 +24,7 @@ public class PatternsPreferencePage extends PreferencePage
 {
 
 	private final AbstractConfigurator configurator;
-
+	private boolean isCreatedPage;
 	private Text headerText;
 	private Text footerText;
 	private Text propertyText;
@@ -34,10 +34,12 @@ public class PatternsPreferencePage extends PreferencePage
 	/**
 	 * Default constructor. Sets the preference store for the {@link FieldEditorPreferencePage} and
 	 * set the description of the preference page.
+	 * @param configurator the given configurator
 	 */
 	public PatternsPreferencePage(final WorkspaceConfigurator configurator)
 	{
 		super();
+		noDefaultAndApplyButton();
 		this.configurator = configurator;
 		setTitle(Messages.getString("preference.pattern.title")); //$NON-NLS-1$
 		setDescription(Messages.getString("preference.pattern.description")); //$NON-NLS-1$
@@ -66,6 +68,7 @@ public class PatternsPreferencePage extends PreferencePage
 		// Updating the status
 		dialogChanged();
 
+		isCreatedPage = true;
 		return composite;
 	}
 
@@ -98,15 +101,6 @@ public class PatternsPreferencePage extends PreferencePage
 			setValid(false);
 			return;
 		}
-
-		if (headerText.getText().trim().equals("") && footerText.getText().trim().equals("") //$NON-NLS-1$ //$NON-NLS-2$
-				&& propertyText.getText().trim().equals("") && commentText.getText().trim().equals("") //$NON-NLS-1$//$NON-NLS-2$
-				&& emptyText.getText().trim().equals("")) //$NON-NLS-1$
-		{
-			setErrorMessage(null);
-			setValid(false);
-			return;
-		}
 		setErrorMessage(null);
 		setValid(true);
 	}
@@ -134,31 +128,19 @@ public class PatternsPreferencePage extends PreferencePage
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.jface.preference.PreferencePage#performDefaults()
-	 */
-	@Override
-	protected void performDefaults()
-	{
-		headerText.setText(""); //$NON-NLS-1$
-		footerText.setText(""); //$NON-NLS-1$
-		propertyText.setText(""); //$NON-NLS-1$
-		commentText.setText(""); //$NON-NLS-1$
-		emptyText.setText(""); //$NON-NLS-1$
-		super.performDefaults();
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#performOk()
 	 */
 	@Override
 	public boolean performOk()
 	{
-		configurator.setHeaderPattern(headerText.getText());
-		configurator.setFooterPattern(footerText.getText());
-		configurator.setPropertyPattern(propertyText.getText());
-		configurator.setCommentPattern(commentText.getText());
-		configurator.setEmptyPattern(emptyText.getText());
+		if (isCreatedPage)
+		{
+			configurator.setHeaderPattern(headerText.getText());
+			configurator.setFooterPattern(footerText.getText());
+			configurator.setPropertyPattern(propertyText.getText());
+			configurator.setCommentPattern(commentText.getText());
+			configurator.setEmptyPattern(emptyText.getText());
+		}
 		return super.performOk();
 	}
 }

@@ -58,7 +58,11 @@ public class WorkspaceWriter implements IWriter
 			{
 				file.create(stream, false, null);
 			}
-			//file.setCharset("UTF-8", null); //$NON-NLS-1$
+			if (configurator.getEncodingPattern() != null)
+				file.setCharset(configurator.getEncodingPattern(), null);
+			else
+				file.setCharset(null, null);
+
 		}
 		catch (final CoreException e)
 		{

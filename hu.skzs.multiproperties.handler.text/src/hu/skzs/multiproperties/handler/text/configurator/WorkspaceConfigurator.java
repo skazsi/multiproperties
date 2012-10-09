@@ -31,8 +31,16 @@ public class WorkspaceConfigurator extends AbstractConfigurator
 	@Override
 	public void parsePath(final String path)
 	{
-		containerName = path.substring(0, path.lastIndexOf("/")); //$NON-NLS-1$
-		fileName = path.substring(path.lastIndexOf("/") + 1); //$NON-NLS-1$
+		if (path.length() > 0)
+		{
+			containerName = path.substring(0, path.lastIndexOf("/")); //$NON-NLS-1$
+			fileName = path.substring(path.lastIndexOf("/") + 1); //$NON-NLS-1$
+		}
+		else
+		{
+			containerName = null;
+			fileName = null;
+		}
 	}
 
 	/*
@@ -43,10 +51,9 @@ public class WorkspaceConfigurator extends AbstractConfigurator
 	@Override
 	public String formatPath()
 	{
-		final StringBuilder stringBuilder = new StringBuilder(containerName);
-		stringBuilder.append("/"); //$NON-NLS-1$
-		stringBuilder.append(fileName);
-		return stringBuilder.toString();
+		if (containerName == null && fileName == null)
+			return ""; //$NON-NLS-1$
+		return containerName + "/" + fileName; //$NON-NLS-1$
 	}
 
 	/**
