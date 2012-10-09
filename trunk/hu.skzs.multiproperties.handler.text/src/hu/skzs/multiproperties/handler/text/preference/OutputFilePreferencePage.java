@@ -30,7 +30,9 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
  */
 public class OutputFilePreferencePage extends PreferencePage
 {
-
+	private boolean isCreatedPage;
+	private Button enableOutputFile;
+	private Button browseButton;
 	private Text textLocation;
 	private Text textFile;
 	private final WorkspaceConfigurator configurator;
@@ -39,6 +41,7 @@ public class OutputFilePreferencePage extends PreferencePage
 	/**
 	 * Default constructor. Sets the preference store for the {@link FieldEditorPreferencePage} and
 	 * set the description of the preference page.
+	 * @param configurator the given configurator
 	 */
 	public OutputFilePreferencePage(final WorkspaceConfigurator configurator)
 	{
@@ -48,6 +51,11 @@ public class OutputFilePreferencePage extends PreferencePage
 		setDescription(Messages.getString("preference.output.description")); //$NON-NLS-1$
 	}
 
+	private boolean isEnabled()
+	{
+		return configurator.getContainerName() != null && configurator.getFileName() != null;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
@@ -55,8 +63,52 @@ public class OutputFilePreferencePage extends PreferencePage
 	@Override
 	protected Control createContents(final Composite parent)
 	{
-		final Composite composite = createComposite(parent);
+		final Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayout(new GridLayout());
+		createEnableCheckPanel(composite);
+		createFilePanel(composite);
+		createEncodingPanel(composite);
 
+		// Updating the status
+		dialogChanged();
+
+		isCreatedPage = true;
+		return composite;
+	}
+
+	private void createEnableCheckPanel(final Composite parent)
+	{
+		// Container
+		enableOutputFile = new Button(parent, SWT.CHECK);
+		enableOutputFile.setText(Messages.getString("preference.output.enabled")); //$NON-NLS-1$
+		enableOutputFile.setSelection(isEnabled());
+		enableOutputFile.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(final SelectionEvent e)
+			{
+				if (enableOutputFile.getSelection())
+				{
+					textLocation.setEnabled(true);
+					browseButton.setEnabled(true);
+					textFile.setEnabled(true);
+					dialogChanged();
+				}
+				else
+					performDefaults();
+			}
+		});
+	}
+
+	private void createFilePanel(final Composite parent)
+	{
+		// Composite
+		final Composite composite = new Composite(parent, SWT.NONE);
+		final GridLayout layout = new GridLayout(3, false);
+		layout.marginWidth = 0;
+		layout.marginHeight = 0;
+		composite.setLayout(layout);
+		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
 		// Container
 		Label label = new Label(composite, SWT.NULL);
 		label.setText(Messages.getString("preference.output.location")); //$NON-NLS-1$
@@ -64,6 +116,7 @@ public class OutputFilePreferencePage extends PreferencePage
 		if (configurator.getContainerName() != null)
 			textLocation.setText(configurator.getContainerName());
 		textLocation.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		textLocation.setEnabled(enableOutputFile.getSelection());
 		textLocation.addModifyListener(new ModifyListener()
 		{
 			public void modifyText(final ModifyEvent e)
@@ -71,9 +124,10 @@ public class OutputFilePreferencePage extends PreferencePage
 				dialogChanged();
 			}
 		});
-		final Button button = new Button(composite, SWT.PUSH);
-		button.setText(Messages.getString("preference.output.location.browse")); //$NON-NLS-1$
-		button.addSelectionListener(new SelectionAdapter()
+		browseButton = new Button(composite, SWT.PUSH);
+		browseButton.setText(Messages.getString("preference.output.location.browse")); //$NON-NLS-1$
+		browseButton.setEnabled(enableOutputFile.getSelection());
+		browseButton.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
 			public void widgetSelected(final SelectionEvent e)
@@ -81,7 +135,6 @@ public class OutputFilePreferencePage extends PreferencePage
 				handleBrowse();
 			}
 		});
-
 		// Filename
 		label = new Label(composite, SWT.NULL);
 		label.setText(Messages.getString("preference.output.filename")); //$NON-NLS-1$
@@ -89,6 +142,7 @@ public class OutputFilePreferencePage extends PreferencePage
 		if (configurator.getFileName() != null)
 			textFile.setText(configurator.getFileName());
 		textFile.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		textFile.setEnabled(enableOutputFile.getSelection());
 		textFile.addModifyListener(new ModifyListener()
 		{
 			public void modifyText(final ModifyEvent e)
@@ -96,9 +150,16 @@ public class OutputFilePreferencePage extends PreferencePage
 				dialogChanged();
 			}
 		});
+	}
 
-		// Encoding group
-		encodingEditor = new EncodingFieldEditor(configurator, parent);
+	private void createEncodingPanel(final Composite parent)
+	{
+		final Composite encodingComposite = new Composite(parent, SWT.NONE);
+		final GridData gridData = new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL);
+		gridData.verticalIndent = 10;
+		gridData.horizontalSpan = 3;
+		encodingComposite.setLayoutData(gridData);
+		encodingEditor = new EncodingFieldEditor(configurator, encodingComposite);
 		encodingEditor.load();
 		encodingEditor.setPropertyChangeListener(new IPropertyChangeListener()
 		{
@@ -110,28 +171,6 @@ public class OutputFilePreferencePage extends PreferencePage
 				dialogChanged();
 			}
 		});
-
-		// Updating the status
-		dialogChanged();
-
-		return composite;
-	}
-
-	/**
-	 * Creates the composite which will contain all the preference controls for
-	 * this page.
-	 * @param parent the parent composite
-	 * @return the composite for this page
-	 */
-	private Composite createComposite(final Composite parent)
-	{
-		final Composite composite = new Composite(parent, SWT.NONE);
-		final GridLayout layout = new GridLayout(3, false);
-		layout.marginWidth = 0;
-		layout.marginHeight = 0;
-		composite.setLayout(layout);
-		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		return composite;
 	}
 
 	/**
@@ -157,34 +196,37 @@ public class OutputFilePreferencePage extends PreferencePage
 	 */
 	private void dialogChanged()
 	{
-		final IResource container = ResourcesPlugin.getWorkspace().getRoot()
-				.findMember(new Path(textLocation.getText()));
-		final String fileName = textFile.getText();
+		if (enableOutputFile.getSelection())
+		{
+			final IResource container = ResourcesPlugin.getWorkspace().getRoot()
+					.findMember(new Path(textLocation.getText()));
+			final String fileName = textFile.getText();
 
-		if (textLocation.getText().length() == 0)
-		{
-			updateStatus(Messages.getString("preference.output.error.mustspecified")); //$NON-NLS-1$
-			return;
-		}
-		if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0)
-		{
-			updateStatus(Messages.getString("preference.output.error.mustexists")); //$NON-NLS-1$
-			return;
-		}
-		if (!container.isAccessible())
-		{
-			updateStatus(Messages.getString("preference.output.error.mustwriteable")); //$NON-NLS-1$
-			return;
-		}
-		if (fileName.length() == 0)
-		{
-			updateStatus(Messages.getString("preference.output.error.validfile")); //$NON-NLS-1$
-			return;
-		}
-		if (fileName.replace('\\', '/').indexOf('/', 1) > 0)
-		{
-			updateStatus(Messages.getString("preference.output.error.validfilename")); //$NON-NLS-1$
-			return;
+			if (textLocation.getText().length() == 0)
+			{
+				updateStatus(Messages.getString("preference.output.error.mustspecified")); //$NON-NLS-1$
+				return;
+			}
+			if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0)
+			{
+				updateStatus(Messages.getString("preference.output.error.mustexists")); //$NON-NLS-1$
+				return;
+			}
+			if (!container.isAccessible())
+			{
+				updateStatus(Messages.getString("preference.output.error.mustwriteable")); //$NON-NLS-1$
+				return;
+			}
+			if (fileName.length() == 0)
+			{
+				updateStatus(Messages.getString("preference.output.error.validfile")); //$NON-NLS-1$
+				return;
+			}
+			if (fileName.replace('\\', '/').indexOf('/', 1) > 0)
+			{
+				updateStatus(Messages.getString("preference.output.error.validfilename")); //$NON-NLS-1$
+				return;
+			}
 		}
 		if (!encodingEditor.isValid())
 		{
@@ -208,9 +250,14 @@ public class OutputFilePreferencePage extends PreferencePage
 	@Override
 	protected void performDefaults()
 	{
+		enableOutputFile.setSelection(false);
+		textLocation.setEnabled(false);
 		textLocation.setText(""); //$NON-NLS-1$
+		browseButton.setEnabled(false);
+		textFile.setEnabled(false);
 		textFile.setText(""); //$NON-NLS-1$
 		encodingEditor.loadDefault();
+		dialogChanged();
 		super.performDefaults();
 	}
 
@@ -221,9 +268,20 @@ public class OutputFilePreferencePage extends PreferencePage
 	@Override
 	public boolean performOk()
 	{
-		configurator.setContainerName(textLocation.getText());
-		configurator.setFileName(textFile.getText());
-		encodingEditor.store();
+		if (isCreatedPage)
+		{
+			if (enableOutputFile.getSelection())
+			{
+				configurator.setContainerName(textLocation.getText());
+				configurator.setFileName(textFile.getText());
+			}
+			else
+			{
+				configurator.setContainerName(null);
+				configurator.setFileName(null);
+			}
+			encodingEditor.store();
+		}
 		return super.performOk();
 	}
 }

@@ -90,6 +90,7 @@ public abstract class AbstractConfigurator
 
 	/**
 	 * Returns the formatted path part of the configuration.
+	 * @return the formatted String
 	 */
 	public abstract String formatPath();
 

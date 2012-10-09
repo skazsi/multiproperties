@@ -54,6 +54,13 @@
             <Value disabled="false">Adja meg a kimeneti szöveges fájlt.</Value>
         </Property>
         <Property>
+            <Name>preference.output.enabled</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Enable output text file writing</Value>
+            <Value disabled="false">Engedélyezett kimeneti szöveges fájl irás</Value>
+        </Property>
+        <Property>
             <Name>preference.output.location</Name>
             <Description></Description>
             <Disabled>false</Disabled>
@@ -148,8 +155,8 @@
             <Name>preference.pattern.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <Value disabled="false">Specify the desired patterns.</Value>
-            <Value disabled="false">Adja meg a kívánt mintákat.</Value>
+            <Value disabled="false">Specify the desired patterns. You can use the following markers in the patterns. ${name} - name of MultiProperties; ${description} - description of MultiProperties; ${columnName} - name of the current column; ${columnDescription} - description of the current column; ${key} - key in case of property record; ${value} - value in case of property or comment record.</Value>
+            <Value disabled="false">Adja meg a kívánt mintákat. A következő jelölőket használhatja a mintákban. ${name} - neve a MultiProperties-nak; ${description} - leírása a MultiProperties-nak; ${columnName} - neve az adott oszlopnak; ${columnDescription} - leírása az adott oszlopnak; ${key} - kulcs property rekord esetén; ${value} - érték property vagy comment rekord esetén.</Value>
         </Property>
         <Property>
             <Name>preference.pattern.footer</Name>

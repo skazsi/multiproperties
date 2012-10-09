@@ -22,6 +22,10 @@ public class TextHandler implements IHandler
 	private static final String MARKER_KEY = "${key}"; //$NON-NLS-1$
 	private static final String MARKER_VALUE = "${value}"; //$NON-NLS-1$
 
+	/*
+	 * (non-Javadoc)
+	 * @see hu.skzs.multiproperties.base.api.IHandler#save(java.lang.String, hu.skzs.multiproperties.base.model.Table, hu.skzs.multiproperties.base.model.Column)
+	 */
 	public void save(final String configuration, final Table table, final Column column) throws HandlerException
 	{
 		final AbstractConfigurator configurator = ConfiguratorFactory.getConfigurator(configuration);
@@ -34,7 +38,8 @@ public class TextHandler implements IHandler
 	 * @param configuration the given {@link AbstractConfigurator} instance
 	 * @param table the given table
 	 * @param column the given column
-	 * @return the converted content of the given column 
+	 * @return the converted content of the given column
+	 * @throws HandlerException 
 	 */
 	public byte[] convert(final AbstractConfigurator configuration, final Table table, final Column column)
 			throws HandlerException
@@ -61,8 +66,13 @@ public class TextHandler implements IHandler
 				strb.append(replaceMarkers(pattern, table, column, record));
 			}
 			strb.append(replaceMarkers(configuration.getFooterPattern(), table, column, null));
-			//return strb.toString().getBytes("UTF-8"); //$NON-NLS-1$
-			return strb.toString().getBytes();
+
+			if (configuration.getEncodingPattern() != null)
+				return strb.toString().getBytes(configuration.getEncodingPattern());
+			else
+			{
+				return strb.toString().getBytes();
+			}
 		}
 		catch (final Exception e)
 		{

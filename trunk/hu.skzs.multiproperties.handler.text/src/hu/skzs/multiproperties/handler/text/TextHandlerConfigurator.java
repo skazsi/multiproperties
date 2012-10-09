@@ -42,7 +42,6 @@ public class TextHandlerConfigurator implements IHandlerConfigurator
 			mgr.addToRoot(patternNode);
 			final PreferenceDialog dialog = new PreferenceDialog(shell, mgr);
 			dialog.create();
-			//dialog.setMessage("page.getTitle()");
 			if (dialog.open() == Window.OK)
 				return workspaceConfigurator.toString();
 			else
