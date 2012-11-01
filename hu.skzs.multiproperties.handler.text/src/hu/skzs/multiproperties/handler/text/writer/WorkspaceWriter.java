@@ -37,6 +37,8 @@ public class WorkspaceWriter implements IWriter
 	 */
 	public void write(final byte[] bytes) throws HandlerException
 	{
+		if (configurator.getContainerName() == null || configurator.getFileName() == null)
+			return;
 		try
 		{
 			final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
@@ -62,7 +64,6 @@ public class WorkspaceWriter implements IWriter
 				file.setCharset(configurator.getEncodingPattern(), null);
 			else
 				file.setCharset(null, null);
-
 		}
 		catch (final CoreException e)
 		{
