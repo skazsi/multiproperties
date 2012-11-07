@@ -7,7 +7,9 @@ import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.handler.java.writer.Writer;
+import hu.skzs.multiproperties.handler.java.configurator.AbstractConfigurator;
+import hu.skzs.multiproperties.handler.java.configurator.ConfiguratorFactory;
+import hu.skzs.multiproperties.handler.java.writer.IWriter;
 import hu.skzs.multiproperties.handler.java.writer.WriterFactory;
 
 import java.io.BufferedReader;
@@ -33,80 +35,81 @@ public class JavaHandler implements IHandler
 	 */
 	public void save(final String configuration, final Table table, final Column column) throws HandlerException
 	{
-		try
-		{
-			final Writer writer = WriterFactory.getWriter(configuration);
-			writer.write(convert(writer, table, column));
-		}
-		catch (final Exception e)
-		{
-			throw new HandlerException("Unexpected error occurred during saving the column by handler", e); //$NON-NLS-1$
-		}
+		final AbstractConfigurator configurator = ConfiguratorFactory.getConfigurator(configuration);
+		final IWriter writer = WriterFactory.getWriter(configurator);
+		writer.write(convert(configurator, table, column));
 	}
 
 	/**
-	 * Converts and returns the content of the given {@link Column} based on the given {@link Writer}
-	 * @param converter the given converter configuration
+	 * Converts and returns the content of the given {@link Column} based on the given {@link AbstractConfigurator}
+	 * @param configuration the given {@link AbstractConfigurator} instance
 	 * @param table the given table
 	 * @param column the given column
 	 * @return the converted content of the given column 
-	 * @throws IOException 
+	 * @throws HandlerException 
 	 */
-	public byte[] convert(final Writer writer, final Table table, final Column column) throws IOException
+	public byte[] convert(final AbstractConfigurator configuration, final Table table, final Column column)
+			throws HandlerException
 	{
-		final StringBuilder strb = new StringBuilder();
-
-		// Writing the description
-		if (writer.isDescriptionIncluded())
+		try
 		{
-			writeString(strb, table.getDescription());
-			strb.append("\r\n"); //$NON-NLS-1$
-		}
+			final StringBuilder strb = new StringBuilder();
 
-		// Writing the column description
-		if (writer.isColumnDescriptionIncluded())
-		{
-			writeString(strb, column.getDescription());
-			strb.append("\r\n"); //$NON-NLS-1$
-		}
-
-		// Writing the records
-		for (int i = 0; i < table.size(); i++)
-		{
-			if (table.get(i) instanceof PropertyRecord)
+			// Writing the description
+			if (configuration.isDescriptionIncluded())
 			{
-				final PropertyRecord record = (PropertyRecord) table.get(i);
-				String value = record.getColumnValue(column);
-				if (value == null)
-					if (record.getDefaultColumnValue() != null && !writer.isDisableDefaultValues())
-						value = record.getDefaultColumnValue();
-				if (value == null)
-					continue;
+				writeString(strb, table.getDescription());
+				strb.append("\r\n"); //$NON-NLS-1$
+			}
 
-				// If disabled, then it will be written as a comment
-				if (record.isDisabled())
-					if (writer.isDisabledPropertiesIncluded())
-						strb.append("#"); //$NON-NLS-1$
-					else
+			// Writing the column description
+			if (configuration.isColumnDescriptionIncluded())
+			{
+				writeString(strb, column.getDescription());
+				strb.append("\r\n"); //$NON-NLS-1$
+			}
+
+			// Writing the records
+			for (int i = 0; i < table.size(); i++)
+			{
+				if (table.get(i) instanceof PropertyRecord)
+				{
+					final PropertyRecord record = (PropertyRecord) table.get(i);
+					String value = record.getColumnValue(column);
+					if (value == null)
+						if (record.getDefaultColumnValue() != null && !configuration.isDisableDefaultValues())
+							value = record.getDefaultColumnValue();
+					if (value == null)
 						continue;
 
-				strb.append(saveConvert(record.getValue(), true));
-				strb.append("="); //$NON-NLS-1$
-				strb.append(saveConvert(value, false));
-				strb.append("\r\n"); //$NON-NLS-1$
-			}
-			else if (table.get(i) instanceof CommentRecord)
-			{
-				final CommentRecord record = (CommentRecord) table.get(i);
-				strb.append("#" + record.getValue() + "\r\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			else if (table.get(i) instanceof EmptyRecord)
-			{
-				strb.append("\r\n"); //$NON-NLS-1$
-			}
-		}
+					// If disabled, then it will be written as a comment
+					if (record.isDisabled())
+						if (configuration.isDisabledPropertiesIncluded())
+							strb.append("#"); //$NON-NLS-1$
+						else
+							continue;
 
-		return strb.toString().getBytes();
+					strb.append(saveConvert(record.getValue(), true));
+					strb.append("="); //$NON-NLS-1$
+					strb.append(saveConvert(value, false));
+					strb.append("\r\n"); //$NON-NLS-1$
+				}
+				else if (table.get(i) instanceof CommentRecord)
+				{
+					final CommentRecord record = (CommentRecord) table.get(i);
+					strb.append("#" + record.getValue() + "\r\n"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+				else if (table.get(i) instanceof EmptyRecord)
+				{
+					strb.append("\r\n"); //$NON-NLS-1$
+				}
+			}
+			return strb.toString().getBytes();
+		}
+		catch (final Exception e)
+		{
+			throw new HandlerException("Unable to produce the content", e); //$NON-NLS-1$
+		}
 	}
 
 	/**
