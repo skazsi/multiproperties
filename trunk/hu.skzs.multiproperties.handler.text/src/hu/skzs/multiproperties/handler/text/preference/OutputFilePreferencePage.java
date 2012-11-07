@@ -6,7 +6,6 @@ import hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -39,8 +38,7 @@ public class OutputFilePreferencePage extends PreferencePage
 	private EncodingFieldEditor encodingEditor;
 
 	/**
-	 * Default constructor. Sets the preference store for the {@link FieldEditorPreferencePage} and
-	 * set the description of the preference page.
+	 * Default constructor.
 	 * @param configurator the given configurator
 	 */
 	public OutputFilePreferencePage(final WorkspaceConfigurator configurator)

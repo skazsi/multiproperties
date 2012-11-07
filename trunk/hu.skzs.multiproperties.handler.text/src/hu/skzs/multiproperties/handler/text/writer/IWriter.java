@@ -14,5 +14,5 @@ public interface IWriter
 	 * @param bytes the given content in byte array
 	 * @throws HandlerException when writing failed
 	 */
-	public abstract void write(byte[] bytes) throws HandlerException;
+	public void write(byte[] bytes) throws HandlerException;
 }
