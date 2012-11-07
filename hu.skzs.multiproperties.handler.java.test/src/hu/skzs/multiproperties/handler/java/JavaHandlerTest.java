@@ -1,16 +1,13 @@
 package hu.skzs.multiproperties.handler.java;
 
+import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.handler.java.writer.WorkspaceWriter;
-import hu.skzs.multiproperties.handler.java.writer.Writer;
-import hu.skzs.multiproperties.handler.java.writer.WriterConfigurationException;
-
-import java.io.IOException;
-
+import hu.skzs.multiproperties.handler.java.configurator.AbstractConfigurator;
+import hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator;
 import junit.framework.Assert;
 
 import org.junit.After;
@@ -59,23 +56,22 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
-	public void testConvertSimple() throws IOException
+	public void testConvertSimple() throws HandlerException
 	{
 		final Table table = createTable();
 		table.add(createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final Writer writer = createWriter(false, false, false, true);
+		final AbstractConfigurator configurator = createConfigurator(false, false, false, true);
 		// when
 
-		final byte[] enBytes = handler.convert(writer, table, table.getColumns().get(0));
-		final byte[] huBytes = handler.convert(writer, table, table.getColumns().get(1));
+		final byte[] enBytes = handler.convert(configurator, table, table.getColumns().get(0));
+		final byte[] huBytes = handler.convert(configurator, table, table.getColumns().get(1));
 
 		// then
 		Assert.assertEquals(PROP_EN_SIMPLE, new String(enBytes));
@@ -83,133 +79,127 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
-	public void testConvertIncludeDescription() throws IOException
+	public void testConvertIncludeDescription() throws HandlerException
 	{
 		final Table table = createTable();
 		table.add(createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final Writer writer = createWriter(true, false, false, true);
+		final AbstractConfigurator configurator = createConfigurator(true, false, false, true);
 		// when
 
-		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_DESCRIPTION, new String(bytes));
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
-	public void testConvertIncludeColumnDescription() throws IOException
+	public void testConvertIncludeColumnDescription() throws HandlerException
 	{
 		final Table table = createTable();
 		table.add(createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final Writer writer = createWriter(false, true, false, true);
+		final AbstractConfigurator configurator = createConfigurator(false, true, false, true);
 		// when
 
-		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_COLUMN_DESCRIPTION, new String(bytes));
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
-	public void testConvertIncludeBothDescription() throws IOException
+	public void testConvertIncludeBothDescription() throws HandlerException
 	{
 		final Table table = createTable();
 		table.add(createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final Writer writer = createWriter(true, true, false, true);
+		final AbstractConfigurator configurator = createConfigurator(true, true, false, true);
 		// when
 
-		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_BOTH_DESCRIPTION, new String(bytes));
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
-	public void testConvertDisabled() throws IOException
+	public void testConvertDisabled() throws HandlerException
 	{
 		final Table table = createTable();
 		table.add(createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, true, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final Writer writer = createWriter(false, false, false, true);
+		final AbstractConfigurator configurator = createConfigurator(false, false, false, true);
 		// when
 
-		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_DISABLED, new String(bytes));
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
-	public void testConvertDisabledIncluded() throws IOException
+	public void testConvertDisabledIncluded() throws HandlerException
 	{
 		final Table table = createTable();
 		table.add(createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, true, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final Writer writer = createWriter(false, false, true, true);
+		final AbstractConfigurator configurator = createConfigurator(false, false, true, true);
 		// when
 
-		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_DISABLED_INCLUDED, new String(bytes));
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
-	public void testConvertDefaultValue() throws IOException
+	public void testConvertDefaultValue() throws HandlerException
 	{
 		final Table table = createTable();
 		table.add(createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, DEFAULT, false, table.getColumns().toArray(), new String[] { null,
 				2 + HU + VALUE }));
-		final Writer writer = createWriter(false, false, false, false);
+		final AbstractConfigurator configurator = createConfigurator(false, false, false, false);
 		// when
 
-		final byte[] enBytes = handler.convert(writer, table, table.getColumns().get(0));
-		final byte[] huBytes = handler.convert(writer, table, table.getColumns().get(1));
+		final byte[] enBytes = handler.convert(configurator, table, table.getColumns().get(0));
+		final byte[] huBytes = handler.convert(configurator, table, table.getColumns().get(1));
 
 		// then
 		Assert.assertEquals(PROP_EN_DEFAULT, new String(enBytes));
@@ -217,23 +207,22 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
-	public void testConvertDefaultValueDisabled() throws IOException
+	public void testConvertDefaultValueDisabled() throws HandlerException
 	{
 		final Table table = createTable();
 		table.add(createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, DEFAULT, false, table.getColumns().toArray(), new String[] { null,
 				2 + HU + VALUE }));
-		final Writer writer = createWriter(false, false, false, true);
+		final AbstractConfigurator configurator = createConfigurator(false, false, false, true);
 		// when
 
-		final byte[] enBytes = handler.convert(writer, table, table.getColumns().get(0));
-		final byte[] huBytes = handler.convert(writer, table, table.getColumns().get(1));
+		final byte[] enBytes = handler.convert(configurator, table, table.getColumns().get(0));
+		final byte[] huBytes = handler.convert(configurator, table, table.getColumns().get(1));
 
 		// then
 		Assert.assertEquals(PROP_EN_DEFAULT_DISABLED, new String(enBytes));
@@ -241,12 +230,11 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
-	public void testConvertRecords() throws IOException
+	public void testConvertRecords() throws HandlerException
 	{
 		final Table table = createTable();
 		table.add(createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(), new String[] {
@@ -255,17 +243,17 @@ public class JavaHandlerTest
 		table.add(new CommentRecord(COMMENT));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final Writer writer = createWriter(false, false, false, false);
+		final AbstractConfigurator configurator = createConfigurator(false, false, false, false);
 		// when
 
-		final byte[] bytes = handler.convert(writer, table, table.getColumns().get(0));
+		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
 
 		// then
 		Assert.assertEquals(PROP_EN_RECORDS, new String(bytes));
 	}
 
 	/**
-	 * Returns a newly constructed test {@link Writer} instance based on the given parameters.
+	 * Returns a newly constructed test {@link AbstractConfigurator} instance based on the given parameters.
 	 * @param description
 	 * @param columnDescription
 	 * @param disabled
@@ -273,19 +261,17 @@ public class JavaHandlerTest
 	 * @return
 	 * @throws RuntimeException 
 	 */
-	private Writer createWriter(final boolean description, final boolean columnDescription, final boolean disabled,
-			final boolean defaultValues)
+	private AbstractConfigurator createConfigurator(final boolean description, final boolean columnDescription,
+			final boolean disabled, final boolean defaultValues)
 	{
 		try
 		{
-			final Writer writer = new WorkspaceWriter(""); //$NON-NLS-1$
-			writer.setIncludeDescription(description);
-			writer.setIncludeColumnDescription(columnDescription);
-			writer.setIncludeDisabled(disabled);
-			writer.setDisableDefaultValues(defaultValues);
-			return writer;
+			return new WorkspaceConfigurator("/Test/not_important.properties" //$NON-NLS-1$
+					+ AbstractConfigurator.DELIM + description + AbstractConfigurator.DELIM
+					+ columnDescription
+					+ AbstractConfigurator.DELIM + disabled + AbstractConfigurator.DELIM + defaultValues);
 		}
-		catch (final WriterConfigurationException e)
+		catch (final HandlerException e)
 		{
 			throw new RuntimeException(e);
 		}

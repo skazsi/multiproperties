@@ -39,118 +39,129 @@
             <Value disabled="false">Browse...</Value>
             <Value disabled="false">Tallózás...</Value>
         </Property>
+        <Empty/>
         <Comment>
-            <Value>WIZARD</Value>
+            <Value>PREFERENCES</Value>
         </Comment>
         <Comment>
             <Value>Configuration</Value>
         </Comment>
         <Property>
-            <Name>wizard.configuration.title</Name>
+            <Name>preference.output.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Output properties file</Value>
             <Value disabled="false">Kimeneti properties fájl</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.description</Name>
+            <Name>preference.output.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Specify the output properties file.</Value>
             <Value disabled="false">Adja meg a kimeneti properties fájlt.</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.location</Name>
+            <Name>preference.output.enabled</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Enable output properties file writing</Value>
+            <Value disabled="false">Engedélyezett kimeneti properties fájl irás</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.location</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Location</Value>
             <Value disabled="false">Hely</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.location.browse</Name>
+            <Name>preference.output.location.browse</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Browse...</Value>
             <Value disabled="false">Tallóz...</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.location.browse.description</Name>
+            <Name>preference.output.location.browse.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Select location for the properties file.</Value>
             <Value disabled="false">Adja meg a helyét a properties fájlnak.</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.filename</Name>
+            <Name>preference.output.filename</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">File name</Value>
             <Value disabled="false">Fájl név</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.include.description</Name>
+            <Name>preference.output.include.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Insert description of MultiProperties in the beginning as comment</Value>
             <Value disabled="false">A MultiProperties megjegyzésének beszúrása előre</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.include.columndescription</Name>
+            <Name>preference.output.include.columndescription</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Insert description of column in the beginning as comment</Value>
             <Value disabled="false">Az oszlop megjegyzésének beszúrása előre</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.include.disabled</Name>
+            <Name>preference.output.include.disabled</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Write disabled properties as comment</Value>
             <Value disabled="false">Letiltott property rekordok írása megjegyzésként</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.disable.defaultvalues</Name>
+            <Name>preference.output.disable.defaultvalues</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Disable default values</Value>
             <Value disabled="false">Alapértelmezett értékek tiltása</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.error.mustspecified</Name>
+            <Name>preference.output.error.mustspecified</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">File location must be specified!</Value>
             <Value disabled="false">A fájl helye meg kell legyen adva!</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.error.mustexists</Name>
+            <Name>preference.output.error.mustexists</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">File location must exist!</Value>
             <Value disabled="false">A fájl helyének léteznie kell!</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.error.mustwriteable</Name>
+            <Name>preference.output.error.mustwriteable</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">Project must be writable!</Value>
             <Value disabled="false">A projektnek írhatónak kell lennie!</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.error.validfile</Name>
+            <Name>preference.output.error.validfile</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">File name must be specified!</Value>
             <Value disabled="false">A fájl neve meg kell legyen adva!</Value>
         </Property>
         <Property>
-            <Name>wizard.configuration.error.validfilename</Name>
+            <Name>preference.output.error.validfilename</Name>
             <Description></Description>
             <Disabled>false</Disabled>
             <Value disabled="false">File name must be valid!</Value>
             <Value disabled="false">A fájl nevének érvényesnek kell lennie!</Value>
         </Property>
         <Empty/>
+        <Comment>
+            <Value>WIZARD</Value>
+        </Comment>
         <Comment>
             <Value>Importer</Value>
         </Comment>

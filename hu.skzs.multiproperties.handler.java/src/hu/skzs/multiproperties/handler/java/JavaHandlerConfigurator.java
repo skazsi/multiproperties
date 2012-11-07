@@ -2,15 +2,17 @@ package hu.skzs.multiproperties.handler.java;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
-import hu.skzs.multiproperties.handler.java.wizard.TargetPropertiesSelectionWizard;
-import hu.skzs.multiproperties.handler.java.writer.WorkspaceWriter;
-import hu.skzs.multiproperties.handler.java.writer.Writer;
-import hu.skzs.multiproperties.handler.java.writer.WriterFactory;
+import hu.skzs.multiproperties.handler.java.configurator.ConfiguratorFactory;
+import hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator;
+import hu.skzs.multiproperties.handler.java.preference.OutputFilePreferencePage;
 
 import java.util.Properties;
 
+import org.eclipse.jface.preference.IPreferenceNode;
+import org.eclipse.jface.preference.PreferenceDialog;
+import org.eclipse.jface.preference.PreferenceManager;
+import org.eclipse.jface.preference.PreferenceNode;
 import org.eclipse.jface.window.Window;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -30,11 +32,17 @@ public class JavaHandlerConfigurator implements IHandlerConfigurator
 	{
 		try
 		{
-			final Writer writer = WriterFactory.getWriter(configuration); // it must be WorkspaceWriter in this case
-			final TargetPropertiesSelectionWizard wizard = new TargetPropertiesSelectionWizard((WorkspaceWriter) writer);
-			final WizardDialog wizarddialog = new WizardDialog(shell, wizard);
-			if (wizarddialog.open() == Window.OK)
-				return writer.toString();
+			final WorkspaceConfigurator workspaceConfigurator = (WorkspaceConfigurator) ConfiguratorFactory
+					.getConfigurator(configuration); // it must be WorkspaceConfigurator in this case
+
+			final OutputFilePreferencePage outputPage = new OutputFilePreferencePage(workspaceConfigurator);
+			final PreferenceManager mgr = new PreferenceManager();
+			final IPreferenceNode outputNode = new PreferenceNode("outputPage", outputPage); //$NON-NLS-1$
+			mgr.addToRoot(outputNode);
+			final PreferenceDialog dialog = new PreferenceDialog(shell, mgr);
+			dialog.create();
+			if (dialog.open() == Window.OK)
+				return workspaceConfigurator.toString();
 			else
 				return null;
 		}
