@@ -12,7 +12,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * The <code>DisableHandler</code> deletes the selected {@link AbstractRecord} instances.
- * @author sallai
+ * @author skzs
  */
 public class DisableHandler extends AbstractHandler
 {

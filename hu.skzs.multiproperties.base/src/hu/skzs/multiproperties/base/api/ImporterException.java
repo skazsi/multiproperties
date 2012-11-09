@@ -2,7 +2,7 @@ package hu.skzs.multiproperties.base.api;
 
 /**
  * The {@link ImporterException} type represents importer problems.
- * @author sallai
+ * @author skzs
  */
 public class ImporterException extends Exception
 {

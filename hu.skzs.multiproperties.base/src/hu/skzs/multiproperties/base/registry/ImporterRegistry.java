@@ -11,7 +11,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 /**
  * The {@link ImporterRegistry} loads and stores all of the {@link IImporter} implementations currently
  * available for the plugin.
- * @author sallai
+ * @author skzs
  *
  */
 public class ImporterRegistry extends AbstractRegistry<ImporterRegistryElement>

@@ -9,7 +9,7 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
 
 /**
  * The <code>LayoutFactory</code> is a helper class for constructing different layout and layout data instances. 
- * @author sallai
+ * @author skzs
  */
 public class LayoutFactory
 {

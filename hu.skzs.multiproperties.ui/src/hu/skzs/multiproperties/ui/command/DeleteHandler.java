@@ -17,7 +17,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * The <code>DeleteCommand</code> deletes the selected {@link AbstractRecord} instances.
- * @author sallai
+ * @author skzs
  */
 public class DeleteHandler extends AbstractHandler
 {

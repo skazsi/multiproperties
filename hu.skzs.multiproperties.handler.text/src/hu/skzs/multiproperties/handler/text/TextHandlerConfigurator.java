@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Shell;
 /**
  * The {@link TextHandlerConfigurator} is the text file based implementation of {@link IHandlerConfigurator} and responsible
  * for configuring the Text Handler.
- * @author sallai
+ * @author skzs
  */
 public class TextHandlerConfigurator implements IHandlerConfigurator
 {

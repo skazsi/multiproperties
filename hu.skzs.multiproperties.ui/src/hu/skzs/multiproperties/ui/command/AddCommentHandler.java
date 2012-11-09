@@ -14,7 +14,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * The <code>AddCommentHandler</code> adds a new {@link CommentRecord} instance.
- * @author sallai
+ * @author skzs
  */
 public class AddCommentHandler extends AbstractHandler
 {

@@ -13,7 +13,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * The <code>EmptyAddWizard</code> wizard is able to add new empty record. 
- * @author sallai
+ * @author skzs
  */
 public class EmptyAddWizard extends Wizard
 {

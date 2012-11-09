@@ -23,7 +23,7 @@ import org.eclipse.ui.handlers.RegistryToggleState;
 
 /**
  * The <code>TableColumnLabelProvider</code> is the label provider for the table page.
- * @author sallai
+ * @author skzs
  */
 public class TableColumnLabelProvider extends ColumnLabelProvider
 {

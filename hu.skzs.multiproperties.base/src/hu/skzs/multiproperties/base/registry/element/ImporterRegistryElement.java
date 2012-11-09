@@ -9,7 +9,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 /**
  * The {@link ImporterRegistryElement} is an implementation of {@link AbstractRegistryElement} and
  * represent an importer extension element.
- * @author sallai
+ * @author skzs
  *
  */
 public class ImporterRegistryElement extends AbstractRegistryElement

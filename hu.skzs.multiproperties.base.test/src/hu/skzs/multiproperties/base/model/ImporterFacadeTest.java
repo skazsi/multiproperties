@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author sallai
+ * @author skzs
  * 
  */
 public class ImporterFacadeTest
@@ -61,12 +61,14 @@ public class ImporterFacadeTest
 	{
 		PropertyRecord propertyRecord = new PropertyRecord(value);
 		if (columnValue != null)
+		{
 			propertyRecord.putColumnValue(COLUMN, columnValue);
+		}
 		return propertyRecord;
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade()}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#init(Table, Column)}.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructionNull()
@@ -76,7 +78,7 @@ public class ImporterFacadeTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(Table,int)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(List, int)}.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testPerformImportTableNull()
@@ -86,7 +88,7 @@ public class ImporterFacadeTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(Table,int)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(List, int)}.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testPerformImportMethodInvalid()
@@ -99,7 +101,7 @@ public class ImporterFacadeTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(Table,int)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(List, int)}.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testPerformImportMethodInvalidStructutral()
@@ -113,7 +115,7 @@ public class ImporterFacadeTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(Table,int)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(List, int)}.
 	 */
 	@Test
 	public void testPerformImportMethodStructuralIntoEmpty()
@@ -149,7 +151,7 @@ public class ImporterFacadeTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(Table,int)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(List, int)}.
 	 */
 	@Test
 	public void testPerformImportMethodStructuralIntoNonEmpty()
@@ -196,7 +198,7 @@ public class ImporterFacadeTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(Table,int)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(List, int)}.
 	 */
 	@Test
 	public void testPerformImportMethodKeyValueIntoEmpty()
@@ -224,7 +226,7 @@ public class ImporterFacadeTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(Table,int)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(List, int)}.
 	 */
 	@Test
 	public void testPerformImportMethodKeyValueIntoNonEmpty()
@@ -264,7 +266,7 @@ public class ImporterFacadeTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(Table,int)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(List, int)}.
 	 */
 	@Test
 	public void testPerformImportMethodValueIntoEmpty()
@@ -290,7 +292,7 @@ public class ImporterFacadeTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(Table,int)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.ImporterFacade#performImport(List, int)}.
 	 */
 	@Test
 	public void testPerformImportMethodValueIntoNonEmpty()

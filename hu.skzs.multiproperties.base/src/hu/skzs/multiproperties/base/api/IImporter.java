@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * A {@link IImporter} implementation is responsible for importing content into a {@link Column}.
- * @author sallai
+ * @author skzs
  */
 public interface IImporter
 {

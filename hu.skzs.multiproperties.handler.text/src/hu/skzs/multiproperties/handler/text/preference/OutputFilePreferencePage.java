@@ -25,7 +25,7 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
 /**
  * The {@link OutputFilePreferencePage} offers specifying the target output file.
- * @author sallai
+ * @author skzs
  */
 public class OutputFilePreferencePage extends PreferencePage
 {

@@ -15,7 +15,7 @@ import org.eclipse.ui.handlers.RegistryToggleState;
 
 /**
  * The <code>TableEditingSupport</code> is the editing support implementation for the table page.
- * @author sallai
+ * @author skzs
  */
 public class TableEditingSupport extends EditingSupport
 {

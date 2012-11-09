@@ -14,7 +14,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * The <code>AddEmptyHandler</code> adds a new {@link EmptyRecord} instance.
- * @author sallai
+ * @author skzs
  */
 public class AddEmptyHandler extends AbstractHandler
 {

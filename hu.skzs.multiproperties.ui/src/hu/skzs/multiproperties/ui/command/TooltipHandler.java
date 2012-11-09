@@ -7,7 +7,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * The <code>TooltipHandler</code> toggles the tooltip.
- * @author sallai
+ * @author skzs
  */
 public class TooltipHandler extends AbstractHandler
 {

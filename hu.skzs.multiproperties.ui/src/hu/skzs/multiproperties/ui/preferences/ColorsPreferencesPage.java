@@ -14,7 +14,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
  * editor's table page.
  * <p>The {@link TablePage} listens for the property change events, thus changing the color settings
  * results refreshing the table page immediately.</p>
- * @author sallai
+ * @author skzs
  */
 public class ColorsPreferencesPage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage
 {

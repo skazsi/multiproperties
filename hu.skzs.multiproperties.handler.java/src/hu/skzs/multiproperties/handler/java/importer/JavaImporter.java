@@ -18,7 +18,7 @@ import java.util.Properties;
 /**
  * The {@link JavaImporter} is the default implementation of {@link IImporter}.
  * It is able to importer records from <code>java.util.Properties</code> input.
- * @author sallai
+ * @author skzs
  * @see Properties
  *
  */

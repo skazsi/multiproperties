@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 
 /**
- * @author sallai
+ * @author skzs
  * 
  */
 public class WorkspaceConfiguratorTest

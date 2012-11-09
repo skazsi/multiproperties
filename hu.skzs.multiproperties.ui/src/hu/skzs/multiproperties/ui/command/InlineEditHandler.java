@@ -7,7 +7,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * The <code>InlineEditHandler</code> toggles the inline edit feature.
- * @author sallai
+ * @author skzs
  */
 public class InlineEditHandler extends AbstractHandler
 {

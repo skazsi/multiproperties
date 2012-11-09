@@ -12,7 +12,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 /**
- * @author sallai
+ * @author skzs
  * 
  */
 public class LineReaderTest
@@ -24,7 +24,7 @@ public class LineReaderTest
 	private static final String NORMAL = "normal.properties"; //$NON-NLS-1$
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.importer.LineReader()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.importer.LineReader#LineReader(InputStream)}.
 	 * @throws FileNotFoundException
 	 */
 	@Test

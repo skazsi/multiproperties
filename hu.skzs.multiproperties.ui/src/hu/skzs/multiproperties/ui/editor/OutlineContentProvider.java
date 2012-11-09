@@ -13,7 +13,7 @@ import org.eclipse.jface.viewers.Viewer;
 
 /**
  * The <code>OutlineContentProvider</code> is the content provider for the outline page.
- * @author sallai
+ * @author skzs
  */
 public class OutlineContentProvider implements IStructuredContentProvider
 {

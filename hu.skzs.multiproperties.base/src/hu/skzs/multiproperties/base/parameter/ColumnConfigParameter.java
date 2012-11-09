@@ -3,7 +3,7 @@ package hu.skzs.multiproperties.base.parameter;
 /**
  * The {@link ColumnConfigParameter} represents the configuration to be used for the desired column.
  * It is used when the handler saves the content of the column.
- * @author sallai
+ * @author skzs
  *
  */
 public class ColumnConfigParameter extends ValuedParameter<String>

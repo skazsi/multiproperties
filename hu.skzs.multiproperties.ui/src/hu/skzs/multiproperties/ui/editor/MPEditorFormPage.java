@@ -12,7 +12,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 /**
  * The <code>MPEditorFormPage</code> class is an extended implementation of {@link MPEditorPage}
  * for supporting forms.
- * @author sallai
+ * @author skzs
  */
 public abstract class MPEditorFormPage extends MPEditorPage
 {

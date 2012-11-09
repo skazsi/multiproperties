@@ -2,7 +2,7 @@ package hu.skzs.multiproperties.base.parameter;
 
 /**
  * The {@link ColumnNameParameter} represents the name of the desired column in the MultiProperties file
- * @author sallai
+ * @author skzs
  *
  */
 public class ColumnNameParameter extends ValuedParameter<String>

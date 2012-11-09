@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author sallai
+ * @author skzs
  * 
  */
 public class JavaHandlerTest

@@ -10,7 +10,7 @@ import org.eclipse.jface.wizard.Wizard;
 
 /**
  * The <code>PropertyEditWizard</code> wizard is able to edit a property record. 
- * @author sallai
+ * @author skzs
  */
 public class PropertyEditWizard extends Wizard
 {

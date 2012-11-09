@@ -5,7 +5,7 @@ import org.eclipse.jface.wizard.Wizard;
 
 /**
  * Abstract class for creating importer wizards.
- * @author sallai
+ * @author skzs
  */
 public abstract class AbstractImporterWizard extends Wizard
 {

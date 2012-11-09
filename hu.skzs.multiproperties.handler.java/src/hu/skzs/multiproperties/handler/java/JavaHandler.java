@@ -19,7 +19,7 @@ import java.util.Properties;
 
 /**
  * The <code>JavaHandler</code> is the default implementation of {@link IHandler}. It produces <code>java.util.Properties</code> typed output.
- * @author sallai
+ * @author skzs
  * @see Properties
  */
 public class JavaHandler implements IHandler

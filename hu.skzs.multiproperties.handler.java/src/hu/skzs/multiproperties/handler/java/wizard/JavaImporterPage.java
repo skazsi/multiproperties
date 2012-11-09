@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Text;
 
 /**
  * The {@link JavaImporterPage} lets the user select a properties file.
- * @author sallaikr
+ * @author skzs
  *
  */
 public class JavaImporterPage extends WizardPage

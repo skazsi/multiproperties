@@ -4,7 +4,7 @@ import java.io.File;
 
 /**
  * The {@link FileParameter} represents the input MultiProperties file
- * @author sallai
+ * @author skzs
  *
  */
 public class FileParameter extends ValuedParameter<File>

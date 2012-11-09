@@ -12,7 +12,7 @@ import org.eclipse.swt.graphics.Point;
  * The <code>FindReplaceTarget</code> defines target for finding {@link AbstractRecord}
  * instances in the table page.
  * <p>The primary use of this class is to support the standard Eclipse based find and replace command.</p>
- * @author sallai
+ * @author skzs
  */
 public class FindReplaceTarget implements IFindReplaceTarget
 {

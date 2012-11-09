@@ -11,7 +11,7 @@ import org.eclipse.ui.texteditor.FindReplaceAction;
 
 /**
  * The <code>FindReplaceHandler</code> activates the {@link FindReplaceAction}.
- * @author sallai
+ * @author skzs
  */
 public class FindReplaceHandler extends AbstractHandler
 {

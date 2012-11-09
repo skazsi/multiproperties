@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Shell;
 /**
  * The {@link JavaHandlerConfigurator} is the default implementation of {@link IHandlerConfigurator} and responsible
  * for configuring the Java Handler.
- * @author sallai
+ * @author skzs
  * @see Properties
  */
 public class JavaHandlerConfigurator implements IHandlerConfigurator

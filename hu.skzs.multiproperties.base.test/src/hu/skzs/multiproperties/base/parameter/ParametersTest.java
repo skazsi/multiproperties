@@ -6,14 +6,14 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 /**
- * @author sallai
+ * @author skzs
  * 
  */
 public class ParametersTest extends AbstractSchemaConverterTest
 {
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters(String[])}.
+	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters#Parameters(String[])}.
 	 */
 	@Test
 	public void testConstructorEmpty()
@@ -26,7 +26,7 @@ public class ParametersTest extends AbstractSchemaConverterTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters(String[])}.
+	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters#Parameters(String[])}.
 	 */
 	@Test
 	public void testConstructorHelp()
@@ -40,7 +40,7 @@ public class ParametersTest extends AbstractSchemaConverterTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters(String[])}.
+	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters#Parameters(String[])}.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorMissingDash()
@@ -50,7 +50,7 @@ public class ParametersTest extends AbstractSchemaConverterTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters(String[])}.
+	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters#Parameters(String[])}.
 	 */
 	@Test
 	public void testConstructorSomeParameter()

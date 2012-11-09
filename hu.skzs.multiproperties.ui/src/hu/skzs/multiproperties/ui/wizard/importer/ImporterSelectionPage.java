@@ -13,7 +13,7 @@ import org.eclipse.jface.wizard.IWizardNode;
 /**
  * The {@link ImporterSelectionPage} wizard page lists all of the available importers and the users
  * is able to choose one of them.
- * @author sallai
+ * @author skzs
  */
 public class ImporterSelectionPage extends AbstractWizardSelectionPage
 {

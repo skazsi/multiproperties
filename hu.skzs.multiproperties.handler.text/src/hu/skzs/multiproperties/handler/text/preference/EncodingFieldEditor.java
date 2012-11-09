@@ -13,7 +13,7 @@ import org.eclipse.ui.ide.dialogs.AbstractEncodingFieldEditor;
  * The {@link EncodingFieldEditor} is a field editor for editing the encoding of
  * the output text files.
  * <p>Refactored from <code>org.eclipse.ui.ide.dialogs.ResourceEncodingFieldEditor</code> class.</p>
- * @author sallai
+ * @author skzs
  */
 public class EncodingFieldEditor extends AbstractEncodingFieldEditor
 {

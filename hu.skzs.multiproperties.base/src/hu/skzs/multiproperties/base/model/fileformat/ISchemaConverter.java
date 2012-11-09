@@ -5,7 +5,7 @@ import hu.skzs.multiproperties.base.model.Table;
 /**
  * The <code>ISchemaConverter</code> interface and it implementations are responsible for
  * converting between a byte array and the models.  
- * @author sallai
+ * @author skzs
  */
 public interface ISchemaConverter
 {

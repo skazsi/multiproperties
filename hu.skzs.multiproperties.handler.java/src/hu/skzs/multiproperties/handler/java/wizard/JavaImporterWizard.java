@@ -6,7 +6,7 @@ import hu.skzs.multiproperties.handler.java.Messages;
 /**
  * The {@link JavaImporterWizard} is the default <code>java.util.Properties</code> based
  * importer wizard implementation.
- * @author sallai
+ * @author skzs
  */
 public final class JavaImporterWizard extends AbstractImporterWizard
 {

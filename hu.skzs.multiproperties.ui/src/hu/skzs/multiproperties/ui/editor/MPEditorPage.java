@@ -8,7 +8,7 @@ import org.eclipse.ui.part.EditorPart;
 
 /**
  * The <code>MPEditorPage</code> class is the base implementation for MultiProperties Editor pages.
- * @author sallai
+ * @author skzs
  */
 public abstract class MPEditorPage extends EditorPart
 {

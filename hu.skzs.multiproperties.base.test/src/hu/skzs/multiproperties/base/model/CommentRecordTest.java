@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author sallai
+ * @author skzs
  * 
  */
 public class CommentRecordTest
@@ -30,7 +30,7 @@ public class CommentRecordTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.CommentRecord()}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.CommentRecord#CommentRecord()}.
 	 * 
 	 */
 	@Test
@@ -44,7 +44,7 @@ public class CommentRecordTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.CommentRecord(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.CommentRecord#CommentRecord(String)}.
 	 * 
 	 */
 	@Test

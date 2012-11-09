@@ -4,7 +4,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 
 /**
  * The {@link AbstractRegistryElement} is the base implementation of registry elements.
- * @author sallai
+ * @author skzs
  *
  */
 public abstract class AbstractRegistryElement

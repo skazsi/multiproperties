@@ -6,7 +6,7 @@ import hu.skzs.multiproperties.support.handler.configurator.IEncodingAwareConfig
 
 /**
  * A {@link TextHandlerConfigurator} implementation is responsible for parsing and formatting the handler configuration.
- * @author sallai
+ * @author skzs
  */
 public abstract class TextHandlerConfigurator implements IConfigurator, IEncodingAwareConfigurator
 {

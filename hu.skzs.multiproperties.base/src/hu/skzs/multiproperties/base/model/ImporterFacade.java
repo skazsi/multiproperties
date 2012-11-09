@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The {@link ImporterFacade} performs any importing into a {@link Table}.
  * <p>After initializing the facade it can be reused several times.</p>
- * @author sallai
+ * @author skzs
  */
 public class ImporterFacade
 {
