@@ -19,7 +19,7 @@ public class Parameters
 
 	private final List<Parameter> parameters = new LinkedList<Parameter>();
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings("rawtypes")
 	public Parameters(final String[] args)
 	{
 		int index = 0;
@@ -126,6 +126,20 @@ public class Parameters
 		{
 			if (parameter instanceof ColumnConfigParameter)
 				return (ColumnConfigParameter) parameter;
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the {@link ColumnConfigPatternParameter} or <code>null</code> if it does not exists.
+	 * @return the {@link ColumnConfigPatternParameter}
+	 */
+	public ColumnConfigPatternParameter getColumnConfigPatternParameter()
+	{
+		for (final Parameter parameter : parameters)
+		{
+			if (parameter instanceof ColumnConfigPatternParameter)
+				return (ColumnConfigPatternParameter) parameter;
 		}
 		return null;
 	}
