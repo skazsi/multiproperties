@@ -1,17 +1,19 @@
 package hu.skzs.multiproperties.handler.text.configurator;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
+import hu.skzs.multiproperties.support.handler.configurator.IConfigurator;
+import hu.skzs.multiproperties.support.handler.configurator.IEncodingAwareConfigurator;
 
 /**
- * A {@link AbstractConfigurator} implementation is responsible for parsing and formatting the handler configuration.
+ * A {@link TextHandlerConfigurator} implementation is responsible for parsing and formatting the handler configuration.
  * @author sallai
  */
-public abstract class AbstractConfigurator
+public abstract class TextHandlerConfigurator implements IConfigurator, IEncodingAwareConfigurator
 {
 
 	public static final String DELIM = "/#/"; //$NON-NLS-1$
 
-	protected String encodingPattern;
+	protected String encoding;
 	protected String headerPattern;
 	protected String footerPattern;
 	protected String propertyPattern;
@@ -19,12 +21,9 @@ public abstract class AbstractConfigurator
 	protected String emptyPattern;
 
 	/**
-	 * Default constructor, which parses the given <code>configuration</code>.
-	 * 
-	 * @param configuration the given configuration
-	 * @throws HandlerException when the format is invalid
+	 * {@inheritDoc}
 	 */
-	public AbstractConfigurator(final String configuration) throws HandlerException
+	public void setConfiguration(final String configuration) throws HandlerException
 	{
 		if (configuration == null || configuration.equals("")) //$NON-NLS-1$
 			return;
@@ -36,9 +35,9 @@ public abstract class AbstractConfigurator
 
 			parsePath(tokens[0]);
 			if (tokens[1].length() == 0)
-				encodingPattern = null;
+				encoding = null;
 			else
-				encodingPattern = tokens[1];
+				encoding = tokens[1];
 			headerPattern = tokens[2];
 			propertyPattern = tokens[3];
 			commentPattern = tokens[4];
@@ -54,18 +53,15 @@ public abstract class AbstractConfigurator
 	}
 
 	/**
-	 * Returns the persisted format of the handler configuration
-	 * 
-	 * @return the persisted format of the handler configuration
+	 * {@inheritDoc}
 	 */
-	@Override
-	public String toString()
+	public String getConfiguration()
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(formatPath());
 		stringBuilder.append(DELIM);
-		if (encodingPattern != null)
-			stringBuilder.append(encodingPattern);
+		if (encoding != null)
+			stringBuilder.append(encoding);
 		stringBuilder.append(DELIM);
 		stringBuilder.append(headerPattern);
 		stringBuilder.append(DELIM);
@@ -95,23 +91,20 @@ public abstract class AbstractConfigurator
 	public abstract String formatPath();
 
 	/**
-	 * Returns the encoding pattern or <code>null</code> if default encoding
-	 * is used.
-	 * @return the encoding pattern or <code>null</code> if default encoding
-	 * is used
+	 * {@inheritDoc}
 	 */
-	public String getEncodingPattern()
+	public String getEncoding()
 	{
-		return encodingPattern;
+		return encoding;
 	}
 
 	/**
 	 * Sets the encoding. Can be <code>null</code> for using default encoding.
 	 * @param encodingPattern the given encoding pattern
 	 */
-	public void setEncodingPattern(final String encodingPattern)
+	public void setEncoding(final String encodingPattern)
 	{
-		this.encodingPattern = encodingPattern;
+		this.encoding = encodingPattern;
 	}
 
 	public String getHeaderPattern()

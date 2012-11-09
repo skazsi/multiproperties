@@ -1,32 +1,31 @@
-package hu.skzs.multiproperties.handler.java.writer;
+package hu.skzs.multiproperties.support.handler.writer;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
-import hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator;
+import hu.skzs.multiproperties.support.handler.configurator.IFileSystemConfigurator;
 
 import java.io.File;
 import java.io.FileOutputStream;
 
 /**
- * File system based {@link IWriter} implementation.
- * @author sallai
+ * File system based {@link AbstractWriter} implementation.
+ * @author skzs
  */
-public class FileSystemWriter implements IWriter
+public class FileSystemWriter extends AbstractWriter<IFileSystemConfigurator>
 {
 
-	private final FileSystemConfigurator configurator;
-
 	/**
-	 * Package level constructor.
-	 * @param configurator the given instance of {@link FileSystemConfigurator} to be used.
+	 * Package protected constructor.
+	 * @param configurator the given {@link IFileSystemConfigurator} instance
+	 * @see WriterFactory
 	 */
-	FileSystemWriter(final FileSystemConfigurator configurator)
+	FileSystemWriter(final IFileSystemConfigurator configurator)
 	{
-		this.configurator = configurator;
+		super(configurator);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.handler.text.writer.AbstractWriter#write(byte[])
+	 * @see hu.skzs.multiproperties.base.api.writer.IWriter#write(byte[])
 	 */
 	public void write(final byte[] bytes) throws HandlerException
 	{

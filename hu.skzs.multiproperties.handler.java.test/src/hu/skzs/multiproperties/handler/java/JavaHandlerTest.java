@@ -6,7 +6,7 @@ import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.handler.java.configurator.AbstractConfigurator;
+import hu.skzs.multiproperties.handler.java.configurator.JavaHandlerConfigurator;
 import hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator;
 import junit.framework.Assert;
 
@@ -56,7 +56,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
 	 */
 	@Test
@@ -67,7 +67,7 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator(false, false, false, true);
+		final JavaHandlerConfigurator configurator = createConfigurator(false, false, false, true);
 		// when
 
 		final byte[] enBytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -79,7 +79,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
 	 */
 	@Test
@@ -90,7 +90,7 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator(true, false, false, true);
+		final JavaHandlerConfigurator configurator = createConfigurator(true, false, false, true);
 		// when
 
 		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -100,7 +100,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
 	 */
 	@Test
@@ -111,7 +111,7 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator(false, true, false, true);
+		final JavaHandlerConfigurator configurator = createConfigurator(false, true, false, true);
 		// when
 
 		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -121,7 +121,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
 	 */
 	@Test
@@ -132,7 +132,7 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator(true, true, false, true);
+		final JavaHandlerConfigurator configurator = createConfigurator(true, true, false, true);
 		// when
 
 		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -142,7 +142,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
 	 */
 	@Test
@@ -153,7 +153,7 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, true, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator(false, false, false, true);
+		final JavaHandlerConfigurator configurator = createConfigurator(false, false, false, true);
 		// when
 
 		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -163,7 +163,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
 	 */
 	@Test
@@ -174,7 +174,7 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, true, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator(false, false, true, true);
+		final JavaHandlerConfigurator configurator = createConfigurator(false, false, true, true);
 		// when
 
 		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -184,7 +184,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
 	 */
 	@Test
@@ -195,7 +195,7 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, DEFAULT, false, table.getColumns().toArray(), new String[] { null,
 				2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator(false, false, false, false);
+		final JavaHandlerConfigurator configurator = createConfigurator(false, false, false, false);
 		// when
 
 		final byte[] enBytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -207,7 +207,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
 	 */
 	@Test
@@ -218,7 +218,7 @@ public class JavaHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, DEFAULT, false, table.getColumns().toArray(), new String[] { null,
 				2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator(false, false, false, true);
+		final JavaHandlerConfigurator configurator = createConfigurator(false, false, false, true);
 		// when
 
 		final byte[] enBytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -230,7 +230,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(AbstractConfigurator, Table, Column)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
 	 */
 	@Test
@@ -243,7 +243,7 @@ public class JavaHandlerTest
 		table.add(new CommentRecord(COMMENT));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator(false, false, false, false);
+		final JavaHandlerConfigurator configurator = createConfigurator(false, false, false, false);
 		// when
 
 		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -253,7 +253,7 @@ public class JavaHandlerTest
 	}
 
 	/**
-	 * Returns a newly constructed test {@link AbstractConfigurator} instance based on the given parameters.
+	 * Returns a newly constructed test {@link JavaHandlerConfigurator} instance based on the given parameters.
 	 * @param description
 	 * @param columnDescription
 	 * @param disabled
@@ -261,15 +261,17 @@ public class JavaHandlerTest
 	 * @return
 	 * @throws RuntimeException 
 	 */
-	private AbstractConfigurator createConfigurator(final boolean description, final boolean columnDescription,
+	private JavaHandlerConfigurator createConfigurator(final boolean description, final boolean columnDescription,
 			final boolean disabled, final boolean defaultValues)
 	{
 		try
 		{
-			return new WorkspaceConfigurator("/Test/not_important.properties" //$NON-NLS-1$
-					+ AbstractConfigurator.DELIM + description + AbstractConfigurator.DELIM
+			final JavaHandlerConfigurator configurator = new WorkspaceConfigurator();
+			configurator.setConfiguration("/Test/not_important.properties" //$NON-NLS-1$
+					+ JavaHandlerConfigurator.DELIM + description + JavaHandlerConfigurator.DELIM
 					+ columnDescription
-					+ AbstractConfigurator.DELIM + disabled + AbstractConfigurator.DELIM + defaultValues);
+					+ JavaHandlerConfigurator.DELIM + disabled + JavaHandlerConfigurator.DELIM + defaultValues);
+			return configurator;
 		}
 		catch (final HandlerException e)
 		{

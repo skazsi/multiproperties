@@ -6,11 +6,8 @@ import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.handler.text.configurator.AbstractConfigurator;
+import hu.skzs.multiproperties.handler.text.configurator.TextHandlerConfigurator;
 import hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator;
-
-import java.io.IOException;
-
 import junit.framework.Assert;
 
 import org.junit.Before;
@@ -53,10 +50,8 @@ public class TextHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.text.TextHandler#convert()}.
-	 * @throws IOException 
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.TextHandler#convert(TextHandlerConfigurator, Table, Column)}.
 	 * @throws HandlerException 
-	 * 
 	 */
 	@Test
 	public void testConvertSimple() throws HandlerException
@@ -67,7 +62,7 @@ public class TextHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator();
+		final TextHandlerConfigurator configurator = createConfigurator();
 
 		// when
 		final byte[] enBytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -79,9 +74,8 @@ public class TextHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.TextHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.TextHandler#convert(TextHandlerConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConvertDisabled() throws HandlerException
@@ -92,7 +86,7 @@ public class TextHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, null, true, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator();
+		final TextHandlerConfigurator configurator = createConfigurator();
 
 		// when
 		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -102,9 +96,8 @@ public class TextHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.TextHandler#convert()}.
-	 * @throws IOException 
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.TextHandler#convert(TextHandlerConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConvertDefaultValue() throws HandlerException
@@ -115,7 +108,7 @@ public class TextHandlerTest
 				1 + EN + VALUE, 1 + HU + VALUE }));
 		table.add(createPropertyRecord(2 + VALUE, DEFAULT, false, table.getColumns().toArray(), new String[] { null,
 				2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator();
+		final TextHandlerConfigurator configurator = createConfigurator();
 
 		// when
 		final byte[] enBytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -127,8 +120,8 @@ public class TextHandlerTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.TextHandler#convert()}.
-	 * @throws IOException 
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.TextHandler#convert(TextHandlerConfigurator, Table, Column)}.
+	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConvertRecords() throws HandlerException
@@ -141,7 +134,7 @@ public class TextHandlerTest
 		table.add(new CommentRecord(COMMENT));
 		table.add(createPropertyRecord(2 + VALUE, null, false, table.getColumns().toArray(), new String[] {
 				2 + EN + VALUE, 2 + HU + VALUE }));
-		final AbstractConfigurator configurator = createConfigurator();
+		final TextHandlerConfigurator configurator = createConfigurator();
 
 		// when
 		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
@@ -151,16 +144,16 @@ public class TextHandlerTest
 	}
 
 	/**
-	 * Returns a newly constructed test {@link AbstractConfigurator} with default values.
+	 * Returns a newly constructed test {@link TextHandlerConfigurator} with default values.
 	 * @return
 	 */
-	private AbstractConfigurator createConfigurator()
+	private TextHandlerConfigurator createConfigurator()
 	{
 		return createConfigurator(PATTERN_HEADER, PATTERN_FOOTER, PATTERN_PROPERTY, PATTERN_COMMENT, PATTERN_EMPTY);
 	}
 
 	/**
-	 * Returns a newly constructed test {@link AbstractConfigurator} instance based on the given parameters.
+	 * Returns a newly constructed test {@link TextHandlerConfigurator} instance based on the given parameters.
 	 * @param header
 	 * @param footer
 	 * @param property
@@ -168,12 +161,13 @@ public class TextHandlerTest
 	 * @param empty
 	 * @return
 	 */
-	private AbstractConfigurator createConfigurator(final String header, final String footer, final String property,
+	private TextHandlerConfigurator createConfigurator(final String header, final String footer, final String property,
 			final String comment, final String empty)
 	{
 		try
 		{
-			final AbstractConfigurator configurator = new WorkspaceConfigurator(""); //$NON-NLS-1$
+			final TextHandlerConfigurator configurator = new WorkspaceConfigurator();
+			configurator.setConfiguration(""); //$NON-NLS-1$
 			configurator.setHeaderPattern(header);
 			configurator.setFooterPattern(footer);
 			configurator.setPropertyPattern(property);

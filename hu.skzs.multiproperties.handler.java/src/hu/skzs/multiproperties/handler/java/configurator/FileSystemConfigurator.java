@@ -1,30 +1,22 @@
 package hu.skzs.multiproperties.handler.java.configurator;
 
-import hu.skzs.multiproperties.base.api.HandlerException;
+import hu.skzs.multiproperties.support.handler.configurator.IFileSystemConfigurator;
+import hu.skzs.multiproperties.support.handler.writer.FileSystemWriter;
 
 /**
- * A {@link FileSystemConfigurator} implementation is responsible for parsing and formatting the file system based handler configuration.
- * @author sallai
+ * A {@link FileSystemConfigurator} implementation represents and describes a file system based handler
+ * configuration for the <strong>Java Properties Handler</strong>.
+ * @author skzs
+ * @see FileSystemWriter
+ * @see WorkspaceConfigurator
  */
-public class FileSystemConfigurator extends AbstractConfigurator
+public class FileSystemConfigurator extends JavaHandlerConfigurator implements IFileSystemConfigurator
 {
 
 	private String fileName;
 
 	/**
-	 * Default constructor, which parses the given <code>configuration</code>.
-	 * @param configuration the given configuration
-	 * @throws HandlerException when the format is invalid
-	 */
-	public FileSystemConfigurator(final String configuration) throws HandlerException
-	{
-		super(configuration);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.skzs.multiproperties.handler.java.writer.Writer#parsePath(java.lang.String)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void parsePath(final String path)
@@ -32,10 +24,8 @@ public class FileSystemConfigurator extends AbstractConfigurator
 		fileName = path;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.skzs.multiproperties.handler.java.writer.Writer#formatPath()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String formatPath()
@@ -44,17 +34,7 @@ public class FileSystemConfigurator extends AbstractConfigurator
 	}
 
 	/**
-	 * Sets the file name
-	 * @param fileName the given file name
-	 */
-	public void setFileName(final String fileName)
-	{
-		this.fileName = fileName;
-	}
-
-	/**
-	 * Returns the file name
-	 * @return the file name
+	 * {@inheritDoc}
 	 */
 	public String getFileName()
 	{

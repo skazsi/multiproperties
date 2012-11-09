@@ -7,10 +7,10 @@ import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.handler.java.configurator.AbstractConfigurator;
-import hu.skzs.multiproperties.handler.java.configurator.ConfiguratorFactory;
-import hu.skzs.multiproperties.handler.java.writer.IWriter;
-import hu.skzs.multiproperties.handler.java.writer.WriterFactory;
+import hu.skzs.multiproperties.handler.java.configurator.JavaConfiguratorFactory;
+import hu.skzs.multiproperties.handler.java.configurator.JavaHandlerConfigurator;
+import hu.skzs.multiproperties.support.handler.writer.IWriter;
+import hu.skzs.multiproperties.support.handler.writer.WriterFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,20 +35,21 @@ public class JavaHandler implements IHandler
 	 */
 	public void save(final String configuration, final Table table, final Column column) throws HandlerException
 	{
-		final AbstractConfigurator configurator = ConfiguratorFactory.getConfigurator(configuration);
+		final JavaHandlerConfigurator configurator = JavaConfiguratorFactory.getInstance().getConfigurator(
+				configuration);
 		final IWriter writer = WriterFactory.getWriter(configurator);
 		writer.write(convert(configurator, table, column));
 	}
 
 	/**
-	 * Converts and returns the content of the given {@link Column} based on the given {@link AbstractConfigurator}
-	 * @param configuration the given {@link AbstractConfigurator} instance
+	 * Converts and returns the content of the given {@link Column} based on the given {@link JavaHandlerConfigurator}
+	 * @param configuration the given {@link JavaHandlerConfigurator} instance
 	 * @param table the given table
 	 * @param column the given column
 	 * @return the converted content of the given column 
 	 * @throws HandlerException 
 	 */
-	public byte[] convert(final AbstractConfigurator configuration, final Table table, final Column column)
+	public byte[] convert(final JavaHandlerConfigurator configuration, final Table table, final Column column)
 			throws HandlerException
 	{
 		try

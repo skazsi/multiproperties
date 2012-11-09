@@ -2,7 +2,7 @@ package hu.skzs.multiproperties.handler.text;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
-import hu.skzs.multiproperties.handler.text.configurator.ConfiguratorFactory;
+import hu.skzs.multiproperties.handler.text.configurator.TextConfiguratorFactory;
 import hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator;
 import hu.skzs.multiproperties.handler.text.preference.OutputFilePreferencePage;
 import hu.skzs.multiproperties.handler.text.preference.PatternsPreferencePage;
@@ -30,8 +30,8 @@ public class TextHandlerConfigurator implements IHandlerConfigurator
 	{
 		try
 		{
-			final WorkspaceConfigurator workspaceConfigurator = (WorkspaceConfigurator) ConfiguratorFactory
-					.getConfigurator(configuration); // it must be WorkspaceConfigurator in this case
+			final WorkspaceConfigurator workspaceConfigurator = (WorkspaceConfigurator) TextConfiguratorFactory
+					.getInstance().getConfigurator(configuration); // it must be WorkspaceConfigurator in this case
 
 			final OutputFilePreferencePage outputPage = new OutputFilePreferencePage(workspaceConfigurator);
 			final PatternsPreferencePage patternPage = new PatternsPreferencePage(workspaceConfigurator);
@@ -43,7 +43,7 @@ public class TextHandlerConfigurator implements IHandlerConfigurator
 			final PreferenceDialog dialog = new PreferenceDialog(shell, mgr);
 			dialog.create();
 			if (dialog.open() == Window.OK)
-				return workspaceConfigurator.toString();
+				return workspaceConfigurator.getConfiguration();
 			else
 				return null;
 		}

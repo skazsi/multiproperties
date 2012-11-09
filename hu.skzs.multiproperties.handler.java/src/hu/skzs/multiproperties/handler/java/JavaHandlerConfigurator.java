@@ -2,7 +2,7 @@ package hu.skzs.multiproperties.handler.java;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.base.api.IHandlerConfigurator;
-import hu.skzs.multiproperties.handler.java.configurator.ConfiguratorFactory;
+import hu.skzs.multiproperties.handler.java.configurator.JavaConfiguratorFactory;
 import hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator;
 import hu.skzs.multiproperties.handler.java.preference.OutputFilePreferencePage;
 
@@ -32,8 +32,8 @@ public class JavaHandlerConfigurator implements IHandlerConfigurator
 	{
 		try
 		{
-			final WorkspaceConfigurator workspaceConfigurator = (WorkspaceConfigurator) ConfiguratorFactory
-					.getConfigurator(configuration); // it must be WorkspaceConfigurator in this case
+			final WorkspaceConfigurator workspaceConfigurator = (WorkspaceConfigurator) JavaConfiguratorFactory
+					.getInstance().getConfigurator(configuration); // it must be WorkspaceConfigurator in this case
 
 			final OutputFilePreferencePage outputPage = new OutputFilePreferencePage(workspaceConfigurator);
 			final PreferenceManager mgr = new PreferenceManager();
@@ -42,7 +42,7 @@ public class JavaHandlerConfigurator implements IHandlerConfigurator
 			final PreferenceDialog dialog = new PreferenceDialog(shell, mgr);
 			dialog.create();
 			if (dialog.open() == Window.OK)
-				return workspaceConfigurator.toString();
+				return workspaceConfigurator.getConfiguration();
 			else
 				return null;
 		}

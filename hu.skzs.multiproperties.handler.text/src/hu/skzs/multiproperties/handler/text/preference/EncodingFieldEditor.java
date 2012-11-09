@@ -1,7 +1,7 @@
 package hu.skzs.multiproperties.handler.text.preference;
 
 import hu.skzs.multiproperties.handler.text.Messages;
-import hu.skzs.multiproperties.handler.text.configurator.AbstractConfigurator;
+import hu.skzs.multiproperties.handler.text.configurator.TextHandlerConfigurator;
 
 import java.lang.reflect.Method;
 
@@ -17,9 +17,9 @@ import org.eclipse.ui.ide.dialogs.AbstractEncodingFieldEditor;
  */
 public class EncodingFieldEditor extends AbstractEncodingFieldEditor
 {
-	private final AbstractConfigurator configurator;
+	private final TextHandlerConfigurator configurator;
 
-	public EncodingFieldEditor(final AbstractConfigurator configurator, final Composite parent)
+	public EncodingFieldEditor(final TextHandlerConfigurator configurator, final Composite parent)
 	{
 		super();
 		this.configurator = configurator;
@@ -45,7 +45,7 @@ public class EncodingFieldEditor extends AbstractEncodingFieldEditor
 	@Override
 	protected String getStoredValue()
 	{
-		return configurator.getEncodingPattern();
+		return configurator.getEncoding();
 	}
 
 	/**
@@ -79,9 +79,9 @@ public class EncodingFieldEditor extends AbstractEncodingFieldEditor
 	protected void doStore()
 	{
 		if (callIsDefaultSelected())
-			configurator.setEncodingPattern(null);
+			configurator.setEncoding(null);
 		else
-			configurator.setEncodingPattern(getSelectedEncoding());
+			configurator.setEncoding(getSelectedEncoding());
 	}
 
 	/*

@@ -1,25 +1,19 @@
 package hu.skzs.multiproperties.handler.text.configurator;
 
-import hu.skzs.multiproperties.base.api.HandlerException;
+import hu.skzs.multiproperties.support.handler.configurator.IFileSystemConfigurator;
+import hu.skzs.multiproperties.support.handler.writer.FileSystemWriter;
 
 /**
- * A {@link FileSystemConfigurator} implementation is responsible for parsing and formatting the file system based handler configuration.
- * @author sallai
+ * A {@link FileSystemConfigurator} implementation represents and describes a file system based handler
+ * configuration for the <strong>Text File Handler</strong>.
+ * @author skzs
+ * @see FileSystemWriter
+ * @see WorkspaceConfigurator
  */
-public class FileSystemConfigurator extends AbstractConfigurator
+public class FileSystemConfigurator extends TextHandlerConfigurator implements IFileSystemConfigurator
 {
 
 	private String fileName;
-
-	/**
-	 * Default constructor, which parses the given <code>configuration</code>.
-	 * @param configuration the given configuration
-	 * @throws HandlerException when the format is invalid
-	 */
-	public FileSystemConfigurator(final String configuration) throws HandlerException
-	{
-		super(configuration);
-	}
 
 	/*
 	 * (non-Javadoc)

@@ -27,14 +27,15 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#WorkspaceConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructor() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator(CONF_1_0);
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONF_1_0);
 
 		// then
 		Assert.assertEquals(CONTAINER, configurator.getContainerName());
@@ -46,25 +47,27 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#WorkspaceConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test(expected = HandlerException.class)
 	public void testConstructorNoSlash() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator("blabla" + FILENAME + "|true|true|true"); //$NON-NLS-1$ //$NON-NLS-2$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration("blabla" + FILENAME + "|true|true|true"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#WorkspaceConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructorFalseDesc() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator(CONTAINER_AND_FILENAME + "|false|true|true"); //$NON-NLS-1$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONTAINER_AND_FILENAME + "|false|true|true"); //$NON-NLS-1$
 
 		// then
 		Assert.assertEquals(CONTAINER, configurator.getContainerName());
@@ -76,14 +79,15 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#WorkspaceConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructorFalseColDesc() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator(CONTAINER_AND_FILENAME + "|true|false|true"); //$NON-NLS-1$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONTAINER_AND_FILENAME + "|true|false|true"); //$NON-NLS-1$
 
 		// then
 		Assert.assertEquals(CONTAINER, configurator.getContainerName());
@@ -95,14 +99,15 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#WorkspaceConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructorFalseDisabled() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator(CONTAINER_AND_FILENAME + "|true|true|false"); //$NON-NLS-1$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONTAINER_AND_FILENAME + "|true|true|false"); //$NON-NLS-1$
 
 		// then
 		Assert.assertEquals(CONTAINER, configurator.getContainerName());
@@ -114,25 +119,27 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#WorkspaceConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test(expected = HandlerException.class)
 	public void testConstructorWrongBoolean() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator(CONTAINER_AND_FILENAME + "|true|ttrue|true"); //$NON-NLS-1$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONTAINER_AND_FILENAME + "|true|ttrue|true"); //$NON-NLS-1$
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#WorkspaceConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException
 	 */
 	@Test
 	public void testConstructor_1_1() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator(CONTAINER_AND_FILENAME + "|true|true|true|true"); //$NON-NLS-1$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONTAINER_AND_FILENAME + "|true|true|true|true"); //$NON-NLS-1$
 
 		// then
 		Assert.assertEquals(CONTAINER, configurator.getContainerName());
@@ -144,17 +151,18 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#toString()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator#getConfiguration()}.
 	 * @throws HandlerException
 	 */
 	@Test
-	public void testToString() throws HandlerException
+	public void testGetConfiguration() throws HandlerException
 	{
 		// given
-		configurator = new WorkspaceConfigurator(CONTAINER_AND_FILENAME + "|true|true|true|true"); //$NON-NLS-1$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONTAINER_AND_FILENAME + "|true|true|true|true"); //$NON-NLS-1$
 
 		// when
-		final String conf = configurator.toString();
+		final String conf = configurator.getConfiguration();
 
 		// then
 		Assert.assertEquals(CONTAINER_AND_FILENAME + "|true|true|true|true", conf); //$NON-NLS-1$
