@@ -1,12 +1,13 @@
 package hu.skzs.multiproperties.handler.java.configurator;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
+import hu.skzs.multiproperties.support.handler.configurator.IConfigurator;
 
 /**
- * A {@link AbstractConfigurator} implementation is responsible for parsing and formatting the handler configuration.
+ * A {@link JavaHandlerConfigurator} implementation is responsible for parsing and formatting the handler configuration.
  * @author sallai
  */
-public abstract class AbstractConfigurator
+public abstract class JavaHandlerConfigurator implements IConfigurator
 {
 
 	public static final String DELIM = "|"; //$NON-NLS-1$
@@ -20,12 +21,9 @@ public abstract class AbstractConfigurator
 	protected boolean disableDefault;
 
 	/**
-	 * Default constructor, which parses the given <code>configuration</code>.
-	 * 
-	 * @param configuration the given configuration
-	 * @throws HandlerException when the format is invalid
+	 * {@inheritDoc}
 	 */
-	public AbstractConfigurator(final String configuration) throws HandlerException
+	public void setConfiguration(final String configuration) throws HandlerException
 	{
 		if (configuration == null || configuration.equals("")) //$NON-NLS-1$
 			return;
@@ -51,12 +49,9 @@ public abstract class AbstractConfigurator
 	}
 
 	/**
-	 * Returns the persisted format of the handler configuration
-	 * 
-	 * @return the persisted format of the handler configuration
+	 * {@inheritDoc}
 	 */
-	@Override
-	public String toString()
+	public String getConfiguration()
 	{
 		final StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(formatPath());

@@ -1,7 +1,7 @@
 package hu.skzs.multiproperties.handler.text.preference;
 
 import hu.skzs.multiproperties.handler.text.Messages;
-import hu.skzs.multiproperties.handler.text.configurator.AbstractConfigurator;
+import hu.skzs.multiproperties.handler.text.configurator.TextHandlerConfigurator;
 import hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Text;
 public class PatternsPreferencePage extends PreferencePage
 {
 
-	private final AbstractConfigurator configurator;
+	private final TextHandlerConfigurator configurator;
 	private boolean isCreatedPage;
 	private Text headerText;
 	private Text footerText;
@@ -91,13 +91,13 @@ public class PatternsPreferencePage extends PreferencePage
 
 	private void dialogChanged()
 	{
-		if (headerText.getText().contains(AbstractConfigurator.DELIM)
-				|| footerText.getText().contains(AbstractConfigurator.DELIM)
-				|| propertyText.getText().contains(AbstractConfigurator.DELIM)
-				|| commentText.getText().contains(AbstractConfigurator.DELIM)
-				|| emptyText.getText().contains(AbstractConfigurator.DELIM))
+		if (headerText.getText().contains(TextHandlerConfigurator.DELIM)
+				|| footerText.getText().contains(TextHandlerConfigurator.DELIM)
+				|| propertyText.getText().contains(TextHandlerConfigurator.DELIM)
+				|| commentText.getText().contains(TextHandlerConfigurator.DELIM)
+				|| emptyText.getText().contains(TextHandlerConfigurator.DELIM))
 		{
-			setErrorMessage(Messages.getString("preference.pattern.error.invalid.prefix") + AbstractConfigurator.DELIM + Messages.getString("preference.pattern.error.invalid.suffix")); //$NON-NLS-1$ //$NON-NLS-2$
+			setErrorMessage(Messages.getString("preference.pattern.error.invalid.prefix") + TextHandlerConfigurator.DELIM + Messages.getString("preference.pattern.error.invalid.suffix")); //$NON-NLS-1$ //$NON-NLS-2$
 			setValid(false);
 			return;
 		}

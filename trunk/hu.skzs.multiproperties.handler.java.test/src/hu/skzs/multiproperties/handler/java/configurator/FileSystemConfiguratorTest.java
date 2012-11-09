@@ -25,14 +25,15 @@ public class FileSystemConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#FileSystemConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructor() throws HandlerException
 	{
 		// when
-		configurator = new FileSystemConfigurator(CONF_1_0);
+		configurator = new FileSystemConfigurator();
+		configurator.setConfiguration(CONF_1_0);
 
 		// then
 		Assert.assertEquals(FILENAME, configurator.getFileName());
@@ -43,14 +44,15 @@ public class FileSystemConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#FileSystemConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructorFalseDesc() throws HandlerException
 	{
 		// when
-		configurator = new FileSystemConfigurator(FILENAME + "|false|true|true"); //$NON-NLS-1$
+		configurator = new FileSystemConfigurator();
+		configurator.setConfiguration(FILENAME + "|false|true|true"); //$NON-NLS-1$
 
 		// then
 		Assert.assertEquals(FILENAME, configurator.getFileName());
@@ -61,14 +63,15 @@ public class FileSystemConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#FileSystemConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructorFalseColDesc() throws HandlerException
 	{
 		// when
-		configurator = new FileSystemConfigurator(FILENAME + "|true|false|true"); //$NON-NLS-1$
+		configurator = new FileSystemConfigurator();
+		configurator.setConfiguration(FILENAME + "|true|false|true"); //$NON-NLS-1$
 
 		// then
 		Assert.assertEquals(FILENAME, configurator.getFileName());
@@ -79,14 +82,15 @@ public class FileSystemConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#FileSystemConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructorFalseDisabled() throws HandlerException
 	{
 		// when
-		configurator = new FileSystemConfigurator(FILENAME + "|true|true|false"); //$NON-NLS-1$
+		configurator = new FileSystemConfigurator();
+		configurator.setConfiguration(FILENAME + "|true|true|false"); //$NON-NLS-1$
 
 		// then
 		Assert.assertEquals(FILENAME, configurator.getFileName());
@@ -97,25 +101,27 @@ public class FileSystemConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#FileSystemConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test(expected = HandlerException.class)
 	public void testConstructorWrongBoolean() throws HandlerException
 	{
 		// when
-		configurator = new FileSystemConfigurator(FILENAME + "|true|ttrue|true"); //$NON-NLS-1$
+		configurator = new FileSystemConfigurator();
+		configurator.setConfiguration(FILENAME + "|true|ttrue|true"); //$NON-NLS-1$
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#FileSystemConfigurator(String)}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructor_1_1() throws HandlerException
 	{
 		// when
-		configurator = new FileSystemConfigurator(FILENAME + "|true|true|true|true"); //$NON-NLS-1$
+		configurator = new FileSystemConfigurator();
+		configurator.setConfiguration(FILENAME + "|true|true|true|true"); //$NON-NLS-1$
 
 		// then
 		Assert.assertEquals(FILENAME, configurator.getFileName());
@@ -126,17 +132,18 @@ public class FileSystemConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#toString()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#getConfiguration()}.
 	 * @throws HandlerException
 	 */
 	@Test
-	public void testToString() throws HandlerException
+	public void testGetConfiguration() throws HandlerException
 	{
 		// given
-		configurator = new FileSystemConfigurator(FILENAME + "|true|true|true|true"); //$NON-NLS-1$
+		configurator = new FileSystemConfigurator();
+		configurator.setConfiguration(FILENAME + "|true|true|true|true"); //$NON-NLS-1$
 
 		// when
-		final String conf = configurator.toString();
+		final String conf = configurator.getConfiguration();
 
 		// then
 		Assert.assertEquals(FILENAME + "|true|true|true|true", conf); //$NON-NLS-1$

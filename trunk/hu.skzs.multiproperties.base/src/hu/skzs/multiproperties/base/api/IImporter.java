@@ -87,6 +87,7 @@ public interface IImporter
 	 * <p><strong>Note:</strong> The implementations must not modify the given {@link Column} parameter.</p>
 	 * @param column the column where the values will be imported or <code>null</code> if structural import is selected
 	 * @param input the input object
+	 * @return a list of records
 	 * @throws ImporterException when an unexpected error occur
 	 */
 	public List<AbstractRecord> getRecords(Object input, Column column) throws ImporterException;

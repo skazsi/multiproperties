@@ -1,27 +1,20 @@
 package hu.skzs.multiproperties.handler.text.configurator;
 
-import hu.skzs.multiproperties.base.api.HandlerException;
+import hu.skzs.multiproperties.support.handler.configurator.IWorkspaceConfigurator;
+import hu.skzs.multiproperties.support.handler.writer.WorkspaceWriter;
 
 /**
- * A {@link WorkspaceConfigurator} implementation is responsible for parsing and formatting the workspace based handler configuration.
- * @author sallai
+ * A {@link WorkspaceConfigurator} implementation represents and describes a workspace based handler
+ * configuration for the <strong>Text File Handler</strong>.
+ * @author skzs
+ * @see WorkspaceWriter
+ * @see FileSystemConfigurator
  */
-public class WorkspaceConfigurator extends AbstractConfigurator
+public class WorkspaceConfigurator extends TextHandlerConfigurator implements IWorkspaceConfigurator
 {
 
 	private String containerName;
 	private String fileName;
-
-	/**
-	 * Default constructor, which parses the given <code>configuration</code>.
-	 * 
-	 * @param configuration the given configuration
-	 * @throws HandlerException when the format is invalid
-	 */
-	public WorkspaceConfigurator(final String configuration) throws HandlerException
-	{
-		super(configuration);
-	}
 
 	/*
 	 * (non-Javadoc)

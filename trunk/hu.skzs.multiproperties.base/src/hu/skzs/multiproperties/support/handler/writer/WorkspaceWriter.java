@@ -1,7 +1,8 @@
-package hu.skzs.multiproperties.handler.java.writer;
+package hu.skzs.multiproperties.support.handler.writer;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
-import hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator;
+import hu.skzs.multiproperties.support.handler.configurator.IEncodingAwareConfigurator;
+import hu.skzs.multiproperties.support.handler.configurator.IWorkspaceConfigurator;
 
 import java.io.ByteArrayInputStream;
 
@@ -14,26 +15,27 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 
 /**
- * Eclipse workspace based {@link IWriter} implementation.
- * @author sallai
+ * Eclipse workspace based {@link AbstractWriter} implementation.
+ * @author skzs
  */
-public class WorkspaceWriter implements IWriter
+public class WorkspaceWriter extends AbstractWriter<IWorkspaceConfigurator>
 {
 
-	private final WorkspaceConfigurator configurator;
-
 	/**
-	 * Package level constructor.
-	 * @param configurator the given instance of {@link WorkspaceConfigurator} to be used.
+	 * Package protected constructor.
+	 * @param configurator the given {@link IWorkspaceConfigurator} instance
+	 * @see WriterFactory
 	 */
-	WorkspaceWriter(final WorkspaceConfigurator configurator)
+	WorkspaceWriter(final IWorkspaceConfigurator configurator)
 	{
-		this.configurator = configurator;
+		super(configurator);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.handler.text.writer.AbstractWriter#write(byte[])
+	/**
+	 * {@inheritDoc}
+	 * If the provided {@link IWorkspaceConfigurator} instance also implements the
+	 * {@link IEncodingAwareConfigurator} interface, then the {@link IEncodingAwareConfigurator#getEncoding()}
+	 * encoding will be set on the output file.
 	 */
 	public void write(final byte[] bytes) throws HandlerException
 	{
@@ -59,6 +61,16 @@ public class WorkspaceWriter implements IWriter
 			else
 			{
 				file.create(stream, false, null);
+			}
+
+			// Setting the encoding
+			if (configurator instanceof IEncodingAwareConfigurator)
+			{
+				final IEncodingAwareConfigurator encodingAwareConfigurator = (IEncodingAwareConfigurator) configurator;
+				if (encodingAwareConfigurator.getEncoding() != null)
+					file.setCharset(encodingAwareConfigurator.getEncoding(), null);
+				else
+					file.setCharset(null, null);
 			}
 		}
 		catch (final CoreException e)

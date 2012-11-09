@@ -1,32 +1,23 @@
 package hu.skzs.multiproperties.handler.java.configurator;
 
-import hu.skzs.multiproperties.base.api.HandlerException;
+import hu.skzs.multiproperties.support.handler.configurator.IWorkspaceConfigurator;
+import hu.skzs.multiproperties.support.handler.writer.WorkspaceWriter;
 
 /**
- * A {@link WorkspaceConfigurator} implementation is responsible for parsing and formatting the workspace based handler configuration.
- * @author sallai
+ * A {@link WorkspaceConfigurator} implementation represents and describes a workspace based handler
+ * configuration for the <strong>Java Properties Handler</strong>.
+ * @author skzs
+ * @see WorkspaceWriter
+ * @see FileSystemConfigurator
  */
-public class WorkspaceConfigurator extends AbstractConfigurator
+public class WorkspaceConfigurator extends JavaHandlerConfigurator implements IWorkspaceConfigurator
 {
 
 	private String containerName;
 	private String fileName;
 
 	/**
-	 * Default constructor, which parses the given <code>configuration</code>.
-	 * 
-	 * @param configuration the given configuration
-	 * @throws HandlerException when the format is invalid
-	 */
-	public WorkspaceConfigurator(final String configuration) throws HandlerException
-	{
-		super(configuration);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.skzs.multiproperties.handler.java.writer.Writer#parsePath(java.lang.String)
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void parsePath(final String path)
@@ -43,10 +34,8 @@ public class WorkspaceConfigurator extends AbstractConfigurator
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.skzs.multiproperties.handler.java.writer.Writer#formatPath()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public String formatPath()
@@ -58,7 +47,6 @@ public class WorkspaceConfigurator extends AbstractConfigurator
 
 	/**
 	 * Sets the container name
-	 * 
 	 * @param containerName the given container name
 	 */
 	public void setContainerName(final String containerName)
@@ -67,9 +55,7 @@ public class WorkspaceConfigurator extends AbstractConfigurator
 	}
 
 	/**
-	 * Returns the container name
-	 * 
-	 * @return the container name
+	 * {@inheritDoc}
 	 */
 	public String getContainerName()
 	{
@@ -78,7 +64,6 @@ public class WorkspaceConfigurator extends AbstractConfigurator
 
 	/**
 	 * Sets the file name
-	 * 
 	 * @param fileName the given file name
 	 */
 	public void setFileName(final String fileName)
@@ -87,9 +72,7 @@ public class WorkspaceConfigurator extends AbstractConfigurator
 	}
 
 	/**
-	 * Returns the file name
-	 * 
-	 * @return the file name
+	 * {@inheritDoc}
 	 */
 	public String getFileName()
 	{

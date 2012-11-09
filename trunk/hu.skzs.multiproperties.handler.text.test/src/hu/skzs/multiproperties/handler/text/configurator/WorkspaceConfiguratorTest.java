@@ -23,11 +23,11 @@ public class WorkspaceConfiguratorTest
 	private static final String PROPERTY = "property"; //$NON-NLS-1$
 	private static final String COMMENT = "comment"; //$NON-NLS-1$
 	private static final String EMPTY = "empty"; //$NON-NLS-1$
-	private static final String PATTERNS = AbstractConfigurator.DELIM + HEADER + AbstractConfigurator.DELIM + PROPERTY
-			+ AbstractConfigurator.DELIM + COMMENT + AbstractConfigurator.DELIM + EMPTY + AbstractConfigurator.DELIM
-			+ FOOTER;
-	private static final String PATTERNS_WITH_ENCODING = AbstractConfigurator.DELIM + ENCODING + PATTERNS;
-	private static final String CONF = CONTAINER_AND_FILENAME + PATTERNS_WITH_ENCODING + AbstractConfigurator.DELIM
+	private static final String PATTERNS = TextHandlerConfigurator.DELIM + HEADER + TextHandlerConfigurator.DELIM
+			+ PROPERTY + TextHandlerConfigurator.DELIM + COMMENT + TextHandlerConfigurator.DELIM + EMPTY
+			+ TextHandlerConfigurator.DELIM + FOOTER;
+	private static final String PATTERNS_WITH_ENCODING = TextHandlerConfigurator.DELIM + ENCODING + PATTERNS;
+	private static final String CONF = CONTAINER_AND_FILENAME + PATTERNS_WITH_ENCODING + TextHandlerConfigurator.DELIM
 			+ ETX;
 
 	private WorkspaceConfigurator configurator;
@@ -39,14 +39,15 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructorEmpty() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator(""); //$NON-NLS-1$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(""); //$NON-NLS-1$
 
 		// then
 		Assert.assertNull(configurator.getContainerName());
@@ -59,19 +60,20 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructor() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator(CONF);
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONF);
 
 		// then
 		Assert.assertEquals(CONTAINER, configurator.getContainerName());
 		Assert.assertEquals(FILENAME, configurator.getFileName());
-		Assert.assertEquals(ENCODING, configurator.getEncodingPattern());
+		Assert.assertEquals(ENCODING, configurator.getEncoding());
 		Assert.assertEquals(HEADER, configurator.getHeaderPattern());
 		Assert.assertEquals(FOOTER, configurator.getFooterPattern());
 		Assert.assertEquals(PROPERTY, configurator.getPropertyPattern());
@@ -80,21 +82,22 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test
 	public void testConstructorWithDefaultEncoding() throws HandlerException
 	{
 		// when
-		final String config = CONTAINER_AND_FILENAME + AbstractConfigurator.DELIM + PATTERNS
-				+ AbstractConfigurator.DELIM + ETX;
-		configurator = new WorkspaceConfigurator(config);
+		final String config = CONTAINER_AND_FILENAME + TextHandlerConfigurator.DELIM + PATTERNS
+				+ TextHandlerConfigurator.DELIM + ETX;
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(config);
 
 		// then
 		Assert.assertEquals(CONTAINER, configurator.getContainerName());
 		Assert.assertEquals(FILENAME, configurator.getFileName());
-		Assert.assertNull(configurator.getEncodingPattern());
+		Assert.assertNull(configurator.getEncoding());
 		Assert.assertEquals(HEADER, configurator.getHeaderPattern());
 		Assert.assertEquals(FOOTER, configurator.getFooterPattern());
 		Assert.assertEquals(PROPERTY, configurator.getPropertyPattern());
@@ -103,56 +106,62 @@ public class WorkspaceConfiguratorTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test(expected = HandlerException.class)
 	public void testConstructorNoSlash() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator("blabla" + FILENAME + PATTERNS_WITH_ENCODING); //$NON-NLS-1$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration("blabla" + FILENAME + PATTERNS_WITH_ENCODING); //$NON-NLS-1$
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator#setConfiguration(String)}.
 	 * @throws HandlerException 
 	 */
 	@Test(expected = HandlerException.class)
 	public void testConstructorTooLong() throws HandlerException
 	{
 		// when
-		configurator = new WorkspaceConfigurator(CONF + AbstractConfigurator.DELIM + "blabla"); //$NON-NLS-1$
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONF + TextHandlerConfigurator.DELIM + "blabla"); //$NON-NLS-1$
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator#toString()()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator#getConfiguration()}.
+	 * @throws HandlerException
 	 */
 	@Test
-	public void testToString() throws HandlerException
+	public void testGetConfiguration() throws HandlerException
 	{
 		// given
-		configurator = new WorkspaceConfigurator(CONF);
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(CONF);
 
 		// when
-		final String conf = configurator.toString();
+		final String conf = configurator.getConfiguration();
 
 		// then
 		Assert.assertEquals(CONF, conf);
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator#toString()()}.
+	 * Test method for {@link hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator#getConfiguration()}.
+	 * @throws HandlerException
 	 */
 	@Test
-	public void testToStringWithDefaultEncoding() throws HandlerException
+	public void testGetConfigurationWithDefaultEncoding() throws HandlerException
 	{
 		// given
-		final String config = CONTAINER_AND_FILENAME + AbstractConfigurator.DELIM + PATTERNS
-				+ AbstractConfigurator.DELIM + ETX;
-		configurator = new WorkspaceConfigurator(config);
+		final String config = CONTAINER_AND_FILENAME + TextHandlerConfigurator.DELIM + PATTERNS
+				+ TextHandlerConfigurator.DELIM + ETX;
+		configurator = new WorkspaceConfigurator();
+		configurator.setConfiguration(config);
 
 		// when
-		final String conf = configurator.toString();
+		final String conf = configurator.getConfiguration();
 
 		// then
 		Assert.assertEquals(config, conf);

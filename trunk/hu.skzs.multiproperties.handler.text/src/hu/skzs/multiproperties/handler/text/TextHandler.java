@@ -7,10 +7,10 @@ import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.handler.text.configurator.AbstractConfigurator;
-import hu.skzs.multiproperties.handler.text.configurator.ConfiguratorFactory;
-import hu.skzs.multiproperties.handler.text.writer.IWriter;
-import hu.skzs.multiproperties.handler.text.writer.WriterFactory;
+import hu.skzs.multiproperties.handler.text.configurator.TextConfiguratorFactory;
+import hu.skzs.multiproperties.handler.text.configurator.TextHandlerConfigurator;
+import hu.skzs.multiproperties.support.handler.writer.IWriter;
+import hu.skzs.multiproperties.support.handler.writer.WriterFactory;
 
 public class TextHandler implements IHandler
 {
@@ -28,20 +28,21 @@ public class TextHandler implements IHandler
 	 */
 	public void save(final String configuration, final Table table, final Column column) throws HandlerException
 	{
-		final AbstractConfigurator configurator = ConfiguratorFactory.getConfigurator(configuration);
+		final TextHandlerConfigurator configurator = TextConfiguratorFactory.getInstance().getConfigurator(
+				configuration);
 		final IWriter writer = WriterFactory.getWriter(configurator);
 		writer.write(convert(configurator, table, column));
 	}
 
 	/**
-	 * Converts and returns the content of the given {@link Column} based on the given {@link AbstractConfigurator}
-	 * @param configuration the given {@link AbstractConfigurator} instance
+	 * Converts and returns the content of the given {@link Column} based on the given {@link TextHandlerConfigurator}
+	 * @param configuration the given {@link TextHandlerConfigurator} instance
 	 * @param table the given table
 	 * @param column the given column
 	 * @return the converted content of the given column
 	 * @throws HandlerException 
 	 */
-	public byte[] convert(final AbstractConfigurator configuration, final Table table, final Column column)
+	public byte[] convert(final TextHandlerConfigurator configuration, final Table table, final Column column)
 			throws HandlerException
 	{
 		try
@@ -67,8 +68,8 @@ public class TextHandler implements IHandler
 			}
 			strb.append(replaceMarkers(configuration.getFooterPattern(), table, column, null));
 
-			if (configuration.getEncodingPattern() != null)
-				return strb.toString().getBytes(configuration.getEncodingPattern());
+			if (configuration.getEncoding() != null)
+				return strb.toString().getBytes(configuration.getEncoding());
 			else
 			{
 				return strb.toString().getBytes();
