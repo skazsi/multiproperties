@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author sallai
+ * @author skzs
  * 
  */
 public class PropertyRecordTest
@@ -32,8 +32,7 @@ public class PropertyRecordTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord()}.
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#PropertyRecord()}.
 	 */
 	@Test
 	public void testConstruction()
@@ -46,8 +45,7 @@ public class PropertyRecordTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord(String)}.
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#PropertyRecord(String)}.
 	 */
 	@Test
 	public void testConstructionWithValue()
@@ -61,7 +59,6 @@ public class PropertyRecordTest
 
 	/**
 	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setValue(String)} without using listener.
-	 * 
 	 */
 	@Test
 	public void testSetValueWithoutListener()
@@ -78,7 +75,6 @@ public class PropertyRecordTest
 
 	/**
 	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setValue(String)} with using listener.
-	 * 
 	 */
 	@Test
 	public void testSetValueWithListener()
@@ -119,7 +115,6 @@ public class PropertyRecordTest
 
 	/**
 	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDescription(String)} without using listener.
-	 * 
 	 */
 	@Test
 	public void testSetDescriptionWithoutListener()
@@ -136,7 +131,6 @@ public class PropertyRecordTest
 
 	/**
 	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDescription(String)} with using listener.
-	 * 
 	 */
 	@Test
 	public void testSetDescriptionWithListener()
@@ -177,7 +171,7 @@ public class PropertyRecordTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDisabled(String)}
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#isDisabled()}
 	 */
 	@Test
 	public void testSetDisabled()
@@ -190,8 +184,7 @@ public class PropertyRecordTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDisabled(String)} without using listener.
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDisabled(boolean)} without using listener.
 	 */
 	@Test
 	public void testSetDisabledWithoutListener()
@@ -207,8 +200,7 @@ public class PropertyRecordTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDisabled(String)} with using listener.
-	 * 
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDisabled(boolean)} with using listener.
 	 */
 	@Test
 	public void testSetDisabledWithListener()
@@ -228,7 +220,7 @@ public class PropertyRecordTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDisabled(String)} with using listener.
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDisabled(boolean)} with using listener.
 	 * Because the value is the same, it should not do anything.
 	 */
 	@Test
@@ -267,7 +259,6 @@ public class PropertyRecordTest
 
 	/**
 	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDefaultColumnValue(String)} with using listener.
-	 * 
 	 */
 	@Test
 	public void testSetDefaultColumnValueWithListener()

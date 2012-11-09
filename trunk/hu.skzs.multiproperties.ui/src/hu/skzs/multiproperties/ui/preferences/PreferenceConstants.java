@@ -3,7 +3,7 @@ package hu.skzs.multiproperties.ui.preferences;
 /**
  * The <code>PreferenceConstants</code> contains constant for coloring the MultiProperties
  * table page.
- * @author sallai
+ * @author skzs
  */
 public interface PreferenceConstants
 {

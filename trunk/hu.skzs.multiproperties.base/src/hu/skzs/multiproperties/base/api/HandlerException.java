@@ -3,7 +3,7 @@ package hu.skzs.multiproperties.base.api;
 /**
  * The <code>HandlerException</code> exception type represents
  * handler problems.
- * @author sallai
+ * @author skzs
  */
 public class HandlerException extends Exception
 {

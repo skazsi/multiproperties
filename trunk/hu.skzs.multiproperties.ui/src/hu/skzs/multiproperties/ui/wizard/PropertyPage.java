@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Text;
  * <p>The {@link PropertyPage#PropertyPage(PropertyRecord, Table)} constructor receives a {@link PropertyRecord} instance.
  * Passing <code>null</code> value means this wizard page is used in <strong>new</strong> mode, while an instance means 
  * the wizard page will be initiated based on the given instance resulting <strong>edit</strong> mode.</p>
- * @author sallai
+ * @author skzs
  */
 public class PropertyPage extends WizardPage
 {

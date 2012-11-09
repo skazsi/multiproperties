@@ -13,7 +13,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * The <code>PropertyAddWizard</code> wizard is able to add new property record. 
- * @author sallai
+ * @author skzs
  */
 public class PropertyAddWizard extends Wizard
 {

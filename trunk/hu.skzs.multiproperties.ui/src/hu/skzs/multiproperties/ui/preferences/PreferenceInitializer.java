@@ -7,7 +7,7 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 /**
  * The <code>PreferenceInitializer</code> is used by the <code>plugin.xml</code> for initializing
  * the preference values.  
- * @author sallai
+ * @author skzs
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer
 {

@@ -19,7 +19,7 @@ import javax.xml.bind.Unmarshaller;
 /**
  * The <code>SchemaConverter</code> is an implementation of {@link ISchemaConverter} for <code>1.1</code> format.
  * 
- * @author sallai
+ * @author skzs
  */
 public class SchemaConverter implements ISchemaConverter
 {

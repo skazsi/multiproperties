@@ -9,7 +9,7 @@ import org.eclipse.jface.viewers.Viewer;
 
 /**
  * The {@link RegistryElementContentProvider} is the content provider for registry element selection.
- * @author sallai
+ * @author skzs
  */
 public class RegistryElementContentProvider<T extends AbstractRegistryElement> implements IStructuredContentProvider
 {

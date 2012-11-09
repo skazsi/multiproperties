@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Text;
 
 /**
  * The {@link PatternsPreferencePage} offers specifying the target output file.
- * @author sallai
+ * @author skzs
  */
 public class PatternsPreferencePage extends PreferencePage
 {

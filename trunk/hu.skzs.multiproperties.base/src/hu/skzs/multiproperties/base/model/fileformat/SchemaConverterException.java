@@ -3,7 +3,7 @@ package hu.skzs.multiproperties.base.model.fileformat;
 /**
  * The <code>SchemaConverterException</code> exception type represents
  * schema converting problems.
- * @author sallai
+ * @author skzs
  */
 public class SchemaConverterException extends Exception
 {

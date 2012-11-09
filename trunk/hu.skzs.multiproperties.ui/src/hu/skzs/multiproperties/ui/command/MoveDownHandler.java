@@ -13,7 +13,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * The <code>MoveDownHandler</code> moves down the selected {@link AbstractRecord} instances.
- * @author sallai
+ * @author skzs
  */
 public class MoveDownHandler extends AbstractHandler
 {

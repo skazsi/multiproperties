@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Shell;
  * <p>The MultiProperties plugin guarantees only storing a String value for each {@link Column},
  * which is understandable by the handler only, and specifies how the handler should write out
  * the particular {@link Column}.</p>
- * @author sallai
+ * @author skzs
  */
 public interface IHandlerConfigurator
 {

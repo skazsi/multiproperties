@@ -16,7 +16,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * The <code>PositionPage</code> wizard page gives options to insert a new record at a desired place.
- * @author sallai
+ * @author skzs
  */
 public class PositionPage extends WizardPage
 {

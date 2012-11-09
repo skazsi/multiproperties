@@ -19,7 +19,7 @@ import org.eclipse.ui.PlatformUI;
  * <li><code>isBeginningSelection</code> - check whether the current selection begins at the beginning of the table or not</li>
  * <li><code>isEndingSelection</code> - check whether the current selection ends at the beginning of the table or not</li>
  * </ul>
- * @author sallai
+ * @author skzs
  */
 public class MPEPropertyTester extends PropertyTester
 {

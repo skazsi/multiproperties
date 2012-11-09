@@ -9,14 +9,15 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 /**
- * @author sallai
+ * @author skzs
  * 
  */
 public class InputStreamContentReaderTest
 {
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.io.InputStreamContentReader()}.
+	 * Test method for {@link hu.skzs.multiproperties.base.io.InputStreamContentReader#InputStreamContentReader(InputStream)}.
+	 * @throws IOException
 	 */
 	@Test
 	public void testConstructor() throws IOException
@@ -34,7 +35,8 @@ public class InputStreamContentReaderTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.io.InputStreamContentReader()}.
+	 * Test method for {@link hu.skzs.multiproperties.base.io.InputStreamContentReader#InputStreamContentReader(InputStream)}.
+	 * @throws IOException
 	 */
 	@Test
 	public void testConstructorEmpty() throws IOException
@@ -48,7 +50,8 @@ public class InputStreamContentReaderTest
 	}
 
 	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.io.InputStreamContentReader()}.
+	 * Test method for {@link hu.skzs.multiproperties.base.io.InputStreamContentReader#InputStreamContentReader(InputStream)}.
+	 * @throws IOException
 	 */
 	@Test(expected = NullPointerException.class)
 	public void testConstructorNull() throws IOException

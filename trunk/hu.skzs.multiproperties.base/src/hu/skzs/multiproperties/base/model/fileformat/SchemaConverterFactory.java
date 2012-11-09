@@ -11,7 +11,7 @@ import javax.xml.parsers.SAXParserFactory;
 /**
  * The <code>SchemaConverterFactory</code> constructs {@link ISchemaConverter} instances.
  * 
- * @author sallai
+ * @author skzs
  * 
  */
 public class SchemaConverterFactory

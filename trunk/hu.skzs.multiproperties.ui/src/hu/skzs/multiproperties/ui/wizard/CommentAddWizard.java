@@ -13,7 +13,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * The <code>CommentAddWizard</code> wizard is able to add new comment record. 
- * @author sallai
+ * @author skzs
  */
 public class CommentAddWizard extends Wizard
 {

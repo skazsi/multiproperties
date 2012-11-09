@@ -17,7 +17,7 @@ import java.util.Map;
  * only for a particular UI action.
  * </p>
  * 
- * @author sallai
+ * @author skzs
  */
 public class Table implements IRecordChangeListener, IStructuralChangeListener
 {

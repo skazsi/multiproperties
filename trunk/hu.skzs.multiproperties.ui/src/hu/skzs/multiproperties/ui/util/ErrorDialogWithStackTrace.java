@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Shell;
 
 /**
  * The {@link ErrorDialogWithStackTrace} is a helper class for representing error messages with stack trace details.
- * @author sallai
+ * @author skzs
  *
  */
 public class ErrorDialogWithStackTrace

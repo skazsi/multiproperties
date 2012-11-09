@@ -4,7 +4,7 @@ package hu.skzs.multiproperties.base.parameter;
  * The {@link ValuedParameter} is the base class of each valued parameter.
  * <p>The standard use case is to parsing the parameter value in the constructor, storing in a member, and simply
  * giving back in the {@link #getValue()} method.</p>
- * @author sallai
+ * @author skzs
  *
  * @param <T> is the type of the parameter
  */

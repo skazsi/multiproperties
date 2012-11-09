@@ -11,7 +11,7 @@ import org.eclipse.swt.graphics.Image;
 
 /**
  * The {@link ImporterSelectionLabelProvider} is the label provider for importer selection.
- * @author sallai
+ * @author skzs
  */
 public class ImporterSelectionLabelProvider extends ColumnLabelProvider
 {

@@ -34,7 +34,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 /**
  * The <code>OutlinePage</code> visualizes the currently selected {@link PropertyRecord} if there is
  * exactly one this typed selection.
- * @author sallai
+ * @author skzs
  */
 public class OutlinePage extends Page implements IContentOutlinePage, ISelectionListener
 {

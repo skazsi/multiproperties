@@ -7,7 +7,7 @@ import org.eclipse.ui.IPerspectiveFactory;
 /**
  * The <code>Perspective</code> is used to initialize the MultiProperties perspective layout.
  * It only shows the outline view on the right side.
- * @author sallai
+ * @author skzs
  */
 public class Perspective implements IPerspectiveFactory
 {

@@ -14,7 +14,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * The <code>AddPropertyHandler</code> adds a new {@link PropertyRecord} instance.
- * @author sallai
+ * @author skzs
  */
 public class AddPropertyHandler extends AbstractHandler
 {

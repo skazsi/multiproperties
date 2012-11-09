@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * The  <code>Parameters</code> class is able to parse the program arguments into instances of {@link Parameter}.
- * @author sallai
+ * @author skzs
  *
  */
 public class Parameters

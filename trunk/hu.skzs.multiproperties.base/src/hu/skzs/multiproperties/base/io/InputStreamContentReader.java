@@ -6,7 +6,7 @@ import java.io.InputStream;
 /**
  * The {@link InputStreamContentReader} is a thread safe and singleton content reader.
  * <p>Reads up the whole content of the input stream and stores it in an internal byte array.</p> 
- * @author sallai
+ * @author skzs
  *
  */
 public class InputStreamContentReader

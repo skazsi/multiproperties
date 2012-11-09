@@ -15,7 +15,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 /**
- * @author sallai
+ * @author skzs
  * 
  */
 public class SchemaConverterTest extends AbstractSchemaConverterTest

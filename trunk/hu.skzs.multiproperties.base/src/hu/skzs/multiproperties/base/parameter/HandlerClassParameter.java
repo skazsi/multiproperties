@@ -4,7 +4,7 @@ import hu.skzs.multiproperties.base.api.IHandler;
 
 /**
  * The {@link HandlerClassParameter} represents the handler class to be used
- * @author sallai
+ * @author skzs
  *
  */
 public class HandlerClassParameter extends ValuedParameter<Class<IHandler>>

@@ -17,7 +17,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 /**
  * The <code>PreferencesPage</code> is responsible for editing the general settings of MultiProperties
  * Editor.
- * @author sallai
+ * @author skzs
  */
 public class PreferencesPage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage
 {

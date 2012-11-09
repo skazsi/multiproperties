@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Label;
  * launched.
  * <p>Refactored from <code>org.eclipse.ui.internal.dialogs.WorkbenchWizardSelectionPage</code>
  * and <code>org.eclipse.ui.internal.dialogs.WorkbenchWizardListSelectionPage</code>.</p>
- * @author sallai
+ * @author skzs
  */
 public abstract class AbstractWizardSelectionPage extends WizardSelectionPage implements ISelectionChangedListener,
 		IDoubleClickListener

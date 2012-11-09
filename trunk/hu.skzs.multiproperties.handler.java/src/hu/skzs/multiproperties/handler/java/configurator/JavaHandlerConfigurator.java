@@ -5,7 +5,7 @@ import hu.skzs.multiproperties.support.handler.configurator.IConfigurator;
 
 /**
  * A {@link JavaHandlerConfigurator} implementation is responsible for parsing and formatting the handler configuration.
- * @author sallai
+ * @author skzs
  */
 public abstract class JavaHandlerConfigurator implements IConfigurator
 {

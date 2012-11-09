@@ -12,7 +12,7 @@ import org.eclipse.swt.graphics.Point;
  * A wizard node represents a "potential" wizard. Wizard nodes
  * are used by wizard selection pages to allow the user to pick
  * from several available nested wizards.
- * @author sallai
+ * @author skzs
  */
 public class ImporterWizardNode implements IWizardNode
 {

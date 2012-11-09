@@ -7,7 +7,7 @@ import org.eclipse.jface.viewers.Viewer;
 
 /**
  * The <code>TableContentProvider</code> is the content provider for the table page.
- * @author sallai
+ * @author skzs
  */
 public class TableContentProvider implements IStructuredContentProvider
 {

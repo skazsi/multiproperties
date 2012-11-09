@@ -8,7 +8,7 @@ import org.eclipse.jface.wizard.Wizard;
 
 /**
  * The <code>CommentEditWizard</code> wizard is able to edit a comment record. 
- * @author sallai
+ * @author skzs
  */
 public class CommentEditWizard extends Wizard
 {

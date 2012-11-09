@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Label;
  * <li>Importing only the key-value pairs only. The previously non-existing keys will be added to the end.</li>
  * <li>Importing just the values.</li>
  * </ul>
- * @author sallai
+ * @author skzs
  */
 public class ImporterMethodsPage extends WizardPage
 {

@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Display;
 
 /**
  * The <code>OutlineValueColumnLabelProvider</code> is the label provider for the outline page value column.
- * @author sallai
+ * @author skzs
  */
 public class OutlineValueColumnLabelProvider extends ColumnLabelProvider
 {

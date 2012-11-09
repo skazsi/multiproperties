@@ -17,7 +17,7 @@ import org.eclipse.jface.wizard.Wizard;
 
 /**
  * The <code>ImportWizard</code> wizard is able to import a content from different sources by using importers. 
- * @author sallai
+ * @author skzs
  */
 public class ImporterWizard extends Wizard
 {

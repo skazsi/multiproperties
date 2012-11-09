@@ -13,7 +13,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * The <code>MoveUpHandler</code> moves up the selected {@link AbstractRecord} instances.
- * @author sallai
+ * @author skzs
  */
 public class MoveUpHandler extends AbstractHandler
 {
