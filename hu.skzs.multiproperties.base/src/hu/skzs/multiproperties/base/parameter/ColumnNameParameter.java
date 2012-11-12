@@ -8,8 +8,6 @@ package hu.skzs.multiproperties.base.parameter;
 public class ColumnNameParameter extends ValuedParameter<String>
 {
 
-	private final String columnName;
-
 	/**
 	 * Default constructor
 	 * @param value the given parameter value as String
@@ -17,17 +15,14 @@ public class ColumnNameParameter extends ValuedParameter<String>
 	public ColumnNameParameter(final String value)
 	{
 		super(value);
-		columnName = value;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.base.parameter.ValuedParameter#getValue()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public String getValue()
+	protected String convertValue(final String value)
 	{
-		return columnName;
+		return value;
 	}
-
 }
