@@ -65,6 +65,43 @@ public class ParametersTest extends AbstractSchemaConverterTest
 		Assert.assertEquals("columnname", parameters.getColumnNameParameter().getValue());
 		Assert.assertNull(parameters.getFileParameter());
 		Assert.assertNull(parameters.getHandlerClassParameter());
+	}
 
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters#Parameters(String[])}.
+	 */
+	@Test
+	public void testConstructorWithNewLineParameter()
+	{
+		// fixture
+		System.setProperty(ValuedParameter.DISABLE_LINE_BREAK, Boolean.FALSE.toString());
+
+		// when
+		Parameters parameters = new Parameters(new String[] { "-columnConfigPattern", "column\\nconfiguration" });
+
+		// then
+		Assert.assertEquals(1, parameters.size());
+		Assert.assertEquals("column\nconfiguration", parameters.getColumnConfigPatternParameter().getValue());
+		Assert.assertNull(parameters.getFileParameter());
+		Assert.assertNull(parameters.getHandlerClassParameter());
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.parameter.Parameters#Parameters(String[])}.
+	 */
+	@Test
+	public void testConstructorWithDisabledNewLineParameter()
+	{
+		// fixture
+		System.setProperty(ValuedParameter.DISABLE_LINE_BREAK, Boolean.TRUE.toString());
+
+		// when
+		Parameters parameters = new Parameters(new String[] { "-columnConfigPattern", "column\\nconfiguration" });
+
+		// then
+		Assert.assertEquals(1, parameters.size());
+		Assert.assertEquals("column\\nconfiguration", parameters.getColumnConfigPatternParameter().getValue());
+		Assert.assertNull(parameters.getFileParameter());
+		Assert.assertNull(parameters.getHandlerClassParameter());
 	}
 }

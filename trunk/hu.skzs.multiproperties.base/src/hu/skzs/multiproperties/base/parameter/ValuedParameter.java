@@ -11,6 +11,16 @@ package hu.skzs.multiproperties.base.parameter;
 public abstract class ValuedParameter<T> extends Parameter
 {
 
+	private final T value;
+
+	/**
+	 * Key constant for representing that VM argument which disables the <code>\n</code>
+	 * line break resolving. If the this <code>disableLineBreak</code> exists and
+	 * it's value equals to <code>true</code>, then the <code>\n</code> substring in the
+	 * parameters will not be resolved as line break. 
+	 */
+	public static final String DISABLE_LINE_BREAK = "disableLineBreak"; //$NON-NLS-1$
+
 	/**
 	 * Default constructor
 	 * <p><strong>Note:</strong> must be overridden and parse the given <code>valueString</code> properly.
@@ -18,11 +28,38 @@ public abstract class ValuedParameter<T> extends Parameter
 	 */
 	public ValuedParameter(final String valueString)
 	{
+		this.value = convertValue(resolveNewLine(valueString));
+	}
+
+	/**
+	 * Returns the converted value of the given String.
+	 * @param value the given String
+	 * @return the converted value of the given String
+	 */
+	protected abstract T convertValue(String value);
+
+	/**
+	 * Returns a new line resolved String if the {@link #DISABLE_LINE_BREAK} VM argument exists and it's
+	 * value equals to <code>true</code>, otherwise it return the given String value.
+	 * @return a new line resolved String
+	 */
+	protected String resolveNewLine(final String value)
+	{
+		if (System.getProperty(DISABLE_LINE_BREAK) != null
+				&& System.getProperty(DISABLE_LINE_BREAK).equalsIgnoreCase(Boolean.TRUE.toString()))
+		{
+			return value;
+		}
+		return value.replaceAll("\\\\n", "\n"); //$NON-NLS-1$//$NON-NLS-2$
 	}
 
 	/**
 	 * Returns the value of the parameter.
 	 * @return the value of the parameter
 	 */
-	public abstract T getValue();
+	public T getValue()
+	{
+		return value;
+	}
+
 }

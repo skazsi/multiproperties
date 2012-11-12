@@ -10,8 +10,6 @@ package hu.skzs.multiproperties.base.parameter;
 public class ColumnConfigPatternParameter extends ValuedParameter<String>
 {
 
-	private final String columnConfigPattern;
-
 	/**
 	 * Default constructor
 	 * @param value the given parameter value as String
@@ -19,17 +17,15 @@ public class ColumnConfigPatternParameter extends ValuedParameter<String>
 	public ColumnConfigPatternParameter(final String value)
 	{
 		super(value);
-		columnConfigPattern = value;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.base.parameter.ValuedParameter#getValue()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
-	public String getValue()
+	protected String convertValue(final String value)
 	{
-		return columnConfigPattern;
+		return value;
 	}
 
 }

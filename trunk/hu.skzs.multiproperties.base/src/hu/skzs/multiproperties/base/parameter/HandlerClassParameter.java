@@ -10,34 +10,30 @@ import hu.skzs.multiproperties.base.api.IHandler;
 public class HandlerClassParameter extends ValuedParameter<Class<IHandler>>
 {
 
-	private final Class<IHandler> clazz;
-
 	/**
 	 * Default constructor
 	 * @param value the given parameter value as String
 	 */
-	@SuppressWarnings("unchecked")
 	public HandlerClassParameter(final String value)
 	{
 		super(value);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected Class<IHandler> convertValue(final String value)
+	{
 		try
 		{
-			clazz = (Class<IHandler>) Class.forName(value);
+			@SuppressWarnings("unchecked")
+			final Class<IHandler> clazz = (Class<IHandler>) Class.forName(value);
+			return clazz;
 		}
 		catch (final ClassNotFoundException e)
 		{
 			throw new IllegalArgumentException("Unable to load handler class", e); //$NON-NLS-1$
 		}
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.base.parameter.ValuedParameter#getValue()
-	 */
-	@Override
-	public Class<IHandler> getValue()
-	{
-		return clazz;
-	}
-
 }
