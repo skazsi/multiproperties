@@ -68,7 +68,7 @@ Because the *Text File* handler is an advanced version of [ImplementingNewHandle
 
 <pre>java -classpath hu.skzs.multiproperties.base_1.2.0.jar;hu.skzs.multiproperties.handler.text_1.2.0.jar hu.skzs.multiproperties.base.HandlerExecutor -file file.multiproperties -columnConfigPattern "${columnName}.sql/#/UTF-8/#/${description}\n/#/${key} - ${value}\n/#/${value}\n/#/\n/#//#/ETX" -handlerClass hu.skzs.multiproperties.handler.text.TextHandler</pre>
 
-Please note that the exact format of the *Text File* handler configuration and the used format by [ImplementingNewHandlerTutorial How to implement new handler] tutorial is slightly different. The tutorial does support the output file encoding.
+Please note that the exact format of the *Text File* handler configuration and the used format by [ImplementingNewHandlerTutorial How to implement new handler] tutorial is slightly different. The tutorial does support the output file encoding. For proper description please see the [TextFileHandler#Configuration_format Text File configuration] format to understand it.
 
 = Ant/Maven build process =
 While the MultiProperties does not support directly the And and Maven build processes, until both of them give the possibility to call any Java application as a build step. This chapter is finally just a hint instead of a detailed description.
