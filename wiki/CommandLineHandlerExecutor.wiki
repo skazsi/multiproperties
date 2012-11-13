@@ -47,13 +47,13 @@ dler
 = Converting a column =
 Enter the following command to convert for example the `file.multiproperties` file's *EN* called column into `EN.properties` file with the *Java Properties* handler.
  <pre>java -classpath hu.skzs.multiproperties.base_1.2.0.jar;hu.skzs.multiproperties.handler.java_1.2.0.jar hu.skzs.multiproperties.base.HandlerExecutor -file file.multiproperties -columnName EN -columnConfig "EN.properties|true|true|true|false" -handlerClass hu.skzs.multiproperties.handler.java.JavaHandler</pre>
-It will produce the desired `EN.properties` file. Please see the [#Java_Properties_configuration Java Properties configuration] format to understand the boolean values in the end of the column configuration.
+It will produce the desired `EN.properties` file. Please see the [PropertiesHandler#Configuration_format Java Properties configuration] format to understand the boolean values in the end of the column configuration.
 
 = Converting all of the columns =
 ^Since 1.2.0^
 Enter the following command to convert for example the `file.multiproperties` file's each column into different properties files with the *Java Properties* handler.
  <pre>java -classpath hu.skzs.multiproperties.base_1.2.0.jar;hu.skzs.multiproperties.handler.java_1.2.0.jar hu.skzs.multiproperties.base.HandlerExecutor -file file.multiproperties -columnConfigPattern "messages_${columnName}.properties|true|true|true|false" -handlerClass hu.skzs.multiproperties.handler.java.JavaHandler</pre>
-If the input `file.multiproperties` contained two columns with `EN` and `HU` names, then two properties file will be generated with `messages_EN.properties` and `messages_HU.properties` names. Please see the [#Java_Properties_configuration Java Properties configuration] format to understand the boolean values in the end of the column configuration.
+If the input `file.multiproperties` contained two columns with `EN` and `HU` names, then two properties file will be generated with `messages_EN.properties` and `messages_HU.properties` names. Please see the [PropertiesHandler#Configuration_format Java Properties configuration] format to understand the boolean values in the end of the column configuration.
 
 = Using line break =
 ^Since 1.2.0^
