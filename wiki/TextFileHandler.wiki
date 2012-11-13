@@ -1,7 +1,7 @@
 #summary Overview of Text File Handler
 
 = Introduction =
-The *Text File* handler is able to produce almost any kind of text files from the content of columns where each record can be represented with one line in the text file.
+The *Text File* handler is able to produce almost any kind of text files from the content of columns where each record can be represented with one line in the output text file.
 
 = Handler =
 
@@ -24,6 +24,9 @@ You can specify the following patterns.
  * _property_ - written in the output file when the next record is a [Records#Property property record]
  * _comment_ - written in the output file when the next record is a [Records#Comment comment record]
  * _empty_ - written in the output file when the next record is a [Records#Empty empty record]
+
+See below an example screenshot about the pattern configuration.
+http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/Handlers/TextHandlerConf01.jpg
 
 == Markers ==
 You can use the following markers:
