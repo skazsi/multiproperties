@@ -1,0 +1,18 @@
+#summary Overview of Text File Handler
+
+= Introduction =
+
+= Handler =
+The *Text File* handler let you produce ...
+
+= Importer =
+The *Text File* handler currently does not support importing features.
+
+= Configuration format =
+The `multiproperties` file format provides only a string value for the handler configuration. In some cases, like [CommandLineHandlerExecutor command line usage], you need to know how this value is encoded. In *Text File* handler case it is the following.
+
+The target text file together with the above detailed settings are appended together with `/#/` separator character sequence. The stored values in order are:
+ # File name of the output text file (can be fully qualified path).
+ # 
+Example:
+ `c:\output.txt/#/UTF-8/#/${description}\n/#/${key} - ${value}\n/#/${value}\n/#/\n/#//#/ETX`
