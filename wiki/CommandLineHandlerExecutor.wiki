@@ -70,15 +70,5 @@ Because the *Text File* handler is an advanced version of [ImplementingNewHandle
 
 Please note that the exact format of the *Text File* handler configuration and the used format by [ImplementingNewHandlerTutorial How to implement new handler] tutorial is slightly different. The tutorial does support the output file encoding.
 
-= Java Properties configuration =
-If you would like to use the *Java Properties* handler, then most probably you need to know the it's configuration format. It uses the `|` sign as a separator and stores the following values in order.
- # File name of the output properties file (can be fully qualified path).
- # Include MultiProperties description as comment in the beginning of the output properties file. (boolean, only `true` and `false` are valid values)
- # Include the selected column description as comment in the beginning of the output properties file. (boolean, only `true` and `false` are valid values)
- # Include disabled property records as comment. (boolean, only `true` and `false` are valid values)
- # Disable the [Records#Property default values]. (boolean, only `true` and `false` are valid values)
-Example:
- `"c:\EN.properties|true|true|true|false"`
-
 = Ant/Maven build process =
 While the MultiProperties does not support directly the And and Maven build processes, until both of them give the possibility to call any Java application as a build step. This chapter is finally just a hint instead of a detailed description.
