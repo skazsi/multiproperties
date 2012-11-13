@@ -1,18 +1,18 @@
 #summary Command line usage of handlers
 
-The handlers can be used from command line too. That means you can take any `multiproperties` file as input, then convert one of it's column to the desired output by choosing any of your available handler.
+The handlers can be used from command line too. That means you can take any `multiproperties` file as input, then convert one or all of it's columns to the desired output by choosing any of your available handler.
 
 = Preparation =
-First of all you need to collect  the _base_ plugin `jar` file of the MultiProperties feature together with the handler plugin `jar` file. Hereinafter the *Java Properties* handler will be used, so finally you need to collect the following `jar` files from your Eclipse installation's `plugin` folder.
+First of all you need to collect the _base_ plugin `jar` file of the MultiProperties feature together with the desired handler plugin `jar` file. Hereinafter the examples below will use the *Java Properties* handler, so finally you need to collect the following `jar` files from your Eclipse installation's `plugin` folder.
  * `hu.skzs.multiproperties.base_X.Y.Z.jar`
  * `hu.skzs.multiproperties.handler.java_X.Y.Z.jar`
-Please note that the `X`, `Y` and `Z` means the major, minor and bugfix version numbers.  In the following the `1.1.0` version is used.
+Please note that the `X`, `Y` and `Z` means the major, minor and bugfix version numbers.  In the following the `1.2.0` version is used.
 
 If your handler requires some additional `jar` files on the classpath, you need to take care of them too.
 
 = Printing the usage =
 Enter the following command to print out the usage.
- <pre>java -classpath hu.skzs.multiproperties.base_1.1.0.jar;hu.skzs.multiproperties.handler.java_1.1.0.jar hu.skzs.multiproperties.base.HandlerExecutor</pre>
+ <pre>java -classpath hu.skzs.multiproperties.base_1.2.0.jar;hu.skzs.multiproperties.handler.java_1.2.0.jar hu.skzs.multiproperties.base.HandlerExecutor</pre>
 It will produce the following output.
 <pre>
 MultiProperties Handler Executor
