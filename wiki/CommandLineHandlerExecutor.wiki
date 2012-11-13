@@ -17,26 +17,58 @@ It will produce the following output.
 <pre>
 MultiProperties Handler Executor
 Usage:
-        <-file MultiPropertiesFilePath> <-columnName ColumnName> [-columnConfig ColumnConfig] <-handlerClass HandlerClass>
-or
-        -help
+  for transforming only one column:
+    <-file MultiPropertiesFilePath> <-columnName ColumnName> [-columnConfig ColumnConfig] <-handlerClass HandlerClass>
+  for transforming all columns:
+    <-file MultiPropertiesFilePath> <-columnConfigPattern ColumnConfigPattern> <-handlerClass HandlerClass>
+  help
+    -help
 Where:
-        file         : Path to the MultiProperties file
-        columnName   : Name of the column to be used by the handler
-        columnConfig : The handler specific configuration to be used
-        handlerClass : Fully qualified class name of the handler
-        help         : Prints this help out
+    file                : Path to the MultiProperties file.
+    columnName          : Name of the column to be used by the handler.
+    columnConfig        : The handler specific configuration to be used.
+                          When neither of this and 'columnConfigPattern' is set,
+                          then the stored value by MultiProperties file is used.
+                          Cannot be used together with 'columnConfigPattern'.
+    columnConfigPattern : The handler specific configuration pattern to be used.
+                          When used, all of the columns will be transformed. It's value can
+                          contain ${columnName} marker which will be replaced to the current column.
+                          Cannot be used together with 'columnConfig'.
+    handlerClass        : Fully qualified class name of the handler.
+    help                : Prints this help out.
 Example:
-        -file c:\file.multiproperties -columnName EN -columnConfig c:\EN.properties|true|true|true -handlerClass hu.skzs.multiproperties.handler.java.JavaHandler
-
- Note:
-If you don't specify the columnConfig paramater, then the column configuration stored in the MultiProperties will be used.
+    -file c:\file.multiproperties -columnName EN -columnConfig c:\EN.properties|true|true|true -handlerClass hu.skzs.multiproperties.handler.java.JavaHandle
+r
+or
+    -file c:\file.multiproperties -columnConfigPattern c:\${columnName}.properties|true|true|true -handlerClass hu.skzs.multiproperties.handler.java.JavaHan
+dler
 </pre>
 
 = Converting a column =
 Enter the following command to convert for example the `file.multiproperties` file's *EN* called column into `EN.properties` file with the *Java Properties* handler.
- <pre>java -classpath hu.skzs.multiproperties.base_1.1.0.jar;hu.skzs.multiproperties.handler.java_1.1.0.jar hu.skzs.multiproperties.base.HandlerExecutor -file file.multiproperties -columnName EN -columnConfig "EN.properties|true|true|true|false" -handlerClass hu.skzs.multiproperties.handler.java.JavaHandler</pre>
+ <pre>java -classpath hu.skzs.multiproperties.base_1.2.0.jar;hu.skzs.multiproperties.handler.java_1.2.0.jar hu.skzs.multiproperties.base.HandlerExecutor -file file.multiproperties -columnName EN -columnConfig "EN.properties|true|true|true|false" -handlerClass hu.skzs.multiproperties.handler.java.JavaHandler</pre>
 It will produce the desired `EN.properties` file. Please see the [#Java_Properties_configuration Java Properties configuration] format to understand the boolean values in the end of the column configuration.
+
+= Converting all of the columns =
+^Since 1.2.0^
+Enter the following command to convert for example the `file.multiproperties` file's each column into different properties files with the *Java Properties* handler.
+ <pre>java -classpath hu.skzs.multiproperties.base_1.2.0.jar;hu.skzs.multiproperties.handler.java_1.2.0.jar hu.skzs.multiproperties.base.HandlerExecutor -file file.multiproperties -columnConfigPattern "messages_${columnName}.properties|true|true|true|false" -handlerClass hu.skzs.multiproperties.handler.java.JavaHandler</pre>
+If the input `file.multiproperties` contained two columns with `EN` and `HU` names, then two properties file will be generated with `messages_EN.properties` and `messages_HU.properties` names. Please see the [#Java_Properties_configuration Java Properties configuration] format to understand the boolean values in the end of the column configuration.
+
+= Using line break =
+^Since 1.2.0^
+The MultiProperties command line interpreter automatically replaces the `\n` character sequence to a line break. If you would like to disable this feature, then set the `disableLineBreak=true` VM argument. Example:
+ <pre>java -DdisableLineBreak=true -classpath hu.skzs.multiproperties.base_1.2.0.jar; ...</pre>
+
+= Additional examples =
+== Using Text File Handler ==
+If you would like to use the *Text File* handler instead of *Java Properties* handler, then at first you need to put its `jar` file on the classpath which is the `hu.skzs.multiproperties.handler.text_X.Y.Z.jar`. Furthermore you always need to use handler specific configuration.
+
+Because the *Text File* handler is an advanced version of [ImplementingNewHandlerTutorial How to implement new handler] tutorial, if you would like to produce such SQL files which are described in the [ImplementingNewHandlerConfiguratorClass How to implement new handler configurator class] part of the tutorial, then you need to use the following command.
+
+<pre>java -classpath hu.skzs.multiproperties.base_1.2.0.jar;hu.skzs.multiproperties.handler.text_1.2.0.jar hu.skzs.multiproperties.base.HandlerExecutor -file file.multiproperties -columnConfigPattern "${columnName}.sql/#/UTF-8/#/${description}\n/#/${key} - ${value}\n/#/${value}\n/#/\n/#//#/ETX" -handlerClass hu.skzs.multiproperties.handler.text.TextHandler</pre>
+
+Please note that the exact format of the *Text File* handler configuration and the used format by [ImplementingNewHandlerTutorial How to implement new handler] tutorial is slightly different. The tutorial does support the output file encoding.
 
 = Java Properties configuration =
 If you would like to use the *Java Properties* handler, then most probably you need to know the it's configuration format. It uses the `|` sign as a separator and stores the following values in order.
