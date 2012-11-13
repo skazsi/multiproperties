@@ -1,10 +1,12 @@
 #summary Overview of handlers and importers.
 
 = Available Handlers and Importers =
-Currently the following handlers and importers are available by the project.
+The _handlers_ are the main extension for the *MultiProperties Editor*. While they let us generate different kind of output from the same *MultiProperties* content, until the _importers_ let us import content from different source into the *MultiProperties*. Currently the following _handlers_ and _importers_ are available by the project.
 
 || *Name* || *Plug-in* || *Description* || *Handler* || *Importer* ||
 || http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.handler.java/icons/java_prop.gif [PropertiesHandler Java Properties] || `hu.skzs.multiproperties.handler.java` || Provides the support of standard [http://docs.oracle.com/javase/tutorial/essential/environment/properties.html Properites] format, which is frequently used for localization or build processes. || http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/checkboxon.gif || http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/checkboxon.gif ||
 || http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.handler.text/icons/text.gif [TextFileHandler Text File] || `hu.skzs.multiproperties.handler.text` || Able to produce text files by using different pattern and markers. Supports different encoding for the generated output file. || http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/checkboxon.gif || http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/checkboxoff.gif ||
 
 You can get further information about the handlers and importers by clicking on their name.
+
+*Important:* The *MultiProperties Editor* does not contain any _handler_ or _importer_ by default. You need to install them explicitly by selecting the desired extension on the same [http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.updatesite/ update site].
