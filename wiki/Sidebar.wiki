@@ -4,6 +4,8 @@
   * [CreatingNewMultiPropertiesFile Creating a new MultiProperties file]
   * [Records Property, comment and empty records]
  * [HandlersImporters Handlers & Importers]
+  * [PropertiesHandler Properties handler & importer]
+  * [TextFileHandler Text File handler]
  * Advanced features
   * [ImportingContent Import content]
   * [CommandLineHandlerExecutor Command line usage of handlers]
