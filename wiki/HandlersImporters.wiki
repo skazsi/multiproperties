@@ -9,4 +9,4 @@ The _handlers_ are the main extension for the *MultiProperties Editor*. While th
 
 You can get further information about the handlers and importers by clicking on their name.
 
-*Important:* The *MultiProperties Editor* does not contain any _handler_ or _importer_ by default. You need to install them explicitly by selecting the desired extension on the same [http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.updatesite/ update site].
+*Important:* The *MultiProperties Editor* does not contain any _handler_ or _importer_ by default. You need to install them explicitly by selecting the desired extension from the same [http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.updatesite/ update site].
