@@ -1,5 +1,12 @@
 #summary All releases
 
+= 1.2.0 =
+2012-11-14 r238
+ * issue26 [TextFileHandler Text File handler]
+ * issue27 Unable to switch off the Properties Handler for a particular column
+ * issue23 Improved facade for [CommandLineHandlerExecutor command-line execution]
+ * issue20 No icon is visible for the Java Importer selection
+
 = 1.1.0 =
 2012-09-13 r117
  * issue7 [ImportingContent Import] properties files
