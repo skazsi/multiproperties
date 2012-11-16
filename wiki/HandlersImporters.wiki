@@ -1,7 +1,7 @@
 #summary Overview of handlers and importers.
 
 = Available Handlers and Importers =
-The _handlers_ are the main extension for the *MultiProperties Editor*. While they let us generate different kind of output from the same *MultiProperties* content, until the _importers_ let us import content from different source into the *MultiProperties*. Currently the following _handlers_ and _importers_ are available by the project.
+The _handlers_ are the main extensions for the *MultiProperties Editor*. While they let us generate different kind of output from the same *MultiProperties* content, until the _importers_ let us import content from different sources into the *MultiProperties*. Currently the following _handlers_ and _importers_ are available by the project, but you can also [ImplementingNewHandlerTutorial create your own handler].
 
 || *Name* || *Plug-in* || *Description* || *Handler* || *Importer* ||
 || http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.handler.java/icons/java_prop.gif [PropertiesHandler Java Properties] || `hu.skzs.multiproperties.handler.java` || Provides the support of standard [http://docs.oracle.com/javase/tutorial/essential/environment/properties.html Properites] format, which is frequently used for localization or build processes. || http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/checkboxon.gif || http://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.util/wiki/checkboxon.gif ||
