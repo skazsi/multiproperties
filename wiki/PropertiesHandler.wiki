@@ -6,7 +6,7 @@ _Properties_ are configuration values managed as _key/value pairs_. In each pair
 = Handler =
 The *Java Properties* handler let you produce `properties` files from the MultiProperties columns with the following features:
  * Includes the `native2ascii` conversion. The user don't need to care about it.
- * All of the [Records record types] are supported. In addition of property records, the comment and empty records result more readable result.
+ * All of the [Records record types] are supported. In addition of property records, the comment and empty records result more readable output.
  * Possibility to include the MultiProperties description as comment in the beginning of the output `properties` file.
  * Possibility to include the current column's description as comment in the beginning of the output `properties` file.
  * Possibility to write disabled records as comments instead of skipping them.
