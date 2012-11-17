@@ -1,0 +1,17 @@
+#labels Featured
+=Documentation=
+
+ * [FeaturesOfEditor Basic features]
+  * [CreatingNewMultiPropertiesFile Creating a new MultiProperties file]
+  * [Records Property, comment and empty records]
+ * [HandlersImporters Handlers & Importers]
+  * [PropertiesHandler Properties handler & importer]
+  * [TextFileHandler Text File handler]
+ * Advanced features
+  * [ImportingContent Import content]
+  * [CommandLineHandlerExecutor Command line usage of handlers]
+ * Customization
+  * [ImplementingNewHandlerTutorial How to implement new handler]
+   * [ImplementingNewHandlerProject Creating the project]
+   * [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
+   * [ImplementingNewHandlerClass Implementing handler class]
