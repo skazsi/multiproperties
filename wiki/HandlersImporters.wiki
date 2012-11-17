@@ -1,4 +1,5 @@
 #summary Overview of handlers and importers.
+#labels Featured
 
 = Available Handlers and Importers =
 The _handlers_ are the main extensions for the *MultiProperties Editor*. While they let us generate different kind of output from the same *MultiProperties* content, until the _importers_ let us import content from different sources into the *MultiProperties*. Currently the following _handlers_ and _importers_ are available by the project, but you can also [ImplementingNewHandlerTutorial create your own handler].
