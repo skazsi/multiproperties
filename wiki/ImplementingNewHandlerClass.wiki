@@ -1,4 +1,5 @@
 #summary How to implement new handler class
+#labels Phase-Implementation
 
 Previous step: [ImplementingNewHandlerConfiguratorClass How to implement new handler configurator class]
 
