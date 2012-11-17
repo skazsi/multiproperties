@@ -1,4 +1,5 @@
 #summary How to implement new handler
+#labels Phase-Implementation
 
 = Introduction =
 This tutorial wiki page describes how you can implement a new handler. The description assumes that you are familiar with the Eclipse [http://www.eclipse.org/pde/ plugin development] on basic level together with [http://www.eclipse.org/swt/ SWT] and [http://wiki.eclipse.org/JFace JFace].
