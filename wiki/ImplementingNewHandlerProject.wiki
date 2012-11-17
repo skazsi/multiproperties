@@ -1,4 +1,5 @@
 #summary Creating the new project for the new handler.
+#labels Phase-Implementation
 
 Previous step: [ImplementingNewHandlerTutorial How to implement new handler]<br/>
 Next step: [ImplementingNewHandlerConfiguratorClass Implementing handler configurator classes]
