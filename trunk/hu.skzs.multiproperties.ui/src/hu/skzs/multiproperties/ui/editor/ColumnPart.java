@@ -33,10 +33,25 @@ public class ColumnPart implements IDetailsPage
 	private final ColumnsMasterDetailsBlock block;
 	private Column column;
 	private boolean name_changed;
-	private boolean description_changed;
-	private boolean handler_configuration_changed;
 	private Text nametext;
+	private final ModifyListener textModifyListener = new ModifyListener()
+	{
+
+		public void modifyText(final ModifyEvent e)
+		{
+			column.setName(nametext.getText());
+			name_changed = true;
+		}
+	};
 	private Text descriptiontext;
+	private final ModifyListener descriptionModifyListener = new ModifyListener()
+	{
+
+		public void modifyText(final ModifyEvent e)
+		{
+			column.setDescription(descriptiontext.getText());
+		}
+	};
 	private String handler_configuration;
 	private Button configure;
 
@@ -68,14 +83,7 @@ public class ColumnPart implements IDetailsPage
 		toolkit.createLabel(client, Messages.getString("columns.column.name")); //$NON-NLS-1$
 		nametext = toolkit.createText(client, "", SWT.SINGLE); //$NON-NLS-1$
 		nametext.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
-		nametext.addModifyListener(new ModifyListener()
-		{
-
-			public void modifyText(final ModifyEvent e)
-			{
-				name_changed = true;
-			}
-		});
+		nametext.addModifyListener(textModifyListener);
 		final Label label = toolkit.createLabel(client, Messages.getString("columns.column.description")); //$NON-NLS-1$
 		final GridData griddata = new GridData();
 		griddata.verticalAlignment = GridData.BEGINNING;
@@ -83,14 +91,7 @@ public class ColumnPart implements IDetailsPage
 		descriptiontext = toolkit.createText(client, "", SWT.MULTI); //$NON-NLS-1$
 		descriptiontext.setLayoutData(new GridData(GridData.FILL_BOTH | GridData.GRAB_HORIZONTAL
 				| GridData.GRAB_VERTICAL));
-		descriptiontext.addModifyListener(new ModifyListener()
-		{
-
-			public void modifyText(final ModifyEvent e)
-			{
-				description_changed = true;
-			}
-		});
+		descriptiontext.addModifyListener(descriptionModifyListener);
 		toolkit.createLabel(client, Messages.getString("columns.column.handler")); //$NON-NLS-1$
 		configure = toolkit.createButton(client, Messages.getString("columns.column.handler.button"), SWT.PUSH); //$NON-NLS-1$
 		configure.addSelectionListener(new SelectionAdapter()
@@ -118,7 +119,7 @@ public class ColumnPart implements IDetailsPage
 					if (new_handler_configuration != null && !new_handler_configuration.equals(handler_configuration))
 					{
 						handler_configuration = new_handler_configuration;
-						handler_configuration_changed = true;
+						column.setHandlerConfiguration(handler_configuration);
 					}
 				}
 				catch (final Exception e)
@@ -140,23 +141,11 @@ public class ColumnPart implements IDetailsPage
 
 	public boolean isDirty()
 	{
-		return name_changed || description_changed || handler_configuration_changed;
+		return name_changed;
 	}
 
 	public void commit(final boolean onSave)
 	{
-		if (name_changed)
-		{
-			column.setName(nametext.getText());
-		}
-		if (description_changed)
-		{
-			column.setDescription(descriptiontext.getText());
-		}
-		if (handler_configuration_changed)
-		{
-			column.setHandlerConfiguration(handler_configuration);
-		}
 		block.refresh();
 	}
 
@@ -181,12 +170,14 @@ public class ColumnPart implements IDetailsPage
 	public void selectionChanged(final IFormPart part, final ISelection selection)
 	{
 		column = (Column) ((IStructuredSelection) selection).getFirstElement();
+		nametext.removeModifyListener(textModifyListener);
 		nametext.setText(column.getName());
+		nametext.addModifyListener(textModifyListener);
 		name_changed = false;
+		descriptiontext.removeModifyListener(descriptionModifyListener);
 		descriptiontext.setText(column.getDescription());
-		description_changed = false;
+		descriptiontext.addModifyListener(descriptionModifyListener);
 		handler_configuration = column.getHandlerConfiguration();
-		handler_configuration_changed = false;
 		configure.setEnabled(!block.getEditor().getTable().getHandler().equals("")); //$NON-NLS-1$
 	}
 }
