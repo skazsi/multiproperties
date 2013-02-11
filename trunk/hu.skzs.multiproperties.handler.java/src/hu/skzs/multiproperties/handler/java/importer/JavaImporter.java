@@ -36,7 +36,7 @@ public class JavaImporter implements IImporter
 		try
 		{
 			inputStream = new FileInputStream(fileName);
-			final LineReader lineReader = new LineReader(new FileInputStream(fileName));
+			final LineReader lineReader = new LineReader(inputStream);
 
 			final List<AbstractRecord> records = new LinkedList<AbstractRecord>();
 
