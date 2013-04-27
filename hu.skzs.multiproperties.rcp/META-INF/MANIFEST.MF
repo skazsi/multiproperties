@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MultiProperties Rcp Plug-in
+Bundle-SymbolicName: hu.skzs.multiproperties.rcp; singleton:=true
+Bundle-Version: 1.2.0
+Bundle-Activator: hu.skzs.multiproperties.rcp.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ hu.skzs.multiproperties.base;bundle-version="1.2.0",
+ hu.skzs.multiproperties.handler.java;bundle-version="1.2.0",
+ hu.skzs.multiproperties.handler.text;bundle-version="1.2.0",
+ hu.skzs.multiproperties.ui;bundle-version="1.2.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
