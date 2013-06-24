@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<MultiProperties xmlns="hu.skzs.multiproperties">
+    <Version>1.1</Version>
+    <Name>MultiProperties RCP</Name>
+    <Description></Description>
+    <Handler>Java Properties Handler</Handler>
+    <Columns>
+        <Key>
+            <Width>305</Width>
+        </Key>
+        <Column>
+            <Name>EN</Name>
+            <Description></Description>
+            <Width>284</Width>
+            <HandlerConfiguration>/hu.skzs.multiproperties.rcp/plugin.properties|false|false|false|false</HandlerConfiguration>
+        </Column>
+        <Column>
+            <Name>HU</Name>
+            <Description></Description>
+            <Width>402</Width>
+            <HandlerConfiguration>/hu.skzs.multiproperties.rcp/plugin_hu.properties|false|false|false|false</HandlerConfiguration>
+        </Column>
+    </Columns>
+    <Records>
+        <Comment>
+            <Value>GENERAL</Value>
+        </Comment>
+        <Empty/>
+        <Comment>
+            <Value>MENU</Value>
+        </Comment>
+        <Property>
+            <Name>menu.file</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">&amp;File</Value>
+            <Value disabled="false">&amp;Fájl</Value>
+        </Property>
+        <Property>
+            <Name>menu.edit</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">&amp;Edit</Value>
+            <Value disabled="false">&amp;Szerkesztés</Value>
+        </Property>
+        <Property>
+            <Name>menu.window</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">&amp;Window</Value>
+            <Value disabled="false">&amp;Ablak</Value>
+        </Property>
+        <Property>
+            <Name>menu.help</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">&amp;Help</Value>
+            <Value disabled="false">&amp;Súgó</Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>COMMAND</Value>
+        </Comment>
+        <Property>
+            <Name>command.schema.name</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">MultiProperties</Value>
+            <Value disabled="false">MultiProperties</Value>
+        </Property>
+        <Property>
+            <Name>command.newfile</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">New...</Value>
+            <Value disabled="false">Új...</Value>
+        </Property>
+        <Property>
+            <Name>command.newfile.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">New...</Value>
+            <Value disabled="false">Új...</Value>
+        </Property>
+        <Property>
+            <Name>command.openfile</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Open...</Value>
+            <Value disabled="false">Megnyitás...</Value>
+        </Property>
+        <Property>
+            <Name>command.openfile.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Open...</Value>
+            <Value disabled="false">Megnyitás...</Value>
+        </Property>
+        <Property>
+            <Name>command.openfile.dialog.filemask</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">MultiProperties file</Value>
+            <Value disabled="false">MultiProperties fájl</Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>WIZARD</Value>
+        </Comment>
+        <Comment>
+            <Value>new MultiProperties</Value>
+        </Comment>
+        <Property>
+            <Name>wizard.new.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">New MultiProperties</Value>
+            <Value disabled="false">Új MultiProperties</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.file</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">File</Value>
+            <Value disabled="false">Fájl</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.browse</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Browse...</Value>
+            <Value disabled="false">Tallózás...</Value>
+        </Property>
+        <Property>
+            <Name>wizard.new.general.browse.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Select new MultiProperties file</Value>
+            <Value disabled="false">Adja meg az új MultiProperties fájlt</Value>
+        </Property>
+        <Empty/>
+        <Comment>
+            <Value>PREFERENCE</Value>
+        </Comment>
+        <Empty/>
+        <Comment>
+            <Value>PERSPECTIVE</Value>
+        </Comment>
+    </Records>
+</MultiProperties>

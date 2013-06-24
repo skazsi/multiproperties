@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.CoreException;
 /**
  * The {@link HandlerRegistryElement} is an implementation of {@link AbstractRegistryElement} and
  * represent a handler extension element.
- * @author SKZS
+ * @author skzs
  *
  */
 public class HandlerRegistryElement extends AbstractRegistryElement
