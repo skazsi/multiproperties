@@ -12,6 +12,11 @@ import org.eclipse.ui.IPerspectiveFactory;
 public class Perspective implements IPerspectiveFactory
 {
 
+	/**
+	 * The ID of the perspective as specified in the extension.
+	 */
+	public static final String ID = "hu.skzs.multiproperties.ui.perspective"; //$NON-NLS-1$
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)

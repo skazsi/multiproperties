@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.Platform;
 
 /**
  * The {@link AbstractRegistry} is the base implementation for all extension registry.
- * @author SKZS
+ * @author skzs
  *
  * @param <T>
  */

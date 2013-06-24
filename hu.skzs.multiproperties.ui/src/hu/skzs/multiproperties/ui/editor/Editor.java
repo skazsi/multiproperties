@@ -1,7 +1,8 @@
 package hu.skzs.multiproperties.ui.editor;
 
 import hu.skzs.multiproperties.base.api.IHandler;
-import hu.skzs.multiproperties.base.io.InputStreamContentReader;
+import hu.skzs.multiproperties.base.io.EditorInputAdapter;
+import hu.skzs.multiproperties.base.io.EditorInputAdapterFactory;
 import hu.skzs.multiproperties.base.model.AbstractRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
@@ -16,13 +17,9 @@ import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
 import hu.skzs.multiproperties.ui.util.ErrorDialogWithStackTrace;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -35,7 +32,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -59,6 +55,8 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	 */
 	public static final String SCHEMA_CHARSET = "UTF-8"; //$NON-NLS-1$
 
+	private EditorInputAdapter<?> editorInputAdapter;
+
 	private MPEditorPage overviewPage;
 	private MPEditorPage columnsPage;
 	private TablePage tablePage;
@@ -75,6 +73,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 
 	/**
 	 * Closes all project files on project close.
+	 * @param event 
 	 */
 	public void resourceChanged(final IResourceChangeEvent event)
 	{
@@ -101,16 +100,6 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	}
 
 	/**
-	 * Returns the {@link IFile} instance. That file stores the MultiProperties content.
-	 * @return the {@link IFile} instance
-	 */
-	public IFile getFile()
-	{
-		final IFileEditorInput fileEditorInput = (IFileEditorInput) getEditorInput();
-		return fileEditorInput.getFile();
-	}
-
-	/**
 	 * Returns the current {@link Table} instance.
 	 * <p>The instance can be changed during life cycle of an editor instance, because when an external modification occurs, a new {@link Table} instance is built.
 	 * Thus clients should not hold a reference to this returned instance.</p>
@@ -127,7 +116,8 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 		super.init(site, input);
 		try
 		{
-			setPartName(getFile().getName());
+			editorInputAdapter = EditorInputAdapterFactory.getInstance().getEditorInputAdapter(getEditorInput());
+			setPartName(editorInputAdapter.getName());
 			doLoad();
 		}
 		catch (final Throwable e)
@@ -212,7 +202,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	 * <p>The method performs the followings:</p>
 	 * <ol>
 	 * <li>Constructs a {@link ISchemaConverter} based on the {@link #getFile()}</li>
-	 * <li>Constructs a new {@link Table} based on the {@link ISchemaConverter()}, thus the previous instance is discarded</li>
+	 * <li>Constructs a new {@link Table} based on the {@link ISchemaConverter}, thus the previous instance is discarded</li>
 	 * <li>Sets the {@link IStructuralChangeListener} and {@link IRecordChangeListener} of the {@link Table} to this editor instance</li>
 	 * <li>Sets the <code>dirty</code> flag of the table to <code>false</code></li>
 	 * </ol>
@@ -223,8 +213,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	{
 		try
 		{
-			final InputStream inputStream = getFile().getContents(true);
-			final byte[] content = new InputStreamContentReader(inputStream).getContent();
+			final byte[] content = editorInputAdapter.getFileContentAccessor().getContent();
 			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(content);
 			table = schemaConverter.convert(content);
 			table.setStructuralChangeListener(this);
@@ -260,24 +249,12 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	@Override
 	public void doSave(final IProgressMonitor monitor)
 	{
-		final IFile file = getFile();
-
 		// Saving the content
 		try
 		{
 			final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(table);
-			final InputStream inputStream = new ByteArrayInputStream(schemaConverter.convert(table));
-			if (file.exists())
-			{
-				file.setCharset(SCHEMA_CHARSET, null);
-				file.setContents(inputStream, true, true, null);
-			}
-			else
-			{
-				file.create(inputStream, true, null);
-				file.setCharset(SCHEMA_CHARSET, null);
-			}
-
+			final byte[] content = schemaConverter.convert(table);
+			editorInputAdapter.getFileContentAccessor().setContent(content);
 			table.setDirty(false);
 		}
 		catch (final Exception e)
@@ -343,18 +320,14 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 				if (((PropertyRecord) table.get(i)).isDuplicated())
 					duplicated++;
 			}
-			file.deleteMarkers(null, true, 0);
 			if (duplicated > 0)
 			{
-				IMarker marker = file.findMarker(0);
-				if (marker == null)
-				{
-					marker = file.createMarker(IMarker.PROBLEM);
-					marker.setAttribute(
-							IMarker.MESSAGE,
-							Messages.getString("editor.marker.error.prefix") + duplicated + Messages.getString("editor.marker.error.suffix")); //$NON-NLS-1$ //$NON-NLS-2$
-					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
-				}
+				editorInputAdapter.setMarker(Messages.getString("editor.marker.error.prefix") + duplicated //$NON-NLS-1$
+						+ Messages.getString("editor.marker.error.suffix")); //$NON-NLS-1$
+			}
+			else
+			{
+				editorInputAdapter.setMarker(null);
 			}
 		}
 		catch (final Exception e)

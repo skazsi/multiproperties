@@ -12,7 +12,7 @@
             <Name>EN</Name>
             <Description></Description>
             <Width>284</Width>
-            <HandlerConfiguration>/hu.skzs.multiproperties.ui/plugin.properties</HandlerConfiguration>
+            <HandlerConfiguration>/hu.skzs.multiproperties.ui/plugin.properties|false|false|false</HandlerConfiguration>
         </Column>
         <Column>
             <Name>HU</Name>
@@ -976,27 +976,6 @@ See also the editor.marker.error.prefix property.</Description>
             <Disabled>false</Disabled>
             <Value disabled="false">New MultiProperties</Value>
             <Value disabled="false">Új MultiProperties</Value>
-        </Property>
-        <Property>
-            <Name>wizard.new.progress.title</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Creating new MultiProperties file</Value>
-            <Value disabled="false">Új MultiProperties fájl létrehozása</Value>
-        </Property>
-        <Property>
-            <Name>wizard.new.progress.creating</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Creating the content...</Value>
-            <Value disabled="false">A tartalom létrehozása...</Value>
-        </Property>
-        <Property>
-            <Name>wizard.new.progress.opening</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">File opening...</Value>
-            <Value disabled="false">Fájl megnyitása...</Value>
         </Property>
         <Property>
             <Name>wizard.new.general.desc</Name>

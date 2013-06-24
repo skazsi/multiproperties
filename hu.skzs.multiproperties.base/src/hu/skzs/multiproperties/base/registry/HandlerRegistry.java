@@ -10,7 +10,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 /**
  * The {@link HandlerRegistry} loads and stores all of the {@link IHandler} implementions currently
  * available for the plugin.
- * @author SKZS
+ * @author skzs
  *
  */
 public class HandlerRegistry extends AbstractRegistry<HandlerRegistryElement>

@@ -5,7 +5,7 @@ import hu.skzs.multiproperties.base.model.PropertyRecord;
 
 /**
  * Simple model class for representing the outline elements.
- * @author Krisztian_Zsolt_Sall
+ * @author skzs
  *
  */
 public class OutlineInputElement

@@ -26,11 +26,11 @@ public class SchemaConverterFactory
 	static final String SCHEMA_CONVERTER_CLASS_NAME = "SchemaConverter"; //$NON-NLS-1$
 
 	/**
-	 * Returns a newly constructed {@link SchemaConverter} instance based on the given <code>content</code>.
+	 * Returns a newly constructed {@link ISchemaConverter} instance based on the given <code>content</code>.
 	 * 
 	 * @param content
 	 *            the given contents byte array
-	 * @return a newly constructed {@link SchemaConverter} instance
+	 * @return a newly constructed {@link ISchemaConverter} instance
 	 * @throws UnsupportedSchemaVersionException
 	 *             if an unsupported schema is tried to be used
 	 * @throws SchemaConverterException
@@ -51,11 +51,11 @@ public class SchemaConverterFactory
 	}
 
 	/**
-	 * Returns a newly constructed {@link SchemaConverter} instance based on the given {@link Table}.
+	 * Returns a newly constructed {@link ISchemaConverter} instance based on the given {@link Table}.
 	 * 
 	 * @param table
 	 *            the given table
-	 * @return a newly constructed {@link SchemaConverter} instance
+	 * @return a newly constructed {@link ISchemaConverter} instance
 	 * @throws UnsupportedSchemaVersionException
 	 *             if an unsupported schema is tried to be used
 	 * @throws SchemaConverterException
@@ -67,10 +67,10 @@ public class SchemaConverterFactory
 	}
 
 	/**
-	 * Returns a newly constructed newest {@link SchemaConverter} instance.
+	 * Returns a newly constructed newest {@link ISchemaConverter} instance.
 	 * <p>This method should be called for creating the latest schema format.</p>
 	 * 
-	 * @return a newly constructed newest {@link SchemaConverter} instance
+	 * @return a newly constructed newest {@link ISchemaConverter} instance
 	 * @throws SchemaConverterException if an unexpected error occurred
 	 */
 	public static ISchemaConverter getSchemaConverter() throws SchemaConverterException

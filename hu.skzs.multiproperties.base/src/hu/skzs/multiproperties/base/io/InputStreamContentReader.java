@@ -7,8 +7,12 @@ import java.io.InputStream;
  * The {@link InputStreamContentReader} is a thread safe and singleton content reader.
  * <p>Reads up the whole content of the input stream and stores it in an internal byte array.</p> 
  * @author skzs
- *
+ * @deprecated
  */
+/*
+ * THIS CLASS SHOULD BE REMOVED
+ */
+@Deprecated
 public class InputStreamContentReader
 {
 	private final byte[] content;
@@ -18,7 +22,9 @@ public class InputStreamContentReader
 	 * @param inputStream
 	 * @return the content of the given input stream as byte array
 	 * @throws IOException
+	 * @deprecated
 	 */
+	@Deprecated
 	public InputStreamContentReader(final InputStream inputStream) throws IOException
 	{
 		content = new byte[inputStream.available()];
@@ -35,7 +41,9 @@ public class InputStreamContentReader
 	/**
 	 * Returns a defensive copy of the internal byte array.
 	 * @return a defensive copy of the internal byte array
+	 * @deprecated
 	 */
+	@Deprecated
 	public byte[] getContent()
 	{
 		final byte[] copy = new byte[content.length];

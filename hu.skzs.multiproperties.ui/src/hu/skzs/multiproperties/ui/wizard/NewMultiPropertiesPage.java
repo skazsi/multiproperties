@@ -1,16 +1,17 @@
 package hu.skzs.multiproperties.ui.wizard;
 
+import hu.skzs.multiproperties.base.io.FileContentAccessor;
+import hu.skzs.multiproperties.base.io.WorkspaceFileContentAccessor;
 import hu.skzs.multiproperties.ui.Messages;
-import hu.skzs.multiproperties.ui.util.LayoutFactory;
 
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -23,34 +24,28 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
-public class NewMultiPropertiesPage extends WizardPage
+public class NewMultiPropertiesPage extends AbstractNewMultiPropertiesPage
 {
 	private Text location;
 	private Text file;
-	private Text name;
-	private Text description;
 	private final ISelection selection;
 
 	public NewMultiPropertiesPage(final ISelection selection)
 	{
-		super("multiproperties.new.general"); //$NON-NLS-1$
-		setTitle(Messages.getString("wizard.new.title")); //$NON-NLS-1$
-		setDescription(Messages.getString("wizard.new.general.desc")); //$NON-NLS-1$
+		super();
 		this.selection = selection;
 	}
 
 	/**
-	 * @see IDialogPage#createControl(Composite)
+	 * {@inheritDoc}
 	 */
-	public void createControl(final Composite parent)
+	@Override
+	public void createFileControl(final Composite parent)
 	{
-		final Composite container = new Composite(parent, SWT.NULL);
-		container.setLayout(LayoutFactory.createGridLayout(3));
-
 		// Location
-		Label label = new Label(container, SWT.NULL);
+		Label label = new Label(parent, SWT.NULL);
 		label.setText(Messages.getString("wizard.new.general.location")); //$NON-NLS-1$
-		location = new Text(container, SWT.BORDER | SWT.SINGLE);
+		location = new Text(parent, SWT.BORDER | SWT.SINGLE);
 		location.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		location.addModifyListener(new ModifyListener()
 		{
@@ -59,7 +54,7 @@ public class NewMultiPropertiesPage extends WizardPage
 				validate();
 			}
 		});
-		final Button button = new Button(container, SWT.PUSH);
+		final Button button = new Button(parent, SWT.PUSH);
 		button.setText(Messages.getString("wizard.new.general.browse")); //$NON-NLS-1$
 		button.addSelectionListener(new SelectionAdapter()
 		{
@@ -71,9 +66,9 @@ public class NewMultiPropertiesPage extends WizardPage
 		});
 
 		// Filename
-		label = new Label(container, SWT.NULL);
+		label = new Label(parent, SWT.NULL);
 		label.setText(Messages.getString("wizard.new.general.filename")); //$NON-NLS-1$
-		file = new Text(container, SWT.BORDER | SWT.SINGLE);
+		file = new Text(parent, SWT.BORDER | SWT.SINGLE);
 		file.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		file.addModifyListener(new ModifyListener()
 		{
@@ -82,41 +77,14 @@ public class NewMultiPropertiesPage extends WizardPage
 				validate();
 			}
 		});
-		new Label(container, SWT.NONE);
-
-		LayoutFactory.createSeparatorInGrid(container, 3);
-
-		// Name
-
-		label = new Label(container, SWT.NULL);
-		label.setText(Messages.getString("wizard.new.general.name")); //$NON-NLS-1$
-		name = new Text(container, SWT.BORDER | SWT.SINGLE);
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.horizontalSpan = 2;
-		name.setLayoutData(gridData);
-		name.addModifyListener(new ModifyListener()
-		{
-			public void modifyText(final ModifyEvent e)
-			{
-				validate();
-			}
-		});
-		label = new Label(container, SWT.NULL);
-		label.setText(Messages.getString("wizard.new.general.description")); //$NON-NLS-1$
-		description = new Text(container, SWT.BORDER | SWT.MULTI);
-		gridData = new GridData(GridData.FILL_BOTH | GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL);
-		gridData.horizontalSpan = 2;
-		description.setLayoutData(gridData);
-
-		initialize();
-		validate();
-		setControl(container);
+		new Label(parent, SWT.NONE);
 	}
 
 	/**
-	 * Tests if the current workbench selection is a suitable container to use.
+	 * {@inheritDoc}
 	 */
-	private void initialize()
+	@Override
+	protected void initialize()
 	{
 		if (selection != null && selection.isEmpty() == false && selection instanceof IStructuredSelection)
 		{
@@ -134,14 +102,13 @@ public class NewMultiPropertiesPage extends WizardPage
 				location.setText(container.getFullPath().toString());
 			}
 		}
-		file.setText("file.multiproperties"); //$NON-NLS-1$
+		super.initialize();
 	}
 
 	/**
 	 * Uses the standard container selection dialog to choose the new value for
 	 * the container field.
 	 */
-
 	private void handleBrowse()
 	{
 		final ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace()
@@ -158,10 +125,10 @@ public class NewMultiPropertiesPage extends WizardPage
 	}
 
 	/**
-	 * Ensures that both text fields are set.
+	 * {@inheritDoc}
 	 */
-
-	private void validate()
+	@Override
+	protected void validate()
 	{
 		setErrorMessage(null);
 		setPageComplete(true);
@@ -205,32 +172,33 @@ public class NewMultiPropertiesPage extends WizardPage
 			}
 		}
 
-		// Name
-		if (name.getText().length() == 0)
-		{
-			setPageComplete(false);
-		}
+		super.validate();
 	}
 
-	public String getLocation()
+	private String getLocation()
 	{
 		return location.getText();
 	}
 
-	public String getFileName()
+	private String getFileName()
 	{
 		if (!file.getText().toLowerCase().endsWith(".multiproperties")) //$NON-NLS-1$
 			return file.getText() + ".multiproperties"; //$NON-NLS-1$
 		return file.getText();
 	}
 
-	public String getMultiPropertiesName()
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public FileContentAccessor<?> getFileContentAccessor()
 	{
-		return name.getText();
+		final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		final IResource resource = root.findMember(new Path(getLocation()));
+		final IContainer container = (IContainer) resource;
+		final IFile file = container.getFile(new Path(getFileName()));
+
+		return new WorkspaceFileContentAccessor(file);
 	}
 
-	public String getMultiPropertiesDescription()
-	{
-		return description.getText();
-	}
 }

@@ -8,7 +8,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * The <code>VersionInfoParser</code> is a {@link DefaultHandler} implementation for parsing only the version information from a
  * MultiProperties file.
  * 
- * @author Krisztian_Zsolt_Sall
+ * @author skzs
  * @see SchemaConverterFactory
  * 
  */
@@ -20,7 +20,8 @@ class VersionInfoParser extends DefaultHandler
 	private String version;
 
 	@Override
-	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
+	public void startElement(final String uri, final String localName, final String qName, final Attributes attributes)
+			throws SAXException
 	{
 		if (VERSION_TAG.equals(qName))
 		{
@@ -29,7 +30,7 @@ class VersionInfoParser extends DefaultHandler
 	}
 
 	@Override
-	public void endElement(String uri, String localName, String qName) throws SAXException
+	public void endElement(final String uri, final String localName, final String qName) throws SAXException
 	{
 		if (VERSION_TAG.equals(qName))
 		{
@@ -38,7 +39,7 @@ class VersionInfoParser extends DefaultHandler
 	}
 
 	@Override
-	public void characters(char[] ch, int start, int length) throws SAXException
+	public void characters(final char[] ch, final int start, final int length) throws SAXException
 	{
 		if (insideVersionElement)
 		{

@@ -12,68 +12,6 @@
       </application>
    </extension>
    <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            name="RCP Perspective"
-            class="hu.skzs.multiproperties.rcp.Perspective"
-            id="hu.skzs.multiproperties.rcp.perspective">
-      </perspective>
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            name="Message"
-            allowMultiple="true"
-            icon="icons/sample2.gif"
-            class="hu.skzs.multiproperties.rcp.View"
-            id="hu.skzs.multiproperties.rcp.view">
-      </view>
-      <view
-            name="Mailboxes"
-            allowMultiple="true"
-            icon="icons/sample3.gif"
-            class="hu.skzs.multiproperties.rcp.NavigationView"
-            id="hu.skzs.multiproperties.rcp.navigationView">
-      </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <category
-            name="Mail"
-            id="hu.skzs.multiproperties.rcp.category">
-      </category>
-      <command
-            name="Open Mailbox"
-            description="Opens a mailbox"
-            categoryId="hu.skzs.multiproperties.rcp.category"
-            id="hu.skzs.multiproperties.rcp.open">
-      </command>
-      <command
-            name="Open Message Dialog"
-            description="Open a message dialog"
-            categoryId="hu.skzs.multiproperties.rcp.category"
-            id="hu.skzs.multiproperties.rcp.openMessage">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.bindings">
-      <key
-            commandId="hu.skzs.multiproperties.rcp.open"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="CTRL+2">
-      </key>
-      <key
-            commandId="hu.skzs.multiproperties.rcp.openMessage"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="CTRL+3">
-      </key>
-      <key
-            commandId="org.eclipse.ui.file.exit"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="CTRL+X">
-      </key>
-   </extension>
-   <extension
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
@@ -81,7 +19,7 @@
             name="MultiProperties">
          <property
                name="aboutText"
-               value="RCP Mail template created by PDE">
+               value="MultiProperties Editor - standalone - Alpha version">
          </property>
          <property
                name="windowImages"
@@ -95,7 +33,85 @@
                name="appName"
                value="MultiProperties">
          </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
       </product>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="hu.skzs.multiproperties.rcp.command.NewFile"
+            name="%command.newfile">
+      </command>
+      <command
+            id="hu.skzs.multiproperties.rcp.command.OpenFile"
+            name="%command.openfile">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:file?after=new">
+            <command
+                  commandId="hu.skzs.multiproperties.rcp.command.NewFile"
+                  label="%command.newfile"
+                  tooltip="%command.newfile.tooltip">
+            </command>
+            <command
+                  commandId="hu.skzs.multiproperties.rcp.command.OpenFile"
+                  label="%command.openfile"
+                  tooltip="%command.openfile.tooltip">
+            </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?before=group.file">
+         <toolbar
+               id="hu.skzs.multiproperties.rcp.toolbar">
+            <command
+                  commandId="hu.skzs.multiproperties.rcp.command.OpenFile"
+                  icon="icons/open.png"
+                  label="%command.openfile"
+                  tooltip="%command.openfile">
+            </command>
+            <separator name="hu.skzs.multiproperties.rcp.toolbar.separator" visible="true"/>
+            <command
+                  commandId="org.eclipse.ui.file.save" style="push">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+      		class="hu.skzs.multiproperties.rcp.handler.NewFileHandler"
+            commandId="hu.skzs.multiproperties.rcp.command.NewFile">
+      </handler>
+      <handler
+      		class="hu.skzs.multiproperties.rcp.handler.OpenFileHandler"
+            commandId="hu.skzs.multiproperties.rcp.command.OpenFile">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <scheme
+            id="hu.skzs.multiproperties.rcp.scheme"
+            name="%command.schema.name">
+      </scheme>
+      <key
+            commandId="hu.skzs.multiproperties.rcp.command.NewFile"
+            schemeId="hu.skzs.multiproperties.rcp.scheme"
+            sequence="M1+N">
+      </key>
+      <key
+            commandId="hu.skzs.multiproperties.rcp.command.OpenFile"
+            schemeId="hu.skzs.multiproperties.rcp.scheme"
+            sequence="M1+O">
+      </key>
    </extension>
 
 </plugin>
