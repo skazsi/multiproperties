@@ -18,6 +18,7 @@ Export-Package: hu.skzs.multiproperties.base.api,
  hu.skzs.multiproperties.base.model.listener,
  hu.skzs.multiproperties.base.registry,
  hu.skzs.multiproperties.base.registry.element,
+ hu.skzs.multiproperties.support,
  hu.skzs.multiproperties.support.handler.configurator,
  hu.skzs.multiproperties.support.handler.writer
 Bundle-ClassPath: .,

@@ -1,5 +1,6 @@
 package hu.skzs.multiproperties.rcp;
 
+import hu.skzs.multiproperties.support.WorkbenchTypeProvider;
 import hu.skzs.multiproperties.ui.perspectives.Perspective;
 
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
@@ -25,4 +26,12 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor
 		return Perspective.ID;
 	}
 
+	@Override
+	public void preStartup()
+	{
+		super.preStartup();
+
+		// Setting the workbench type to stand-alone
+		WorkbenchTypeProvider.setStandAlone(true);
+	}
 }

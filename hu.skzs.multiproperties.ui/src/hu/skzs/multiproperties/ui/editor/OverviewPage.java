@@ -2,6 +2,7 @@ package hu.skzs.multiproperties.ui.editor;
 
 import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.base.registry.element.HandlerRegistryElement;
+import hu.skzs.multiproperties.support.WorkbenchTypeProvider;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.util.ComboPart;
@@ -211,6 +212,11 @@ public class OverviewPage extends MPEditorFormPage
 					editor.getTable().setHandler(handler.getText());
 			}
 		});
+
+		if (WorkbenchTypeProvider.isStandAlone()) // TODO: Handlers are not supported in stand-alone
+		{
+			handler.setEnabled(false);
+		}
 	}
 
 	private void fillNavigationSection(final Composite parent)

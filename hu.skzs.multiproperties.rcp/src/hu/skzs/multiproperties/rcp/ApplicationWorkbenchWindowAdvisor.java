@@ -1,7 +1,12 @@
 package hu.skzs.multiproperties.rcp;
 
+import hu.skzs.multiproperties.rcp.preference.PreferenceConstants;
+
 import org.eclipse.jface.action.ICoolBarManager;
+import org.eclipse.jface.dialogs.MessageDialogWithToggle;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -47,6 +52,28 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 			IWorkbenchPage page = windows[i].getActivePage();
 			if (page != null)
 				page.hideActionSet("org.eclipse.ui.actionSet.openFiles"); //$NON-NLS-1$
+		}
+
+		// Displaying the notification dialog about the alpha version
+		final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		if (store.getString(PreferenceConstants.NOTIFICATION_VER_ALPHA) == MessageDialogWithToggle.ALWAYS)
+		{
+			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
+			{
+				public void run()
+				{
+					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+
+					String title = Messages.getString("general.alphaversion.title"); //$NON-NLS-1$
+					String toogle = Messages.getString("general.alphaversion.toogle"); //$NON-NLS-1$
+					StringBuilder strb = new StringBuilder(Messages.getString("general.alphaversion.notification1")); //$NON-NLS-1$
+					strb.append("\n\n"); //$NON-NLS-1$
+					strb.append(Messages.getString("general.alphaversion.notification2")); //$NON-NLS-1$
+
+					MessageDialogWithToggle.openInformation(shell, title, strb.toString(), toogle, false, store,
+							PreferenceConstants.NOTIFICATION_VER_ALPHA);
+				}
+			});
 		}
 	}
 }
