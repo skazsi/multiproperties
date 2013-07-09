@@ -12,6 +12,7 @@ import hu.skzs.multiproperties.base.model.fileformat.UnsupportedSchemaVersionExc
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
 import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 import hu.skzs.multiproperties.base.registry.element.HandlerRegistryElement;
+import hu.skzs.multiproperties.support.WorkbenchTypeProvider;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
@@ -264,6 +265,11 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 			return;
 		}
 
+		if (WorkbenchTypeProvider.isStandAlone()) // TODO: Handlers are not supported in stand-alone
+		{
+			return;
+		}
+
 		// Saving the columns with the configured handler
 		try
 		{
@@ -345,7 +351,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	@Override
 	public boolean isSaveAsAllowed()
 	{
-		return false;
+		return true;
 	}
 
 	public List<AbstractRecord> getClipboard()

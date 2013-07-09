@@ -2,6 +2,7 @@ package hu.skzs.multiproperties.ui.editor;
 
 import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.base.registry.element.HandlerRegistryElement;
+import hu.skzs.multiproperties.support.WorkbenchTypeProvider;
 import hu.skzs.multiproperties.ui.Activator;
 import hu.skzs.multiproperties.ui.Messages;
 import hu.skzs.multiproperties.ui.util.ErrorDialogWithStackTrace;
@@ -129,6 +130,11 @@ public class ColumnPart implements IDetailsPage
 				}
 			}
 		});
+
+		if (WorkbenchTypeProvider.isStandAlone()) // TODO: Handlers are not supported in stand-alone
+		{
+			configure.setEnabled(false);
+		}
 	}
 
 	public void initialize(final IManagedForm form)
@@ -178,6 +184,8 @@ public class ColumnPart implements IDetailsPage
 		descriptiontext.setText(column.getDescription());
 		descriptiontext.addModifyListener(descriptionModifyListener);
 		handler_configuration = column.getHandlerConfiguration();
-		configure.setEnabled(!block.getEditor().getTable().getHandler().equals("")); //$NON-NLS-1$
+
+		if (!WorkbenchTypeProvider.isStandAlone()) // TODO: Handlers are not supported in stand-alone
+			configure.setEnabled(!block.getEditor().getTable().getHandler().equals("")); //$NON-NLS-1$
 	}
 }

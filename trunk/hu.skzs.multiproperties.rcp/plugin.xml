@@ -19,7 +19,7 @@
             name="MultiProperties">
          <property
                name="aboutText"
-               value="MultiProperties Editor - standalone - Alpha version">
+               value="%aboutText">
          </property>
          <property
                name="windowImages"
@@ -27,7 +27,7 @@
          </property>
          <property
                name="aboutImage"
-               value="product_lg.gif">
+               value="logo.png">
          </property>
          <property
                name="appName"
@@ -50,6 +50,10 @@
             id="hu.skzs.multiproperties.rcp.command.OpenFile"
             name="%command.openfile">
       </command>
+      <command
+            id="hu.skzs.multiproperties.rcp.command.OpenHomepage"
+            name="%command.openhomepage">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -65,6 +69,15 @@
                   commandId="hu.skzs.multiproperties.rcp.command.OpenFile"
                   label="%command.openfile"
                   tooltip="%command.openfile.tooltip">
+            </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:help?before=additions">
+            <command
+                  commandId="hu.skzs.multiproperties.rcp.command.OpenHomepage"
+                  label="%command.openhomepage"
+                  tooltip="%command.openhomepage">
             </command>
       </menuContribution>
       <menuContribution
@@ -94,6 +107,10 @@
       <handler
       		class="hu.skzs.multiproperties.rcp.handler.OpenFileHandler"
             commandId="hu.skzs.multiproperties.rcp.command.OpenFile">
+      </handler>
+      <handler
+      		class="hu.skzs.multiproperties.rcp.handler.OpenHomepageHandler"
+            commandId="hu.skzs.multiproperties.rcp.command.OpenHomepage">
       </handler>
    </extension>
    <extension

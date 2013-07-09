@@ -128,7 +128,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor
 		editMenu.add(new Separator());
 		fileMenu.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
 
-		// Help
+		// Window
 		windowMenu.add(newWindowAction);
 		windowMenu.add(new Separator());
 		windowMenu.add(resetPerspectiveWindowAction);
@@ -136,6 +136,8 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor
 		windowMenu.add(preferencesWindowAction);
 
 		// Help
+		helpMenu.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));
+		helpMenu.add(new Separator());
 		helpMenu.add(aboutAction);
 	}
 
