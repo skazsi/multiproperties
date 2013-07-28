@@ -351,7 +351,7 @@ public class Editor extends MultiPageEditorPart implements IResourceChangeListen
 	@Override
 	public boolean isSaveAsAllowed()
 	{
-		return true;
+		return false;
 	}
 
 	public List<AbstractRecord> getClipboard()

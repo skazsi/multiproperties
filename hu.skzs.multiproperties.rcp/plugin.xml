@@ -130,5 +130,11 @@
             sequence="M1+O">
       </key>
    </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="hu.skzs.multiproperties.rcp.preference.PreferenceInitializer">
+      </initializer>
+   </extension>
 
 </plugin>
