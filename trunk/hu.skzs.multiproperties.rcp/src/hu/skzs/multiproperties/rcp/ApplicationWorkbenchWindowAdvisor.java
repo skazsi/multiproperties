@@ -56,7 +56,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 
 		// Displaying the notification dialog about the alpha version
 		final IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		if (store.getString(PreferenceConstants.NOTIFICATION_VER_ALPHA) == MessageDialogWithToggle.ALWAYS)
+		if (store.getString(PreferenceConstants.NOTIFICATION_VER_ALPHA) == MessageDialogWithToggle.PROMPT)
 		{
 			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable()
 			{
