@@ -20,7 +20,7 @@ public class SchemaConverterFactory
 	/**
 	 * The <code>NEWEST_VERSION</code> represents the newest schema version
 	 */
-	public static final String NEWEST_VERSION = hu.skzs.multiproperties.base.model.fileformat_1_1.SchemaConverter.VERSION;
+	public static final String NEWEST_VERSION = hu.skzs.multiproperties.base.model.fileformat_1_2.SchemaConverter.VERSION;
 
 	static final String SCHEMA_CONVERTER_PACKAGE_PREFIX = "hu.skzs.multiproperties.base.model.fileformat_"; //$NON-NLS-1$
 	static final String SCHEMA_CONVERTER_CLASS_NAME = "SchemaConverter"; //$NON-NLS-1$

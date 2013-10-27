@@ -10,6 +10,7 @@ public class PropertyRecord extends AbstractRecord
 	private String value;
 	private String description;
 	private boolean disabled;
+	private boolean multiLine;
 	private String defaultColumnValue;
 	private Map<Column, String> columnValues = new HashMap<Column, String>();
 	private boolean duplicated;
@@ -74,6 +75,20 @@ public class PropertyRecord extends AbstractRecord
 		return disabled;
 	}
 
+	public void setMultiLine(final boolean multiLine)
+	{
+		if (this.multiLine == multiLine)
+			return;
+		this.multiLine = multiLine;
+		if (recordChangeListener != null)
+			recordChangeListener.changed(this);
+	}
+
+	public boolean isMultiLine()
+	{
+		return multiLine;
+	}
+
 	public void setDefaultColumnValue(final String defaultValue)
 	{
 		if (this.defaultColumnValue != null && this.defaultColumnValue.equals(defaultValue))
@@ -134,6 +149,7 @@ public class PropertyRecord extends AbstractRecord
 		propertyrecord.value = value;
 		propertyrecord.description = description;
 		propertyrecord.disabled = disabled;
+		propertyrecord.multiLine = multiLine;
 		propertyrecord.defaultColumnValue = defaultColumnValue;
 		final Map<Column, String> columnvalues = new HashMap<Column, String>();
 		final Iterator<Column> iterator = this.columnValues.keySet().iterator();

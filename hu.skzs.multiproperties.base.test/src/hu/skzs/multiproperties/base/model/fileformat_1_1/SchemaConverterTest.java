@@ -21,7 +21,7 @@ import org.junit.Test;
 public class SchemaConverterTest extends AbstractSchemaConverterTest
 {
 
-	private static final String VERSION = "1.0";
+	private static final String VERSION = "1.1";
 	private static final String NORMAL_FILE = "normal.multiproperties";
 	private static final String EMPTY_FILE = "empty.multiproperties";
 	private final SchemaConverter schemaConverter = new SchemaConverter();
@@ -54,14 +54,14 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 		Assert.assertTrue(table.get(0) instanceof CommentRecord);
 		assertEquals(COMMENT, (CommentRecord) table.get(0));
 		Assert.assertTrue(table.get(1) instanceof PropertyRecord);
-		assertEquals(NAME, DESCRIPTION, false, null, new String[] { "EN value", "HU value" }, table.getColumns(),
+		assertEquals(NAME, DESCRIPTION, false, false, null, new String[] { "EN value", "HU value" }, table.getColumns(),
 				(PropertyRecord) table.get(1));
 		Assert.assertTrue(table.get(2) instanceof PropertyRecord);
-		assertEquals(NAME, DESCRIPTION, false, DEFAULT_VALUE, new String[] { "EN value", "HU value" },
-				table.getColumns(), (PropertyRecord) table.get(1));
+		assertEquals(NAME, DESCRIPTION, true, false, DEFAULT_VALUE, new String[] { "EN value", "HU value" },
+				table.getColumns(), (PropertyRecord) table.get(2));
 		Assert.assertTrue(table.get(3) instanceof PropertyRecord);
-		assertEquals(NAME, DESCRIPTION, true, null, new String[] { "EN value", "HU value" }, table.getColumns(),
-				(PropertyRecord) table.get(2));
+		assertEquals(NAME, DESCRIPTION, true, false, null, new String[] { "EN value", "HU value" }, table.getColumns(),
+				(PropertyRecord) table.get(3));
 		Assert.assertTrue(table.get(4) instanceof EmptyRecord);
 	}
 
