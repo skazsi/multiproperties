@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <MultiProperties xmlns="hu.skzs.multiproperties">
-    <Version>1.1</Version>
+    <Version>1.2</Version>
     <Name>name</Name>
     <Description>description</Description>
     <Handler>handler</Handler>
@@ -48,5 +48,13 @@
             <Value disabled="false">HU value</Value>
         </Property>
         <Empty/>
+        <Property>
+            <Name>name</Name>
+            <Description>description</Description>
+            <Disabled>true</Disabled>
+            <MultiLine>true</MultiLine>
+            <Value disabled="false">EN value</Value>
+            <Value disabled="false">HU value</Value>
+        </Property>
     </Records>
 </MultiProperties>

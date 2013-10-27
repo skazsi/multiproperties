@@ -13,7 +13,7 @@ import java.util.Map;
  * The <code>Table</code> object represents the entire MultiProperties object. It is basically the root model object of a MultiProperties
  * content.
  * <p>
- * The clients should hold a reference only for an instance of this class. Child objects should, like record or columns should be referenced
+ * The clients should hold a reference only for an instance of this class. Child objects, like records or columns should be referenced
  * only for a particular UI action.
  * </p>
  * 
@@ -95,7 +95,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	/**
 	 * Sets the description of the MultiProperties
 	 * 
-	 * @param name
+	 * @param description
 	 *            The description of the MultiProperties
 	 * @see #getDescription()
 	 */
@@ -245,7 +245,6 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 * 
 	 * @param dirty
 	 *            the dirty state
-	 * @see #setDirty(boolean, AbstractRecord)
 	 * @see #isDirty()
 	 */
 	public void setDirty(final boolean dirty)
@@ -278,7 +277,6 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 * 
 	 * @return the current dirty state
 	 * @see #setDirty(boolean)
-	 * @see #setDirty(boolean, AbstractRecord)
 	 */
 	public boolean isDirty()
 	{
@@ -324,7 +322,6 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 * 
 	 * @param record
 	 *            the new record
-	 * @see #set(AbstractRecord, int)
 	 * @see #insert(AbstractRecord, int)
 	 */
 	public void add(final AbstractRecord record)
@@ -347,7 +344,6 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 * @param index
 	 *            the position of insert
 	 * @see #add(AbstractRecord)
-	 * @see #set(AbstractRecord, int)
 	 * @throws IllegalArgumentException
 	 *             if the index is out of the bounds
 	 */
@@ -392,7 +388,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	/**
 	 * Returns the index of the specified property record. The comment and empty records are not involved in the search.
 	 * 
-	 * @param record
+	 * @param property
 	 *            the property string to search for
 	 * @see #indexOf(AbstractRecord)
 	 * @return the index of the first occurrence or <code>-1</code> if there is no such property record
@@ -414,7 +410,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	/**
 	 * Returns the first position of the specified property record. The comment and empty records are not involved in the search.
 	 * 
-	 * @param record
+	 * @param property
 	 *            The property string to search for
 	 * @param position
 	 *            The position where the search should be started

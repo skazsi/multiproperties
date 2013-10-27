@@ -19,7 +19,7 @@ public class ImporterFacade
 	 * Initializes the facade
 	 * <p>Client must call it before any other method.</p>
 	 * @param table the given {@link Table} instance to be used
-	 * @param the selected {@link Column} instance or <code>null</code> if structural method is selected
+	 * @param column the selected {@link Column} instance or <code>null</code> if structural method is selected
 	 * @throws IllegalArgumentException if the <code>table</code> is null
 	 */
 	public void init(final Table table, final Column column)
@@ -50,7 +50,7 @@ public class ImporterFacade
 
 	/**
 	 * Performs the import. The given list of {@link AbstractRecord} will be imported by using the
-	 * given <code>method</code> into the previously set {@link Table} instance by {@link #init(Table)} method.
+	 * given <code>method</code> into the previously set {@link Table} instance by {@link #init(Table, Column)} method.
 	 * @param records the given list of {@link AbstractRecord}s
 	 * @param method the given method
 	 */

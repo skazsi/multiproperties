@@ -241,6 +241,76 @@ public class PropertyRecordTest
 	}
 
 	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#isMultiLine()}
+	 */
+	@Test
+	public void testSetMultiLine()
+	{
+		// fixture
+		record = new PropertyRecord();
+
+		// then
+		Assert.assertFalse(record.isMultiLine());
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setMultiLine(boolean)} without using listener.
+	 */
+	@Test
+	public void testSetMultiLineWithoutListener()
+	{
+		// fixture
+		record = new PropertyRecord();
+
+		// when
+		record.setMultiLine(true);
+
+		// then
+		Assert.assertTrue(record.isMultiLine());
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setMultiLine(boolean)} with using listener.
+	 */
+	@Test
+	public void testSetMultiLineWithListener()
+	{
+		// fixture
+		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		record = new PropertyRecord();
+		record.setRecordChangeListener(listenerMock);
+		listenerMock.changed(record);
+		EasyMock.replay(listenerMock);
+		// when
+		record.setMultiLine(true);
+
+		// then
+		EasyMock.verify(listenerMock);
+		Assert.assertEquals(true, record.isMultiLine());
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setMultiLine(boolean)} with using listener.
+	 * Because the value is the same, it should not do anything.
+	 */
+	@Test
+	public void testSetMultiLineSameValue()
+	{
+		// fixture
+		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		record = new PropertyRecord();
+		record.setMultiLine(true);
+		record.setRecordChangeListener(listenerMock);
+		EasyMock.replay(listenerMock);
+		// when
+		record.setMultiLine(true);
+
+		// then
+		EasyMock.verify(listenerMock);
+		Assert.assertEquals(true, record.isMultiLine());
+	}
+
+	/**
 	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setDefaultColumnValue(String)} without using listener.
 	 * 
 	 */

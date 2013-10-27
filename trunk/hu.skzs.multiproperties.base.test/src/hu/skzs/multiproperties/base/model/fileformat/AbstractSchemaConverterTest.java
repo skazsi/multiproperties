@@ -76,12 +76,14 @@ public abstract class AbstractSchemaConverterTest
 	 * @param comment
 	 *            the {@link PropertyRecord} which properties is checked against the other properties
 	 */
-	protected void assertEquals(String name, String description, boolean disabled, String defaultValue,
-			String[] values, Columns columns, PropertyRecord property)
+	protected void assertEquals(String name, String description, boolean disabled, boolean multiLine,
+			String defaultValue, String[] values, Columns columns, PropertyRecord property)
 	{
 		Assert.assertEquals(name, property.getValue());
 		Assert.assertEquals(description, property.getDescription());
 		Assert.assertEquals(disabled, property.isDisabled());
+		Assert.assertEquals(multiLine, property.isMultiLine());
+		Assert.assertEquals(defaultValue, property.getDefaultColumnValue());
 		Assert.assertEquals(values.length, columns.size());
 		for (int i = 0; i < values.length; i++)
 		{

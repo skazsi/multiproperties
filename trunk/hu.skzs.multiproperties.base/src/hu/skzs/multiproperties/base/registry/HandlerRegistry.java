@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 
 /**
- * The {@link HandlerRegistry} loads and stores all of the {@link IHandler} implementions currently
+ * The {@link HandlerRegistry} loads and stores all of the {@link IHandler} implementations currently
  * available for the plugin.
  * @author skzs
  *
