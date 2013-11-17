@@ -1,7 +1,6 @@
 package hu.skzs.multiproperties.base.model.fileformat;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -51,7 +50,7 @@ public class SchemaConverterFactoryTest
 	{
 		// fixture
 		final String newestVersion = SchemaConverterFactory.NEWEST_VERSION;
-		int major = Integer.parseInt("" + newestVersion.charAt(0));
+		final int major = Integer.parseInt("" + newestVersion.charAt(0));
 		int minor = Integer.parseInt("" + newestVersion.charAt(2));
 
 		// when
@@ -69,7 +68,7 @@ public class SchemaConverterFactoryTest
 	public void testgetSchemaConverter_1_0() throws SchemaConverterException
 	{
 		// when
-		ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(SUCCESS_1_0.getBytes());
+		final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(SUCCESS_1_0.getBytes());
 
 		// then
 		Assert.assertNotNull(schemaConverter);
@@ -85,7 +84,7 @@ public class SchemaConverterFactoryTest
 	public void testgetSchemaConverter_1_1() throws SchemaConverterException
 	{
 		// when
-		ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(SUCCESS_1_1.getBytes());
+		final ISchemaConverter schemaConverter = SchemaConverterFactory.getSchemaConverter(SUCCESS_1_1.getBytes());
 
 		// then
 		Assert.assertNotNull(schemaConverter);

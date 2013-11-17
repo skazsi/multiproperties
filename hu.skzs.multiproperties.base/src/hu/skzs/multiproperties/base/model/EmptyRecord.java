@@ -4,7 +4,7 @@ public class EmptyRecord extends AbstractRecord
 {
 
 	@Override
-	public Object clone() throws CloneNotSupportedException
+	public EmptyRecord clone() throws CloneNotSupportedException
 	{
 		final EmptyRecord emptyrecord = new EmptyRecord();
 		return emptyrecord;

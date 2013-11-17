@@ -10,8 +10,7 @@ import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -36,7 +35,8 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 	public void testConvertIFile() throws SchemaConverterException, IOException
 	{
 		// when
-		Table table = schemaConverter.convert(readBytes(SchemaConverterTest.class.getResourceAsStream(NORMAL_FILE)));
+		final Table table = schemaConverter.convert(readBytes(SchemaConverterTest.class
+				.getResourceAsStream(NORMAL_FILE)));
 
 		// then
 		Assert.assertNotNull(table);
@@ -54,8 +54,8 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 		Assert.assertTrue(table.get(0) instanceof CommentRecord);
 		assertEquals(COMMENT, (CommentRecord) table.get(0));
 		Assert.assertTrue(table.get(1) instanceof PropertyRecord);
-		assertEquals(NAME, DESCRIPTION, false, false, null, new String[] { "EN value", "HU value" }, table.getColumns(),
-				(PropertyRecord) table.get(1));
+		assertEquals(NAME, DESCRIPTION, false, false, null, new String[] { "EN value", "HU value" },
+				table.getColumns(), (PropertyRecord) table.get(1));
 		Assert.assertTrue(table.get(2) instanceof PropertyRecord);
 		assertEquals(NAME, DESCRIPTION, true, false, null, new String[] { "EN value", "HU value" }, table.getColumns(),
 				(PropertyRecord) table.get(2));
@@ -72,7 +72,8 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 	public void testConvertIFileEmpty() throws SchemaConverterException, IOException
 	{
 		// when
-		Table table = schemaConverter.convert(readBytes(SchemaConverterTest.class.getResourceAsStream(EMPTY_FILE)));
+		final Table table = schemaConverter
+				.convert(readBytes(SchemaConverterTest.class.getResourceAsStream(EMPTY_FILE)));
 
 		// then
 		Assert.assertNotNull(table);
@@ -111,7 +112,7 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 	public void testConvertIFileTable() throws SchemaConverterException, IOException
 	{
 		// fixture
-		Table table = new Table();
+		final Table table = new Table();
 		table.setVersion(VERSION);
 		table.setName(NAME);
 		table.setDescription(DESCRIPTION);
@@ -119,7 +120,7 @@ public class SchemaConverterTest extends AbstractSchemaConverterTest
 		table.setKeyColumnWidth(100);
 
 		// when
-		byte[] content = schemaConverter.convert(table);
+		final byte[] content = schemaConverter.convert(table);
 
 		// then
 		assertEquals(SchemaConverterTest.class.getResourceAsStream(EMPTY_FILE), new ByteArrayInputStream(content));

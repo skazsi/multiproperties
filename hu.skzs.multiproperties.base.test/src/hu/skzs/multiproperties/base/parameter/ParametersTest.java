@@ -1,8 +1,8 @@
 package hu.skzs.multiproperties.base.parameter;
 
 import hu.skzs.multiproperties.base.model.fileformat.AbstractSchemaConverterTest;
-import junit.framework.Assert;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -19,7 +19,7 @@ public class ParametersTest extends AbstractSchemaConverterTest
 	public void testConstructorEmpty()
 	{
 		// when
-		Parameters parameters = new Parameters(new String[] {});
+		final Parameters parameters = new Parameters(new String[] {});
 
 		// then
 		Assert.assertEquals(0, parameters.size());
@@ -32,7 +32,7 @@ public class ParametersTest extends AbstractSchemaConverterTest
 	public void testConstructorHelp()
 	{
 		// when
-		Parameters parameters = new Parameters(new String[] { "-help" });
+		final Parameters parameters = new Parameters(new String[] { "-help" });
 
 		// then
 		Assert.assertEquals(1, parameters.size());
@@ -56,8 +56,8 @@ public class ParametersTest extends AbstractSchemaConverterTest
 	public void testConstructorSomeParameter()
 	{
 		// when
-		Parameters parameters = new Parameters(new String[] { "-columnConfig", "columnconfiguration", "-columnName",
-				"columnname" });
+		final Parameters parameters = new Parameters(new String[] { "-columnConfig", "columnconfiguration",
+				"-columnName", "columnname" });
 
 		// then
 		Assert.assertEquals(2, parameters.size());
@@ -77,7 +77,7 @@ public class ParametersTest extends AbstractSchemaConverterTest
 		System.setProperty(ValuedParameter.DISABLE_LINE_BREAK, Boolean.FALSE.toString());
 
 		// when
-		Parameters parameters = new Parameters(new String[] { "-columnConfigPattern", "column\\nconfiguration" });
+		final Parameters parameters = new Parameters(new String[] { "-columnConfigPattern", "column\\nconfiguration" });
 
 		// then
 		Assert.assertEquals(1, parameters.size());
@@ -96,7 +96,7 @@ public class ParametersTest extends AbstractSchemaConverterTest
 		System.setProperty(ValuedParameter.DISABLE_LINE_BREAK, Boolean.TRUE.toString());
 
 		// when
-		Parameters parameters = new Parameters(new String[] { "-columnConfigPattern", "column\\nconfiguration" });
+		final Parameters parameters = new Parameters(new String[] { "-columnConfigPattern", "column\\nconfiguration" });
 
 		// then
 		Assert.assertEquals(1, parameters.size());

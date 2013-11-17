@@ -143,7 +143,7 @@ public class PropertyRecord extends AbstractRecord
 	}
 
 	@Override
-	public Object clone() throws CloneNotSupportedException
+	public PropertyRecord clone() throws CloneNotSupportedException
 	{
 		final PropertyRecord propertyrecord = new PropertyRecord();
 		propertyrecord.value = value;

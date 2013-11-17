@@ -1,9 +1,9 @@
 package hu.skzs.multiproperties.handler.text.configurator;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
-import junit.framework.Assert;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
