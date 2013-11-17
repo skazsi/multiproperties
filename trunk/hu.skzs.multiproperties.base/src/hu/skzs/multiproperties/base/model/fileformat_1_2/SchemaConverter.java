@@ -79,7 +79,8 @@ public class SchemaConverter implements ISchemaConverter
 					final PropertyRecord record = new PropertyRecord(property.getName());
 					record.setDescription(property.getDescription());
 					record.setDisabled(property.isDisabled());
-					record.setMultiLine(property.isMultiLine());
+					final boolean multiLine = property.isMultiLine() != null && property.isMultiLine() ? true : false;
+					record.setMultiLine(multiLine);
 					record.setDefaultColumnValue(property.getDefaultValue());
 					for (int j = 0; j < table.getColumns().size(); j++)
 					{

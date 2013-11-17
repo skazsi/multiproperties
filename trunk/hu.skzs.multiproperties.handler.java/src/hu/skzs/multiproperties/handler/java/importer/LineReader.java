@@ -73,6 +73,7 @@ class LineReader
 	 * <p>The actually read line can be get by calling the {@link #getLineBuffer()} method.</p>
 	 * @see #getLineBuffer()
 	 * @return  the next line of the properties content and returns the number of the characters were read
+	 * @throws IOException 
 	 */
 	public int readLine() throws IOException
 	{

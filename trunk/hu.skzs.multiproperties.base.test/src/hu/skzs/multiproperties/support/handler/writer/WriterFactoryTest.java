@@ -4,8 +4,8 @@ import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.support.handler.configurator.IConfigurator;
 import hu.skzs.multiproperties.support.handler.configurator.IFileSystemConfigurator;
 import hu.skzs.multiproperties.support.handler.configurator.IWorkspaceConfigurator;
-import junit.framework.Assert;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -26,7 +26,7 @@ public class WriterFactoryTest
 		final IFileSystemConfigurator configurator = new IFileSystemConfigurator()
 		{
 
-			public void setConfiguration(String configuration)
+			public void setConfiguration(final String configuration)
 			{
 			}
 
@@ -60,7 +60,7 @@ public class WriterFactoryTest
 		final IWorkspaceConfigurator configurator = new IWorkspaceConfigurator()
 		{
 
-			public void setConfiguration(String configuration)
+			public void setConfiguration(final String configuration)
 			{
 			}
 
@@ -99,7 +99,7 @@ public class WriterFactoryTest
 		final IConfigurator configurator = new IConfigurator()
 		{
 
-			public void setConfiguration(String configuration)
+			public void setConfiguration(final String configuration)
 			{
 			}
 

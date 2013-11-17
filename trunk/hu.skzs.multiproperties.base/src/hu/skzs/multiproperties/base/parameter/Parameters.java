@@ -19,7 +19,7 @@ public class Parameters
 
 	private final List<Parameter> parameters = new LinkedList<Parameter>();
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Parameters(final String[] args)
 	{
 		int index = 0;

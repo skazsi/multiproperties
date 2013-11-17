@@ -8,8 +8,8 @@ import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.handler.text.configurator.TextHandlerConfigurator;
 import hu.skzs.multiproperties.handler.text.configurator.WorkspaceConfigurator;
-import junit.framework.Assert;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -31,7 +31,7 @@ public class CommentRecord extends AbstractRecord
 	}
 
 	@Override
-	public Object clone() throws CloneNotSupportedException
+	public CommentRecord clone() throws CloneNotSupportedException
 	{
 		final CommentRecord commentrecord = new CommentRecord();
 		commentrecord.value = value;
