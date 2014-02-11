@@ -112,6 +112,7 @@ public class Activator extends AbstractUIPlugin
 		reg.put("empty", getImageDescriptor("icons/empty.gif")); //$NON-NLS-1$//$NON-NLS-2$
 		reg.put("warning", getImageDescriptor("icons/warning.gif")); //$NON-NLS-1$//$NON-NLS-2$
 		reg.put("disabled", getImageDescriptor("icons/disabled.gif")); //$NON-NLS-1$//$NON-NLS-2$
+		reg.put("multiline", getImageDescriptor("icons/line-break.png")); //$NON-NLS-1$//$NON-NLS-2$
 		reg.put("insert", getImageDescriptor("icons/insert.gif")); //$NON-NLS-1$//$NON-NLS-2$
 		reg.put("edit", getImageDescriptor("icons/edit.gif")); //$NON-NLS-1$//$NON-NLS-2$
 		reg.put("edit_wiz", getImageDescriptor("icons/edit_wiz.gif")); //$NON-NLS-1$//$NON-NLS-2$

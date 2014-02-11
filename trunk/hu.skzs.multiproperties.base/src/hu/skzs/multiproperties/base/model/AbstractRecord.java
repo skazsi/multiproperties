@@ -9,7 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
 
-public abstract class AbstractRecord implements Cloneable
+public abstract class AbstractRecord
 {
 
 	protected IRecordChangeListener recordChangeListener = null;
@@ -41,10 +41,4 @@ public abstract class AbstractRecord implements Cloneable
 	{
 		this.structuralChangeListener = listener;
 	}
-
-	/**
-	 * This method is cloning the current record.
-	 */
-	@Override
-	public abstract Object clone() throws CloneNotSupportedException;
 }

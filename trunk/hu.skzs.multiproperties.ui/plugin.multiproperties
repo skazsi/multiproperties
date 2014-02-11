@@ -582,6 +582,90 @@ See also the editor.marker.error.prefix property.</Description>
         </Property>
         <Empty/>
         <Comment>
+            <Value>DIALOG</Value>
+        </Comment>
+        <Comment>
+            <Value>position</Value>
+        </Comment>
+        <Property>
+            <Name>dialog.addrecord.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Add</Value>
+            <Value disabled="false">Hozzáadás</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addrecord.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify where the new record should be inserted</Value>
+            <Value disabled="false">Adja meg, hova legyen az új rekord beszúrva</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addpropertyrecord.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the type and the position for the new property record</Value>
+            <Value disabled="false">Adja meg a típusát és helyét az új property rekordnak</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addrecord.type</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Property record type</Value>
+            <Value disabled="false">Property rekord típus</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addrecord.normal</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Normal</Value>
+            <Value disabled="false">Sima</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addrecord.multiline</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Multiline</Value>
+            <Value disabled="false">Több soros</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addrecord.position</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Position</Value>
+            <Value disabled="false">Pozíció</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addrecord.insertbefore</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Insert before the selection</Value>
+            <Value disabled="false">Beszúrás a kijelölés elött</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addrecord.insertafter</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Insert after the selection</Value>
+            <Value disabled="false">Beszúrás a kijelölés után</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addrecord.appendatend</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Append at end</Value>
+            <Value disabled="false">Hozzáfűzés a végére</Value>
+        </Property>
+        <Property>
+            <Name>dialog.addrecord.openedit</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Open the edit dialog after creating the record</Value>
+            <Value disabled="false">A szerkesztő ablak megnyitása az új rekord létrehozása után</Value>
+        </Property>
+        <Empty/>
+        <Comment>
             <Value>PREFERENCE</Value>
         </Comment>
         <Comment>
@@ -662,6 +746,153 @@ See also the editor.marker.error.prefix property.</Description>
         </Property>
         <Empty/>
         <Comment>
+            <Value>PROPERTIES</Value>
+        </Comment>
+        <Comment>
+            <Value>property</Value>
+        </Comment>
+        <Property>
+            <Name>property.property.general.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">General</Value>
+            <Value disabled="false">Általános</Value>
+        </Property>
+        <Property>
+            <Name>property.property.general.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the key for this property. You can also make the property diabled. Finally you can specify a default value as well.</Value>
+            <Value disabled="false">Adja meg a kulcsot a property rekornak. Lehetősége van letiltani, illetve alapértelmezett értéket is megadni.</Value>
+        </Property>
+        <Property>
+            <Name>property.property.general.key</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Key</Value>
+            <Value disabled="false">Kulcs</Value>
+        </Property>
+        <Property>
+            <Name>property.property.general.defaultvalue</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Default value</Value>
+            <Value disabled="false">Alapértelmezett érték</Value>
+        </Property>
+        <Property>
+            <Name>property.property.general.disabled</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Disabled</Value>
+            <Value disabled="false">Letíltott</Value>
+        </Property>
+        <Property>
+            <Name>property.property.general.warning.keyempty</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The key field is empty!</Value>
+            <Value disabled="false">A kulcs mező üres!</Value>
+        </Property>
+        <Property>
+            <Name>property.property.general.warning.keyexists</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">The key already exists!</Value>
+            <Value disabled="false">A kulcs már létezik!</Value>
+        </Property>
+        <Property>
+            <Name>property.property.values.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Values</Value>
+            <Value disabled="false">Értékek</Value>
+        </Property>
+        <Property>
+            <Name>property.property.values.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the values for the columns.</Value>
+            <Value disabled="false">Adja meg az értékeket az oszlopokhoz.</Value>
+        </Property>
+        <Property>
+            <Name>property.property.value.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Value</Value>
+            <Value disabled="false">Érték</Value>
+        </Property>
+        <Property>
+            <Name>property.property.value.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the value for the selected column.</Value>
+            <Value disabled="false">Adja meg az értéket a kijelölt oszlophoz.</Value>
+        </Property>
+        <Property>
+            <Name>property.property.value.enabled</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Enabled</Value>
+            <Value disabled="false">Engedélyezett</Value>
+        </Property>
+        <Property>
+            <Name>property.property.values</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Column values</Value>
+            <Value disabled="false">Oszlop értékek</Value>
+        </Property>
+        <Property>
+            <Name>property.property.fill.checked</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Fill checked values with this one</Value>
+            <Value disabled="false">Kitölt minden értelmezett értéket ezzel az értékkel</Value>
+        </Property>
+        <Property>
+            <Name>property.property.fill.all</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Fill all values with this one</Value>
+            <Value disabled="false">Kitölt minden értéket ezzel az értékkel</Value>
+        </Property>
+        <Property>
+            <Name>property.property.description.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Description</Value>
+            <Value disabled="false">Megjegyzés</Value>
+        </Property>
+        <Property>
+            <Name>property.property.description.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the description for the property record.</Value>
+            <Value disabled="false">Adja meg a megjegyzést a rekordhoz.</Value>
+        </Property>
+        <Property>
+            <Name>property.comment.title</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Value</Value>
+            <Value disabled="false">Érték</Value>
+        </Property>
+        <Property>
+            <Name>property.comment.description</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Specify the value of the comment record.</Value>
+            <Value disabled="false">Adja meg a értékét a megjegyzés rekordnak.</Value>
+        </Property>
+        <Property>
+            <Name>property.comment.value</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Value</Value>
+            <Value disabled="false">Érték</Value>
+        </Property>
+        <Empty/>
+        <Comment>
             <Value>PERSPECTIVE</Value>
         </Comment>
         <Property>
@@ -693,186 +924,6 @@ See also the editor.marker.error.prefix property.</Description>
         <Comment>
             <Value>WIZARD</Value>
         </Comment>
-        <Comment>
-            <Value>property</Value>
-        </Comment>
-        <Property>
-            <Name>wizard.property.add.title</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Add new property record</Value>
-            <Value disabled="false">Új property rekord hozzáadása</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.add.description</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Specify the key and the values for the new property.</Value>
-            <Value disabled="false">Adja meg a kulcsot és az értékeket az új property rekornak.</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.edit.title</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Edit property record</Value>
-            <Value disabled="false">Property rekord szerkesztése</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.edit.description</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Specify the key and the values for the property.</Value>
-            <Value disabled="false">Adja meg a kulcsot és az értékeket a property rekornak.</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.key</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Key</Value>
-            <Value disabled="false">Kulcs</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.defaultvalue</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Default value</Value>
-            <Value disabled="false">Alapértelmezett érték</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.disabled</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Disabled</Value>
-            <Value disabled="false">Letíltott</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.values</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Column values</Value>
-            <Value disabled="false">Oszlop értékek</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.fill.checked</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Fill checked values with this one</Value>
-            <Value disabled="false">Kitölt minden értelmezett értéket ezzel az értékkel</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.fill.all</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Fill all values with this one</Value>
-            <Value disabled="false">Kitölt minden értéket ezzel az értékkel</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.description</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Description</Value>
-            <Value disabled="false">Megjegyzés</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.warning.keyempty</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">The key field is empty!</Value>
-            <Value disabled="false">A kulcs mező üres!</Value>
-        </Property>
-        <Property>
-            <Name>wizard.property.warning.keyexists</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">The key already exists!</Value>
-            <Value disabled="false">A kulcs már létezik!</Value>
-        </Property>
-        <Comment>
-            <Value>comment</Value>
-        </Comment>
-        <Property>
-            <Name>wizard.comment.add.title</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Add new comment record</Value>
-            <Value disabled="false">Új megjegyzés rekord hozzáadása</Value>
-        </Property>
-        <Property>
-            <Name>wizard.comment.add.description</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Specify the content for the new comment.</Value>
-            <Value disabled="false">Adja meg a tartalmát az új megjegyzés rekornak.</Value>
-        </Property>
-        <Property>
-            <Name>wizard.comment.edit.title</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Edit comment record</Value>
-            <Value disabled="false">Megjegyzés rekord szerkesztése</Value>
-        </Property>
-        <Property>
-            <Name>wizard.comment.edit.description</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Specify the content for the comment record.</Value>
-            <Value disabled="false">Adja meg a tartalmát a megjegyzés rekordnak.</Value>
-        </Property>
-        <Property>
-            <Name>wizard.comment.value</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Value: </Value>
-            <Value disabled="false">Érték: </Value>
-        </Property>
-        <Comment>
-            <Value>empty</Value>
-        </Comment>
-        <Property>
-            <Name>wizard.empty.add.title</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Add new empty record</Value>
-            <Value disabled="false">Új üres rekord hozzáadása</Value>
-        </Property>
-        <Comment>
-            <Value>position</Value>
-        </Comment>
-        <Property>
-            <Name>wizard.position.title</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Insert</Value>
-            <Value disabled="false">Beszúrás</Value>
-        </Property>
-        <Property>
-            <Name>wizard.position.description</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Specify where the new record should be inserted</Value>
-            <Value disabled="false">Adja meg, hova legyen az új rekord beszúrva</Value>
-        </Property>
-        <Property>
-            <Name>wizard.position.insertbefore</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Insert before the selection</Value>
-            <Value disabled="false">Beszúrás a kijelölés elött</Value>
-        </Property>
-        <Property>
-            <Name>wizard.position.insertafter</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Insert after the selection</Value>
-            <Value disabled="false">Beszúrás a kijelölés után</Value>
-        </Property>
-        <Property>
-            <Name>wizard.position.appendatend</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <Value disabled="false">Append at end</Value>
-            <Value disabled="false">Hozzáfűzés a végére</Value>
-        </Property>
         <Comment>
             <Value>import</Value>
         </Comment>

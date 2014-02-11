@@ -12,7 +12,7 @@ public class PropertyRecord extends AbstractRecord
 	private boolean disabled;
 	private boolean multiLine;
 	private String defaultColumnValue;
-	private Map<Column, String> columnValues = new HashMap<Column, String>();
+	private final Map<Column, String> columnValues = new HashMap<Column, String>();
 	private boolean duplicated;
 
 	@Override
@@ -30,6 +30,56 @@ public class PropertyRecord extends AbstractRecord
 	{
 		super();
 		this.value = value;
+	}
+
+	/**
+	 * Constructor for creating a new {@link PropertyRecord} based on the given instance.
+	 * <p>The <code>recordChange</code> and <code>structuralChange</code> listeners are remain uninitialized.</p>
+	 * @param propertyRecord the given instance of {@link PropertyRecord}
+	 */
+	public PropertyRecord(final PropertyRecord propertyRecord)
+	{
+		value = propertyRecord.value;
+		description = propertyRecord.description;
+		disabled = propertyRecord.disabled;
+		multiLine = propertyRecord.multiLine;
+		defaultColumnValue = propertyRecord.defaultColumnValue;
+		final Iterator<Column> iterator = propertyRecord.columnValues.keySet().iterator();
+		while (iterator.hasNext())
+		{
+			final Column column = iterator.next();
+			columnValues.put(column, propertyRecord.getColumnValue(column));
+		}
+	}
+
+	/**
+	 * Sets this {@link PropertyRecord}'s properties based on the given instance in the parameter.
+	 * <p>The <code>recordChange</code> and <code>structuralChange</code> listeners are remain unset.</p>
+	 * @param propertyRecord the given instance of {@link PropertyRecord}
+	 */
+	public void set(final PropertyRecord propertyRecord)
+	{
+		setValue(propertyRecord.getValue());
+		setDescription(propertyRecord.getDescription());
+		setDisabled(propertyRecord.isDisabled());
+		setMultiLine(propertyRecord.isMultiLine());
+		setDefaultColumnValue(propertyRecord.getDefaultColumnValue());
+
+		// Removing the unwanted column values
+		final Column[] columns = columnValues.keySet().toArray(new Column[0]);
+		for (final Column column : columns)
+		{
+			if (propertyRecord.getColumnValue(column) == null)
+				removeColumnValue(column);
+		}
+
+		// Setting the new column values
+		final Iterator<Column> setIterator = propertyRecord.columnValues.keySet().iterator();
+		while (setIterator.hasNext())
+		{
+			final Column column = setIterator.next();
+			putColumnValue(column, propertyRecord.getColumnValue(column));
+		}
 	}
 
 	public void setValue(final String value)
@@ -140,27 +190,5 @@ public class PropertyRecord extends AbstractRecord
 	public boolean isDuplicated()
 	{
 		return duplicated;
-	}
-
-	@Override
-	public PropertyRecord clone() throws CloneNotSupportedException
-	{
-		final PropertyRecord propertyrecord = new PropertyRecord();
-		propertyrecord.value = value;
-		propertyrecord.description = description;
-		propertyrecord.disabled = disabled;
-		propertyrecord.multiLine = multiLine;
-		propertyrecord.defaultColumnValue = defaultColumnValue;
-		final Map<Column, String> columnvalues = new HashMap<Column, String>();
-		final Iterator<Column> iterator = this.columnValues.keySet().iterator();
-		while (iterator.hasNext())
-		{
-			final Column column = iterator.next();
-			columnvalues.put(column, getColumnValue(column));
-		}
-		propertyrecord.columnValues = columnvalues;
-		propertyrecord.setRecordChangeListener(recordChangeListener);
-		propertyrecord.setStructuralChangeListener(structuralChangeListener);
-		return propertyrecord;
 	}
 }

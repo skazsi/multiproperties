@@ -16,6 +16,27 @@ public class CommentRecord extends AbstractRecord
 		this.value = value;
 	}
 
+	/**
+	 * Constructor for creating a new {@link CommentRecord} based on the given instance.
+	 * <p>The <code>recordChange</code> and <code>structuralChange</code> listeners are remain uninitialized.</p>
+	 * @param commentRecord the given instance of {@link CommentRecord}
+	 */
+	public CommentRecord(final CommentRecord commentRecord)
+	{
+		super();
+		value = commentRecord.value;
+	}
+
+	/**
+	 * Sets this {@link CommentRecord}'s properties based on the given instance in the parameter.
+	 * <p>The <code>recordChange</code> and <code>structuralChange</code> listeners are remain unset.</p>
+	 * @param commentRecord the given instance of {@link CommentRecord}
+	 */
+	public void set(final CommentRecord commentRecord)
+	{
+		setValue(commentRecord.getValue());
+	}
+
 	public void setValue(final String value)
 	{
 		if (this.value != null && this.value.equals(value))
@@ -28,14 +49,5 @@ public class CommentRecord extends AbstractRecord
 	public String getValue()
 	{
 		return value;
-	}
-
-	@Override
-	public CommentRecord clone() throws CloneNotSupportedException
-	{
-		final CommentRecord commentrecord = new CommentRecord();
-		commentrecord.value = value;
-		commentrecord.setRecordChangeListener(recordChangeListener);
-		return commentrecord;
 	}
 }
