@@ -74,7 +74,7 @@ public class TableEditingSupport extends EditingSupport
 			final PropertyRecord propertyRecord = (PropertyRecord) element;
 			if (column != null)
 			{
-				if (propertyRecord.getColumnValue(column) != null)
+				if (!propertyRecord.isMultiLine() && propertyRecord.getColumnValue(column) != null)
 					return true;
 				else
 					return false;

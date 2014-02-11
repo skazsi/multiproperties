@@ -101,43 +101,56 @@ public class TableColumnLabelProvider extends ColumnLabelProvider
 		final ImageRegistry registry = Activator.getDefault().getImageRegistry();
 		if (element instanceof PropertyRecord)
 		{
-			final PropertyRecord propertyrecord = (PropertyRecord) element;
-			if (propertyrecord.isDisabled() && !propertyrecord.isDuplicated())
+			final PropertyRecord propertyRecord = (PropertyRecord) element;
+			final String imageName = getImageName(propertyRecord);
+			if (registry.get(imageName) == null)
 			{
-				if (registry.get("record_disabled") == null)
-					registry.put(
-							"record_disabled",
-							createDecoratedImage(registry.get("record"), registry.get("disabled"),
-									IDecoration.BOTTOM_LEFT));
-				return registry.get("record_disabled");
+				final Image image = createDecoratedImage(propertyRecord);
+				registry.put(imageName, image);
 			}
-			else if (!propertyrecord.isDisabled() && propertyrecord.isDuplicated())
-			{
-				if (registry.get("record_warning") == null)
-					registry.put(
-							"record_warning",
-							createDecoratedImage(registry.get("record"), registry.get("warning"),
-									IDecoration.BOTTOM_RIGHT));
-				return registry.get("record_warning");
-			}
-			else if (propertyrecord.isDisabled() && propertyrecord.isDuplicated())
-			{
-				if (registry.get("record_disabled_warning") == null)
-				{
-					Image image = createDecoratedImage(registry.get("record"), registry.get("disabled"),
-							IDecoration.BOTTOM_LEFT);
-					image = createDecoratedImage(image, registry.get("warning"), IDecoration.BOTTOM_RIGHT);
-					registry.put("record_disabled_warning", image);
-				}
-				return registry.get("record_disabled_warning");
-			}
-			else
-				return registry.get("record");
+			return registry.get(imageName);
 		}
 		else if (element instanceof CommentRecord)
-			return registry.get("comment");
+			return registry.get("comment"); //$NON-NLS-1$
 		else
-			return registry.get("empty");
+			return registry.get("empty"); //$NON-NLS-1$
+	}
+
+	private String getImageName(final PropertyRecord propertyRecord)
+	{
+		final StringBuilder imageName = new StringBuilder("record"); //$NON-NLS-1$
+		if (propertyRecord.isMultiLine())
+		{
+			imageName.append("_multiline"); //$NON-NLS-1$
+		}
+		if (propertyRecord.isDisabled())
+		{
+			imageName.append("_disabled"); //$NON-NLS-1$
+		}
+		if (propertyRecord.isDuplicated())
+		{
+			imageName.append("_duplicated"); //$NON-NLS-1$
+		}
+		return imageName.toString();
+	}
+
+	private Image createDecoratedImage(final PropertyRecord propertyRecord)
+	{
+		final ImageRegistry registry = Activator.getDefault().getImageRegistry();
+		Image image = registry.get("record"); //$NON-NLS-1$
+		if (propertyRecord.isMultiLine())
+		{
+			image = createDecoratedImage(image, registry.get("multiline"), IDecoration.BOTTOM_RIGHT); //$NON-NLS-1$
+		}
+		if (propertyRecord.isDisabled())
+		{
+			image = createDecoratedImage(image, registry.get("disabled"), IDecoration.BOTTOM_LEFT); //$NON-NLS-1$
+		}
+		if (propertyRecord.isDuplicated())
+		{
+			image = createDecoratedImage(image, registry.get("warning"), IDecoration.TOP_RIGHT); //$NON-NLS-1$
+		}
+		return image;
 	}
 
 	/**

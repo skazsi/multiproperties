@@ -84,6 +84,7 @@ public abstract class AbstractWizardSelectionPage extends WizardSelectionPage im
 
 	/**
 	 * An item in a viewer has been double-clicked.
+	 * @param event 
 	 */
 	public void doubleClick(final DoubleClickEvent event)
 	{

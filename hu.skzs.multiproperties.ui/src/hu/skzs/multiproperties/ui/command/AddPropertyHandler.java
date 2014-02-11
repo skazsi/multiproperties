@@ -1,35 +1,33 @@
 package hu.skzs.multiproperties.ui.command;
 
+import hu.skzs.multiproperties.base.model.AbstractRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
-import hu.skzs.multiproperties.ui.editor.Editor;
-import hu.skzs.multiproperties.ui.wizard.PropertyAddWizard;
+import hu.skzs.multiproperties.ui.command.dialog.AddPropertyRecordDialog;
+import hu.skzs.multiproperties.ui.command.dialog.AddRecordDialog;
 
-import org.eclipse.core.commands.AbstractHandler;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.wizard.IWizard;
-import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.swt.widgets.Shell;
 
 /**
  * The <code>AddPropertyHandler</code> adds a new {@link PropertyRecord} instance.
  * @author skzs
  */
-public class AddPropertyHandler extends AbstractHandler
+public class AddPropertyHandler extends AddRecordHandler
 {
 
-	public Object execute(ExecutionEvent event) throws ExecutionException
+	@Override
+	protected AddRecordDialog createDialog(final Shell shell)
 	{
-		IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (editorPart instanceof Editor)
-		{
-			Editor editor = (Editor) editorPart;
-			final IWizard wizard = new PropertyAddWizard(editor.getTable());
-			final WizardDialog wizarddialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), wizard);
-			wizarddialog.open();
-		}
-		return null;
+		return new AddPropertyRecordDialog(shell);
+	}
+
+	@Override
+	protected AbstractRecord createRecord(final AddRecordDialog dialog)
+	{
+		final AddPropertyRecordDialog addPropertyRecordDialog = (AddPropertyRecordDialog) dialog;
+		final PropertyRecord record = new PropertyRecord(""); //$NON-NLS-1$
+		if (addPropertyRecordDialog.getType() == AddPropertyRecordDialog.Type.MULTILINE)
+			record.setMultiLine(true);
+		return record;
 	}
 
 }

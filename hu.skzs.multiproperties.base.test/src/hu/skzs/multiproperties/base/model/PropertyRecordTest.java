@@ -16,8 +16,8 @@ import org.junit.Test;
 public class PropertyRecordTest
 {
 
-	private static final String VALUE = "key";
-	private static final String DESCRIPTION = "description";
+	private static final String VALUE = "key"; //$NON-NLS-1$
+	private static final String DESCRIPTION = "description"; //$NON-NLS-1$
 	private PropertyRecord record;
 
 	@Before
@@ -58,6 +58,72 @@ public class PropertyRecordTest
 	}
 
 	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#PropertyRecord(PropertyRecord)}.
+	 */
+	@Test
+	public void testCopyConstruction()
+	{
+		// fixture
+		final IRecordChangeListener recordChangeListener = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IStructuralChangeListener structuralChangeListener = EasyMock
+				.createStrictMock(IStructuralChangeListener.class);
+		record = new PropertyRecord(VALUE);
+		record.setDescription(DESCRIPTION);
+		record.setMultiLine(true);
+		record.setDisabled(true);
+		record.setDefaultColumnValue(VALUE);
+		record.setRecordChangeListener(recordChangeListener);
+		record.setStructuralChangeListener(structuralChangeListener);
+		// when
+		final PropertyRecord newRecord = new PropertyRecord(record);
+
+		// then
+		Assert.assertNotSame(record, newRecord);
+		Assert.assertEquals(record.getValue(), newRecord.getValue());
+		Assert.assertEquals(record.getDescription(), newRecord.getDescription());
+		Assert.assertEquals(record.isMultiLine(), newRecord.isMultiLine());
+		Assert.assertEquals(record.isDisabled(), newRecord.isDisabled());
+		Assert.assertEquals(record.getDefaultColumnValue(), newRecord.getDefaultColumnValue());
+		Assert.assertNull(newRecord.recordChangeListener);
+		Assert.assertNull(newRecord.structuralChangeListener);
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#set(PropertyRecord)}.
+	 */
+	@Test
+	public void testSet()
+	{
+		// fixture
+		final IRecordChangeListener recordChangeListener = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IStructuralChangeListener structuralChangeListener = EasyMock
+				.createStrictMock(IStructuralChangeListener.class);
+		final PropertyRecord fromRecord = new PropertyRecord(VALUE);
+		fromRecord.setDescription(DESCRIPTION);
+		fromRecord.setMultiLine(true);
+		fromRecord.setDisabled(true);
+		fromRecord.setDefaultColumnValue(VALUE);
+		fromRecord.setRecordChangeListener(recordChangeListener);
+		fromRecord.setStructuralChangeListener(structuralChangeListener);
+
+		record = new PropertyRecord(VALUE + 111);
+		record.setDescription(DESCRIPTION + 111);
+
+		// when
+		record.set(fromRecord);
+
+		// then
+		Assert.assertNotSame(record, fromRecord);
+		Assert.assertEquals(record.getValue(), VALUE);
+		Assert.assertEquals(record.getDescription(), DESCRIPTION);
+		Assert.assertTrue(record.isMultiLine());
+		Assert.assertTrue(record.isDisabled());
+		Assert.assertEquals(record.getDefaultColumnValue(), VALUE);
+		Assert.assertNull(record.recordChangeListener);
+		Assert.assertNull(record.structuralChangeListener);
+	}
+
+	/**
 	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#setValue(String)} without using listener.
 	 */
 	@Test
@@ -80,7 +146,7 @@ public class PropertyRecordTest
 	public void testSetValueWithListener()
 	{
 		// fixture
-		IStructuralChangeListener listenerMock = EasyMock.createStrictMock(IStructuralChangeListener.class);
+		final IStructuralChangeListener listenerMock = EasyMock.createStrictMock(IStructuralChangeListener.class);
 		record = new PropertyRecord();
 		record.setStructuralChangeListener(listenerMock);
 		listenerMock.changed();
@@ -101,7 +167,7 @@ public class PropertyRecordTest
 	public void testSetValueSameValue()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord(VALUE);
 		record.setRecordChangeListener(listenerMock);
 		EasyMock.replay(listenerMock);
@@ -136,7 +202,7 @@ public class PropertyRecordTest
 	public void testSetDescriptionWithListener()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.setRecordChangeListener(listenerMock);
 		listenerMock.changed(record);
@@ -157,7 +223,7 @@ public class PropertyRecordTest
 	public void testSetDescriptionSameValue()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.setDescription(DESCRIPTION);
 		record.setRecordChangeListener(listenerMock);
@@ -206,7 +272,7 @@ public class PropertyRecordTest
 	public void testSetDisabledWithListener()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.setRecordChangeListener(listenerMock);
 		listenerMock.changed(record);
@@ -227,7 +293,7 @@ public class PropertyRecordTest
 	public void testSetDisabledSameValue()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.setDisabled(true);
 		record.setRecordChangeListener(listenerMock);
@@ -276,7 +342,7 @@ public class PropertyRecordTest
 	public void testSetMultiLineWithListener()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.setRecordChangeListener(listenerMock);
 		listenerMock.changed(record);
@@ -297,7 +363,7 @@ public class PropertyRecordTest
 	public void testSetMultiLineSameValue()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.setMultiLine(true);
 		record.setRecordChangeListener(listenerMock);
@@ -334,7 +400,7 @@ public class PropertyRecordTest
 	public void testSetDefaultColumnValueWithListener()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.setRecordChangeListener(listenerMock);
 		listenerMock.changed(record);
@@ -355,7 +421,7 @@ public class PropertyRecordTest
 	public void testSetDefaultColumnValueSameValue()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.setDefaultColumnValue(VALUE);
 		record.setRecordChangeListener(listenerMock);
@@ -375,7 +441,7 @@ public class PropertyRecordTest
 	public void testPutColumnValueWithoutListener()
 	{
 		// fixture
-		Column column = new Column();
+		final Column column = new Column();
 		record = new PropertyRecord();
 		// when
 		record.putColumnValue(column, VALUE);
@@ -391,8 +457,8 @@ public class PropertyRecordTest
 	public void testPutColumnValueWithListener()
 	{
 		// fixture
-		Column column = new Column();
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final Column column = new Column();
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.setRecordChangeListener(listenerMock);
 		listenerMock.changed(record);
@@ -413,8 +479,8 @@ public class PropertyRecordTest
 	public void testPutColumnValueSameValue()
 	{
 		// fixture
-		Column column = new Column();
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final Column column = new Column();
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.putColumnValue(column, VALUE);
 		record.setRecordChangeListener(listenerMock);
@@ -435,11 +501,11 @@ public class PropertyRecordTest
 	public void testRemoveColumnValue()
 	{
 		// fixture
-		Column column = new Column();
+		final Column column = new Column();
 		record = new PropertyRecord();
 		record.putColumnValue(column, VALUE);
 		// when
-		String value = record.removeColumnValue(column);
+		final String value = record.removeColumnValue(column);
 
 		// then
 		Assert.assertEquals(VALUE, value);
@@ -452,15 +518,15 @@ public class PropertyRecordTest
 	public void testRemoveColumnValueWithListener()
 	{
 		// fixture
-		Column column = new Column();
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final Column column = new Column();
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new PropertyRecord();
 		record.putColumnValue(column, VALUE);
 		record.setRecordChangeListener(listenerMock);
 		listenerMock.changed(record);
 		EasyMock.replay(listenerMock);
 		// when
-		String value = record.removeColumnValue(column);
+		final String value = record.removeColumnValue(column);
 
 		// then
 		EasyMock.verify(listenerMock);
@@ -475,38 +541,12 @@ public class PropertyRecordTest
 	public void testRemoveColumnValueWithNull()
 	{
 		// fixture
-		Column column = new Column();
+		final Column column = new Column();
 		record = new PropertyRecord();
 		// when
-		String value = record.removeColumnValue(column);
+		final String value = record.removeColumnValue(column);
 
 		// then
 		Assert.assertNull(value);
-	}
-
-	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.PropertyRecord#clone()}.
-	 * @throws CloneNotSupportedException 
-	 */
-	@Test
-	public void testClone() throws CloneNotSupportedException
-	{
-		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
-		record = new PropertyRecord(VALUE);
-		record.setDescription(DESCRIPTION);
-		record.setDisabled(true);
-		record.setDefaultColumnValue(VALUE);
-		record.setRecordChangeListener(listenerMock);
-		// when
-		PropertyRecord cloned = (PropertyRecord) record.clone();
-
-		// then
-		Assert.assertNotSame(record, cloned);
-		Assert.assertEquals(record.getValue(), cloned.getValue());
-		Assert.assertEquals(record.getDescription(), cloned.getDescription());
-		Assert.assertEquals(record.isDisabled(), cloned.isDisabled());
-		Assert.assertEquals(record.getDefaultColumnValue(), cloned.getDefaultColumnValue());
-		Assert.assertEquals(listenerMock, cloned.recordChangeListener);
 	}
 }

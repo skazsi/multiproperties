@@ -1,6 +1,7 @@
 package hu.skzs.multiproperties.base.model;
 
 import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
+import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -15,7 +16,7 @@ import org.junit.Test;
 public class CommentRecordTest
 {
 
-	private static final String VALUE = "comment";
+	private static final String VALUE = "comment"; //$NON-NLS-1$
 	private CommentRecord record;
 
 	@Before
@@ -45,7 +46,6 @@ public class CommentRecordTest
 
 	/**
 	 * Test method for {@link hu.skzs.multiproperties.base.model.CommentRecord#CommentRecord(String)}.
-	 * 
 	 */
 	@Test
 	public void testConstructionWithValue()
@@ -55,6 +55,56 @@ public class CommentRecordTest
 
 		// then
 		Assert.assertEquals(VALUE, record.getValue());
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.CommentRecord#CommentRecord(CommentRecord)}.
+	 */
+	@Test
+	public void testCopyConstruction()
+	{
+		// fixture
+		final IRecordChangeListener recordChangeListener = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IStructuralChangeListener structuralChangeListener = EasyMock
+				.createStrictMock(IStructuralChangeListener.class);
+		record = new CommentRecord(VALUE);
+		record.setRecordChangeListener(recordChangeListener);
+		record.setStructuralChangeListener(structuralChangeListener);
+
+		// when
+		final CommentRecord newRecord = new CommentRecord(record);
+
+		// then
+		Assert.assertNotSame(record, newRecord);
+		Assert.assertEquals(record.getValue(), newRecord.getValue());
+		Assert.assertNull(newRecord.recordChangeListener);
+		Assert.assertNull(newRecord.structuralChangeListener);
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.base.model.CommentRecord#set(CommentRecord)}.
+	 */
+	@Test
+	public void testSet()
+	{
+		// fixture
+		final IRecordChangeListener recordChangeListener = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IStructuralChangeListener structuralChangeListener = EasyMock
+				.createStrictMock(IStructuralChangeListener.class);
+		final CommentRecord fromRecord = new CommentRecord(VALUE);
+		fromRecord.setRecordChangeListener(recordChangeListener);
+		fromRecord.setStructuralChangeListener(structuralChangeListener);
+
+		record = new CommentRecord(VALUE + 111);
+
+		// when
+		record.set(fromRecord);
+
+		// then
+		Assert.assertNotSame(record, fromRecord);
+		Assert.assertEquals(record.getValue(), VALUE);
+		Assert.assertNull(record.recordChangeListener);
+		Assert.assertNull(record.structuralChangeListener);
 	}
 
 	/**
@@ -82,7 +132,7 @@ public class CommentRecordTest
 	public void testSetValueWithListener()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new CommentRecord();
 		record.setRecordChangeListener(listenerMock);
 		listenerMock.changed(record);
@@ -103,7 +153,7 @@ public class CommentRecordTest
 	public void testSetValueSameValue()
 	{
 		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
+		final IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
 		record = new CommentRecord(VALUE);
 		record.setRecordChangeListener(listenerMock);
 		EasyMock.replay(listenerMock);
@@ -113,25 +163,5 @@ public class CommentRecordTest
 		// then
 		EasyMock.verify(listenerMock);
 		Assert.assertEquals(VALUE, record.getValue());
-	}
-
-	/**
-	 * Test method for {@link hu.skzs.multiproperties.base.model.CommentRecord#clone()}.
-	 * @throws CloneNotSupportedException 
-	 */
-	@Test
-	public void testClone() throws CloneNotSupportedException
-	{
-		// fixture
-		IRecordChangeListener listenerMock = EasyMock.createStrictMock(IRecordChangeListener.class);
-		record = new CommentRecord(VALUE);
-		record.setRecordChangeListener(listenerMock);
-		// when
-		CommentRecord cloned = (CommentRecord) record.clone();
-
-		// then
-		Assert.assertNotSame(record, cloned);
-		Assert.assertEquals(record.getValue(), cloned.getValue());
-		Assert.assertEquals(listenerMock, cloned.recordChangeListener);
 	}
 }

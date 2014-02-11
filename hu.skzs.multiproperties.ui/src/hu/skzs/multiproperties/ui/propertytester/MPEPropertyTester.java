@@ -8,6 +8,9 @@ import java.util.Iterator;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 /**
@@ -45,10 +48,9 @@ public class MPEPropertyTester extends PropertyTester
 	 */
 	public boolean test(final Object receiver, final String property, final Object[] args, final Object expectedValue)
 	{
-		if (!(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor() instanceof Editor))
+		final Editor editor = getEditor();
+		if (editor == null)
 			return false;
-		final Editor editor = (Editor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-				.getActiveEditor();
 
 		if (PROPERTY_IS_CONTINUOUS_SELECTION.equals(property))
 		{
@@ -105,6 +107,26 @@ public class MPEPropertyTester extends PropertyTester
 			System.err.println("Unsupported property: " + property); //$NON-NLS-1$
 			return false;
 		}
+	}
+
+	private Editor getEditor()
+	{
+		final IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		if (activeWorkbenchWindow == null)
+			return null;
+
+		final IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
+		if (activePage == null)
+			return null;
+
+		final IEditorPart activeEditor = activePage.getActiveEditor();
+		if (activeEditor == null)
+			return null;
+
+		if (!(activeEditor instanceof Editor))
+			return null;
+
+		return (Editor) activeEditor;
 	}
 
 	/**
