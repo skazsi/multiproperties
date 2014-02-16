@@ -92,7 +92,16 @@ public class JavaHandler implements IHandler
 
 					strb.append(saveConvert(record.getValue(), true));
 					strb.append("="); //$NON-NLS-1$
-					strb.append(saveConvert(value, false));
+					final BufferedReader reader = new BufferedReader(new StringReader(value));
+					String line = null;
+					boolean furtherLine = false;
+					while ((line = reader.readLine()) != null)
+					{
+						if (furtherLine)
+							strb.append("\\n\\\n\t"); //$NON-NLS-1$
+						strb.append(saveConvert(line, false));
+						furtherLine = true;
+					}
 					strb.append("\r\n"); //$NON-NLS-1$
 				}
 				else if (table.get(i) instanceof CommentRecord)
