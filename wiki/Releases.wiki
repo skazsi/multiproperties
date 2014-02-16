@@ -1,5 +1,11 @@
 #summary All releases
 
+= 1.3.0 =
+2014-02-16 r266
+ * issue25 Multi line value support is missing
+ * issue29 Changes for columns properties or descriptions not possible to save!
+ * issue34 Moving up/down records can run out of the visible area
+
 = 1.2.0 =
 2012-11-14 r238
  * issue26 [TextFileHandler Text File handler]
