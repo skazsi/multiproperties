@@ -31,6 +31,7 @@ public class JavaHandlerTest
 
 	private static final String PROP_EN_SIMPLE = "1value=1envalue\r\n2value=2envalue\r\n"; //$NON-NLS-1$
 	private static final String PROP_HU_SIMPLE = "1value=1huvalue\r\n2value=2huvalue\r\n"; //$NON-NLS-1$
+	private static final String PROP_MULTILINE = "1value=1\\n\\\n\ten\\n\\\n\tvalue\r\n"; //$NON-NLS-1$
 	private static final String PROP_EN_DESCRIPTION = "# description\r\n\r\n1value=1envalue\r\n2value=2envalue\r\n"; //$NON-NLS-1$
 	private static final String PROP_EN_COLUMN_DESCRIPTION = "# endescription\r\n\r\n1value=1envalue\r\n2value=2envalue\r\n"; //$NON-NLS-1$
 	private static final String PROP_EN_BOTH_DESCRIPTION = "# description\r\n\r\n# endescription\r\n\r\n1value=1envalue\r\n2value=2envalue\r\n"; //$NON-NLS-1$
@@ -76,6 +77,27 @@ public class JavaHandlerTest
 		// then
 		Assert.assertEquals(PROP_EN_SIMPLE, new String(enBytes));
 		Assert.assertEquals(PROP_HU_SIMPLE, new String(huBytes));
+	}
+
+	/**
+	 * Test method for {@link hu.skzs.multiproperties.handler.java.JavaHandler#convert(JavaHandlerConfigurator, Table, Column)}.
+	 * @throws HandlerException 
+	 */
+	@Test
+	public void testConvertMultiline() throws HandlerException
+	{
+		final Table table = createTable();
+		final PropertyRecord record = createPropertyRecord(1 + VALUE, null, false, table.getColumns().toArray(),
+				new String[] { 1 + "\n" + EN + "\n" + VALUE, null }); //$NON-NLS-1$ //$NON-NLS-2$
+		record.setMultiLine(true);
+		table.add(record);
+		final JavaHandlerConfigurator configurator = createConfigurator(false, false, false, true);
+		// when
+
+		final byte[] bytes = handler.convert(configurator, table, table.getColumns().get(0));
+
+		// then
+		Assert.assertEquals(PROP_MULTILINE, new String(bytes));
 	}
 
 	/**
