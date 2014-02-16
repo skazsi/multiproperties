@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <MultiProperties xmlns="hu.skzs.multiproperties">
-    <Version>1.1</Version>
+    <Version>1.2</Version>
     <Name>MultiProperties UI</Name>
     <Description></Description>
     <Handler>Java Properties Handler</Handler>
@@ -29,6 +29,7 @@
             <Name>general.overview</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Overview</Value>
             <Value disabled="false">Áttekintés</Value>
         </Property>
@@ -36,6 +37,7 @@
             <Name>general.columns</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Columns</Value>
             <Value disabled="false">Oszlopok</Value>
         </Property>
@@ -43,6 +45,7 @@
             <Name>general.table</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Table</Value>
             <Value disabled="false">Táblázat</Value>
         </Property>
@@ -50,6 +53,7 @@
             <Name>general.confirm.title</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Confirm</Value>
             <Value disabled="false">Megerősítés</Value>
         </Property>
@@ -57,6 +61,7 @@
             <Name>general.error.title</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Error</Value>
             <Value disabled="false">Hiba</Value>
         </Property>
@@ -68,6 +73,7 @@
             <Name>editor.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">MultiProperties Editor</Value>
             <Value disabled="false">MultiProperties Editor</Value>
         </Property>
@@ -75,6 +81,7 @@
             <Name>editor.error.unsupported</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Your editor version does not support this content version.\nTry to update your editor.</Value>
             <Value disabled="false">Ez a verziójú szerkesztő nem támogatja a megnyitni kívánt tartalom verzióját.\nPróbálja meg frissíteni a szerkesztőt.</Value>
         </Property>
@@ -82,6 +89,7 @@
             <Name>editor.error.obsoleted</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Your editor version supports newer content version. Would you like to update the file to this version? Otherwise some data can get lost during saving.</Value>
             <Value disabled="false">Ez a verziójú szerkesztő újabb tartalom verziót is támogat. Szeretné frissíteni a fájlt erre a verzióra? Különben bizonyos adatok elveszhetnek a mentés során.</Value>
         </Property>
@@ -89,6 +97,7 @@
             <Name>editor.error.file.save</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Unable to save the content.</Value>
             <Value disabled="false">Nem lehetséges a mentés.</Value>
         </Property>
@@ -96,6 +105,7 @@
             <Name>editor.error.handler.save</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">The selected handler could not save the content of a column.</Value>
             <Value disabled="false">A kiválasztott kezelő nem tudta elmenteni az oszlop tartalmát.</Value>
         </Property>
@@ -103,6 +113,7 @@
             <Name>editor.error.file.save.unknown</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">The handler could not save the content, because it does not exist.</Value>
             <Value disabled="false">A kezelő nem tudja elmenteni a tartalmat, mert az nem létezik.</Value>
         </Property>
@@ -110,6 +121,7 @@
             <Name>editor.error.handler.configure</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Configuring the handler for the selected column get failed.</Value>
             <Value disabled="false">A kezelő beállítása a kiválasztott oszlophoz nem sikerült.</Value>
         </Property>
@@ -118,6 +130,7 @@
             <Description>Should be ended with a space character.&#xD;
 See also the editor.marker.error.suffix property.</Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">There are </Value>
             <Value disabled="false"></Value>
         </Property>
@@ -126,6 +139,7 @@ See also the editor.marker.error.suffix property.</Description>
             <Description>Should be started with a space character.&#xD;
 See also the editor.marker.error.prefix property.</Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false"> duplicated records</Value>
             <Value disabled="false"> dupla rekord van</Value>
         </Property>
@@ -137,6 +151,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Overview</Value>
             <Value disabled="false">Áttekintés</Value>
         </Property>
@@ -147,6 +162,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.general.section.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">General Information</Value>
             <Value disabled="false">Általános Információk</Value>
         </Property>
@@ -154,6 +170,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.general.section.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">This section describes general information about this multiproperties.</Value>
             <Value disabled="false">A szekció általános információkat ad a multipropertiesről.</Value>
         </Property>
@@ -161,6 +178,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.general.name</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Name: </Value>
             <Value disabled="false">Név: </Value>
         </Property>
@@ -168,6 +186,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.general.description</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Description: </Value>
             <Value disabled="false">Megjegyzés: </Value>
         </Property>
@@ -178,6 +197,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.handler.section.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Handler</Value>
             <Value disabled="false">Kezelő</Value>
         </Property>
@@ -185,6 +205,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.handler.section.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">The handlers are able to produce different kind of outputs from the multiproperties.</Value>
             <Value disabled="false">A kezelők különböző kimenet képesek előállítani a multipropertiesből.</Value>
         </Property>
@@ -192,6 +213,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.handler.handler</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Handler: </Value>
             <Value disabled="false">Kezelő: </Value>
         </Property>
@@ -199,6 +221,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.handler.handler.none</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">none</Value>
             <Value disabled="false">semmi</Value>
         </Property>
@@ -206,6 +229,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.handler.confirm.text</Name>
             <Description>	</Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Changing the handler implementation will cause the current handler configurations get lost. Are you sure to continue?</Value>
             <Value disabled="false">A kezelő megváltoztatása a jelenlegi kezelő beállítások elvesztését vonja maga után. Biztosan folytatja?</Value>
         </Property>
@@ -216,6 +240,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.navigation.section.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Navigation</Value>
             <Value disabled="false">Navigáció</Value>
         </Property>
@@ -223,6 +248,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.navigation.section.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">This section describes the pages of the editor shortly.</Value>
             <Value disabled="false">Ez a szekció röviden ismerteti a szerkesztő oldalait.</Value>
         </Property>
@@ -230,6 +256,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.navigation.columns</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">list of all columns contained by this multiproperties.</Value>
             <Value disabled="false">megjelenítni az összes oszlopot ebben a multipropertiesben.</Value>
         </Property>
@@ -237,6 +264,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.navigation.table</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">editable interface of columns in table format.</Value>
             <Value disabled="false">szerkesztői felülete az oszloponak táblázatos formában.</Value>
         </Property>
@@ -247,6 +275,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.statistics.section.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Statistics</Value>
             <Value disabled="false">Statisztika</Value>
         </Property>
@@ -254,6 +283,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.statistics.section.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">This section gives statistical information about this multiproperties.</Value>
             <Value disabled="false">Statisztikai információkat nyújt ez a szekció a jelenlegi multipropertiesről.</Value>
         </Property>
@@ -261,6 +291,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.statistics.countof.columns</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Count of columns: </Value>
             <Value disabled="false">Oszlopok száma: </Value>
         </Property>
@@ -268,6 +299,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.statistics.countof.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Count of property records: </Value>
             <Value disabled="false">Property rekordok száma: </Value>
         </Property>
@@ -275,6 +307,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.statistics.countof.disabled</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Count of disabled property records:  </Value>
             <Value disabled="false">Letiltott property rekordok száma: </Value>
         </Property>
@@ -282,6 +315,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.statistics.countof.comment</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Count of comment records: </Value>
             <Value disabled="false">Megjegyzés rekordok száma: </Value>
         </Property>
@@ -289,6 +323,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>overview.statistics.countof.empty</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Count of empty records: </Value>
             <Value disabled="false">Üres rekordok száma: </Value>
         </Property>
@@ -300,6 +335,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Columns</Value>
             <Value disabled="false">Oszlopok</Value>
         </Property>
@@ -307,6 +343,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.button.add</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Add...</Value>
             <Value disabled="false">Hozzáad...</Value>
         </Property>
@@ -314,6 +351,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.button.remove</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Remove</Value>
             <Value disabled="false">Eltávolít</Value>
         </Property>
@@ -321,6 +359,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.button.remove.confirm.text</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Are you sure to remove the selected column?</Value>
             <Value disabled="false">Biztos eltávolítod a kiválasztott oszlopot?</Value>
         </Property>
@@ -328,6 +367,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.button.up</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Up</Value>
             <Value disabled="false">Fel</Value>
         </Property>
@@ -335,6 +375,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.button.down</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Down</Value>
             <Value disabled="false">Le</Value>
         </Property>
@@ -342,6 +383,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.button.import</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Import...</Value>
             <Value disabled="false">Import...</Value>
         </Property>
@@ -349,6 +391,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.button.horizontal</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Horizontal layout</Value>
             <Value disabled="false">Vízszintes elrendezés</Value>
         </Property>
@@ -356,6 +399,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.button.vertical</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Vertical layout</Value>
             <Value disabled="false">Függőleges elrendezés</Value>
         </Property>
@@ -366,6 +410,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.column.section.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Selected column</Value>
             <Value disabled="false">Kiválasztott oszlop</Value>
         </Property>
@@ -373,6 +418,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.column.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Name</Value>
             <Value disabled="false">Név</Value>
         </Property>
@@ -380,6 +426,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.column.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Description</Value>
             <Value disabled="false">Megjegyzés</Value>
         </Property>
@@ -387,6 +434,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.column.handler</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Handler configuration</Value>
             <Value disabled="false">Kezelő beállítás</Value>
         </Property>
@@ -394,6 +442,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.column.handler.button</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Configure...</Value>
             <Value disabled="false">Beállít...</Value>
         </Property>
@@ -401,6 +450,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>columns.column.handler.unknown</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">You cannot configure the handler, because it is non existing.</Value>
             <Value disabled="false">Nem módosíthat a kezelő beállításán, mert a kezelő nem létezik.</Value>
         </Property>
@@ -412,6 +462,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>tables.key</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Key</Value>
             <Value disabled="false">Kulcs</Value>
         </Property>
@@ -423,6 +474,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.add.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Add Property Record...</Value>
             <Value disabled="false">Property Rekord Hozzáadása...</Value>
         </Property>
@@ -430,6 +482,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.add.property.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Add Property Record</Value>
             <Value disabled="false">Property Rekord Hozzáadása</Value>
         </Property>
@@ -437,6 +490,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.add.comment</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Add Comment Record...</Value>
             <Value disabled="false">Megjegyzés Rekord Hozzáadása...</Value>
         </Property>
@@ -444,6 +498,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.add.comment.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Add Comment Record</Value>
             <Value disabled="false">Megjegyzés Rekord Hozzáadása</Value>
         </Property>
@@ -451,6 +506,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.add.empty</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Add Empty Record...</Value>
             <Value disabled="false">Üres Rekord Hozzáadása...</Value>
         </Property>
@@ -458,6 +514,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.add.empty.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Add Empty Record</Value>
             <Value disabled="false">Üres Rekord Hozzáadása</Value>
         </Property>
@@ -465,6 +522,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.delete</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Delete</Value>
             <Value disabled="false">Törlés</Value>
         </Property>
@@ -472,6 +530,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.delete.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Delete Selected Records</Value>
             <Value disabled="false">Kijelölt Rekordok Törlése</Value>
         </Property>
@@ -479,6 +538,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.delete.confirm</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Are you sure to delete selected records?</Value>
             <Value disabled="false">Biztosan törölni szeretnéd a kijelölt rekordokat?</Value>
         </Property>
@@ -486,6 +546,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.edit</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Edit...</Value>
             <Value disabled="false">Szerkesztés...</Value>
         </Property>
@@ -493,6 +554,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.edit.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Edit Selected Record</Value>
             <Value disabled="false">Kijelölt Rekord Szerkesztése</Value>
         </Property>
@@ -500,6 +562,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.convert.multiline</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Convert to Multiline</Value>
             <Value disabled="false">Konvertálás Többsorosra</Value>
         </Property>
@@ -507,6 +570,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.convert.multiline.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Convert to Multiline</Value>
             <Value disabled="false">Konvertálás Többsorosra</Value>
         </Property>
@@ -514,6 +578,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.convert.normal</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Convert to Normal</Value>
             <Value disabled="false">Konvertálás Normálisra</Value>
         </Property>
@@ -521,6 +586,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.convert.normal.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Convert to Normal</Value>
             <Value disabled="false">Konvertálás Normálisra</Value>
         </Property>
@@ -528,6 +594,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.convert.normal.confirm</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Are you sure about converting this multiline property record to a normal? The line breaks will be removed.</Value>
             <Value disabled="false">Biztos benne hogy konvertálni szeretnék ezt a több soros property rekordot normálisra? A sortörések eltávolításra kerülnek.</Value>
         </Property>
@@ -535,6 +602,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.duplicate</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Duplicate</Value>
             <Value disabled="false">Duplikálás</Value>
         </Property>
@@ -542,6 +610,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.duplicate.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Duplicate Selected Records</Value>
             <Value disabled="false">Kijelölt Rekordok Duplikálása</Value>
         </Property>
@@ -549,6 +618,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.disable</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Toggle Disabled</Value>
             <Value disabled="false">Letiltás Átállítása</Value>
         </Property>
@@ -556,6 +626,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.disable.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Toggle Disabled State Of Selected Record</Value>
             <Value disabled="false">Kijelölt Rekordok Letíltásának Átállítása</Value>
         </Property>
@@ -563,6 +634,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.moveup</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Move Up</Value>
             <Value disabled="false">Mozgatás Fel</Value>
         </Property>
@@ -570,6 +642,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.moveup.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Move Up Selected Record</Value>
             <Value disabled="false">Kijelölt Rekordok Mozgatása Fel</Value>
         </Property>
@@ -577,6 +650,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.movedown</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Move Down</Value>
             <Value disabled="false">Mozgatás Le</Value>
         </Property>
@@ -584,6 +658,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.movedown.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Move Down Selected Record</Value>
             <Value disabled="false">Kijelölt Rekordok Mozgatása Le</Value>
         </Property>
@@ -591,6 +666,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Toggle Tooltip</Value>
             <Value disabled="false">Tooltip Átállítása</Value>
         </Property>
@@ -598,6 +674,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.tooltip.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Toggle Tooltip</Value>
             <Value disabled="false">Tooltip Átállítása</Value>
         </Property>
@@ -605,6 +682,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.inlineedit</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Toggle Inline Edit Mode</Value>
             <Value disabled="false">Közvetlen Szerkesztés Átállítása</Value>
         </Property>
@@ -612,6 +690,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>command.inlineedit.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Toggle Inline Edit Mode</Value>
             <Value disabled="false">Közvetlen Szerkesztés Átállítása</Value>
         </Property>
@@ -626,6 +705,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Add</Value>
             <Value disabled="false">Hozzáadás</Value>
         </Property>
@@ -633,6 +713,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Specify where the new record should be inserted</Value>
             <Value disabled="false">Adja meg, hova legyen az új rekord beszúrva</Value>
         </Property>
@@ -640,6 +721,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addpropertyrecord.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Specify the type and the position for the new property record</Value>
             <Value disabled="false">Adja meg a típusát és helyét az új property rekordnak</Value>
         </Property>
@@ -647,6 +729,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.type</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Property record type</Value>
             <Value disabled="false">Property rekord típus</Value>
         </Property>
@@ -654,6 +737,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.normal</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Normal</Value>
             <Value disabled="false">Sima</Value>
         </Property>
@@ -661,6 +745,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.multiline</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Multiline</Value>
             <Value disabled="false">Több soros</Value>
         </Property>
@@ -668,6 +753,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.position</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Position</Value>
             <Value disabled="false">Pozíció</Value>
         </Property>
@@ -675,6 +761,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.insertbefore</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Insert before the selection</Value>
             <Value disabled="false">Beszúrás a kijelölés elött</Value>
         </Property>
@@ -682,6 +769,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.insertafter</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Insert after the selection</Value>
             <Value disabled="false">Beszúrás a kijelölés után</Value>
         </Property>
@@ -689,6 +777,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.appendatend</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Append at end</Value>
             <Value disabled="false">Hozzáfűzés a végére</Value>
         </Property>
@@ -696,6 +785,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>dialog.addrecord.openedit</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Open the edit dialog after creating the record</Value>
             <Value disabled="false">A szerkesztő ablak megnyitása az új rekord létrehozása után</Value>
         </Property>
@@ -710,6 +800,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.general.page.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">MultiProperties</Value>
             <Value disabled="false">MultiProperties</Value>
         </Property>
@@ -717,6 +808,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.general.page.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">MultiProperties Editor general settings.</Value>
             <Value disabled="false">MultiProperties Editor általános beállítások.</Value>
         </Property>
@@ -724,6 +816,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.general.initialpage</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Initial page</Value>
             <Value disabled="false">Kezdő oldal</Value>
         </Property>
@@ -734,6 +827,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.color.page.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Colors</Value>
             <Value disabled="false">Színek</Value>
         </Property>
@@ -741,6 +835,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.color.page.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">MultiProperties Editor color settings.</Value>
             <Value disabled="false">MultiProperties Editor szín beállítások.</Value>
         </Property>
@@ -748,6 +843,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.color.enabled.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Property record's foreground color</Value>
             <Value disabled="false">Property rekord betű színe</Value>
         </Property>
@@ -755,6 +851,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.color.enabled.def.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Property record's foreground color with default value</Value>
             <Value disabled="false">Property rekord betű színe alapértelmezett értékkel</Value>
         </Property>
@@ -762,6 +859,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.color.disabled.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Disabled property record's foreground color</Value>
             <Value disabled="false">Letíltott property rekord betű színe</Value>
         </Property>
@@ -769,6 +867,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.color.disabled.def.property</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Disabled property record's foreground color with default value</Value>
             <Value disabled="false">Letíltott property rekord betű színe alapértelmezett értékkel</Value>
         </Property>
@@ -776,6 +875,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>preference.color.comment</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Comment record's foreground color</Value>
             <Value disabled="false">Megjegyzés rekord betű színe</Value>
         </Property>
@@ -790,6 +890,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.general.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">General</Value>
             <Value disabled="false">Általános</Value>
         </Property>
@@ -797,6 +898,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.general.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Specify the key for this property. You can also make the property diabled. Finally you can specify a default value as well.</Value>
             <Value disabled="false">Adja meg a kulcsot a property rekornak. Lehetősége van letiltani, illetve alapértelmezett értéket is megadni.</Value>
         </Property>
@@ -804,6 +906,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.general.key</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Key</Value>
             <Value disabled="false">Kulcs</Value>
         </Property>
@@ -811,6 +914,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.general.defaultvalue</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Default value</Value>
             <Value disabled="false">Alapértelmezett érték</Value>
         </Property>
@@ -818,6 +922,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.general.disabled</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Disabled</Value>
             <Value disabled="false">Letíltott</Value>
         </Property>
@@ -825,6 +930,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.general.warning.keyempty</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">The key field is empty!</Value>
             <Value disabled="false">A kulcs mező üres!</Value>
         </Property>
@@ -832,6 +938,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.general.warning.keyexists</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">The key already exists!</Value>
             <Value disabled="false">A kulcs már létezik!</Value>
         </Property>
@@ -839,6 +946,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.values.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Values</Value>
             <Value disabled="false">Értékek</Value>
         </Property>
@@ -846,6 +954,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.values.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Specify the values for the columns.</Value>
             <Value disabled="false">Adja meg az értékeket az oszlopokhoz.</Value>
         </Property>
@@ -853,6 +962,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.value.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Value</Value>
             <Value disabled="false">Érték</Value>
         </Property>
@@ -860,6 +970,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.value.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Specify the value for the selected column.</Value>
             <Value disabled="false">Adja meg az értéket a kijelölt oszlophoz.</Value>
         </Property>
@@ -867,6 +978,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.value.enabled</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Enabled</Value>
             <Value disabled="false">Engedélyezett</Value>
         </Property>
@@ -874,6 +986,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.values</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Column values</Value>
             <Value disabled="false">Oszlop értékek</Value>
         </Property>
@@ -881,6 +994,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.fill.checked</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Fill checked values with this one</Value>
             <Value disabled="false">Kitölt minden értelmezett értéket ezzel az értékkel</Value>
         </Property>
@@ -888,6 +1002,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.fill.all</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Fill all values with this one</Value>
             <Value disabled="false">Kitölt minden értéket ezzel az értékkel</Value>
         </Property>
@@ -895,6 +1010,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.description.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Description</Value>
             <Value disabled="false">Megjegyzés</Value>
         </Property>
@@ -902,6 +1018,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.property.description.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Specify the description for the property record.</Value>
             <Value disabled="false">Adja meg a megjegyzést a rekordhoz.</Value>
         </Property>
@@ -909,6 +1026,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.comment.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Value</Value>
             <Value disabled="false">Érték</Value>
         </Property>
@@ -916,6 +1034,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.comment.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Specify the value of the comment record.</Value>
             <Value disabled="false">Adja meg a értékét a megjegyzés rekordnak.</Value>
         </Property>
@@ -923,6 +1042,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>property.comment.value</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Value</Value>
             <Value disabled="false">Érték</Value>
         </Property>
@@ -934,6 +1054,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>perspective.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">MultiProperties</Value>
             <Value disabled="false">MultiProperties</Value>
         </Property>
@@ -945,6 +1066,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>outline.column</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Column</Value>
             <Value disabled="false">Oszlop</Value>
         </Property>
@@ -952,6 +1074,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>outline.value</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Value</Value>
             <Value disabled="false">Érték</Value>
         </Property>
@@ -966,6 +1089,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Import</Value>
             <Value disabled="false">Import</Value>
         </Property>
@@ -973,6 +1097,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.importers.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Importer selection</Value>
             <Value disabled="false">Importer választás</Value>
         </Property>
@@ -980,6 +1105,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.importers.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Select the desired importer to be used</Value>
             <Value disabled="false">Válassza ki a használni kívánt importert</Value>
         </Property>
@@ -987,6 +1113,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.importers.warning</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">There is no available importer</Value>
             <Value disabled="false">Nincs elérhető importer</Value>
         </Property>
@@ -994,6 +1121,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.importers.label</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Select an importer</Value>
             <Value disabled="false">Válasszon egy importert</Value>
         </Property>
@@ -1001,6 +1129,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.method.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Method selection</Value>
             <Value disabled="false">Eljárás választás</Value>
         </Property>
@@ -1008,6 +1137,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.method.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Select the desired method to be used</Value>
             <Value disabled="false">Válassza ki a használni kívánt eljárást</Value>
         </Property>
@@ -1015,6 +1145,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.method.structrure</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Structure import</Value>
             <Value disabled="false">Struktúra importálása</Value>
         </Property>
@@ -1022,6 +1153,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.method.structrure.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Importing the structure includes not just the property records, but the comment and empty records too. All imported record will be appended in the end of the table. The property values are not imported.</Value>
             <Value disabled="false">A struktúra importálása magába foglalja a property rekordok mellett a megjegyzés és üres rekordokat is. Minden rekord a táblázat végére kerül beszúrásra. A property rekordok értéke nem kerül importálásra.</Value>
         </Property>
@@ -1029,6 +1161,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.method.keyvalue</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Key-value based import</Value>
             <Value disabled="false">Kulcs-érték párok importálása</Value>
         </Property>
@@ -1036,6 +1169,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.method.keyvalue.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Importing only the property records together with their values. If the property already exists, then only its value is overwritten. Otherwise a new property will be inserted in the end of the table.</Value>
             <Value disabled="false">Csak a property rekordok importálása az értékeikkel. Ha már létezik akkor csak az értéke kerül felülírásra. Különben egy új property kerül beszúrásra a táblázat végére.</Value>
         </Property>
@@ -1043,6 +1177,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.method.value</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Value import</Value>
             <Value disabled="false">Értékek importálása</Value>
         </Property>
@@ -1050,6 +1185,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.import.method.value.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Importing only values of the already existing properties. If the property does not exist, it will not be created.</Value>
             <Value disabled="false">Csak a property rekordok értékének importálása. Ha még nem létezik egy property, akkor az nem kerül létrehozásra.</Value>
         </Property>
@@ -1060,6 +1196,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">New MultiProperties</Value>
             <Value disabled="false">Új MultiProperties</Value>
         </Property>
@@ -1067,6 +1204,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.desc</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">This wizard creates a new file with multiproperties extension that can be opened by a MultiProperties editor.</Value>
             <Value disabled="false">Ez a varázsló egy új multiproperties kiterjesztésű fájlt hoz létre amit meg lehet nyitni MultiProperties szerkesztővel.</Value>
         </Property>
@@ -1074,6 +1212,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.location</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Location</Value>
             <Value disabled="false">Hely</Value>
         </Property>
@@ -1081,6 +1220,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.browse</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Browse...</Value>
             <Value disabled="false">Tallózás...</Value>
         </Property>
@@ -1088,6 +1228,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.browse.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Select new file container</Value>
             <Value disabled="false">Válasszon egy új konténert</Value>
         </Property>
@@ -1095,6 +1236,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.filename</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">File name</Value>
             <Value disabled="false">Fájlnév</Value>
         </Property>
@@ -1102,6 +1244,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Name</Value>
             <Value disabled="false">Név</Value>
         </Property>
@@ -1109,6 +1252,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.description</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Description</Value>
             <Value disabled="false">Megjegyzés</Value>
         </Property>
@@ -1116,6 +1260,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.error.location.nonexists</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">File location must exist</Value>
             <Value disabled="false">Fájl helye nem létezik</Value>
         </Property>
@@ -1123,6 +1268,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.error.location.nonaccessible</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Project must be writable</Value>
             <Value disabled="false">Fájl helye nem írható</Value>
         </Property>
@@ -1130,6 +1276,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.error.filename.nonvalid</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">File name must be valid</Value>
             <Value disabled="false">Fájl neve nem érvényes</Value>
         </Property>
@@ -1137,6 +1284,7 @@ See also the editor.marker.error.prefix property.</Description>
             <Name>wizard.new.general.error.filename.invalidext</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">File extension must be &quot;multiproperties&quot;</Value>
             <Value disabled="false">Fájl kiterjesztése &quot;multiproperties&quot; kell legyen</Value>
         </Property>
