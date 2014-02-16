@@ -497,6 +497,41 @@ See also the editor.marker.error.prefix property.</Description>
             <Value disabled="false">Kijelölt Rekord Szerkesztése</Value>
         </Property>
         <Property>
+            <Name>command.convert.multiline</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Convert to Multiline</Value>
+            <Value disabled="false">Konvertálás Többsorosra</Value>
+        </Property>
+        <Property>
+            <Name>command.convert.multiline.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Convert to Multiline</Value>
+            <Value disabled="false">Konvertálás Többsorosra</Value>
+        </Property>
+        <Property>
+            <Name>command.convert.normal</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Convert to Normal</Value>
+            <Value disabled="false">Konvertálás Normálisra</Value>
+        </Property>
+        <Property>
+            <Name>command.convert.normal.tooltip</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Convert to Normal</Value>
+            <Value disabled="false">Konvertálás Normálisra</Value>
+        </Property>
+        <Property>
+            <Name>command.convert.normal.confirm</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <Value disabled="false">Are you sure about converting this multiline property record to a normal? The line breaks will be removed.</Value>
+            <Value disabled="false">Biztos benne hogy konvertálni szeretnék ezt a több soros property rekordot normálisra? A sortörések eltávolításra kerülnek.</Value>
+        </Property>
+        <Property>
             <Name>command.duplicate</Name>
             <Description></Description>
             <Disabled>false</Disabled>

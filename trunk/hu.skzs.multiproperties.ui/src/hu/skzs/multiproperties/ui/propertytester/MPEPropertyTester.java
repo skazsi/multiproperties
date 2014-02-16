@@ -1,6 +1,7 @@
 package hu.skzs.multiproperties.ui.propertytester;
 
 import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.PropertyRecord;
 import hu.skzs.multiproperties.base.model.Table;
 import hu.skzs.multiproperties.ui.editor.Editor;
 
@@ -21,6 +22,10 @@ import org.eclipse.ui.PlatformUI;
  * <li><code>isContinuousSelection</code> - check whether the current selection is continuous of {@link AbstractRecord} or not</li>
  * <li><code>isBeginningSelection</code> - check whether the current selection begins at the beginning of the table or not</li>
  * <li><code>isEndingSelection</code> - check whether the current selection ends at the beginning of the table or not</li>
+ * <li><code>isMultilinePropertySelection</code> - check whether the current selection's first element is a {@link PropertyRecord}
+ * with multiline enabled.</li>
+ * <li><code>isNormalPropertySelection</code> - check whether the current selection's first element is a {@link PropertyRecord}
+ * with multiline disabled.</li>
  * </ul>
  * @author skzs
  */
@@ -41,6 +46,18 @@ public class MPEPropertyTester extends PropertyTester
 	 * Property indicating that the selection ends at the beginning of the table.
 	 */
 	private static final String PROPERTY_IS_ENDING_SELECTION = "isEndingSelection"; //$NON-NLS-1$
+
+	/**
+	 * Property indicating that the current selection is a {@link PropertyRecord}
+	 * with multiline enabled.
+	 */
+	private static final String PROPERTY_MULTILINE_PROPERTY_SELECTION = "isMultilinePropertySelection"; //$NON-NLS-1$
+
+	/**
+	 * Property indicating that the current selection is a {@link PropertyRecord}
+	 * with multiline disabled.
+	 */
+	private static final String PROPERTY_NORMAL_PROPERTY_SELECTION = "isNormalPropertySelection"; //$NON-NLS-1$
 
 	/*
 	 * (non-Javadoc)
@@ -101,6 +118,44 @@ public class MPEPropertyTester extends PropertyTester
 			else
 				return false;
 			return editor.getTable().indexOf(record) == editor.getTable().size() - 1;
+		}
+		else if (PROPERTY_MULTILINE_PROPERTY_SELECTION.equals(property))
+		{
+			PropertyRecord record = null;
+			if (receiver instanceof PropertyRecord)
+			{
+				record = (PropertyRecord) receiver;
+			}
+			else if (receiver instanceof StructuredSelection)
+			{
+				final StructuredSelection structuredSelection = (StructuredSelection) receiver;
+				if (structuredSelection.isEmpty())
+					return false;
+
+				record = (PropertyRecord) structuredSelection.getFirstElement();
+			}
+			else
+				return false;
+			return record.isMultiLine();
+		}
+		else if (PROPERTY_NORMAL_PROPERTY_SELECTION.equals(property))
+		{
+			PropertyRecord record = null;
+			if (receiver instanceof PropertyRecord)
+			{
+				record = (PropertyRecord) receiver;
+			}
+			else if (receiver instanceof StructuredSelection)
+			{
+				final StructuredSelection structuredSelection = (StructuredSelection) receiver;
+				if (structuredSelection.isEmpty())
+					return false;
+
+				record = (PropertyRecord) structuredSelection.getFirstElement();
+			}
+			else
+				return false;
+			return !record.isMultiLine();
 		}
 		else
 		{

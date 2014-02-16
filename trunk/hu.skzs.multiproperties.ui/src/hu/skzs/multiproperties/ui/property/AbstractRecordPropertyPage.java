@@ -16,6 +16,7 @@ public abstract class AbstractRecordPropertyPage<T extends AbstractRecord> exten
 {
 	private boolean visible;
 	protected T record;
+	protected T originalRecord;
 	protected Table table;
 
 	public AbstractRecordPropertyPage()
@@ -26,12 +27,11 @@ public abstract class AbstractRecordPropertyPage<T extends AbstractRecord> exten
 
 	/**
 	 * Initializes the property page.
-	 * @param record
-	 * @param table
 	 */
-	void init(final T record, final Table table)
+	void init(final T record, final T originalRecord, final Table table)
 	{
 		this.record = record;
+		this.originalRecord = originalRecord;
 		this.table = table;
 	}
 

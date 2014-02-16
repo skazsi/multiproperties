@@ -64,7 +64,7 @@
             class="hu.skzs.multiproperties.ui.propertytester.MPEPropertyTester"
             id="hu.skzs.multiproperties.ui.propertyTester"
             namespace="hu.skzs.multiproperties.ui"
-            properties="isContinuousSelection,isBeginningSelection,isEndingSelection"
+            properties="isContinuousSelection,isBeginningSelection,isEndingSelection,isMultilinePropertySelection,isNormalPropertySelection"
             type="java.lang.Object">
       </propertyTester>
    </extension>
@@ -85,6 +85,14 @@
       <command
             id="hu.skzs.multiproperties.ui.command.Edit"
             name="%command.edit">
+      </command>
+      <command
+            id="hu.skzs.multiproperties.ui.command.ConvertToMultiline"
+            name="%command.convert.multiline">
+      </command>
+      <command
+            id="hu.skzs.multiproperties.ui.command.ConvertToNormal"
+            name="%command.convert.normal">
       </command>
       <command
             id="hu.skzs.multiproperties.ui.command.Duplicate"
@@ -292,6 +300,22 @@
 	            </visibleWhen>
             </command>
             <command
+                  commandId="hu.skzs.multiproperties.ui.command.ConvertToMultiline"
+                  label="%command.convert.multiline"
+                  tooltip="%command.convert.multiline.tooltip">
+	            <visibleWhen>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.convertToMultiline"/>
+	            </visibleWhen>
+            </command>
+            <command
+                  commandId="hu.skzs.multiproperties.ui.command.ConvertToNormal"
+                  label="%command.convert.normal"
+                  tooltip="%command.convert.normal.tooltip">
+	            <visibleWhen>
+	               <reference definitionId="hu.skzs.multiproperties.ui.definition.convertToNormal"/>
+	            </visibleWhen>
+            </command>
+            <command
                   commandId="hu.skzs.multiproperties.ui.command.MoveUp"
                   label="%command.moveup"
                   tooltip="%command.moveup.tooltip">
@@ -402,6 +426,44 @@
 			</with>
 		</and>
       </definition>
+      <definition
+            id="hu.skzs.multiproperties.ui.definition.convertToMultiline">
+		<and>
+			<with variable="activeEditor">
+         		<instanceof value="hu.skzs.multiproperties.ui.editor.Editor"/>
+			</with>
+			<with variable="selection">
+				<and>
+					<count value="1"/>
+					<iterate ifEmpty="false" operator="and">
+						<or>
+							<instanceof value="hu.skzs.multiproperties.base.model.PropertyRecord"/>
+						</or>
+					</iterate>
+					<test property="hu.skzs.multiproperties.ui.isNormalPropertySelection"/>
+				</and>
+			</with>
+		</and>
+      </definition>
+      <definition
+            id="hu.skzs.multiproperties.ui.definition.convertToNormal">
+		<and>
+			<with variable="activeEditor">
+         		<instanceof value="hu.skzs.multiproperties.ui.editor.Editor"/>
+			</with>
+			<with variable="selection">
+				<and>
+					<count value="1"/>
+					<iterate ifEmpty="false" operator="and">
+						<or>
+							<instanceof value="hu.skzs.multiproperties.base.model.PropertyRecord"/>
+						</or>
+					</iterate>
+					<test property="hu.skzs.multiproperties.ui.isMultilinePropertySelection"/>
+				</and>
+			</with>
+		</and>
+      </definition>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -440,6 +502,20 @@
             commandId="hu.skzs.multiproperties.ui.command.Edit">
             <enabledWhen>
                <reference definitionId="hu.skzs.multiproperties.ui.definition.editable"/>
+            </enabledWhen>
+      </handler>
+      <handler
+      		class="hu.skzs.multiproperties.ui.command.ConvertToMultilineHandler"
+            commandId="hu.skzs.multiproperties.ui.command.ConvertToMultiline">
+            <enabledWhen>
+               <reference definitionId="hu.skzs.multiproperties.ui.definition.convertToMultiline"/>
+            </enabledWhen>
+      </handler>
+      <handler
+      		class="hu.skzs.multiproperties.ui.command.ConvertToNormalHandler"
+            commandId="hu.skzs.multiproperties.ui.command.ConvertToNormal">
+            <enabledWhen>
+               <reference definitionId="hu.skzs.multiproperties.ui.definition.convertToNormal"/>
             </enabledWhen>
       </handler>
       <handler

@@ -16,12 +16,14 @@ class CommentRecordPreferenceManagerBuilder extends AbstractRecordPreferenceMana
 
 	/**
 	 * Constructor
-	 * @param record the record where the preference manager is built to
+	 * @param record the copied record where the preference manager is built to
+	 * @param originalRecord the original record of the copied record
 	 * @param table the table instance which holds the record
 	 */
-	public CommentRecordPreferenceManagerBuilder(final CommentRecord record, final Table table)
+	public CommentRecordPreferenceManagerBuilder(final CommentRecord record, final CommentRecord originalRecord,
+			final Table table)
 	{
-		super(record, table);
+		super(record, originalRecord, table);
 	}
 
 	@Override
@@ -35,7 +37,7 @@ class CommentRecordPreferenceManagerBuilder extends AbstractRecordPreferenceMana
 	private IPreferenceNode buildGeneralNode()
 	{
 		final CommentPropertyPage commentPropertyPage = new CommentPropertyPage();
-		commentPropertyPage.init(record, table);
+		commentPropertyPage.init(record, originalRecord, table);
 		return new PreferenceNode("general", commentPropertyPage); //$NON-NLS-1$
 	}
 }

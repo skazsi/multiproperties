@@ -15,22 +15,30 @@ public abstract class AbstractRecordPreferenceManagerBuilder<T extends AbstractR
 {
 
 	protected final T record;
+	protected final T originalRecord;
 	protected final Table table;
 
 	/**
 	 * Constructor
-	 * @param record the record where the preference manager is built to
+	 * @param record the copied record where the preference manager is built to
+	 * @param originalRecord the original record of the copied record
 	 * @param table the table instance which holds the record
 	 */
-	public AbstractRecordPreferenceManagerBuilder(final T record, final Table table)
+	public AbstractRecordPreferenceManagerBuilder(final T record, final T originalRecord, final Table table)
 	{
 		this.record = record;
+		this.originalRecord = originalRecord;
 		this.table = table;
 	}
 
 	public T getRecord()
 	{
 		return record;
+	}
+
+	public T getOriginalRecord()
+	{
+		return originalRecord;
 	}
 
 	public Table getTable()
