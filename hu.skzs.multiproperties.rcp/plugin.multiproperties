@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <MultiProperties xmlns="hu.skzs.multiproperties">
-    <Version>1.1</Version>
+    <Version>1.2</Version>
     <Name>MultiProperties RCP</Name>
     <Description></Description>
     <Handler>Java Properties Handler</Handler>
@@ -29,6 +29,7 @@
             <Name>aboutText</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">MultiProperties Editor - standalone - Alpha version</Value>
             <Value disabled="false">MultiProperties Editor - standalone - Alpha version</Value>
         </Property>
@@ -36,6 +37,7 @@
             <Name>general.alphaversion.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Notification about this version</Value>
             <Value disabled="false">Figyelmeztetés a jelen verzióról</Value>
         </Property>
@@ -43,6 +45,7 @@
             <Name>general.alphaversion.notification1</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">The current version is only alpha version, which means it is just about verifying the concept of standalone MultiProperties editor.</Value>
             <Value disabled="false">Jelen verzió csak egy előzetes alpha verzió, ami a önáló MultiProperties Editor concepcióját ellenőrzi.</Value>
         </Property>
@@ -50,6 +53,7 @@
             <Name>general.alphaversion.notification2</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">The handlers at the moment cannot be used, and some other minor features may be unavailable as well.</Value>
             <Value disabled="false">A kezelők jelenleg nem használhatóak, illetve egyéb lehetőség is elérhetettlenek lehetnek.</Value>
         </Property>
@@ -57,6 +61,7 @@
             <Name>general.alphaversion.toogle</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Don't show this again</Value>
             <Value disabled="false">Nem mutasd többet</Value>
         </Property>
@@ -68,6 +73,7 @@
             <Name>menu.file</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">&amp;File</Value>
             <Value disabled="false">&amp;Fájl</Value>
         </Property>
@@ -75,6 +81,7 @@
             <Name>menu.edit</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">&amp;Edit</Value>
             <Value disabled="false">&amp;Szerkesztés</Value>
         </Property>
@@ -82,6 +89,7 @@
             <Name>menu.window</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">&amp;Window</Value>
             <Value disabled="false">&amp;Ablak</Value>
         </Property>
@@ -89,6 +97,7 @@
             <Name>menu.help</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">&amp;Help</Value>
             <Value disabled="false">&amp;Súgó</Value>
         </Property>
@@ -100,6 +109,7 @@
             <Name>command.schema.name</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">MultiProperties</Value>
             <Value disabled="false">MultiProperties</Value>
         </Property>
@@ -107,6 +117,7 @@
             <Name>command.newfile</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">New...</Value>
             <Value disabled="false">Új...</Value>
         </Property>
@@ -114,6 +125,7 @@
             <Name>command.newfile.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">New...</Value>
             <Value disabled="false">Új...</Value>
         </Property>
@@ -121,6 +133,7 @@
             <Name>command.openfile</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Open...</Value>
             <Value disabled="false">Megnyitás...</Value>
         </Property>
@@ -128,6 +141,7 @@
             <Name>command.openfile.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Open...</Value>
             <Value disabled="false">Megnyitás...</Value>
         </Property>
@@ -135,6 +149,7 @@
             <Name>command.openfile.dialog.filemask</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">MultiProperties file</Value>
             <Value disabled="false">MultiProperties fájl</Value>
         </Property>
@@ -142,6 +157,7 @@
             <Name>command.openhomepage</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Open MultiProperties homepage</Value>
             <Value disabled="false">A MultiProperties honlap megnyitása</Value>
         </Property>
@@ -149,6 +165,7 @@
             <Name>command.openhomepage.tooltip</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Open MultiProperties homepage</Value>
             <Value disabled="false">A MultiProperties honlap megnyitása</Value>
         </Property>
@@ -163,6 +180,7 @@
             <Name>wizard.new.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">New MultiProperties</Value>
             <Value disabled="false">Új MultiProperties</Value>
         </Property>
@@ -170,6 +188,7 @@
             <Name>wizard.new.general.file</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">File</Value>
             <Value disabled="false">Fájl</Value>
         </Property>
@@ -177,6 +196,7 @@
             <Name>wizard.new.general.browse</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Browse...</Value>
             <Value disabled="false">Tallózás...</Value>
         </Property>
@@ -184,6 +204,7 @@
             <Name>wizard.new.general.browse.title</Name>
             <Description></Description>
             <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
             <Value disabled="false">Select new MultiProperties file</Value>
             <Value disabled="false">Adja meg az új MultiProperties fájlt</Value>
         </Property>
