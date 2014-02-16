@@ -39,6 +39,15 @@
    <feature url="features/hu.skzs.multiproperties.handler.text_1.2.0.jar" id="hu.skzs.multiproperties.handler.text" version="1.2.0">
       <category name="hu.skzs.multiproperties.handler"/>
    </feature>
+   <feature url="features/hu.skzs.multiproperties_1.3.0.jar" id="hu.skzs.multiproperties" version="1.3.0">
+      <category name="hu.skzs.multiproperties.base"/>
+   </feature>
+   <feature url="features/hu.skzs.multiproperties.handler.java_1.3.0.jar" id="hu.skzs.multiproperties.handler.java" version="1.3.0">
+      <category name="hu.skzs.multiproperties.handler"/>
+   </feature>
+   <feature url="features/hu.skzs.multiproperties.handler.text_1.3.0.jar" id="hu.skzs.multiproperties.handler.text" version="1.3.0">
+      <category name="hu.skzs.multiproperties.handler"/>
+   </feature>
    <category-def name="hu.skzs.multiproperties.base" label="MultiProperties">
       <description>
          MultiProperties versions. For supporting an output format, like Java Properties files, install some handler plugins as well.
