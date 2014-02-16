@@ -2,7 +2,7 @@
 <feature
       id="hu.skzs.multiproperties.handler.text"
       label="MultiProperties Text File Handler Feature"
-      version="1.2.0"
+      version="1.3.0"
       provider-name="Krisztián Zsolt Sallai">
 
    <description>
@@ -11,6 +11,7 @@
 
    <url>
       <update label="MultiProperties update site" url="https://svn.codespot.com/a/eclipselabs.org/multiproperties/trunk/hu.skzs.multiproperties.updatesite"/>
+      <discovery label="Eclipse Marketplace" url="http://marketplace.eclipse.org/content/multiproperties"/>
    </url>
 
    <requires>
@@ -22,7 +23,7 @@
          id="hu.skzs.multiproperties.handler.text"
          download-size="0"
          install-size="0"
-         version="1.2.0"
+         version="1.3.0"
          unpack="false"/>
 
 </feature>
