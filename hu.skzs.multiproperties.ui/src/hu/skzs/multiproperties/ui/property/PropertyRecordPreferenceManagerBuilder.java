@@ -17,12 +17,14 @@ class PropertyRecordPreferenceManagerBuilder extends AbstractRecordPreferenceMan
 
 	/**
 	 * Constructor
-	 * @param record the record where the preference manager is built to
+	 * @param record the copied record where the preference manager is built to
+	 * @param originalRecord the original record of the copied record
 	 * @param table the table instance which holds the record
 	 */
-	public PropertyRecordPreferenceManagerBuilder(final PropertyRecord record, final Table table)
+	public PropertyRecordPreferenceManagerBuilder(final PropertyRecord record, final PropertyRecord originalRecord,
+			final Table table)
 	{
-		super(record, table);
+		super(record, originalRecord, table);
 	}
 
 	@Override
@@ -51,28 +53,28 @@ class PropertyRecordPreferenceManagerBuilder extends AbstractRecordPreferenceMan
 			generalPropertyPage = new PropertyRecordMultilineGeneralPropertyPage();
 		else
 			generalPropertyPage = new PropertyRecordGeneralPropertyPage();
-		generalPropertyPage.init(record, table);
+		generalPropertyPage.init(record, originalRecord, table);
 		return new PreferenceNode("general", generalPropertyPage); //$NON-NLS-1$
 	}
 
 	private IPreferenceNode buildValuesNode()
 	{
 		final PropertyRecordValuesPropertyPage propertyValuesPropertyPage = new PropertyRecordValuesPropertyPage();
-		propertyValuesPropertyPage.init(record, table);
+		propertyValuesPropertyPage.init(record, originalRecord, table);
 		return new PreferenceNode("values", propertyValuesPropertyPage); //$NON-NLS-1$
 	}
 
 	private IPreferenceNode buildValueNode(final Column column)
 	{
 		final PropertyRecordValuePropertyPage propertyValuePropertyPage = new PropertyRecordValuePropertyPage(column);
-		propertyValuePropertyPage.init(record, table);
+		propertyValuePropertyPage.init(record, originalRecord, table);
 		return new PreferenceNode(column.getName(), propertyValuePropertyPage);
 	}
 
 	private IPreferenceNode buildDescriptionNode()
 	{
 		final PropertyRecordDescriptionPropertyPage descriptionPropertyPage = new PropertyRecordDescriptionPropertyPage();
-		descriptionPropertyPage.init(record, table);
+		descriptionPropertyPage.init(record, originalRecord, table);
 		return new PreferenceNode("description", descriptionPropertyPage); //$NON-NLS-1$
 	}
 }

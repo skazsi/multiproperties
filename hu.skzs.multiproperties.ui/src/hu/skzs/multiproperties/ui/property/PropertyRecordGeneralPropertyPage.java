@@ -241,7 +241,7 @@ public class PropertyRecordGeneralPropertyPage extends AbstractRecordPropertyPag
 		int counter = 0;
 		int position = -1;
 		while ((position = table.indexOf(keyText.getText().trim(), position + 1)) != -1)
-			if (record == null || position != table.indexOf(record))
+			if (position != table.indexOf(originalRecord))
 			{
 				counter++;
 				break;

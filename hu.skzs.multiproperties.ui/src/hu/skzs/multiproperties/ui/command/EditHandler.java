@@ -60,7 +60,8 @@ public class EditHandler extends AbstractHandler
 	private void editRecord(final Shell shell, final AbstractRecord record, final Table table)
 	{
 		final AbstractRecord tempPropertyRecord = createWorkingCopyRecord(record);
-		final PreferenceManagerBuilderFactory factory = new PreferenceManagerBuilderFactory(tempPropertyRecord, table);
+		final PreferenceManagerBuilderFactory factory = new PreferenceManagerBuilderFactory(tempPropertyRecord, record,
+				table);
 		final AbstractRecordPreferenceManagerBuilder<?> builder = factory.getBuilder();
 
 		final PreferenceDialog dialog = new PreferenceDialog(shell, builder.buildPreferenceManager());
