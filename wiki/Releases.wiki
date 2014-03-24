@@ -1,5 +1,10 @@
 #summary All releases
 
+= 1.3.1 =
+2014-03-24 r269
+ * issue25 "multiline property value with about 500kb text" related to Multi line value support
+
+
 = 1.3.0 =
 2014-02-16 r266
  * issue25 Multi line value support is missing
