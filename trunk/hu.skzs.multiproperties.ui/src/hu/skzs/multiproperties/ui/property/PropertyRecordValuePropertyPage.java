@@ -59,9 +59,11 @@ public class PropertyRecordValuePropertyPage extends AbstractRecordPropertyPage<
 		checkbox = new Button(parent, SWT.CHECK);
 		checkbox.setText(Messages.getString("property.property.value.enabled")); //$NON-NLS-1$
 
-		valueField = new Text(parent, SWT.BORDER | SWT.MULTI);
+		valueField = new Text(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 
 		final GridData gridData = new GridData(GridData.FILL_BOTH | GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL);
+		gridData.widthHint = 64;
+		gridData.heightHint = 64;
 		valueField.setLayoutData(gridData);
 
 		checkbox.addSelectionListener(new SelectionAdapter()

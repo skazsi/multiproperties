@@ -62,8 +62,9 @@ public class PropertyRecordValuesPropertyPage extends AbstractRecordPropertyPage
 			checkboxes[i] = new Button(parent, SWT.CHECK);
 			checkboxes[i].setText(table.getColumns().get(i).getName());
 			checkboxes[i].setData(new Integer(i));
-			valueFields[i] = new Text(parent, SWT.BORDER | SWT.MULTI);
+			valueFields[i] = new Text(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 			final GridData gridData = new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL);
+			gridData.widthHint = 64;
 			gridData.heightHint = 80;
 			valueFields[i].setLayoutData(gridData);
 			checkboxes[i].addSelectionListener(new SelectionAdapter()
