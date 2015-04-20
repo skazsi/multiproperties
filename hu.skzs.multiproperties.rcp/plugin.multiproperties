@@ -42,20 +42,16 @@
             <Value disabled="false">Figyelmeztetés a jelen verzióról</Value>
         </Property>
         <Property>
-            <Name>general.alphaversion.notification1</Name>
+            <Name>general.alphaversion.notification</Name>
             <Description></Description>
             <Disabled>false</Disabled>
-            <MultiLine>false</MultiLine>
-            <Value disabled="false">The current version is only alpha version, which means it is just about verifying the concept of standalone MultiProperties editor.</Value>
-            <Value disabled="false">Jelen verzió csak egy előzetes alpha verzió, ami a önáló MultiProperties Editor concepcióját ellenőrzi.</Value>
-        </Property>
-        <Property>
-            <Name>general.alphaversion.notification2</Name>
-            <Description></Description>
-            <Disabled>false</Disabled>
-            <MultiLine>false</MultiLine>
-            <Value disabled="false">The handlers at the moment cannot be used, and some other minor features may be unavailable as well.</Value>
-            <Value disabled="false">A kezelők jelenleg nem használhatóak, illetve egyéb lehetőség is elérhetettlenek lehetnek.</Value>
+            <MultiLine>true</MultiLine>
+            <Value disabled="false">The current version is only alpha version, which means it is just about verifying the concept of standalone MultiProperties editor.&#xD;
+&#xD;
+The handlers at the moment cannot be used, and some other minor features may be unavailable as well.</Value>
+            <Value disabled="false">Jelen verzió csak egy előzetes alpha verzió, ami a önáló MultiProperties Editor concepciójának ellenőrzését szolgálja.&#xD;
+&#xD;
+A kezelők jelenleg nem használhatóak, illetve egyéb lehetőség is elérhetettlenek lehetnek.</Value>
         </Property>
         <Property>
             <Name>general.alphaversion.toogle</Name>
