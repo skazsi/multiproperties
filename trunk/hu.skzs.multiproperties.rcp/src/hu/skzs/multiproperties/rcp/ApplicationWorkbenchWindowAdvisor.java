@@ -18,15 +18,15 @@ import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 {
 
-	public ApplicationWorkbenchWindowAdvisor(IWorkbenchWindowConfigurer configurer)
+	public ApplicationWorkbenchWindowAdvisor(final IWorkbenchWindowConfigurer configurer)
 	{
 		super(configurer);
 	}
 
 	@Override
-	public ActionBarAdvisor createActionBarAdvisor(IActionBarConfigurer configurer)
+	public ActionBarAdvisor createActionBarAdvisor(final IActionBarConfigurer configurer)
 	{
-		ICoolBarManager coolBarManager = configurer.getCoolBarManager();
+		final ICoolBarManager coolBarManager = configurer.getCoolBarManager();
 		coolBarManager.setLockLayout(false);
 		return new ApplicationActionBarAdvisor(configurer);
 	}
@@ -34,7 +34,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 	@Override
 	public void preWindowOpen()
 	{
-		IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
+		final IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
 		configurer.setInitialSize(new Point(600, 400));
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(false);
@@ -46,10 +46,10 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 		super.postWindowOpen();
 
 		// Suppressing the unwanted menu items
-		IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
+		final IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
 		for (int i = 0; i < windows.length; ++i)
 		{
-			IWorkbenchPage page = windows[i].getActivePage();
+			final IWorkbenchPage page = windows[i].getActivePage();
 			if (page != null)
 				page.hideActionSet("org.eclipse.ui.actionSet.openFiles"); //$NON-NLS-1$
 		}
@@ -62,15 +62,13 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 			{
 				public void run()
 				{
-					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+					final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-					String title = Messages.getString("general.alphaversion.title"); //$NON-NLS-1$
-					String toogle = Messages.getString("general.alphaversion.toogle"); //$NON-NLS-1$
-					StringBuilder strb = new StringBuilder(Messages.getString("general.alphaversion.notification1")); //$NON-NLS-1$
-					strb.append("\n\n"); //$NON-NLS-1$
-					strb.append(Messages.getString("general.alphaversion.notification2")); //$NON-NLS-1$
+					final String title = Messages.getString("general.alphaversion.title"); //$NON-NLS-1$
+					final String toogle = Messages.getString("general.alphaversion.toogle"); //$NON-NLS-1$
+					final String message = Messages.getString("general.alphaversion.notification"); //$NON-NLS-1$
 
-					MessageDialogWithToggle.openInformation(shell, title, strb.toString(), toogle, false, store,
+					MessageDialogWithToggle.openInformation(shell, title, message, toogle, false, store,
 							PreferenceConstants.NOTIFICATION_VER_ALPHA);
 				}
 			});
