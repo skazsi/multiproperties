@@ -6,7 +6,7 @@
       <editor
             class="hu.skzs.multiproperties.ui.editor.Editor"
             extensions="multiproperties"
-            icon="icons/title.gif"
+            icon="icons/multiproperties.gif"
             id="hu.skzs.multiproperties.ui.editor"
             name="%editor.name"/>
    </extension>
@@ -30,7 +30,7 @@
          point="org.eclipse.ui.perspectives">
       <perspective
             class="hu.skzs.multiproperties.ui.perspectives.Perspective"
-            icon="icons/title.gif"
+            icon="icons/multiproperties.gif"
             id="hu.skzs.multiproperties.ui.perspective"
             name="%perspective.name"/>
    </extension>
@@ -43,7 +43,7 @@
       <wizard
             category="hu.skzs.multiproperties.newwizard.category"
             class="hu.skzs.multiproperties.ui.wizard.NewMultiPropertiesWizard"
-            icon="icons/title.gif"
+            icon="icons/multiproperties.gif"
             id="hu.skzs.multiproperties.newwizard.NewMultiProperties"
             name="MultiProperties">
       </wizard>

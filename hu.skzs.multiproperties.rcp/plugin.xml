@@ -19,15 +19,15 @@
             name="MultiProperties">
          <property
                name="aboutText"
-               value="%aboutText">
+               value="MultiProperties Editor - standalone">
          </property>
          <property
                name="windowImages"
-               value="icons/multiproperties.gif">
+               value="icons/multiproperties_16x16.gif,icons/multiproperties_32x32.gif,icons/multiproperties_48x48.gif,icons/multiproperties_64x64.gif,icons/multiproperties_128x128.gif,icons/multiproperties_256x256.gif">
          </property>
          <property
                name="aboutImage"
-               value="logo.png">
+               value="icons/about.png">
          </property>
          <property
                name="appName"

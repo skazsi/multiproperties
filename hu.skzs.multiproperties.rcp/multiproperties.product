@@ -4,9 +4,9 @@
 <product name="MultiProperties" id="hu.skzs.multiproperties.rcp.product" application="hu.skzs.multiproperties.rcp.application" version="1.2.0" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="product_lg.gif"/>
+      <image path="/hu.skzs.multiproperties.rcp/icons/about.png"/>
       <text>
-         RCP Mail template created by PDE
+         MultiProperties Editor - standalone
       </text>
    </aboutInfo>
 
@@ -14,20 +14,26 @@
    </configIni>
 
    <launcherArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/hu.skzs.multiproperties.rcp/icons/multiproperties.gif"/>
+   <windowImages i16="/hu.skzs.multiproperties.rcp/icons/multiproperties_16x16.gif" i32="/hu.skzs.multiproperties.rcp/icons/multiproperties_32x32.gif" i48="/hu.skzs.multiproperties.rcp/icons/multiproperties_48x48.gif" i64="/hu.skzs.multiproperties.rcp/icons/multiproperties_64x64.gif" i128="/hu.skzs.multiproperties.rcp/icons/multiproperties_128x128.gif" i256="/hu.skzs.multiproperties.rcp/icons/multiproperties_256x256.gif"/>
 
+   <splash
+      location="hu.skzs.multiproperties.rcp" />
    <launcher name="multiproperties">
       <solaris/>
-      <win useIco="false">
+      <win useIco="true">
+         <ico path="/hu.skzs.multiproperties.rcp/icons/multiproperties.ico"/>
          <bmp/>
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -50,9 +56,11 @@
       <plugin id="org.eclipse.core.databinding.property"/>
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filesystem"/>
+      <plugin id="org.eclipse.core.filesystem.java7" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.resources"/>
+      <plugin id="org.eclipse.core.resources.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.e4.core.commands"/>
@@ -78,6 +86,7 @@
       <plugin id="org.eclipse.emf.ecore.change"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
       <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.bidi"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.ds"/>
       <plugin id="org.eclipse.equinox.event"/>
@@ -96,6 +105,7 @@
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.jface.text"/>
       <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
@@ -110,6 +120,7 @@
       <plugin id="org.hamcrest.core"/>
       <plugin id="org.junit"/>
       <plugin id="org.w3c.css.sac"/>
+      <plugin id="org.w3c.dom.events"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
    </plugins>
