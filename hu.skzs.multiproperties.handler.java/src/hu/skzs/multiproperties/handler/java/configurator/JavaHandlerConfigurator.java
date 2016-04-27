@@ -2,16 +2,18 @@ package hu.skzs.multiproperties.handler.java.configurator;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.support.handler.configurator.IConfigurator;
+import hu.skzs.multiproperties.support.handler.configurator.IEncodingAwareConfigurator;
 
 /**
  * A {@link JavaHandlerConfigurator} implementation is responsible for parsing and formatting the handler configuration.
  * @author skzs
  */
-public abstract class JavaHandlerConfigurator implements IConfigurator
+public abstract class JavaHandlerConfigurator implements IConfigurator, IEncodingAwareConfigurator
 {
 
 	public static final String DELIM = "|"; //$NON-NLS-1$
 
+	protected String encoding;
 	protected boolean includeDescription;
 	protected boolean includeColumnDescription;
 	protected boolean includeDisabled;
@@ -30,17 +32,22 @@ public abstract class JavaHandlerConfigurator implements IConfigurator
 		try
 		{
 			final String[] tokens = configuration.split("\\" + DELIM); //$NON-NLS-1$
-			if (tokens.length != 4 && tokens.length != 5)
+			if (tokens.length <= 4 && tokens.length > 6)
 				throw new IllegalArgumentException("Invalid configuration: " + configuration); //$NON-NLS-1$
 
 			parsePath(tokens[0]);
 			includeDescription = parseBoolean(tokens[1]);
 			includeColumnDescription = parseBoolean(tokens[2]);
 			includeDisabled = parseBoolean(tokens[3]);
-			if (tokens.length == 5)
+			if (tokens.length > 4)
 			{
 				disableDefault = Boolean.parseBoolean(tokens[4]);
 			}
+			if (tokens.length == 6)
+			{
+				encoding = tokens[5];
+			}
+
 		}
 		catch (final Exception e)
 		{
@@ -63,6 +70,11 @@ public abstract class JavaHandlerConfigurator implements IConfigurator
 		stringBuilder.append(Boolean.toString(includeDisabled));
 		stringBuilder.append(DELIM);
 		stringBuilder.append(Boolean.toString(disableDefault));
+		if (encoding != null)
+		{
+			stringBuilder.append(DELIM);
+			stringBuilder.append(encoding);
+		}
 		return stringBuilder.toString();
 	}
 
@@ -88,7 +100,7 @@ public abstract class JavaHandlerConfigurator implements IConfigurator
 
 	/**
 	 * Parses the path part of the configuration.
-	 * 
+	 *
 	 * @param path the given part part of the configuration
 	 */
 	public abstract void parsePath(String path);
@@ -171,5 +183,15 @@ public abstract class JavaHandlerConfigurator implements IConfigurator
 	public boolean isDisableDefaultValues()
 	{
 		return disableDefault;
+	}
+
+	public String getEncoding()
+	{
+		return encoding;
+	}
+
+	public void setEncoding(final String encoding)
+	{
+		this.encoding = encoding;
 	}
 }

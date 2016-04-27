@@ -7,6 +7,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.preference.PreferencePage;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -37,6 +39,7 @@ public class OutputFilePreferencePage extends PreferencePage
 	private Button checkColumnDescription;
 	private Button checkDisabled;
 	private Button checkDisableDefault;
+	private EncodingFieldEditor encodingEditor;
 
 	/**
 	 * Default constructor.
@@ -67,6 +70,7 @@ public class OutputFilePreferencePage extends PreferencePage
 		createEnableCheckPanel(composite);
 		createFilePanel(composite);
 		createCheckboxesPanel(composite);
+		createEncodingPanel(composite);
 
 		// Updating the status
 		dialogChanged();
@@ -234,6 +238,11 @@ public class OutputFilePreferencePage extends PreferencePage
 				return;
 			}
 		}
+		if (!encodingEditor.isValid())
+		{
+			updateStatus(Messages.getString("preference.output.error.invalid.encoding")); //$NON-NLS-1$
+			return;
+		}
 
 		updateStatus(null);
 	}
@@ -261,6 +270,7 @@ public class OutputFilePreferencePage extends PreferencePage
 		checkColumnDescription.setSelection(false);
 		checkDisabled.setSelection(false);
 		checkDisableDefault.setSelection(false);
+		encodingEditor.loadDefault();
 		dialogChanged();
 		super.performDefaults();
 	}
@@ -288,7 +298,30 @@ public class OutputFilePreferencePage extends PreferencePage
 			configurator.setIncludeColumnDescription(checkColumnDescription.getSelection());
 			configurator.setIncludeDisabled(checkDisabled.getSelection());
 			configurator.setDisableDefaultValues(checkDisableDefault.getSelection());
+			encodingEditor.store();
 		}
 		return super.performOk();
 	}
+
+	private void createEncodingPanel(final Composite parent)
+	{
+		final Composite encodingComposite = new Composite(parent, SWT.NONE);
+		final GridData gridData = new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL);
+		gridData.verticalIndent = 10;
+		gridData.horizontalSpan = 3;
+		encodingComposite.setLayoutData(gridData);
+		encodingEditor = new EncodingFieldEditor(configurator, encodingComposite);
+		encodingEditor.load();
+		encodingEditor.setPropertyChangeListener(new IPropertyChangeListener()
+		{
+			/* (non-Javadoc)
+			 * @see org.eclipse.jface.util.IPropertyChangeListener#propertyChange(org.eclipse.jface.util.PropertyChangeEvent)
+			 */
+			public void propertyChange(final PropertyChangeEvent event)
+			{
+				dialogChanged();
+			}
+		});
+	}
+
 }
