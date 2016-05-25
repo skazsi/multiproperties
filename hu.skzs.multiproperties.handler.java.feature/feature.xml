@@ -2,7 +2,7 @@
 <feature
       id="hu.skzs.multiproperties.handler.java"
       label="MultiProperties Java Handler Feature"
-      version="1.3.1"
+      version="1.3.0.ut8"
       provider-name="Krisztián Zsolt Sallai">
 
    <description>
@@ -23,7 +23,7 @@
          id="hu.skzs.multiproperties.handler.java"
          download-size="0"
          install-size="0"
-         version="1.3.1"
+         version="1.3.0.utf8"
          unpack="false"/>
 
 </feature>
