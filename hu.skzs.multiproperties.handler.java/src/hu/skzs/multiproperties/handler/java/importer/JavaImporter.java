@@ -7,10 +7,12 @@ import hu.skzs.multiproperties.base.model.Column;
 import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
+import hu.skzs.multiproperties.handler.java.configurator.JavaConfiguratorFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -35,8 +37,18 @@ public class JavaImporter implements IImporter
 		InputStream inputStream = null;
 		try
 		{
+			String encoding = null;
+			if (column != null)
+			{
+				encoding = JavaConfiguratorFactory.getInstance().getConfigurator(column.getHandlerConfiguration())
+						.getEncoding();
+			}
 			inputStream = new FileInputStream(fileName);
-			final LineReader lineReader = new LineReader(inputStream);
+			LineReader lineReader;
+			if (encoding == null)
+				lineReader = new LineReader(inputStream);
+			else
+				lineReader = new LineReader(new InputStreamReader(inputStream, encoding));
 
 			final List<AbstractRecord> records = new LinkedList<AbstractRecord>();
 
