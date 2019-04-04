@@ -23,6 +23,7 @@ public class JavaImporterTest
 	private static final String DIRECTORY = "bin/" + JavaImporter.class.getPackage().getName().replaceAll("\\.", "/"); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	private static final String EMPTY_FILE = DIRECTORY + "/empty.properties"; //$NON-NLS-1$
 	private static final String NORMAL_FILE = DIRECTORY + "/normal.properties"; //$NON-NLS-1$
+	private static final String UTF8_FILE = DIRECTORY + "/utf8.properties"; //$NON-NLS-1$
 	private JavaImporter importer;
 
 	@Before
@@ -33,7 +34,7 @@ public class JavaImporterTest
 
 	/**
 	 * Test method for {@link hu.skzs.multiproperties.handler.java.importer.JavaImporter#getRecords(Object, hu.skzs.multiproperties.base.model.Column)}.
-	 * @throws ImporterException 
+	 * @throws ImporterException
 	 */
 	@Test(expected = ImporterException.class)
 	public void testGetRecordsNull() throws ImporterException
@@ -179,5 +180,20 @@ public class JavaImporterTest
 		final PropertyRecord record11 = (PropertyRecord) records.get(11);
 		Assert.assertEquals("key.6", record11.getValue()); //$NON-NLS-1$
 		Assert.assertEquals("value 6", record11.getColumnValue(column)); //$NON-NLS-1$
+	}
+
+	@Test
+	public void testGetRecordsNormalWithColumnUTF8() throws ImporterException
+	{
+		// fixture
+		final Column column = new Column();
+		column.setHandlerConfiguration("/whatever.properties|true|true|true|true|UTF-8"); //$NON-NLS-1$
+
+		// when
+		final List<AbstractRecord> records = importer.getRecords(UTF8_FILE, column);
+
+		//then
+		final PropertyRecord record0 = (PropertyRecord) records.get(0);
+		Assert.assertEquals("àéìú", record0.getColumnValue(column)); //$NON-NLS-1$
 	}
 }

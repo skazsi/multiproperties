@@ -176,6 +176,27 @@
             <Value disabled="false">File name must be valid!</Value>
             <Value disabled="false">A fájl nevének érvényesnek kell lennie!</Value>
         </Property>
+        <Property>
+            <Name>preference.output.encoding.title</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Output file encoding</Value>
+            <Value disabled="false">Kimeneti fájl kódolása</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.encoding.default</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Workspace default encoding: </Value>
+            <Value disabled="false">Workspace alapértelmezett kódolása: </Value>
+        </Property>
+        <Property>
+            <Name>preference.output.error.invalid.encoding</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">The selected encoding is not supported.</Value>
+            <Value disabled="false">A megadott kódolás nem támogatott!</Value>
+        </Property>
         <Empty/>
         <Comment>
             <Value>WIZARD</Value>

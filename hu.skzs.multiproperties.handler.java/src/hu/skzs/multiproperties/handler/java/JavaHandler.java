@@ -46,8 +46,8 @@ public class JavaHandler implements IHandler
 	 * @param configuration the given {@link JavaHandlerConfigurator} instance
 	 * @param table the given table
 	 * @param column the given column
-	 * @return the converted content of the given column 
-	 * @throws HandlerException 
+	 * @return the converted content of the given column
+	 * @throws HandlerException
 	 */
 	public byte[] convert(final JavaHandlerConfigurator configuration, final Table table, final Column column)
 			throws HandlerException
@@ -90,7 +90,8 @@ public class JavaHandler implements IHandler
 						else
 							continue;
 
-					strb.append(saveConvert(record.getValue(), true));
+					strb.append(configuration.getEncoding() == null ? saveConvert(record.getValue(), true)
+							: saveConvert(record.getValue(), true));
 					strb.append("="); //$NON-NLS-1$
 					final BufferedReader reader = new BufferedReader(new StringReader(value));
 					String line = null;
@@ -99,7 +100,7 @@ public class JavaHandler implements IHandler
 					{
 						if (furtherLine)
 							strb.append("\\n\\\n\t"); //$NON-NLS-1$
-						strb.append(saveConvert(line, false));
+						strb.append(configuration.getEncoding() == null ? saveConvert(line, false) : line);
 						furtherLine = true;
 					}
 					strb.append("\r\n"); //$NON-NLS-1$
@@ -114,7 +115,12 @@ public class JavaHandler implements IHandler
 					strb.append("\r\n"); //$NON-NLS-1$
 				}
 			}
-			return strb.toString().getBytes();
+			if (configuration.getEncoding() != null)
+				return strb.toString().getBytes(configuration.getEncoding());
+			else
+			{
+				return strb.toString().getBytes();
+			}
 		}
 		catch (final Exception e)
 		{
@@ -126,7 +132,7 @@ public class JavaHandler implements IHandler
 	 * Writes a multi lined String object on the given {@link StringBuilder}.
 	 * @param stringBuilder
 	 * @param content
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	private void writeString(final StringBuilder stringBuilder, final String content) throws IOException
 	{
@@ -150,7 +156,7 @@ public class JavaHandler implements IHandler
 	/*
 	 * Converts unicodes to encoded &#92;uxxxx and escapes
 	 * special characters with a preceding slash
-	 * 
+	 *
 	 * Refactored from java.util.Properties class.
 	 */
 	private String saveConvert(final String theString, final boolean escapeSpace)
