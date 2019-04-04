@@ -22,6 +22,7 @@ Export-Package: hu.skzs.multiproperties.base.api,
  hu.skzs.multiproperties.support.handler.configurator,
  hu.skzs.multiproperties.support.handler.writer
 Bundle-ClassPath: .,
- lib/jaxb/jaxb-impl.jar,
- lib/jaxb/jaxb-xjc.jar,
- lib/jaxb/jaxb1-impl.jar
+ lib/javax.activation-api-1.2.0.jar,
+ lib/jaxb-api-2.3.1.jar,
+ lib/jaxb-core-2.3.0.1.jar,
+ lib/jaxb-impl-2.3.1.jar

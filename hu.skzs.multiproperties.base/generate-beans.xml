@@ -6,9 +6,11 @@
 		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
 			<classpath>
 				<fileset dir="${basedir}/lib">
-					<include name="jaxb/jaxb-api.jar"/>
-					<include name="jaxb/jaxb-impl.jar"/>
-					<include name="jaxb/jaxb-xjc.jar"/>
+					<include name="javax.activation-api-1.2.0.jar"/>
+					<include name="jaxb-api-2.3.1.jar"/>
+					<include name="jaxb-core-2.3.0.1.jar"/>
+					<include name="jaxb-impl-2.3.1.jar"/>
+					<include name="jaxb-xjc-2.3.1.jar"/>
 				</fileset>
 			</classpath>
 		</taskdef>
