@@ -1,7 +1,5 @@
 package hu.skzs.multiproperties.handler.java.wizard;
 
-import hu.skzs.multiproperties.handler.java.Messages;
-
 import java.io.File;
 
 import org.eclipse.jface.wizard.WizardPage;
@@ -18,30 +16,24 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-/**
- * The {@link JavaImporterPage} lets the user select a properties file.
- * @author skzs
- *
- */
+import hu.skzs.multiproperties.handler.java.Messages;
+import hu.skzs.multiproperties.ui.util.EncodingSelector;
+
 public class JavaImporterPage extends WizardPage
 {
-
-	private static final String FILE_FILTER_PROP = "*.properties"; //$NON-NLS-1$
-	private static final String FILE_FILTER_ALL = "*.*"; //$NON-NLS-1$
+	private static final String FILE_FILTER_PROP = "*.properties";
+	private static final String FILE_FILTER_ALL = "*.*";
 
 	private Text textFile;
+	private EncodingSelector encodingSelector;
 
 	public JavaImporterPage()
 	{
-		super("importer.file.selection"); //$NON-NLS-1$
-		setTitle(Messages.getString("wizard.importer.title")); //$NON-NLS-1$
-		setDescription(Messages.getString("wizard.importer.description")); //$NON-NLS-1$
+		super("importer.file.selection");
+		setTitle(Messages.getString("wizard.importer.title"));
+		setDescription(Messages.getString("wizard.importer.description"));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
-	 */
 	public void createControl(final Composite parent)
 	{
 		final Composite container = new Composite(parent, SWT.NULL);
@@ -52,7 +44,7 @@ public class JavaImporterPage extends WizardPage
 		container.setLayout(layout);
 
 		final Label label = new Label(container, SWT.NULL);
-		label.setText(Messages.getString("general.filename")); //$NON-NLS-1$
+		label.setText(Messages.getString("general.filename"));
 		textFile = new Text(container, SWT.BORDER | SWT.SINGLE);
 		textFile.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		textFile.addModifyListener(new ModifyListener()
@@ -64,7 +56,7 @@ public class JavaImporterPage extends WizardPage
 		});
 
 		final Button button = new Button(container, SWT.PUSH);
-		button.setText(Messages.getString("general.browse")); //$NON-NLS-1$
+		button.setText(Messages.getString("general.browse"));
 		button.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
@@ -74,16 +66,54 @@ public class JavaImporterPage extends WizardPage
 			}
 		});
 
+		final Composite encodingComposite = new Composite(container, SWT.NONE);
+		final GridData gridData = new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL);
+		gridData.verticalIndent = 10;
+		gridData.horizontalSpan = 3;
+		encodingComposite.setLayoutData(gridData);
+		encodingComposite.setLayout(new GridLayout());
+
+		encodingSelector = new EncodingSelector(encodingComposite)
+		{
+
+			@Override
+			public String getTitle()
+			{
+				return Messages.getString("wizard.importer.encoding.title");
+			}
+
+			@Override
+			public String getDefaultEncodingLabel()
+			{
+				return Messages.getString("wizard.importer.encoding.default");
+			}
+
+			@Override
+			public String getDefaultEncodingValue()
+			{
+				return "ISO-8859-1";
+			}
+
+			@Override
+			public String getOtherEncodingLabel()
+			{
+				return Messages.getString("wizard.importer.encoding.other");
+			}
+
+			@Override
+			public void onChange()
+			{
+				dialogChanged();
+			}
+		};
+
 		setPageComplete(false);
 	}
 
-	/**
-	 * Uses the standard file selection dialog to choose a properties file.
-	 */
 	private void handleBrowse()
 	{
 		final FileDialog fileDialog = new FileDialog(getShell(), SWT.OPEN);
-		fileDialog.setText(Messages.getString("wizard.importer.title")); //$NON-NLS-1$
+		fileDialog.setText(Messages.getString("wizard.importer.title"));
 		final String[] filterExt = { FILE_FILTER_PROP, FILE_FILTER_ALL };
 		fileDialog.setFilterExtensions(filterExt);
 		final String filename = fileDialog.open();
@@ -94,54 +124,51 @@ public class JavaImporterPage extends WizardPage
 		}
 	}
 
-	/**
-	 * Ensures that text field is set properly.
-	 */
 	private void dialogChanged()
 	{
-		if (textFile.getText().trim().equals("")) //$NON-NLS-1$
+		if (textFile.getText().trim().equals(""))
 		{
-			updateStatus(Messages.getString("wizard.importer.error.emptyfilename")); //$NON-NLS-1$
+			updateStatus(Messages.getString("wizard.importer.error.emptyfilename"));
 			return;
 		}
 
 		final File file = new File(textFile.getText());
 		if (!file.exists())
 		{
-			updateStatus(Messages.getString("wizard.importer.error.mustexists")); //$NON-NLS-1$
+			updateStatus(Messages.getString("wizard.importer.error.mustexists"));
 			return;
 		}
 		if (!file.isFile())
 		{
-			updateStatus(Messages.getString("wizard.importer.error.validfile")); //$NON-NLS-1$
+			updateStatus(Messages.getString("wizard.importer.error.validfile"));
 			return;
 		}
 		if (!file.canRead())
 		{
-			updateStatus(Messages.getString("wizard.importer.error.readable")); //$NON-NLS-1$
+			updateStatus(Messages.getString("wizard.importer.error.readable"));
+			return;
+		}
+		if (!encodingSelector.isEncodingValid())
+		{
+			updateStatus(Messages.getString("wizard.importer.error.invalidencoding"));
 			return;
 		}
 		updateStatus(null);
 	}
 
-	/**
-	 * Updates the wizard dialog error message to the given error message.
-	 * <p>When <code>message</code> is <code>null</code>, then the previous error message is
-	 * removed and the page is being complete, otherwise it is incomplete.</p>
-	 * @param message the given error message or <code>null</code>
-	 */
 	private void updateStatus(final String message)
 	{
 		setErrorMessage(message);
 		setPageComplete(message == null);
 	}
 
-	/**
-	 * Returns the selected file name.
-	 * @return the selected file name
-	 */
 	public String getFileName()
 	{
 		return textFile.getText();
+	}
+
+	public String getEncoding()
+	{
+		return encodingSelector.getEncoding();
 	}
 }

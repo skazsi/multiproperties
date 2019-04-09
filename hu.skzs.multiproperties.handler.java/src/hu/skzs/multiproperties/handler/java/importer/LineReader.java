@@ -1,12 +1,11 @@
 package hu.skzs.multiproperties.handler.java.importer;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Reader;
 import java.util.Properties;
 
 /**
- * The {@link LineReader} reads a properties content line by line.
+ * The <code>LineReader</code> reads a properties content line by line.
  * <p>All of the property, comment and empty lines are read. If a comment line
  * starts with <code>!</code>, it will be replaced to <code>#</code>.
  * The leading white spaces are excluded. Furthermore is also supports different
@@ -14,34 +13,16 @@ import java.util.Properties;
  * If a logical line consists of multiple natural lines, then it concatenates them.</p>
  * <p>This is a re-factored class from {@link Properties} inner <code>LineReader</code>
  * named class.</p>
- * @see Properties
  */
 class LineReader
 {
-
-	private byte[] inByteBuf;
-	private char[] inCharBuf;
+	private final char[] inCharBuf;
 	private char[] lineBuf = new char[1024];
 	private int inLimit = 0;
 	private int inOffset = 0;
 	private boolean skipLF = false;
-	private InputStream inStream;
-	private Reader reader;
+	private final Reader reader;
 
-	/**
-	 * Constructor for creating an instance based on an {@link InputStream}.
-	 * @param inputStream the given {@link InputStream}
-	 */
-	public LineReader(final InputStream inputStream)
-	{
-		this.inStream = inputStream;
-		inByteBuf = new byte[8192];
-	}
-
-	/**
-	 * Constructor for creating an instance based on an {@link Reader}.
-	 * @param reader the given {@link Reader}
-	 */
 	public LineReader(final Reader reader)
 	{
 		this.reader = reader;
@@ -51,14 +32,13 @@ class LineReader
 	/**
 	 * Returns the currently read line as a char array.
 	 * <p>The array length is usually bigger than how
-	 * many characters are used in real. The caller must use the returned value of {@link #readLine()} method,
+	 * many characters are used in real. The caller must use the returned value of <code>readLine()</code> method,
 	 * which specifies how many characters are valid in the returned character array.</p>
 	 * <p>Usage:</p>
 	 * <pre>
 	 * int count = lineReader.readLine();
 	 * String line = new String(lineReader.getLineBuffer(), 0, count));
 	 * </pre>
-	 * @see #readLine()
 	 * @return the currently read line as a char array
 	 */
 	public char[] getLineBuffer()
@@ -70,10 +50,9 @@ class LineReader
 	 * Reads the next line of the properties content and returns the number of the characters were read.
 	 * <p>If an empty line is read, then <code>0</code> is returned.
 	 * If the EOF is reached, then <code>-1</code> is returned.</p>
-	 * <p>The actually read line can be get by calling the {@link #getLineBuffer()} method.</p>
-	 * @see #getLineBuffer()
+	 * <p>The actually read line can be get by calling the <code>getLineBuffer()</code> method.</p>
 	 * @return  the next line of the properties content and returns the number of the characters were read
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public int readLine() throws IOException
 	{
@@ -88,7 +67,7 @@ class LineReader
 		{
 			if (inOffset >= inLimit)
 			{
-				inLimit = (inStream == null) ? reader.read(inCharBuf) : inStream.read(inByteBuf);
+				inLimit = reader.read(inCharBuf);
 				inOffset = 0;
 				if (inLimit <= 0)
 				{
@@ -98,16 +77,7 @@ class LineReader
 					return length;
 				}
 			}
-			if (inStream != null)
-			{
-				//The line below is equivalent to calling a 
-				//ISO8859-1 decoder.
-				c = (char) (0xff & inByteBuf[inOffset++]);
-			}
-			else
-			{
-				c = inCharBuf[inOffset++];
-			}
+			c = inCharBuf[inOffset++];
 			if (skipLF)
 			{
 				skipLF = false;
@@ -162,7 +132,7 @@ class LineReader
 				// reached EOL
 				if (inOffset >= inLimit)
 				{
-					inLimit = (inStream == null) ? reader.read(inCharBuf) : inStream.read(inByteBuf);
+					inLimit = reader.read(inCharBuf);
 					inOffset = 0;
 					if (inLimit <= 0)
 					{

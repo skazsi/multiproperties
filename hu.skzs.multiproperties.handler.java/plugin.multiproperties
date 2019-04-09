@@ -176,6 +176,34 @@
             <Value disabled="false">File name must be valid!</Value>
             <Value disabled="false">A fájl nevének érvényesnek kell lennie!</Value>
         </Property>
+        <Property>
+            <Name>preference.output.encoding.title</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Output file encoding</Value>
+            <Value disabled="false">Kimeneti fájl kódolása</Value>
+        </Property>
+        <Property>
+            <Name>preference.output.encoding.default</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Properties files default encoding: </Value>
+            <Value disabled="false">Properties fájlok alapértelmezett kódolása: </Value>
+        </Property>
+        <Property>
+            <Name>preference.output.encoding.other</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Other: </Value>
+            <Value disabled="false">Egyéb: </Value>
+        </Property>
+        <Property>
+            <Name>preference.output.error.invalid.encoding</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">The selected encoding is not supported.</Value>
+            <Value disabled="false">A megadott kódolás nem támogatott!</Value>
+        </Property>
         <Empty/>
         <Comment>
             <Value>WIZARD</Value>
@@ -230,6 +258,35 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">The file is not readable!</Value>
             <Value disabled="false">A fájl nem olvasható!</Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.encoding.title</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">File encoding</Value>
+            <Value disabled="false">Fájl kódolása</Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.encoding.default</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Properties files default encoding: </Value>
+            <Value disabled="false">Properties fájlok alapértelmezett kódolása: </Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.encoding.other</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Other: </Value>
+            <Value disabled="false">Egyéb: </Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.error.invalidencoding</Name>
+            <Description></Description>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Invalid encoding!</Value>
+            <Value disabled="false">Érvénytelen kódolás!</Value>
         </Property>
     </Records>
 </MultiProperties>
