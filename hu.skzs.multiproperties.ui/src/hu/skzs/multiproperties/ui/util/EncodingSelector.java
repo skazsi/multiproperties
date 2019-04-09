@@ -10,11 +10,13 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.ui.forms.widgets.TableWrapData;
+import org.eclipse.ui.forms.widgets.TableWrapLayout;
 import org.eclipse.ui.ide.IDEEncoding;
 
 public abstract class EncodingSelector
@@ -33,9 +35,12 @@ public abstract class EncodingSelector
 	{
 		final Group group = new Group(parent, SWT.NONE);
 		group.setText(getTitle());
-		group.setLayout(new GridLayout(2, false));
+		final TableWrapLayout tableWrapLayout = new TableWrapLayout();
+		tableWrapLayout.numColumns = 2;
+		group.setLayout(tableWrapLayout);
 
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+		final GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+		gridData.widthHint = 100;
 		group.setLayoutData(gridData);
 
 		final SelectionAdapter selectionListener = new SelectionAdapter()
@@ -48,21 +53,26 @@ public abstract class EncodingSelector
 			}
 		};
 
+		if (getDescription() != null)
+		{
+			final Label label = new Label(group, SWT.WRAP);
+			label.setText(getDescription());
+			label.setLayoutData(new TableWrapData(TableWrapData.FILL, TableWrapData.TOP, 1, 2));
+		}
+
 		defaultEncodingButton = new Button(group, SWT.RADIO);
 		defaultEncodingButton.setText(getDefaultEncodingLabel() + getDefaultEncodingValue());
 		defaultEncodingButton.setSelection(true);
-		gridData = new GridData();
-		gridData.horizontalSpan = 2;
-		defaultEncodingButton.setLayoutData(gridData);
+		defaultEncodingButton.setLayoutData(new TableWrapData(TableWrapData.LEFT, TableWrapData.TOP, 1, 2));
 		defaultEncodingButton.addSelectionListener(selectionListener);
 
 		otherEncodingButton = new Button(group, SWT.RADIO);
 		otherEncodingButton.setText(getOtherEncodingLabel());
 		otherEncodingButton.addSelectionListener(selectionListener);
+		otherEncodingButton.setLayoutData(new TableWrapData(TableWrapData.LEFT, TableWrapData.TOP));
 
 		encodingCombo = new Combo(group, SWT.NONE);
-		gridData = new GridData();
-		encodingCombo.setLayoutData(gridData);
+		encodingCombo.setLayoutData(new TableWrapData(TableWrapData.LEFT, TableWrapData.TOP, 1, 1));
 		encodingCombo.addSelectionListener(new SelectionAdapter()
 		{
 			@Override
@@ -90,6 +100,8 @@ public abstract class EncodingSelector
 	}
 
 	public abstract String getTitle();
+
+	public abstract String getDescription();
 
 	public abstract String getDefaultEncodingLabel();
 

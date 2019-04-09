@@ -177,6 +177,13 @@
             <Value disabled="false">A fájl nevének érvényesnek kell lennie!</Value>
         </Property>
         <Property>
+            <Name>preference.output.encoding.description</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">By default, properties files are expected to be ISO-8859-1 (Latin-1) encoded. Characters that cannot be directly represented in this encoding are written using Unicode escapes as defined in section 3.3 of The Java™ Language Specification. In case of other encoding selected this escaping is not done.</Value>
+            <Value disabled="false">Alapértelmezetten a properties fájlok kódolása ISO-8859-1 (Latin-1). Karakterek amik nem jeleníthetőek meg ebben a kódolásban Unicode kód megfelelőjével kerül kiírásra a The Java™ Language Specification 3.3-as fejezet alapján. Más kódolásban ez nem történik meg.</Value>
+        </Property>
+        <Property>
             <Name>preference.output.encoding.title</Name>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
@@ -265,6 +272,13 @@
             <MultiLine>false</MultiLine>
             <Value disabled="false">File encoding</Value>
             <Value disabled="false">Fájl kódolása</Value>
+        </Property>
+        <Property>
+            <Name>wizard.importer.encoding.description</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">By default, properties files are expected to be ISO-8859-1 (Latin-1) encoded. Characters that cannot be directly represented in this encoding are expected in Unicode escapes as defined in section 3.3 of The Java™ Language Specification.</Value>
+            <Value disabled="false">Alapértelmezetten a properties fájlok kódolása ISO-8859-1 (Latin-1). Karakterek amik nem jeleníthetőek meg ebben a kódolásban a Unicode megfelelőjükkel vártak a The Java™ Language Specification 3.3-as fejezet alapján.</Value>
         </Property>
         <Property>
             <Name>wizard.importer.encoding.default</Name>

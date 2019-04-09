@@ -83,6 +83,12 @@ public class JavaImporterPage extends WizardPage
 			}
 
 			@Override
+			public String getDescription()
+			{
+				return Messages.getString("wizard.importer.encoding.description");
+			}
+
+			@Override
 			public String getDefaultEncodingLabel()
 			{
 				return Messages.getString("wizard.importer.encoding.default");

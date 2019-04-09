@@ -189,6 +189,12 @@ public class OutputFilePreferencePage extends PreferencePage
 			}
 
 			@Override
+			public String getDescription()
+			{
+				return Messages.getString("preference.output.encoding.description");
+			}
+
+			@Override
 			public String getDefaultEncodingLabel()
 			{
 				return Messages.getString("preference.output.encoding.default");
