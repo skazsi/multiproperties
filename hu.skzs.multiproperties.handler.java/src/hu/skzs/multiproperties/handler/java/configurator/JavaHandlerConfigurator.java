@@ -2,49 +2,49 @@ package hu.skzs.multiproperties.handler.java.configurator;
 
 import hu.skzs.multiproperties.base.api.HandlerException;
 import hu.skzs.multiproperties.support.handler.configurator.IConfigurator;
+import hu.skzs.multiproperties.support.handler.configurator.IEncodingAwareConfigurator;
 
-/**
- * A {@link JavaHandlerConfigurator} implementation is responsible for parsing and formatting the handler configuration.
- * @author skzs
- */
-public abstract class JavaHandlerConfigurator implements IConfigurator
+public abstract class JavaHandlerConfigurator implements IConfigurator, IEncodingAwareConfigurator
 {
-
-	public static final String DELIM = "|"; //$NON-NLS-1$
+	public static final String DELIM = "|";
 
 	protected boolean includeDescription;
 	protected boolean includeColumnDescription;
 	protected boolean includeDisabled;
-	/**
-	 * @since 1.1 file format version
-	 */
 	protected boolean disableDefault;
+	protected String encoding;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	public void setConfiguration(final String configuration) throws HandlerException
 	{
-		if (configuration == null || configuration.equals("")) //$NON-NLS-1$
+		if (configuration == null || configuration.equals(""))
 			return;
 		try
 		{
-			final String[] tokens = configuration.split("\\" + DELIM); //$NON-NLS-1$
-			if (tokens.length != 4 && tokens.length != 5)
-				throw new IllegalArgumentException("Invalid configuration: " + configuration); //$NON-NLS-1$
+			final String[] tokens = configuration.split("\\" + DELIM);
+			if (tokens.length <= 4 && tokens.length > 6)
+				throw new IllegalArgumentException("Invalid configuration: " + configuration);
 
 			parsePath(tokens[0]);
 			includeDescription = parseBoolean(tokens[1]);
 			includeColumnDescription = parseBoolean(tokens[2]);
 			includeDisabled = parseBoolean(tokens[3]);
-			if (tokens.length == 5)
+			if (tokens.length > 4)
 			{
 				disableDefault = Boolean.parseBoolean(tokens[4]);
 			}
+			if (tokens.length == 6)
+			{
+				encoding = tokens[5];
+			}
+			else
+			{
+				encoding = "ISO-8859-1";
+			}
+
 		}
 		catch (final Exception e)
 		{
-			throw new HandlerException("Unexpected error occurred during parsing the handler configuration", e); //$NON-NLS-1$
+			throw new HandlerException("Unexpected error occurred during parsing the handler configuration", e);
 		}
 	}
 
@@ -63,6 +63,8 @@ public abstract class JavaHandlerConfigurator implements IConfigurator
 		stringBuilder.append(Boolean.toString(includeDisabled));
 		stringBuilder.append(DELIM);
 		stringBuilder.append(Boolean.toString(disableDefault));
+		stringBuilder.append(DELIM);
+		stringBuilder.append(encoding);
 		return stringBuilder.toString();
 	}
 
@@ -77,18 +79,18 @@ public abstract class JavaHandlerConfigurator implements IConfigurator
 	protected boolean parseBoolean(final String value) throws HandlerException
 	{
 		if (value == null)
-			throw new HandlerException("The boolean text cannot be null"); //$NON-NLS-1$
+			throw new HandlerException("The boolean text cannot be null");
 		if (value.equalsIgnoreCase(Boolean.TRUE.toString()))
 			return true;
 		else if (value.equalsIgnoreCase(Boolean.FALSE.toString()))
 			return false;
 		else
-			throw new HandlerException("Not a boolean value text: " + value); //$NON-NLS-1$
+			throw new HandlerException("Not a boolean value text: " + value);
 	}
 
 	/**
 	 * Parses the path part of the configuration.
-	 * 
+	 *
 	 * @param path the given part part of the configuration
 	 */
 	public abstract void parsePath(String path);
@@ -171,5 +173,15 @@ public abstract class JavaHandlerConfigurator implements IConfigurator
 	public boolean isDisableDefaultValues()
 	{
 		return disableDefault;
+	}
+
+	public void setEncoding(final String encoding)
+	{
+		this.encoding = encoding;
+	}
+
+	public String getEncoding()
+	{
+		return encoding;
 	}
 }

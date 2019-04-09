@@ -1,151 +1,145 @@
 package hu.skzs.multiproperties.handler.java.configurator;
 
-import hu.skzs.multiproperties.base.api.HandlerException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * @author skzs
- * 
- */
+import hu.skzs.multiproperties.base.api.HandlerException;
+
 public class FileSystemConfiguratorTest
 {
 
-	private static final String FILENAME = "c:\folder\filename.properties"; //$NON-NLS-1$
-	private static final String CONF_1_0 = FILENAME + "|true|true|true"; //$NON-NLS-1$
+	private static final String FILENAME = "c:\folder\filename.properties";
+	private static final String CONF_ORIGINAL = FILENAME + "|true|true|true";
+	private static final String CONF_WITH_DISABLED_DEFAULT = CONF_ORIGINAL + "|true";
+	private static final String CONF_WITH_ENCODING = CONF_WITH_DISABLED_DEFAULT + "|UTF-8";
 
-	private FileSystemConfigurator configurator;
+	private final FileSystemConfigurator underTest = new FileSystemConfigurator();
 
-	@After
-	public void tearDown()
-	{
-		configurator = null;
-	}
-
-	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
-	 * @throws HandlerException 
-	 */
 	@Test
-	public void testConstructor() throws HandlerException
+	public void setConfiguration_Original_Format() throws HandlerException
 	{
-		// when
-		configurator = new FileSystemConfigurator();
-		configurator.setConfiguration(CONF_1_0);
+		// When
+		underTest.setConfiguration(CONF_ORIGINAL);
 
-		// then
-		Assert.assertEquals(FILENAME, configurator.getFileName());
-		Assert.assertTrue(configurator.isDescriptionIncluded());
-		Assert.assertTrue(configurator.isColumnDescriptionIncluded());
-		Assert.assertTrue(configurator.isDisabledPropertiesIncluded());
-		Assert.assertFalse(configurator.isDisableDefaultValues());
+		// Then
+		assertEquals(FILENAME, underTest.getFileName());
+		assertTrue(underTest.isDescriptionIncluded());
+		assertTrue(underTest.isColumnDescriptionIncluded());
+		assertTrue(underTest.isDisabledPropertiesIncluded());
+		assertFalse(underTest.isDisableDefaultValues());
+		assertEquals("ISO-8859-1", underTest.getEncoding());
 	}
 
-	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
-	 * @throws HandlerException 
-	 */
 	@Test
-	public void testConstructorFalseDesc() throws HandlerException
+	public void setConfiguration_WithDisabledDefault() throws HandlerException
 	{
-		// when
-		configurator = new FileSystemConfigurator();
-		configurator.setConfiguration(FILENAME + "|false|true|true"); //$NON-NLS-1$
+		// When
+		underTest.setConfiguration(CONF_WITH_DISABLED_DEFAULT);
 
-		// then
-		Assert.assertEquals(FILENAME, configurator.getFileName());
-		Assert.assertFalse(configurator.isDescriptionIncluded());
-		Assert.assertTrue(configurator.isColumnDescriptionIncluded());
-		Assert.assertTrue(configurator.isDisabledPropertiesIncluded());
-		Assert.assertFalse(configurator.isDisableDefaultValues());
+		// Then
+		assertEquals(FILENAME, underTest.getFileName());
+		assertTrue(underTest.isDescriptionIncluded());
+		assertTrue(underTest.isColumnDescriptionIncluded());
+		assertTrue(underTest.isDisabledPropertiesIncluded());
+		assertTrue(underTest.isDisableDefaultValues());
+		assertEquals("ISO-8859-1", underTest.getEncoding());
 	}
 
-	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
-	 * @throws HandlerException 
-	 */
 	@Test
-	public void testConstructorFalseColDesc() throws HandlerException
+	public void setConfiguration_WithEncoding() throws HandlerException
 	{
-		// when
-		configurator = new FileSystemConfigurator();
-		configurator.setConfiguration(FILENAME + "|true|false|true"); //$NON-NLS-1$
+		// When
+		underTest.setConfiguration(CONF_WITH_ENCODING);
 
-		// then
-		Assert.assertEquals(FILENAME, configurator.getFileName());
-		Assert.assertTrue(configurator.isDescriptionIncluded());
-		Assert.assertFalse(configurator.isColumnDescriptionIncluded());
-		Assert.assertTrue(configurator.isDisabledPropertiesIncluded());
-		Assert.assertFalse(configurator.isDisableDefaultValues());
+		// Then
+		assertEquals(FILENAME, underTest.getFileName());
+		assertTrue(underTest.isDescriptionIncluded());
+		assertTrue(underTest.isColumnDescriptionIncluded());
+		assertTrue(underTest.isDisabledPropertiesIncluded());
+		assertTrue(underTest.isDisableDefaultValues());
+		assertEquals("UTF-8", underTest.getEncoding());
 	}
 
-	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
-	 * @throws HandlerException 
-	 */
 	@Test
-	public void testConstructorFalseDisabled() throws HandlerException
+	public void setConfiguration_FalseDesc() throws HandlerException
 	{
-		// when
-		configurator = new FileSystemConfigurator();
-		configurator.setConfiguration(FILENAME + "|true|true|false"); //$NON-NLS-1$
+		// When
+		underTest.setConfiguration(FILENAME + "|false|true|true|true|UTF-8");
 
-		// then
-		Assert.assertEquals(FILENAME, configurator.getFileName());
-		Assert.assertTrue(configurator.isDescriptionIncluded());
-		Assert.assertTrue(configurator.isColumnDescriptionIncluded());
-		Assert.assertFalse(configurator.isDisabledPropertiesIncluded());
-		Assert.assertFalse(configurator.isDisableDefaultValues());
+		// Then
+		assertEquals(FILENAME, underTest.getFileName());
+		assertFalse(underTest.isDescriptionIncluded());
+		assertTrue(underTest.isColumnDescriptionIncluded());
+		assertTrue(underTest.isDisabledPropertiesIncluded());
+		assertTrue(underTest.isDisableDefaultValues());
+		assertEquals("UTF-8", underTest.getEncoding());
 	}
 
-	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
-	 * @throws HandlerException 
-	 */
+	@Test
+	public void setConfiguration_FalseColDesc() throws HandlerException
+	{
+		// When
+		underTest.setConfiguration(FILENAME + "|true|false|true|true|UTF-8");
+
+		// Then
+		assertEquals(FILENAME, underTest.getFileName());
+		assertTrue(underTest.isDescriptionIncluded());
+		assertFalse(underTest.isColumnDescriptionIncluded());
+		assertTrue(underTest.isDisabledPropertiesIncluded());
+		assertTrue(underTest.isDisableDefaultValues());
+		assertEquals("UTF-8", underTest.getEncoding());
+	}
+
+	@Test
+	public void setConfiguration_FalseDisabled() throws HandlerException
+	{
+		// When
+		underTest.setConfiguration(FILENAME + "|true|true|false|true|UTF-8");
+
+		// Then
+		assertEquals(FILENAME, underTest.getFileName());
+		assertTrue(underTest.isDescriptionIncluded());
+		assertTrue(underTest.isColumnDescriptionIncluded());
+		assertFalse(underTest.isDisabledPropertiesIncluded());
+		assertTrue(underTest.isDisableDefaultValues());
+		assertEquals("UTF-8", underTest.getEncoding());
+	}
+
+	@Test
+	public void setConfigurationFalseDisabledDefault() throws HandlerException
+	{
+		// When
+		underTest.setConfiguration(FILENAME + "|true|true|true|false|UTF-8");
+
+		// Then
+		assertEquals(FILENAME, underTest.getFileName());
+		assertTrue(underTest.isDescriptionIncluded());
+		assertTrue(underTest.isColumnDescriptionIncluded());
+		assertTrue(underTest.isDisabledPropertiesIncluded());
+		assertFalse(underTest.isDisableDefaultValues());
+		assertEquals("UTF-8", underTest.getEncoding());
+	}
+
 	@Test(expected = HandlerException.class)
-	public void testConstructorWrongBoolean() throws HandlerException
+	public void setConfiguration_WrongBoolean() throws HandlerException
 	{
-		// when
-		configurator = new FileSystemConfigurator();
-		configurator.setConfiguration(FILENAME + "|true|ttrue|true"); //$NON-NLS-1$
+		// When
+		underTest.setConfiguration(FILENAME + "|true|ttrue|true");
 	}
 
-	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#setConfiguration(String)}.
-	 * @throws HandlerException 
-	 */
 	@Test
-	public void testConstructor_1_1() throws HandlerException
+	public void getConfiguration() throws HandlerException
 	{
-		// when
-		configurator = new FileSystemConfigurator();
-		configurator.setConfiguration(FILENAME + "|true|true|true|true"); //$NON-NLS-1$
+		// Given
+		underTest.setConfiguration(FILENAME + "|true|true|true|true|UTF-8");
 
-		// then
-		Assert.assertEquals(FILENAME, configurator.getFileName());
-		Assert.assertTrue(configurator.isDescriptionIncluded());
-		Assert.assertTrue(configurator.isColumnDescriptionIncluded());
-		Assert.assertTrue(configurator.isDisabledPropertiesIncluded());
-		Assert.assertTrue(configurator.isDisableDefaultValues());
-	}
+		// When
+		final String conf = underTest.getConfiguration();
 
-	/**
-	 * Test method for {@link hu.skzs.multiproperties.handler.java.configurator.FileSystemConfigurator#getConfiguration()}.
-	 * @throws HandlerException
-	 */
-	@Test
-	public void testGetConfiguration() throws HandlerException
-	{
-		// given
-		configurator = new FileSystemConfigurator();
-		configurator.setConfiguration(FILENAME + "|true|true|true|true"); //$NON-NLS-1$
-
-		// when
-		final String conf = configurator.getConfiguration();
-
-		// then
-		Assert.assertEquals(FILENAME + "|true|true|true|true", conf); //$NON-NLS-1$
+		// Then
+		assertEquals(FILENAME + "|true|true|true|true|UTF-8", conf);
 	}
 }

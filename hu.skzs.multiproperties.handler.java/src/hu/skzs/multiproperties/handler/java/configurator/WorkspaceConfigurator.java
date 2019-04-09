@@ -16,16 +16,13 @@ public class WorkspaceConfigurator extends JavaHandlerConfigurator implements IW
 	private String containerName;
 	private String fileName;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void parsePath(final String path)
 	{
 		if (path.length() > 0)
 		{
-			containerName = path.substring(0, path.lastIndexOf("/")); //$NON-NLS-1$
-			fileName = path.substring(path.lastIndexOf("/") + 1); //$NON-NLS-1$
+			containerName = path.substring(0, path.lastIndexOf("/"));
+			fileName = path.substring(path.lastIndexOf("/") + 1);
 		}
 		else
 		{
@@ -34,46 +31,29 @@ public class WorkspaceConfigurator extends JavaHandlerConfigurator implements IW
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String formatPath()
 	{
 		if (containerName == null && fileName == null)
-			return ""; //$NON-NLS-1$
-		return containerName + "/" + fileName; //$NON-NLS-1$
+			return "";
+		return containerName + "/" + fileName;
 	}
 
-	/**
-	 * Sets the container name
-	 * @param containerName the given container name
-	 */
 	public void setContainerName(final String containerName)
 	{
 		this.containerName = containerName;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	public String getContainerName()
 	{
 		return containerName;
 	}
 
-	/**
-	 * Sets the file name
-	 * @param fileName the given file name
-	 */
 	public void setFileName(final String fileName)
 	{
 		this.fileName = fileName;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	public String getFileName()
 	{
 		return fileName;

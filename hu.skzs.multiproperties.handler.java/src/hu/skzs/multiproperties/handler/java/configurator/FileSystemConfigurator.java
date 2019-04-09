@@ -15,27 +15,18 @@ public class FileSystemConfigurator extends JavaHandlerConfigurator implements I
 
 	private String fileName;
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void parsePath(final String path)
 	{
 		fileName = path;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String formatPath()
 	{
 		return fileName;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	public String getFileName()
 	{
 		return fileName;

@@ -1,5 +1,12 @@
 package hu.skzs.multiproperties.handler.java.importer;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.List;
+
 import hu.skzs.multiproperties.base.api.IImporter;
 import hu.skzs.multiproperties.base.api.ImporterException;
 import hu.skzs.multiproperties.base.model.AbstractRecord;
@@ -8,35 +15,18 @@ import hu.skzs.multiproperties.base.model.CommentRecord;
 import hu.skzs.multiproperties.base.model.EmptyRecord;
 import hu.skzs.multiproperties.base.model.PropertyRecord;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
-
-/**
- * The {@link JavaImporter} is the default implementation of {@link IImporter}.
- * It is able to importer records from <code>java.util.Properties</code> input.
- * @author skzs
- * @see Properties
- *
- */
 public class JavaImporter implements IImporter
 {
 
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.base.api.IImporter#getRecords(java.lang.Object)
-	 */
 	public List<AbstractRecord> getRecords(final Object input, final Column column) throws ImporterException
 	{
-		final String fileName = (String) input;
+		final JavaImporterInput javaImporterInput = (JavaImporterInput) input;
 		InputStream inputStream = null;
 		try
 		{
-			inputStream = new FileInputStream(fileName);
-			final LineReader lineReader = new LineReader(inputStream);
+			inputStream = new FileInputStream(javaImporterInput.getFileName());
+			final LineReader lineReader = new LineReader(
+					new InputStreamReader(inputStream, javaImporterInput.getEncoding()));
 
 			final List<AbstractRecord> records = new LinkedList<AbstractRecord>();
 
@@ -72,7 +62,6 @@ public class JavaImporter implements IImporter
 				valueStart = limit;
 				hasSep = false;
 
-				//System.out.println("line=<" + new String(lineBuf, 0, limit) + ">");
 				precedingBackslash = false;
 				while (keyLen < limit)
 				{
@@ -129,7 +118,7 @@ public class JavaImporter implements IImporter
 		}
 		catch (final Exception e)
 		{
-			throw new ImporterException("Unexpected error occurred during importing", e); //$NON-NLS-1$
+			throw new ImporterException("Unexpected error occurred during importing", e);
 		}
 		finally
 		{

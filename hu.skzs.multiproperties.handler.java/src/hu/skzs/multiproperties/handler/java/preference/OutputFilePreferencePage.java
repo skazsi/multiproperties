@@ -1,8 +1,5 @@
 package hu.skzs.multiproperties.handler.java.preference;
 
-import hu.skzs.multiproperties.handler.java.Messages;
-import hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator;
-
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -21,10 +18,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
-/**
- * The {@link OutputFilePreferencePage} offers specifying the target output file.
- * @author skzs
- */
+import hu.skzs.multiproperties.handler.java.Messages;
+import hu.skzs.multiproperties.handler.java.configurator.WorkspaceConfigurator;
+import hu.skzs.multiproperties.ui.util.EncodingSelector;
+
 public class OutputFilePreferencePage extends PreferencePage
 {
 	private final WorkspaceConfigurator configurator;
@@ -37,17 +34,14 @@ public class OutputFilePreferencePage extends PreferencePage
 	private Button checkColumnDescription;
 	private Button checkDisabled;
 	private Button checkDisableDefault;
+	private EncodingSelector encodingSelector;
 
-	/**
-	 * Default constructor.
-	 * @param configurator the given configurator
-	 */
 	public OutputFilePreferencePage(final WorkspaceConfigurator configurator)
 	{
 		super();
 		this.configurator = configurator;
-		setTitle(Messages.getString("preference.output.title")); //$NON-NLS-1$
-		setDescription(Messages.getString("preference.output.description")); //$NON-NLS-1$
+		setTitle(Messages.getString("preference.output.title"));
+		setDescription(Messages.getString("preference.output.description"));
 	}
 
 	private boolean isEnabled()
@@ -55,10 +49,6 @@ public class OutputFilePreferencePage extends PreferencePage
 		return configurator.getContainerName() != null && configurator.getFileName() != null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
-	 */
 	@Override
 	protected Control createContents(final Composite parent)
 	{
@@ -66,6 +56,7 @@ public class OutputFilePreferencePage extends PreferencePage
 		composite.setLayout(new GridLayout());
 		createEnableCheckPanel(composite);
 		createFilePanel(composite);
+		createEncodingPanel(composite);
 		createCheckboxesPanel(composite);
 
 		// Updating the status
@@ -79,7 +70,7 @@ public class OutputFilePreferencePage extends PreferencePage
 	{
 		// Container
 		enableOutputFile = new Button(parent, SWT.CHECK);
-		enableOutputFile.setText(Messages.getString("preference.output.enabled")); //$NON-NLS-1$
+		enableOutputFile.setText(Messages.getString("preference.output.enabled"));
 		enableOutputFile.setSelection(isEnabled());
 		enableOutputFile.addSelectionListener(new SelectionAdapter()
 		{
@@ -110,7 +101,7 @@ public class OutputFilePreferencePage extends PreferencePage
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL));
 		// Container
 		Label label = new Label(composite, SWT.NULL);
-		label.setText(Messages.getString("preference.output.location")); //$NON-NLS-1$
+		label.setText(Messages.getString("preference.output.location"));
 		textLocation = new Text(composite, SWT.BORDER | SWT.SINGLE);
 		if (configurator.getContainerName() != null)
 			textLocation.setText(configurator.getContainerName());
@@ -124,7 +115,7 @@ public class OutputFilePreferencePage extends PreferencePage
 			}
 		});
 		browseButton = new Button(composite, SWT.PUSH);
-		browseButton.setText(Messages.getString("preference.output.location.browse")); //$NON-NLS-1$
+		browseButton.setText(Messages.getString("preference.output.location.browse"));
 		browseButton.setEnabled(enableOutputFile.getSelection());
 		browseButton.addSelectionListener(new SelectionAdapter()
 		{
@@ -136,7 +127,7 @@ public class OutputFilePreferencePage extends PreferencePage
 		});
 		// Filename
 		label = new Label(composite, SWT.NULL);
-		label.setText(Messages.getString("preference.output.filename")); //$NON-NLS-1$
+		label.setText(Messages.getString("preference.output.filename"));
 		textFile = new Text(composite, SWT.BORDER | SWT.SINGLE);
 		if (configurator.getFileName() != null)
 			textFile.setText(configurator.getFileName());
@@ -154,39 +145,87 @@ public class OutputFilePreferencePage extends PreferencePage
 	private void createCheckboxesPanel(final Composite parent)
 	{
 		checkDescription = new Button(parent, SWT.CHECK);
-		checkDescription.setText(Messages.getString("preference.output.include.description")); //$NON-NLS-1$
+		checkDescription.setText(Messages.getString("preference.output.include.description"));
 		checkDescription.setSelection(configurator.isDescriptionIncluded());
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		checkDescription.setLayoutData(gridData);
 		checkColumnDescription = new Button(parent, SWT.CHECK);
-		checkColumnDescription.setText(Messages.getString("preference.output.include.columndescription")); //$NON-NLS-1$
+		checkColumnDescription.setText(Messages.getString("preference.output.include.columndescription"));
 		checkColumnDescription.setSelection(configurator.isColumnDescriptionIncluded());
 		gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		checkColumnDescription.setLayoutData(gridData);
 		checkDisabled = new Button(parent, SWT.CHECK);
-		checkDisabled.setText(Messages.getString("preference.output.include.disabled")); //$NON-NLS-1$
+		checkDisabled.setText(Messages.getString("preference.output.include.disabled"));
 		checkDisabled.setSelection(configurator.isDisabledPropertiesIncluded());
 		gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		checkDisabled.setLayoutData(gridData);
 		checkDisableDefault = new Button(parent, SWT.CHECK);
-		checkDisableDefault.setText(Messages.getString("preference.output.disable.defaultvalues")); //$NON-NLS-1$
+		checkDisableDefault.setText(Messages.getString("preference.output.disable.defaultvalues"));
 		checkDisableDefault.setSelection(configurator.isDisableDefaultValues());
 		gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		checkDisableDefault.setLayoutData(gridData);
 	}
 
-	/**
-	 * Uses the standard container selection dialog to choose the new value for
-	 * the container field.
-	 */
+	private void createEncodingPanel(final Composite parent)
+	{
+		final Composite encodingComposite = new Composite(parent, SWT.NONE);
+		final GridData gridData = new GridData(GridData.FILL_HORIZONTAL | GridData.GRAB_HORIZONTAL);
+		gridData.verticalIndent = 10;
+		gridData.horizontalSpan = 3;
+		encodingComposite.setLayoutData(gridData);
+		encodingComposite.setLayout(new GridLayout());
+
+		encodingSelector = new EncodingSelector(encodingComposite)
+		{
+
+			@Override
+			public String getTitle()
+			{
+				return Messages.getString("preference.output.encoding.title");
+			}
+
+			@Override
+			public String getDescription()
+			{
+				return Messages.getString("preference.output.encoding.description");
+			}
+
+			@Override
+			public String getDefaultEncodingLabel()
+			{
+				return Messages.getString("preference.output.encoding.default");
+			}
+
+			@Override
+			public String getDefaultEncodingValue()
+			{
+				return "ISO-8859-1";
+			}
+
+			@Override
+			public String getOtherEncodingLabel()
+			{
+				return Messages.getString("preference.output.encoding.other");
+			}
+
+			@Override
+			public void onChange()
+			{
+				dialogChanged();
+			}
+		};
+		encodingSelector.setEncoding(configurator.getEncoding());
+	}
+
 	private void handleBrowse()
 	{
-		final ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace()
-				.getRoot(), false, Messages.getString("preference.output.location.browse.description")); //$NON-NLS-1$
+		final ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(),
+				ResourcesPlugin.getWorkspace().getRoot(), false,
+				Messages.getString("preference.output.location.browse.description"));
 		if (dialog.open() == ContainerSelectionDialog.OK)
 		{
 			final Object[] result = dialog.getResult();
@@ -197,9 +236,6 @@ public class OutputFilePreferencePage extends PreferencePage
 		}
 	}
 
-	/**
-	 * Ensures that both text fields are set.
-	 */
 	private void dialogChanged()
 	{
 		if (enableOutputFile.getSelection())
@@ -210,29 +246,34 @@ public class OutputFilePreferencePage extends PreferencePage
 
 			if (textLocation.getText().length() == 0)
 			{
-				updateStatus(Messages.getString("preference.output.error.mustspecified")); //$NON-NLS-1$
+				updateStatus(Messages.getString("preference.output.error.mustspecified"));
 				return;
 			}
 			if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0)
 			{
-				updateStatus(Messages.getString("preference.output.error.mustexists")); //$NON-NLS-1$
+				updateStatus(Messages.getString("preference.output.error.mustexists"));
 				return;
 			}
 			if (!container.isAccessible())
 			{
-				updateStatus(Messages.getString("preference.output.error.mustwriteable")); //$NON-NLS-1$
+				updateStatus(Messages.getString("preference.output.error.mustwriteable"));
 				return;
 			}
 			if (fileName.length() == 0)
 			{
-				updateStatus(Messages.getString("preference.output.error.validfile")); //$NON-NLS-1$
+				updateStatus(Messages.getString("preference.output.error.validfile"));
 				return;
 			}
 			if (fileName.replace('\\', '/').indexOf('/', 1) > 0)
 			{
-				updateStatus(Messages.getString("preference.output.error.validfilename")); //$NON-NLS-1$
+				updateStatus(Messages.getString("preference.output.error.validfilename"));
 				return;
 			}
+		}
+		if (!encodingSelector.isEncodingValid())
+		{
+			updateStatus(Messages.getString("preference.output.error.invalid.encoding"));
+			return;
 		}
 
 		updateStatus(null);
@@ -244,31 +285,24 @@ public class OutputFilePreferencePage extends PreferencePage
 		setValid(message == null);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.preference.PreferencePage#performDefaults()
-	 */
 	@Override
 	protected void performDefaults()
 	{
 		enableOutputFile.setSelection(false);
 		textLocation.setEnabled(false);
-		textLocation.setText(""); //$NON-NLS-1$
+		textLocation.setText("");
 		browseButton.setEnabled(false);
 		textFile.setEnabled(false);
-		textFile.setText(""); //$NON-NLS-1$
+		textFile.setText("");
 		checkDescription.setSelection(false);
 		checkColumnDescription.setSelection(false);
 		checkDisabled.setSelection(false);
 		checkDisableDefault.setSelection(false);
+		encodingSelector.setEncoding("ISO-8859-1");
 		dialogChanged();
 		super.performDefaults();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.preference.PreferencePage#performOk()
-	 */
 	@Override
 	public boolean performOk()
 	{
@@ -288,7 +322,9 @@ public class OutputFilePreferencePage extends PreferencePage
 			configurator.setIncludeColumnDescription(checkColumnDescription.getSelection());
 			configurator.setIncludeDisabled(checkDisabled.getSelection());
 			configurator.setDisableDefaultValues(checkDisableDefault.getSelection());
+			configurator.setEncoding(encodingSelector.getEncoding());
 		}
 		return super.performOk();
 	}
+
 }
