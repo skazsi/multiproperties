@@ -1,9 +1,5 @@
 package hu.skzs.multiproperties.ui.wizard.importer;
 
-import hu.skzs.multiproperties.base.api.IImporter;
-import hu.skzs.multiproperties.base.model.Column;
-import hu.skzs.multiproperties.ui.Messages;
-
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -14,15 +10,10 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-/**
- * The {@link ImporterMethodsPage} wizard page gives the possibility to select the appropriate method for importing:
- * <ul>
- * <li>Importing the structure, including the property, comment and empty lines.</li>
- * <li>Importing only the key-value pairs only. The previously non-existing keys will be added to the end.</li>
- * <li>Importing just the values.</li>
- * </ul>
- * @author skzs
- */
+import hu.skzs.multiproperties.base.model.Column;
+import hu.skzs.multiproperties.base.model.ImportMode;
+import hu.skzs.multiproperties.ui.Messages;
+
 public class ImporterMethodsPage extends WizardPage
 {
 
@@ -30,77 +21,57 @@ public class ImporterMethodsPage extends WizardPage
 	private final Column column;
 	private Button importStructureRadio;
 	private Button importKeyValueRadio;
-	private Button importValue;
+	private Button importValueRadio;
 
-	/**
-	 * Default constructor.
-	 * <p>If the <code>column</code> parameters is not <code>null</code> then the <strong>key-value</strong>
-	 * and the <strong>value</strong> methods can be also selected, otherwise cannot.</p>
-	 * @param column the given column
-	 */
 	public ImporterMethodsPage(final Column column)
 	{
-		super("import.method.page"); //$NON-NLS-1$
+		super("import.method.page");
 		this.column = column;
-		setTitle(Messages.getString("wizard.import.method.title")); //$NON-NLS-1$
-		setDescription(Messages.getString("wizard.import.method.description")); //$NON-NLS-1$
+		setTitle(Messages.getString("wizard.import.method.title"));
+		setDescription(Messages.getString("wizard.import.method.description"));
 		setPageComplete(false);
 	}
 
 	public void createControl(final Composite parent)
 	{
-		// Container
 		final Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout());
 		setControl(composite);
 
-		importStructureRadio = createRadio(composite, Messages.getString("wizard.import.method.structrure")); //$NON-NLS-1$
-		createDescriptionText(composite, Messages.getString("wizard.import.method.structrure.description")); //$NON-NLS-1$
+		importStructureRadio = createRadio(composite, Messages.getString("wizard.import.method.structrure"));
+		createDescriptionText(composite, Messages.getString("wizard.import.method.structrure.description"));
 
 		createSpacer(composite);
 
-		importKeyValueRadio = createRadio(composite, Messages.getString("wizard.import.method.keyvalue")); //$NON-NLS-1$
+		importKeyValueRadio = createRadio(composite, Messages.getString("wizard.import.method.keyvalue"));
 		if (column == null)
 			importKeyValueRadio.setEnabled(false);
-		createDescriptionText(composite, Messages.getString("wizard.import.method.keyvalue.description")); //$NON-NLS-1$
+		createDescriptionText(composite, Messages.getString("wizard.import.method.keyvalue.description"));
 
 		createSpacer(composite);
 
-		importValue = createRadio(composite, Messages.getString("wizard.import.method.value")); //$NON-NLS-1$
+		importValueRadio = createRadio(composite, Messages.getString("wizard.import.method.value"));
 		if (column == null)
-			importValue.setEnabled(false);
-		createDescriptionText(composite, Messages.getString("wizard.import.method.value.description")); //$NON-NLS-1$
+			importValueRadio.setEnabled(false);
+		createDescriptionText(composite, Messages.getString("wizard.import.method.value.description"));
 	}
 
 	@Override
 	public boolean isPageComplete()
 	{
-		if (importStructureRadio.getSelection())
-			return true;
-		if (importKeyValueRadio.getSelection())
-			return true;
-		if (importValue.getSelection())
-			return true;
-		return false;
-
+		return importStructureRadio.getSelection() || importKeyValueRadio.getSelection()
+				|| importValueRadio.getSelection();
 	}
 
-	/**
-	 * Returns the selected method.
-	 * @return the selected method
-	 * @see IImporter#METHOD_STRUCTURAL
-	 * @see IImporter#METHOD_KEY_VALUE
-	 * @see IImporter#METHOD_VALUE
-	 */
-	public int getSelectedMethod()
+	public ImportMode getImportMode()
 	{
 		if (importStructureRadio.getSelection())
-			return IImporter.METHOD_STRUCTURAL;
+			return ImportMode.STRUCTURAL;
 		if (importKeyValueRadio.getSelection())
-			return IImporter.METHOD_KEY_VALUE;
-		if (importValue.getSelection())
-			return IImporter.METHOD_VALUE;
-		throw new RuntimeException("Unimplemented method option"); //$NON-NLS-1$
+			return ImportMode.KEY_VALUE;
+		if (importValueRadio.getSelection())
+			return ImportMode.VALUE;
+		throw new RuntimeException("Unimplemented method option");
 
 	}
 
