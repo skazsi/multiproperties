@@ -1,24 +1,21 @@
 package hu.skzs.multiproperties.ui.wizard.importer;
 
-import hu.skzs.multiproperties.base.api.AbstractImporterWizard;
-import hu.skzs.multiproperties.base.api.IImporter;
-import hu.skzs.multiproperties.base.model.AbstractRecord;
-import hu.skzs.multiproperties.base.model.Column;
-import hu.skzs.multiproperties.base.model.ImporterFacade;
-import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.base.registry.element.ImporterRegistryElement;
-import hu.skzs.multiproperties.ui.Activator;
-import hu.skzs.multiproperties.ui.Messages;
-
 import java.util.List;
 
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
-/**
- * The <code>ImportWizard</code> wizard is able to import a content from different sources by using importers. 
- * @author skzs
- */
+import hu.skzs.multiproperties.base.api.AbstractImporterWizard;
+import hu.skzs.multiproperties.base.api.IImporter;
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.Column;
+import hu.skzs.multiproperties.base.model.ImportMode;
+import hu.skzs.multiproperties.base.model.ImporterService;
+import hu.skzs.multiproperties.base.model.Table;
+import hu.skzs.multiproperties.base.registry.element.ImporterRegistryElement;
+import hu.skzs.multiproperties.ui.Activator;
+import hu.skzs.multiproperties.ui.Messages;
+
 public class ImporterWizard extends Wizard
 {
 
@@ -36,7 +33,7 @@ public class ImporterWizard extends Wizard
 	@Override
 	public void addPages()
 	{
-		setWindowTitle(Messages.getString("wizard.import.title")); //$NON-NLS-1$
+		setWindowTitle(Messages.getString("wizard.import.title"));
 		importerSelectionPage = new ImporterSelectionPage();
 		addPage(importerSelectionPage);
 		importMethodsPage = new ImporterMethodsPage(column);
@@ -80,15 +77,14 @@ public class ImporterWizard extends Wizard
 			// Importing the content
 			final List<AbstractRecord> records = importer.getRecords(wizard.getInput(), column);
 
-			final ImporterFacade facade = new ImporterFacade();
-			facade.init(table, column);
-
-			facade.performImport(records, importMethodsPage.getSelectedMethod());
+			final ImporterService importerService = new ImporterService(table,
+					importMethodsPage.getImportMode() == ImportMode.STRUCTURAL ? null : column);
+			importerService.performImport(records, importMethodsPage.getImportMode());
 
 		}
 		catch (final Exception e)
 		{
-			Activator.logError("Unexpected error occurred during importing", e); //$NON-NLS-1$
+			Activator.logError("Unexpected error occurred during importing", e);
 		}
 		return true;
 	}
