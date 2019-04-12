@@ -1,13 +1,5 @@
 package hu.skzs.multiproperties.ui.command;
 
-import hu.skzs.multiproperties.base.model.AbstractRecord;
-import hu.skzs.multiproperties.base.model.Table;
-import hu.skzs.multiproperties.ui.Activator;
-import hu.skzs.multiproperties.ui.command.dialog.AddEditableRecordDialog;
-import hu.skzs.multiproperties.ui.command.dialog.AddRecordDialog;
-import hu.skzs.multiproperties.ui.editor.Editor;
-import hu.skzs.multiproperties.ui.editor.TablePage;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -21,6 +13,14 @@ import org.eclipse.ui.IWorkbenchSite;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.handlers.IHandlerService;
+
+import hu.skzs.multiproperties.base.model.AbstractRecord;
+import hu.skzs.multiproperties.base.model.Table;
+import hu.skzs.multiproperties.ui.Activator;
+import hu.skzs.multiproperties.ui.command.dialog.AddEditableRecordDialog;
+import hu.skzs.multiproperties.ui.command.dialog.AddRecordDialog;
+import hu.skzs.multiproperties.ui.editor.Editor;
+import hu.skzs.multiproperties.ui.editor.TablePage;
 
 /**
  * Abstract handler implementation for adding new records.
@@ -96,7 +96,8 @@ public abstract class AddRecordHandler extends AbstractHandler
 			else
 			{
 				final Object[] selectedRecordObjects = structuredSelection.toArray();
-				final AbstractRecord lastSelectedRecord = (AbstractRecord) selectedRecordObjects[selectedRecordObjects.length - 1];
+				final AbstractRecord lastSelectedRecord = (AbstractRecord) selectedRecordObjects[selectedRecordObjects.length
+						- 1];
 				table.insert(record, table.indexOf(lastSelectedRecord) + 1);
 			}
 		}
@@ -107,7 +108,7 @@ public abstract class AddRecordHandler extends AbstractHandler
 		try
 		{
 			final IWorkbenchSite site = HandlerUtil.getActiveSiteChecked(event);
-			final IHandlerService handlerService = (IHandlerService) site.getService(IHandlerService.class);
+			final IHandlerService handlerService = site.getService(IHandlerService.class);
 			handlerService.executeCommand(EditHandler.COMMAND_ID, null);
 		}
 		catch (final Exception e)

@@ -1,11 +1,11 @@
 package hu.skzs.multiproperties.ui.command.dialog;
 
-import hu.skzs.multiproperties.ui.Messages;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
+
+import hu.skzs.multiproperties.ui.Messages;
 
 /**
  * Custom dialog implementation for selecting position for the new record together with a checkbox for opening the edit dialog

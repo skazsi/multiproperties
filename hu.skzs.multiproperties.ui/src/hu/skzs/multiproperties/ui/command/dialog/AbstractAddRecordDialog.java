@@ -1,8 +1,5 @@
 package hu.skzs.multiproperties.ui.command.dialog;
 
-import hu.skzs.multiproperties.ui.Activator;
-import hu.skzs.multiproperties.ui.Messages;
-
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -12,6 +9,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+
+import hu.skzs.multiproperties.ui.Activator;
+import hu.skzs.multiproperties.ui.Messages;
 
 /**
  * Abstract implementation of custom dialog for selecting position for the new record.
@@ -32,17 +32,12 @@ public abstract class AbstractAddRecordDialog extends TitleAreaDialog
 	}
 
 	@Override
-	public void create()
-	{
-		super.create();
-		setTitle(Messages.getString("dialog.addrecord.title")); //$NON-NLS-1$
-		setMessage(Messages.getString("dialog.addrecord.description"), IMessageProvider.INFORMATION); //$NON-NLS-1$
-		setHelpAvailable(false);
-	}
-
-	@Override
 	protected Control createDialogArea(final Composite parent)
 	{
+		setTitle(Messages.getString("dialog.addrecord.title"));
+		setMessage(Messages.getString("dialog.addrecord.description"), IMessageProvider.INFORMATION);
+		setHelpAvailable(false);
+
 		final Composite area = (Composite) super.createDialogArea(parent);
 		final Composite container = new Composite(area, SWT.NONE);
 		container.setLayoutData(new GridData(GridData.FILL_BOTH));
