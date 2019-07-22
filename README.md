@@ -2,7 +2,7 @@
 
 MultiProperties Editor is an [Eclipse](http://eclipse.org/) plugin for editing multiple key-value based files with similar content. This kind of file format can be [Properties](http://docs.oracle.com/javase/tutorial/essential/environment/properties.html) for example in Java programming language, which is frequently used for [backing a ResourceBundle](http://docs.oracle.com/javase/tutorial/i18n/resbundle/propfile.html). 
 
-However the plugin is not limited to support only [Properties](http://docs.oracle.com/javase/tutorial/essential/environment/properties.html) files. Instead it stores everything in one XML file, including the list of keys, all of the values, descriptions and meta information. When the editor saves its content into the XML file, it also saves different kind of output files with help of handlers. 
+However, the plugin is not limited to support only [Properties](http://docs.oracle.com/javase/tutorial/essential/environment/properties.html) files. Instead, it stores everything in one XML file, including the list of keys, all of the values, descriptions and meta information. When the editor saves its content into the XML file, it also saves different a kind of output files with help of handlers. 
 
 ![Concept of the MultiProperties](https://raw.githubusercontent.com/skazsi/multiproperties/master/hu.skzs.multiproperties.util/image/mpe_concept.gif "Concept of the MultiProperties")
 
