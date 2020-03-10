@@ -127,7 +127,7 @@
         </Property>
         <Property>
             <Name>editor.marker.error.prefix</Name>
-            <Description>Should be ended with a space character.&#xD;
+            <Description>Should be ended with a space character.&#13;
 See also the editor.marker.error.suffix property.</Description>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
@@ -136,12 +136,40 @@ See also the editor.marker.error.suffix property.</Description>
         </Property>
         <Property>
             <Name>editor.marker.error.suffix</Name>
-            <Description>Should be started with a space character.&#xD;
+            <Description>Should be started with a space character.&#13;
 See also the editor.marker.error.prefix property.</Description>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
             <Value disabled="false"> duplicated records</Value>
             <Value disabled="false"> dupla rekord van</Value>
+        </Property>
+        <Property>
+            <Name>editor.filechanged.title</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">File Changed</Value>
+            <Value disabled="false">Fájl megváltozott</Value>
+        </Property>
+        <Property>
+            <Name>editor.filechanged.confirm</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">The file ''{0}'' has been changed on the file system. Do you want to replace the editor contents with these changes?</Value>
+            <Value disabled="false">A ''{0}'' fájl megváltozott a fájl rendszeren. Meg szeretnéd változtatni a szerkesztő tartalmát?</Value>
+        </Property>
+        <Property>
+            <Name>editor.filechanged.button.replace</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Replace editor content</Value>
+            <Value disabled="false">Cserél</Value>
+        </Property>
+        <Property>
+            <Name>editor.filechanged.button.dontreplace</Name>
+            <Disabled>false</Disabled>
+            <MultiLine>false</MultiLine>
+            <Value disabled="false">Ignore file change</Value>
+            <Value disabled="false">Figyelmen kívül hagyás</Value>
         </Property>
         <Empty/>
         <Comment>
@@ -1285,8 +1313,8 @@ See also the editor.marker.error.prefix property.</Description>
             <Description></Description>
             <Disabled>false</Disabled>
             <MultiLine>false</MultiLine>
-            <Value disabled="false">File extension must be &quot;multiproperties&quot;</Value>
-            <Value disabled="false">Fájl kiterjesztése &quot;multiproperties&quot; kell legyen</Value>
+            <Value disabled="false">File extension must be "multiproperties"</Value>
+            <Value disabled="false">Fájl kiterjesztése "multiproperties" kell legyen</Value>
         </Property>
     </Records>
 </MultiProperties>

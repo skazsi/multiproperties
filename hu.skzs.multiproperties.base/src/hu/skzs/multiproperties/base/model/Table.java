@@ -1,35 +1,35 @@
 package hu.skzs.multiproperties.base.model;
 
-import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
-import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
-import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import hu.skzs.multiproperties.base.model.fileformat.SchemaConverterFactory;
+import hu.skzs.multiproperties.base.model.listener.IRecordChangeListener;
+import hu.skzs.multiproperties.base.model.listener.IStructuralChangeListener;
+
 /**
- * The <code>Table</code> object represents the entire MultiProperties object. It is basically the root model object of a MultiProperties
- * content.
+ * The <code>Table</code> object represents the entire MultiProperties object.
+ * It is basically the root model object of a MultiProperties content.
  * <p>
- * The clients should hold a reference only for an instance of this class. Child objects, like records or columns should be referenced
- * only for a particular UI action.
+ * The clients should hold a reference only for an instance of this class. Child
+ * objects, like records or columns should be referenced only for a particular
+ * UI action.
  * </p>
- * 
+ *
  * @author skzs
  */
-public class Table implements IRecordChangeListener, IStructuralChangeListener
-{
+public class Table implements IRecordChangeListener, IStructuralChangeListener {
 
 	/**
 	 * The name of the MultiProperties
 	 */
-	private String name = ""; //$NON-NLS-1$
+	private String name = "";
 	/**
 	 * The description of the MultiProperties
 	 */
-	private String description = ""; //$NON-NLS-1$
+	private String description = "";
 	/**
 	 * The version of the MultiProperties file.
 	 */
@@ -37,7 +37,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	/**
 	 * The handler name.
 	 */
-	private String handler = ""; //$NON-NLS-1$
+	private String handler = "";
 	/**
 	 * The key column width
 	 */
@@ -60,94 +60,92 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	 */
 	private IRecordChangeListener recordChangeListener = null;
 	/**
-	 * This listener is intended to inform the GUI about a structural change, so the entire table should be refreshed
+	 * This listener is intended to inform the GUI about a structural change, so the
+	 * entire table should be refreshed
 	 */
 	private IStructuralChangeListener structuralChangeListener = null;
 
 	/**
 	 * Sets the name of the MultiProperties
-	 * 
-	 * @param name
-	 *            The name of the MultiProperties
+	 *
+	 * @param name The name of the MultiProperties
 	 * @see #getName()
 	 */
-	public void setName(final String name)
-	{
-		if (name == null)
-			throw new IllegalArgumentException("Name cannot be null"); //$NON-NLS-1$
-
-		// TODO: an if should be here to skip the setting of same value
+	public void setName(final String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Name cannot be null");
+		}
+		if (name.equals(this.name)) {
+			return;
+		}
 		this.name = name;
 		setDirty(true);
 	}
 
 	/**
 	 * Returns the name of the MultiProperties
-	 * 
+	 *
 	 * @return the name
 	 * @see #setName(String)
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
 	/**
 	 * Sets the description of the MultiProperties
-	 * 
-	 * @param description
-	 *            The description of the MultiProperties
+	 *
+	 * @param description The description of the MultiProperties
 	 * @see #getDescription()
 	 */
-	public void setDescription(final String description)
-	{
+	public void setDescription(final String description) {
 		if (description == null)
-			throw new IllegalArgumentException("Description cannot be null"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Description cannot be null");
 
-		// TODO: an if should be here to skip the setting of same value
+		if (description.equals(this.description)) {
+			return;
+		}
+
 		this.description = description;
 		setDirty(true);
 	}
 
 	/**
 	 * Returns the description of the MultiProperties
-	 * 
+	 *
 	 * @see #setDescription(String)
 	 * @return the description
 	 */
-	public String getDescription()
-	{
+	public String getDescription() {
 		return description;
 	}
 
 	/**
-	 * Sets the record change listener, which object will be informed about a record change. This listener object must implement the
-	 * {@link IRecordChangeListener} interface.
-	 * 
-	 * @param listener
-	 *            the listener object
+	 * Sets the record change listener, which object will be informed about a record
+	 * change. This listener object must implement the {@link IRecordChangeListener}
+	 * interface.
+	 *
+	 * @param listener the listener object
 	 * @see #setStructuralChangeListener(IStructuralChangeListener)
 	 */
-	public void setRecordChangeListener(final IRecordChangeListener listener)
-	{
+	public void setRecordChangeListener(final IRecordChangeListener listener) {
 		if (listener == null)
-			throw new IllegalArgumentException("Listener cannot be null"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Listener cannot be null");
 
 		this.recordChangeListener = listener;
 	}
 
 	/**
-	 * Sets the structural change listener, which object will be informed about a structural change. This listener object must implement the
+	 * Sets the structural change listener, which object will be informed about a
+	 * structural change. This listener object must implement the
 	 * {@link IStructuralChangeListener} interface.
-	 * 
-	 * @param listener
-	 *            the listener object
+	 *
+	 * @param listener the listener object
 	 * @see #setRecordChangeListener(IRecordChangeListener)
 	 */
-	public void setStructuralChangeListener(final IStructuralChangeListener listener)
-	{
+	public void setStructuralChangeListener(final IStructuralChangeListener listener) {
 		if (listener == null)
-			throw new IllegalArgumentException("Listener cannot be null"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Listener cannot be null");
 
 		this.structuralChangeListener = listener;
 	}
@@ -155,18 +153,17 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	/**
 	 * Sets the version of the MultiProperties file format.
 	 * <p>
-	 * In normal cases this setter method cannot be called from outside, except when an older file is loaded with a newer version of
-	 * MultiProperties plugin and the user chooses the content to be converted to the newer format.
+	 * In normal cases this setter method cannot be called from outside, except when
+	 * an older file is loaded with a newer version of MultiProperties plugin and
+	 * the user chooses the content to be converted to the newer format.
 	 * </p>
-	 * 
-	 * @param version
-	 *            the given version
+	 *
+	 * @param version the given version
 	 * @see #getVersion()
 	 */
-	public void setVersion(final String version)
-	{
+	public void setVersion(final String version) {
 		if (version == null)
-			throw new IllegalArgumentException("Version cannot be null"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Version cannot be null");
 
 		if (version.equals(this.version))
 			return;
@@ -176,27 +173,24 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Returns the version of the MultiProperties file format.
-	 * 
+	 *
 	 * @return the version
 	 * @see #setVersion(String)
 	 */
-	public String getVersion()
-	{
+	public String getVersion() {
 		return version;
 	}
 
 	/**
-	 * Sets the name of the handler. The handlers are used for producing different file formats from a column, like the
-	 * <code>java.util.Properties</code>.
-	 * 
-	 * @param handler
-	 *            The name of the handler
+	 * Sets the name of the handler. The handlers are used for producing different
+	 * file formats from a column, like the <code>java.util.Properties</code>.
+	 *
+	 * @param handler The name of the handler
 	 * @see #getHandler()
 	 */
-	public void setHandler(final String handler)
-	{
+	public void setHandler(final String handler) {
 		if (handler == null)
-			throw new IllegalArgumentException("Handler cannot be null"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Handler cannot be null");
 
 		if (handler.equals(this.handler))
 			return;
@@ -205,50 +199,47 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	}
 
 	/**
-	 * Returns the name of the handler. The handlers are used for producing different file formats from a column, like the
+	 * Returns the name of the handler. The handlers are used for producing
+	 * different file formats from a column, like the
 	 * <code>java.util.Properties</code>.
-	 * 
+	 *
 	 * @return the handler
 	 * @see #setHandler(String)
 	 */
-	public String getHandler()
-	{
+	public String getHandler() {
 		return handler;
 	}
 
 	/**
-	 * This method is called from child objects reporting a record change event. Clients may not invoke this method.
-	 * 
-	 * @param record
-	 *            the changed record
+	 * This method is called from child objects reporting a record change event.
+	 * Clients may not invoke this method.
+	 *
+	 * @param record the changed record
 	 * @see #changed()
 	 */
 	// TODO: it could be package scoped method
-	public void changed(final AbstractRecord record)
-	{
+	public void changed(final AbstractRecord record) {
 		setDirty(true, record);
 	}
 
 	/**
-	 * This method is called from child objects reporting a structural change event. Clients may not invoke this method.
-	 * 
+	 * This method is called from child objects reporting a structural change event.
+	 * Clients may not invoke this method.
+	 *
 	 * @see #changed(AbstractRecord)
 	 */
 	// TODO: it could be package scoped method
-	public void changed()
-	{
+	public void changed() {
 		setDirty(true);
 	}
 
 	/**
 	 * Sets the actual dirty state.
-	 * 
-	 * @param dirty
-	 *            the dirty state
+	 *
+	 * @param dirty the dirty state
 	 * @see #isDirty()
 	 */
-	public void setDirty(final boolean dirty)
-	{
+	public void setDirty(final boolean dirty) {
 		validate();
 		this.dirty = dirty;
 		if (structuralChangeListener != null)
@@ -257,16 +248,13 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Sets the actual dirty state.
-	 * 
-	 * @param dirty
-	 *            the dirty state
-	 * @param record
-	 *            the record that caused the dirty state
+	 *
+	 * @param dirty  the dirty state
+	 * @param record the record that caused the dirty state
 	 * @see #setDirty(boolean)
 	 * @see #isDirty()
 	 */
-	private void setDirty(final boolean dirty, final AbstractRecord record)
-	{
+	private void setDirty(final boolean dirty, final AbstractRecord record) {
 		this.dirty = dirty;
 		if (recordChangeListener != null)
 			recordChangeListener.changed(record);
@@ -274,60 +262,53 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Returns the actual dirty flag.
-	 * 
+	 *
 	 * @return the current dirty state
 	 * @see #setDirty(boolean)
 	 */
-	public boolean isDirty()
-	{
+	public boolean isDirty() {
 		return dirty;
 	}
 
 	/**
 	 * Returns the <code>Columns</code> object.
-	 * 
+	 *
 	 * @return columns
 	 */
-	public Columns getColumns()
-	{
+	public Columns getColumns() {
 		return columns;
 	}
 
 	/**
 	 * Sets the key column width.
-	 * 
-	 * @param width
-	 *            The desired with
+	 *
+	 * @param width The desired with
 	 */
 	// TODO: it should be part of Columns class
-	public void setKeyColumnWidth(final int width)
-	{
+	public void setKeyColumnWidth(final int width) {
 		this.width = width;
 		setDirty(true);
 	}
 
 	/**
 	 * Returns the key column width.
-	 * 
+	 *
 	 * @return The key column width
 	 */
 	// TODO: it should be part of Columns class
-	public int getKeyColumnWidth()
-	{
+	public int getKeyColumnWidth() {
 		return width;
 	}
 
 	/**
 	 * Adds a new record to the end of the MultiProperties.
-	 * 
-	 * @param record
-	 *            the new record
+	 *
+	 * @param record the new record
 	 * @see #insert(AbstractRecord, int)
 	 */
-	public void add(final AbstractRecord record)
-	{
+	public void add(final AbstractRecord record) {
 		if (record == null)
-			throw new IllegalArgumentException("Record cannot be null"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Record cannot be null");
 
 		records.add(record);
 		record.setRecordChangeListener(this);
@@ -338,22 +319,18 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Inserts a new record at a index.
-	 * 
-	 * @param record
-	 *            the new records
-	 * @param index
-	 *            the position of insert
+	 *
+	 * @param record the new records
+	 * @param index  the position of insert
 	 * @see #add(AbstractRecord)
-	 * @throws IllegalArgumentException
-	 *             if the index is out of the bounds
+	 * @throws IllegalArgumentException if the index is out of the bounds
 	 */
-	public void insert(final AbstractRecord record, final int index)
-	{
+	public void insert(final AbstractRecord record, final int index) {
 		if (record == null)
-			throw new IllegalArgumentException("Record cannot be null"); //$NON-NLS-1$
+			throw new IllegalArgumentException("Record cannot be null");
 
 		if (index < 0 || index > records.size())
-			throw new IllegalArgumentException("The index is out of bounds (" + index + "/" + records.size() + ")"); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+			throw new IllegalArgumentException("The index is out of bounds (" + index + "/" + records.size() + ")");
 		records.add(index, record);
 		record.setRecordChangeListener(this);
 		record.setStructuralChangeListener(this);
@@ -362,43 +339,37 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Returns a record at the given index.
-	 * 
-	 * @param index
-	 *            the position
+	 *
+	 * @param index the position
 	 * @return the record
 	 */
-	public AbstractRecord get(final int index)
-	{
+	public AbstractRecord get(final int index) {
 		return records.get(index);
 	}
 
 	/**
 	 * Returns the index of the specified record.
-	 * 
-	 * @param record
-	 *            the record to search for
+	 *
+	 * @param record the record to search for
 	 * @see #indexOf(String)
 	 * @return the index of the first occurrence
 	 */
-	public int indexOf(final AbstractRecord record)
-	{
+	public int indexOf(final AbstractRecord record) {
 		return records.indexOf(record);
 	}
 
 	/**
-	 * Returns the index of the specified property record. The comment and empty records are not involved in the search.
-	 * 
-	 * @param property
-	 *            the property string to search for
+	 * Returns the index of the specified property record. The comment and empty
+	 * records are not involved in the search.
+	 *
+	 * @param property the property string to search for
 	 * @see #indexOf(AbstractRecord)
-	 * @return the index of the first occurrence or <code>-1</code> if there is no such property record
+	 * @return the index of the first occurrence or <code>-1</code> if there is no
+	 *         such property record
 	 */
-	public int indexOf(final String property)
-	{
-		for (int i = 0; i < records.size(); i++)
-		{
-			if (records.get(i) instanceof PropertyRecord)
-			{
+	public int indexOf(final String property) {
+		for (int i = 0; i < records.size(); i++) {
+			if (records.get(i) instanceof PropertyRecord) {
 				final PropertyRecord record = (PropertyRecord) records.get(i);
 				if (record.getValue().equals(property))
 					return i;
@@ -408,21 +379,18 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	}
 
 	/**
-	 * Returns the first position of the specified property record. The comment and empty records are not involved in the search.
-	 * 
-	 * @param property
-	 *            The property string to search for
-	 * @param position
-	 *            The position where the search should be started
+	 * Returns the first position of the specified property record. The comment and
+	 * empty records are not involved in the search.
+	 *
+	 * @param property The property string to search for
+	 * @param position The position where the search should be started
 	 * @see #indexOf(AbstractRecord)
-	 * @return the index of the first occurrence or <code>-1</code> if there is no such property record
+	 * @return the index of the first occurrence or <code>-1</code> if there is no
+	 *         such property record
 	 */
-	public int indexOf(final String property, final int position)
-	{
-		for (int i = position; i < records.size(); i++)
-		{
-			if (records.get(i) instanceof PropertyRecord)
-			{
+	public int indexOf(final String property, final int position) {
+		for (int i = position; i < records.size(); i++) {
+			if (records.get(i) instanceof PropertyRecord) {
 				final PropertyRecord record = (PropertyRecord) records.get(i);
 				if (record.getValue().equals(property))
 					return i;
@@ -433,17 +401,14 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Moves the given record up
-	 * 
-	 * @param record
-	 *            the record to be moved up
-	 * @throws IllegalArgumentException
-	 *             if the record cannot be found
+	 *
+	 * @param record the record to be moved up
+	 * @throws IllegalArgumentException if the record cannot be found
 	 */
-	public void moveUp(final AbstractRecord record)
-	{
+	public void moveUp(final AbstractRecord record) {
 		final int index = indexOf(record);
 		if (index < 0)
-			throw new IllegalArgumentException("The record does not exists in the table"); //$NON-NLS-1$
+			throw new IllegalArgumentException("The record does not exists in the table");
 		records.set(index, records.get(index - 1));
 		records.set(index - 1, record);
 		setDirty(true);
@@ -451,17 +416,14 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Moves the given record down
-	 * 
-	 * @param record
-	 *            the record to be moved down
-	 * @throws IllegalArgumentException
-	 *             if the record cannot be found
+	 *
+	 * @param record the record to be moved down
+	 * @throws IllegalArgumentException if the record cannot be found
 	 */
-	public void moveDown(final AbstractRecord record)
-	{
+	public void moveDown(final AbstractRecord record) {
 		final int index = indexOf(record);
 		if (index < 0)
-			throw new IllegalArgumentException("The record does not exists in the table"); //$NON-NLS-1$
+			throw new IllegalArgumentException("The record does not exists in the table");
 		records.set(index, records.get(index + 1));
 		records.set(index + 1, record);
 		setDirty(true);
@@ -469,17 +431,14 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Removes the record at the given index.
-	 * 
-	 * @param index
-	 *            the index to be removed
+	 *
+	 * @param index the index to be removed
 	 * @return the removed record
-	 * @throws IllegalArgumentException
-	 *             if the index is out of the bounds
+	 * @throws IllegalArgumentException if the index is out of the bounds
 	 */
-	public AbstractRecord remove(final int index)
-	{
+	public AbstractRecord remove(final int index) {
 		if (index < 0 || index >= records.size())
-			throw new IllegalArgumentException("The index is out of bounds (" + index + "/" + records.size() + ")"); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+			throw new IllegalArgumentException("The index is out of bounds (" + index + "/" + records.size() + ")");
 		final AbstractRecord record = records.remove(index);
 		setDirty(true);
 		return record;
@@ -487,16 +446,13 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Removes the given records.
-	 * 
-	 * @param records
-	 *            the records to be removed
+	 *
+	 * @param records the records to be removed
 	 * @return the number of removed records
 	 */
-	public int remove(final AbstractRecord[] records)
-	{
+	public int remove(final AbstractRecord[] records) {
 		int count = 0;
-		for (final AbstractRecord record : records)
-		{
+		for (final AbstractRecord record : records) {
 			if (this.records.remove(record))
 				count++;
 		}
@@ -506,33 +462,31 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Returns the cardinality of all records.
-	 * 
+	 *
 	 * @return cardinality of all records
 	 * @see #sizeOfProperties()
 	 * @see #sizeOfDisabled()
 	 * @see #sizeOfComments()
 	 * @see #sizeOfEmpties()
 	 */
-	public int size()
-	{
+	public int size() {
 		return records.size();
 	}
 
 	/**
-	 * Returns the cardinality of property records. The disabled records are not calculated.
-	 * 
+	 * Returns the cardinality of property records. The disabled records are not
+	 * calculated.
+	 *
 	 * @return cardinality of property records
-	 * 
+	 *
 	 * @see #size()
 	 * @see #sizeOfDisabled()
 	 * @see #sizeOfComments()
 	 * @see #sizeOfEmpties()
 	 */
-	public int sizeOfProperties()
-	{
+	public int sizeOfProperties() {
 		int count = 0;
-		for (int i = 0; i < records.size(); i++)
-		{
+		for (int i = 0; i < records.size(); i++) {
 			if ((records.get(i) instanceof PropertyRecord) && !((PropertyRecord) records.get(i)).isDisabled())
 				count++;
 		}
@@ -541,18 +495,16 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Returns the cardinality of disabled property records.
-	 * 
+	 *
 	 * @return cardinality of disabled property records
 	 * @see #size()
 	 * @see #sizeOfProperties()
 	 * @see #sizeOfComments()
 	 * @see #sizeOfEmpties()
 	 */
-	public int sizeOfDisabled()
-	{
+	public int sizeOfDisabled() {
 		int count = 0;
-		for (int i = 0; i < records.size(); i++)
-		{
+		for (int i = 0; i < records.size(); i++) {
 			if ((records.get(i) instanceof PropertyRecord) && ((PropertyRecord) records.get(i)).isDisabled())
 				count++;
 		}
@@ -561,19 +513,17 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Returns the cardinality of disabled comment records.
-	 * 
+	 *
 	 * @return cardinality of disabled comment records
-	 * 
+	 *
 	 * @see #size()
 	 * @see #sizeOfProperties()
 	 * @see #sizeOfDisabled()
 	 * @see #sizeOfEmpties()
 	 */
-	public int sizeOfComments()
-	{
+	public int sizeOfComments() {
 		int count = 0;
-		for (int i = 0; i < records.size(); i++)
-		{
+		for (int i = 0; i < records.size(); i++) {
 			if (records.get(i) instanceof CommentRecord)
 				count++;
 		}
@@ -582,19 +532,17 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 
 	/**
 	 * Returns the cardinality of disabled empty records.
-	 * 
+	 *
 	 * @return cardinality of disabled empty records
-	 * 
+	 *
 	 * @see #size()
 	 * @see #sizeOfProperties()
 	 * @see #sizeOfDisabled()
 	 * @see #sizeOfComments()
 	 */
-	public int sizeOfEmpties()
-	{
+	public int sizeOfEmpties() {
 		int count = 0;
-		for (int i = 0; i < records.size(); i++)
-		{
+		for (int i = 0; i < records.size(); i++) {
 			if (records.get(i) instanceof EmptyRecord)
 				count++;
 		}
@@ -602,73 +550,60 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	}
 
 	/**
-	 * Returns an array containing all of the records in this list in proper sequence (from first to last element).
-	 * 
-	 * @return An array containing all of the records in this list in proper sequence
+	 * Returns an array containing all of the records in this list in proper
+	 * sequence (from first to last element).
+	 *
+	 * @return An array containing all of the records in this list in proper
+	 *         sequence
 	 */
-	public Object[] toArray()
-	{
+	public Object[] toArray() {
 		return records.toArray();
 	}
 
 	/**
 	 * Is the current record satisfies the search criteria or not.
-	 * 
-	 * @param findString
-	 *            The string to search
-	 * @param currentString
-	 *            The current string of the record
-	 * @param caseSensitive
-	 *            Is the search case sensitive
-	 * @param wholeWord
-	 *            Is the search strict to whole word
+	 *
+	 * @param findString    The string to search
+	 * @param currentString The current string of the record
+	 * @param caseSensitive Is the search case sensitive
+	 * @param wholeWord     Is the search strict to whole word
 	 * @return Is the current record satisfies the search criteria
 	 */
 	private boolean findValue(final String findString, final String currentString, final boolean caseSensitive,
-			final boolean wholeWord)
-	{
-		if (wholeWord
-				&& (findString.equalsIgnoreCase(currentString) && !caseSensitive || caseSensitive
-						&& findString.equals(currentString)))
+			final boolean wholeWord) {
+		if (wholeWord && (findString.equalsIgnoreCase(currentString) && !caseSensitive
+				|| caseSensitive && findString.equals(currentString)))
 			return true;
-		if (!wholeWord
-				&& (caseSensitive && currentString.indexOf(findString) >= 0 || !caseSensitive
-						&& currentString.toLowerCase().indexOf(findString.toLowerCase()) >= 0))
+		if (!wholeWord && (caseSensitive && currentString.indexOf(findString) >= 0
+				|| !caseSensitive && currentString.toLowerCase().indexOf(findString.toLowerCase()) >= 0))
 			return true;
 		return false;
 	}
 
 	/**
 	 * Is the current record satisfies the search criteria or not.
-	 * 
-	 * @param index
-	 *            The current position to search
-	 * @param findString
-	 *            The string to search
-	 * @param caseSensitive
-	 *            Is the search case sensitive
-	 * @param wholeWord
-	 *            Is the search strict to whole word
+	 *
+	 * @param index         The current position to search
+	 * @param findString    The string to search
+	 * @param caseSensitive Is the search case sensitive
+	 * @param wholeWord     Is the search strict to whole word
 	 * @return Is the current record satisfies the search criteria
 	 */
-	public boolean find(final int index, final String findString, final boolean caseSensitive, final boolean wholeWord)
-	{
+	public boolean find(final int index, final String findString, final boolean caseSensitive,
+			final boolean wholeWord) {
 		final AbstractRecord record = get(index);
 		if (record instanceof EmptyRecord)
 			return false;
-		if (record instanceof CommentRecord)
-		{
+		if (record instanceof CommentRecord) {
 			final CommentRecord commentrecord = (CommentRecord) record;
 			if (findValue(findString, commentrecord.getValue(), caseSensitive, wholeWord))
 				return true;
 		}
-		if (record instanceof PropertyRecord)
-		{
+		if (record instanceof PropertyRecord) {
 			final PropertyRecord propertyrecord = (PropertyRecord) record;
 			if (findValue(findString, propertyrecord.getValue(), caseSensitive, wholeWord))
 				return true;
-			for (int i = 0; i < getColumns().size(); i++)
-			{
+			for (int i = 0; i < getColumns().size(); i++) {
 				final Column target = getColumns().get(i);
 				if (propertyrecord.getColumnValue(target) == null)
 					continue;
@@ -680,18 +615,16 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 	}
 
 	/**
-	 * Validates the property based records. If there are duplicated property record with same key value, they will be marked as duplicated.
+	 * Validates the property based records. If there are duplicated property record
+	 * with same key value, they will be marked as duplicated.
 	 */
-	private void validate()
-	{
+	private void validate() {
 		final Map<String, Integer> counters = new HashMap<String, Integer>();
-		for (int i = 0; i < records.size(); i++)
-		{
+		for (int i = 0; i < records.size(); i++) {
 			if (!(records.get(i) instanceof PropertyRecord))
 				continue;
 			final PropertyRecord record = (PropertyRecord) records.get(i);
-			if (counters.get(record.getValue()) == null)
-			{
+			if (counters.get(record.getValue()) == null) {
 				counters.put(record.getValue(), 1);
 				continue;
 			}
@@ -699,8 +632,7 @@ public class Table implements IRecordChangeListener, IStructuralChangeListener
 			counters.put(record.getValue(), counter + 1);
 		}
 
-		for (int i = 0; i < records.size(); i++)
-		{
+		for (int i = 0; i < records.size(); i++) {
 			if (!(records.get(i) instanceof PropertyRecord))
 				continue;
 			final PropertyRecord record = (PropertyRecord) records.get(i);
