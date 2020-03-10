@@ -1,11 +1,5 @@
 package hu.skzs.multiproperties.ui.editor;
 
-import hu.skzs.multiproperties.base.model.Column;
-import hu.skzs.multiproperties.ui.Activator;
-import hu.skzs.multiproperties.ui.Messages;
-import hu.skzs.multiproperties.ui.command.EditHandler;
-import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
-
 import org.eclipse.core.commands.NotEnabledException;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -26,74 +20,63 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.handlers.IHandlerService;
 
-public class TablePage extends MPEditorPage
-{
+import hu.skzs.multiproperties.base.model.Column;
+import hu.skzs.multiproperties.ui.Activator;
+import hu.skzs.multiproperties.ui.Messages;
+import hu.skzs.multiproperties.ui.command.EditHandler;
+import hu.skzs.multiproperties.ui.preferences.PreferenceConstants;
+
+public class TablePage extends MPEditorPage {
 
 	/**
-	 * The <code>PAGE_ID</code> represents the page identifier.
-	 * It is used for changing the pages.
+	 * The <code>PAGE_ID</code> represents the page identifier. It is used for
+	 * changing the pages.
 	 */
-	public static final String PAGE_ID = "table"; //$NON-NLS-1$
+	public static final String PAGE_ID = "table";
 
 	private TableViewer tableviewer;
 
 	/**
-	 * The <code>preferenceListener</code> listens for any color related preference changes. In case of change,
-	 * it initiates a refresh on the table.
+	 * The <code>preferenceListener</code> listens for any color related preference
+	 * changes. In case of change, it initiates a refresh on the table.
 	 */
-	IPropertyChangeListener preferenceListener = new IPropertyChangeListener()
-	{
+	IPropertyChangeListener preferenceListener = new IPropertyChangeListener() {
 
-		public void propertyChange(final PropertyChangeEvent event)
-		{
-			if (event.getProperty().startsWith(PreferenceConstants.COLOR_PREFIX))
-			{
+		public void propertyChange(final PropertyChangeEvent event) {
+			if (event.getProperty().startsWith(PreferenceConstants.COLOR_PREFIX)) {
 				tableviewer.refresh();
 			}
 		}
 	};
 
-	/**
-	 * Default constructor.
-	 */
-	public TablePage()
-	{
+	public TablePage() {
 		super();
 		setId(PAGE_ID);
 	}
 
-	public TableViewer getTableViewer()
-	{
+	public TableViewer getTableViewer() {
 		return tableviewer;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.ui.editors.MPEditorPage#getPageText()
-	 */
 	@Override
-	public String getPageText()
-	{
-		return Messages.getString("general.table"); //$NON-NLS-1$
+	public String getPageText() {
+		return Messages.getString("general.table");
 	}
 
 	@Override
-	public void init(final IEditorSite site, final IEditorInput input) throws PartInitException
-	{
+	public void init(final IEditorSite site, final IEditorInput input) throws PartInitException {
 		super.init(site, input);
 		Activator.getDefault().getPreferenceStore().addPropertyChangeListener(preferenceListener);
 	}
 
 	@Override
-	public void dispose()
-	{
+	public void dispose() {
 		Activator.getDefault().getPreferenceStore().removePropertyChangeListener(preferenceListener);
 		super.dispose();
 	}
 
 	@Override
-	public void createPartControl(final Composite parent)
-	{
+	public void createPartControl(final Composite parent) {
 		parent.setLayout(new FillLayout());
 
 		// Table viewer
@@ -118,23 +101,16 @@ public class TablePage extends MPEditorPage
 		getSite().registerContextMenu(menuManager, tableviewer);
 
 		// Double clicking
-		tableviewer.addDoubleClickListener(new IDoubleClickListener()
-		{
+		tableviewer.addDoubleClickListener(new IDoubleClickListener() {
 
-			public void doubleClick(final DoubleClickEvent event)
-			{
-				final IHandlerService handlerService = (IHandlerService) getSite().getService(IHandlerService.class);
-				try
-				{
+			public void doubleClick(final DoubleClickEvent event) {
+				final IHandlerService handlerService = getSite().getService(IHandlerService.class);
+				try {
 					handlerService.executeCommand(EditHandler.COMMAND_ID, null);
-				}
-				catch (final NotEnabledException e)
-				{
+				} catch (final NotEnabledException e) {
 					// do nothing
 					// TODO: it should be investigated how the enabled state could be checked
-				}
-				catch (final Exception e)
-				{
+				} catch (final Exception e) {
 					Activator.logError(e);
 				}
 			}
@@ -143,78 +119,64 @@ public class TablePage extends MPEditorPage
 	}
 
 	@Override
-	public void setActive()
-	{
-		if (editor.getTable().getColumns().isStale())
-		{
-			updateValueColumns();
-			tableviewer.refresh();
+	public void setActive() {
+		if (editor.getTable().getColumns().isStale()) {
+			refresh();
 			editor.getTable().getColumns().setStale(false);
 		}
 	}
 
-	/**
-	 * Create the key column.
-	 * @param tableViewer
-	 */
-	private void createKeyColumn()
-	{
+	void refresh() {
+		updateValueColumns();
+		tableviewer.setInput(editor.getTable());
+		tableviewer.refresh();
+	}
+
+	private void createKeyColumn() {
 		final TableViewerColumn keyTableViewerColumn = new TableViewerColumn(tableviewer, SWT.NONE);
 		keyTableViewerColumn.setLabelProvider(new TableColumnLabelProvider());
 		keyTableViewerColumn.setEditingSupport(new TableEditingSupport(tableviewer));
-		keyTableViewerColumn.getColumn().setText(Messages.getString("tables.key")); //$NON-NLS-1$
+		keyTableViewerColumn.getColumn().setText(Messages.getString("tables.key"));
 		keyTableViewerColumn.getColumn().setWidth(editor.getTable().getKeyColumnWidth());
-		keyTableViewerColumn.getColumn().addControlListener(new ControlAdapter()
-		{
+		keyTableViewerColumn.getColumn().addControlListener(new ControlAdapter() {
 			@Override
-			public void controlResized(final ControlEvent e)
-			{
+			public void controlResized(final ControlEvent e) {
 				final TableColumn tablecolumn = (TableColumn) e.getSource();
 				editor.getTable().setKeyColumnWidth(tablecolumn.getWidth());
 			}
 		});
 	}
 
-	/**
-	 * Updates the value columns
-	 */
-	private void updateValueColumns()
-	{
-		// Turning off the redraw flag on the table viewer
+	private void updateValueColumns() {
 		tableviewer.getTable().setRedraw(false);
 
 		// Removing the value columns
 		int col = tableviewer.getTable().getColumnCount();
-		while (col > 1)
-		{
+		while (col > 1) {
 			final TableColumn tc = tableviewer.getTable().getColumn(--col);
 			tc.dispose();
 		}
 
 		// Adding the new value columns
-		for (int i = 0; i < editor.getTable().getColumns().size(); i++)
-		{
+		for (int i = 0; i < editor.getTable().getColumns().size(); i++) {
 			final Column column = editor.getTable().getColumns().get(i);
 
 			final TableViewerColumn tableViewerColumn = new TableViewerColumn(tableviewer, SWT.NONE, i + 1);
-			tableViewerColumn.setLabelProvider(new TableColumnLabelProvider(editor.getTable().getColumns().get(i)));
+			tableViewerColumn.setLabelProvider(new TableColumnLabelProvider(column));
 			tableViewerColumn.setEditingSupport(new TableEditingSupport(tableviewer, column));
 
 			final TableColumn tableColumn = tableViewerColumn.getColumn();
 			tableColumn.setText(editor.getTable().getColumns().get(i).getName());
 			tableColumn.setWidth(editor.getTable().getColumns().get(i).getWidth());
-			tableColumn.addControlListener(new ControlAdapter()
-			{
+			tableColumn.addControlListener(new ControlAdapter() {
 				@Override
-				public void controlResized(final ControlEvent e)
-				{
+				public void controlResized(final ControlEvent e) {
 					final TableColumn tablecolumn = (TableColumn) e.getSource();
 					column.setWidth(tablecolumn.getWidth());
 				}
 			});
 		}
 
-		// Turning on the redraw flag on the table viewer
 		tableviewer.getTable().setRedraw(true);
 	}
 }

@@ -1,70 +1,52 @@
 package hu.skzs.multiproperties.ui.editor;
 
-import hu.skzs.multiproperties.ui.Activator;
-import hu.skzs.multiproperties.ui.Messages;
-
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
-public class ColumnsPage extends MPEditorFormPage
-{
+import hu.skzs.multiproperties.ui.Activator;
+import hu.skzs.multiproperties.ui.Messages;
+
+public class ColumnsPage extends MPEditorFormPage {
 
 	/**
-	 * The <code>PAGE_ID</code> represents the page identifier.
-	 * It is used for changing the pages.
+	 * The <code>PAGE_ID</code> represents the page identifier. It is used for
+	 * changing the pages.
 	 */
-	public static final String PAGE_ID = "columns"; //$NON-NLS-1$
+	public static final String PAGE_ID = "columns";
 
 	private ColumnsMasterDetailsBlock columnsMasterDetailsBlock;
 
-	/**
-	 * Default constructor.
-	 */
-	public ColumnsPage()
-	{
+	public ColumnsPage() {
 		super();
 		setId(PAGE_ID);
 	}
 
 	@Override
-	public void setActive()
-	{
+	public void setActive() {
+		refresh();
+	}
 
-		// TODO		if (active)
-		//		{
+	void refresh() {
 		columnsMasterDetailsBlock.refresh();
-		//		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.ui.editors.MPEditorPage#getPageText()
-	 */
 	@Override
-	public String getPageText()
-	{
-		return Messages.getString("general.columns"); //$NON-NLS-1$
+	public String getPageText() {
+		return Messages.getString("general.columns");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see hu.skzs.multiproperties.ui.editors.MPEditorFormPage#createFormContent(org.eclipse.ui.forms.IManagedForm)
-	 */
 	@Override
-	public void createFormContent(IManagedForm managedForm)
-	{
-		ScrolledForm scrolledForm = managedForm.getForm();
+	public void createFormContent(final IManagedForm managedForm) {
+		final ScrolledForm scrolledForm = managedForm.getForm();
 
-		// Form
 		formToolkit.decorateFormHeading(scrolledForm.getForm());
-		scrolledForm.setText(Messages.getString("columns.title")); //$NON-NLS-1$
-		scrolledForm.setImage(Activator.getDefault().getImageRegistry().get("columns")); //$NON-NLS-1$
+		scrolledForm.setText(Messages.getString("columns.title"));
+		scrolledForm.setImage(Activator.getDefault().getImageRegistry().get("columns"));
 
 		fillBody(managedForm);
 	}
 
-	private void fillBody(final IManagedForm managedForm)
-	{
+	private void fillBody(final IManagedForm managedForm) {
 		columnsMasterDetailsBlock = new ColumnsMasterDetailsBlock(this);
 		columnsMasterDetailsBlock.createContent(managedForm);
 	}
