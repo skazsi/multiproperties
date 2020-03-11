@@ -78,6 +78,12 @@ public class Editor extends MultiPageEditorPart
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
 	}
 
+	@Override
+	public void dispose() {
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
+		super.dispose();
+	}
+
 	public void resourceChanged(final IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.PRE_CLOSE) {
 			Display.getDefault().asyncExec(new Runnable() {
